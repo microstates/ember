@@ -16,7 +16,7 @@ export default Ember.Helper.extend({
   },
 
   modelFor(value = 0) {
-    return Object.create(new String(value), {
+    return Object.create(new Number(value), {
       add: {
         value: (amount = 1)=> {
           this.update(this.modelFor(value + amount));

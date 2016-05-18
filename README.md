@@ -1,6 +1,17 @@
-# Ember-microstates
+# Ember Microstates
 
-This README outlines the details of collaborating on this Ember addon.
+If you squint hard enough, you can see the future.
+
+## Helpers
+
+* `addon/helpers/boolean.js`
+* `addon/helpers/list.js`
+* `addon/helpers/string.js`
+* `addon/helpers/number.js`
+
+## Binding
+
+* `addon/initializers/register-bind-helper.js`
 
 ## Installation
 

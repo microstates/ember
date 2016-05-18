@@ -1,19 +1,24 @@
 <h2 id="title">Welcome to Ember</h2>
-{{#bind (boolean) (list) (string) (number) as |switch items str num|}}
+{{#bind (boolean) (list) (string) (number) as |switch items str num binding|}}
+  <button onclick={{binding.undo}}>Undo</button>
+  <button onclick={{binding.redo}}>Redo</button>
   <h3>Boolean</h3>
   value: {{#if switch}}true{{else}}false{{/if}}
   <hr/>
-  <button {{action (action switch.toggle)}}>Toggle</button>
-  <button {{action (action switch.set true)}}>Set True</button>
-  <button {{action (action switch.set false)}}>Set False</button>
+  <button onclick={{switch.toggle}}>Toggle</button>
+  <button onclick={{action switch.set true}}>Set True</button>
+  <button onclick={{action switch.set false}}>Set False</button>
 
   <h3>List</h3>
   <ol>
     {{#each items as |item|}}
-      <li>{{item}} <button {{action (action items.remove item)}}>x</button></li>
+      <li>{{item}} <button onclick={{action items.remove item}}>x</button></li>
     {{/each}}
   </ol>
   <label>Add Item: {{input action=(action items.push)}}</label>
+  <hr/>
+  <button onclick={{action items.pop}}>Pop</button>
+  <button onclick={{action items.shift}}>Shift</button>
 
   <h3>String</h3>
   {{one-way-input update=(action str.set)}} "{{str}}"
@@ -21,6 +26,6 @@
   <h3>Number</h3>
   value: {{num}}
   <hr/>
-  <button {{action (action num.add 1)}}>+</button>
-  <button {{action (action num.subtract 1)}}>-</button>
+  <button onclick={{action num.add 1}}>+</button>
+  <button onclick={{action num.subtract 1}}>-</button>
 {{/bind}}

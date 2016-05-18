@@ -16,7 +16,7 @@ export default Ember.Helper.extend({
   },
 
   modelFor(value) {
-    return Object.create(value.slice(), {
+    return Object.create(value, {
       add: {
         value: (item)=> {
           this.update(this.modelFor(value.concat(item)));
