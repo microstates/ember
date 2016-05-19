@@ -1,5 +1,5 @@
 <h2 id="title">Welcome to Ember</h2>
-{{#bind (boolean) (list) (string) (number) as |switch items str num|}}
+{{#bind (boolean) (list groceries) (string) (number) as |switch items str num|}}
   <h3>Boolean</h3>
   value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
@@ -8,15 +8,15 @@
   <button class="spec-set-false "onclick={{action switch.set false}}>Set False</button>
 
   <h3>List</h3>
-  <ol>
-    {{#each items as |item|}}
-      <li>{{item}} <button onclick={{action items.remove item}}>x</button></li>
+  <ol class="spec-list">
+    {{#each items as |item i|}}
+      <li>{{item}} <button class="spec-remove-item-{{i}}" onclick={{action items.remove item}}>x</button></li>
     {{/each}}
   </ol>
   <label>Add Item: {{input action=(action items.push)}}</label>
   <hr/>
-  <button onclick={{action items.pop}}>Pop</button>
-  <button onclick={{action items.shift}}>Shift</button>
+  <button class="spec-pop" onclick={{action items.pop}}>Pop</button>
+  <button class="spec-shift" onclick={{action items.shift}}>Shift</button>
 
   <h3>String</h3>
   {{one-way-input update=(action str.set)}} "{{str}}"
