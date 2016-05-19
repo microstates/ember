@@ -13,6 +13,10 @@ If you squint hard enough, you can see the future.
 
 * `addon/initializers/register-bind-helper.js`
 
+## Example Usage
+
+* [tests/dummy/app/templates/application.hbs][https://github.com/cowboyd/ember-microstates/blob/master/tests/dummy/app/templates/application.hbs]
+
 ## Installation
 
 * `git clone` this repository

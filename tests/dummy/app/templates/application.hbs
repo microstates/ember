@@ -1,7 +1,5 @@
 <h2 id="title">Welcome to Ember</h2>
-{{#bind (boolean) (list) (string) (number) as |switch items str num binding|}}
-  <button onclick={{binding.undo}}>Undo</button>
-  <button onclick={{binding.redo}}>Redo</button>
+{{#bind (boolean) (list) (string) (number) as |switch items str num|}}
   <h3>Boolean</h3>
   value: {{#if switch}}true{{else}}false{{/if}}
   <hr/>
