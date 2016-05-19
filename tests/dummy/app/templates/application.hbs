@@ -1,5 +1,5 @@
 <h2 id="title">Welcome to Ember</h2>
-{{#bind (boolean) (list groceries) (string "a string") (number) as |switch items str num|}}
+{{#bind (boolean) (list groceries) (string "a string") (number 5) as |switch items str num|}}
   <h3>Boolean</h3>
   value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
@@ -22,8 +22,8 @@
   {{one-way-input class="spec-string-input" update=(action str.set)}} <span class="spec-string">"{{str}}"</span>
 
   <h3>Number</h3>
-  value: {{num}}
+  value: <span class="spec-number">{{num}}</span>
   <hr/>
-  <button onclick={{action num.add 1}}>+</button>
-  <button onclick={{action num.subtract 1}}>-</button>
+  <button class="spec-add" onclick={{action num.add 1}}>+</button>
+  <button class="spec-subtract" onclick={{action num.subtract 1}}>-</button>
 {{/bind}}

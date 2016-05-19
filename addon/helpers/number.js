@@ -29,7 +29,7 @@ export default Ember.Helper.extend({
         }
       },
       toString: {
-        value: ()=> { String(value); }
+        value: ()=> {return String(value); }
       }
     });
   }
