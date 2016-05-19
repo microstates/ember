@@ -1,11 +1,11 @@
 <h2 id="title">Welcome to Ember</h2>
 {{#bind (boolean) (list) (string) (number) as |switch items str num|}}
   <h3>Boolean</h3>
-  value: {{#if switch}}true{{else}}false{{/if}}
+  value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
-  <button onclick={{switch.toggle}}>Toggle</button>
-  <button onclick={{action switch.set true}}>Set True</button>
-  <button onclick={{action switch.set false}}>Set False</button>
+  <button class="spec-toggle" onclick={{switch.toggle}}>Toggle</button>
+  <button class="spec-set-true" onclick={{action switch.set true}}>Set True</button>
+  <button class="spec-set-false "onclick={{action switch.set false}}>Set False</button>
 
   <h3>List</h3>
   <ol>

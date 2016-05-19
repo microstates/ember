@@ -1,3 +1,4 @@
+/*jshint -W053 */
 import Ember from 'ember';
 
 export default Ember.Helper.extend({

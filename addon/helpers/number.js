@@ -1,3 +1,4 @@
+/*jshint -W053 */
 import Ember from 'ember';
 
 export default Ember.Helper.extend({
@@ -28,7 +29,7 @@ export default Ember.Helper.extend({
         }
       },
       toString: {
-        value: ()=> { return new String(value); }
+        value: ()=> { String(value); }
       }
     });
   }
