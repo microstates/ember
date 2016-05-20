@@ -2,25 +2,15 @@ import Ember from 'ember';
 
 export let MicroState = Ember.Helper.extend({
   compute([value = this.default]) {
-    if (!this.current || !this._update) {
-      this.current = this.modelFor(value);
+    if (!this.value || !this._update) {
+      this.value = value;
     }
-    delete this._update;
-    return this.current;
-  },
-
-  update(model) {
-    this._update = true;
-    this.current = model;
-    this.recompute();
-  },
-
-  modelFor(current) {
+    let current = this.value;
     let actions = Object.keys(this.actions).reduce((actions, key)=> {
       actions[key] = {
         value: (...args)=> {
-          let next = this.actions[key].call(null, current, ...args);
-          return this.update(this.modelFor(next));
+          let action = this.actions[key];
+          return this.setState((curr) => action.call(null, curr, ...args));
         }
       };
       return actions;
@@ -34,6 +24,12 @@ export let MicroState = Ember.Helper.extend({
 
   wrap(value) {
     return value;
-  }
+  },
 
+  setState(updateFn = (current)=> current) {
+    this._update = true;
+    this.value = updateFn.call(this, this.value);
+    this.recompute();
+    return this.value;
+  }
 });
