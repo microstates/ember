@@ -1,1 +1,1 @@
-export { default, number } from 'ember-microstates/helpers/number';
+export { default } from 'ember-microstates/helpers/number';

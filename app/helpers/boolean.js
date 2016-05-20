@@ -1,1 +1,1 @@
-export { default, boolean } from 'ember-microstates/helpers/boolean';
+export { default } from 'ember-microstates/helpers/boolean';
