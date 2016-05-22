@@ -1,13 +1,15 @@
 import { MicroState } from 'ember-microstates';
 
 const True = Object.create([true], {
-  value: {value: true},
-  valueOf: {value: ()=> { return true; }}
+  value: { value: true },
+  valueOf: {value: ()=> { return true; }},
+  toString: {value: ()=> "true" }
 });
 
 const False = Object.create([], {
-  value: {value: false},
-  valueOf: {value: ()=> { return false; }}
+  value: { value: false },
+  valueOf: { value: ()=> { return false; } },
+  toString: {value: ()=> "false" }
 });
 
 

@@ -1,14 +1,15 @@
 /*jshint -W053 */
+import Ember from 'ember';
 import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
   default: "",
 
   wrap(value) {
-    return new String(value);
+    return Ember.assign(new String(value), {
+      toString() { return value; }
+    });
   },
-
-  asString: String,
 
   actions: {
     set(string, value) {

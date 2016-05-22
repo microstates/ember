@@ -15,9 +15,6 @@ export let MicroState = Ember.Helper.extend({
       };
       return actions;
     }, {});
-    if (this.asString) {
-      actions.toString = {value: ()=> { return this.asString(current); }};
-    }
 
     return Object.create(this.wrap(current), actions);
   },
