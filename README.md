@@ -2,6 +2,10 @@
 
 If you squint hard enough, you can see the future.
 
+This addon allows you to create immutable states, and also setup actions that
+transition those states all from within your templates. See the dummy
+application for an explanation.
+
 ## Helpers
 
 * `addon/helpers/boolean.js`
