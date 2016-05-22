@@ -1,7 +1,7 @@
 {
   "name": "ember-microstates",
   "version": "0.1.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Data Down, Actions Up: at the molecular level.",
   "directories": {
     "doc": "doc",
     "test": "tests"
