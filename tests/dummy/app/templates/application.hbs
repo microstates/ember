@@ -3,9 +3,10 @@
   <h3>Boolean</h3>
   value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
+
   <button class="spec-toggle" onclick={{switch.toggle}}>Toggle</button>
   <button class="spec-set-true" onclick={{action switch.set true}}>Set True</button>
-  <button class="spec-set-false "onclick={{action switch.set false}}>Set False</button>
+  <button class="spec-set-false" onclick={{action switch.set false}}>Set False</button>
 
   <h3>List</h3>
   <ol class="spec-list">
@@ -15,11 +16,11 @@
   </ol>
   <label>Add Item: {{input action=(action items.push)}}</label>
   <hr/>
-  <button class="spec-pop" onclick={{action items.pop}}>Pop</button>
-  <button class="spec-shift" onclick={{action items.shift}}>Shift</button>
+  <button class="spec-pop" onclick={{items.pop}}>Pop</button>
+  <button class="spec-shift" onclick={{items.shift}}>Shift</button>
 
   <h3>String</h3>
-  {{one-way-input class="spec-string-input" update=(action str.set)}} <span class="spec-string">"{{str}}"</span>
+  {{one-way-input class="spec-string-input" update=str.set}} <span class="spec-string">"{{str}}"</span>
 
   <h3>Number</h3>
   value: <span class="spec-number">{{num}}</span>
