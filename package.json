@@ -1,6 +1,6 @@
 {
   "name": "ember-microstates",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Data Down, Actions Up: at the molecular level.",
   "directories": {
     "doc": "doc",
