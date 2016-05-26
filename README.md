@@ -1,5 +1,10 @@
 # Ember Microstates
 
+[![npm version](https://badge.fury.io/js/ember-microstates.svg)](https://badge.fury.io/js/ember-microstates)
+[![npm version](https://badge.fury.io/js/ember-microstates.svg)](https://badge.fury.io/js/ember-microstates)
+[![Build Status](https://travis-ci.org/cowboyd/ember-microstates.svg?branch=master)](https://travis-ci.org/cowboyd/ember-microstates)
+
+
 If you squint hard enough, you can see the future.
 
 This addon allows you to create immutable states, and also setup actions that
