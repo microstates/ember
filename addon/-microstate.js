@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
+
 export default Ember.Helper.extend({
   compute([value = this.default], options) {
     this.options = options;
@@ -14,7 +16,12 @@ export default Ember.Helper.extend({
           var nextState = this.setState((curr) => action.call(null, curr, ...args));
           sendActionNotification(this, key, nextState);
           return nextState;
-        }
+        },
+        // If this is Ember < 2, we want to make this property re-configurable
+        // so that it can add a setter when embedded in handlebars. This setter
+        // should never be used, but will keep the handlebars templates from
+        // barking.
+        configurable: IS_EMBER_1 ? true : false
       };
       return actions;
     }, {});

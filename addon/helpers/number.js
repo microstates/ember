@@ -1,13 +1,13 @@
 /*jshint -W053 */
-import Ember from 'ember';
 import { MicroState } from 'ember-microstates';
+import assign from '../utils/assign';
 
 export default MicroState.extend({
 
   default: 0,
 
   wrap: function(value) {
-    return Ember.assign(new Number(value), {
+    return assign(new Number(value), {
       toString() { return String(value); }
     });
   },
