@@ -19,8 +19,8 @@ describe('Boolean', function() {
       recompute: onRecompute
     });
 
-    Ember.on(this.helper, 'state', onStateEvent);
-    Ember.on(this.helper, 'toggle', onToggleEvent);
+    Ember.addListener(this.helper, 'state', this, onStateEvent);
+    Ember.addListener(this.helper, 'toggle', this, onToggleEvent);
     this.value = this.helper.compute([true], {'on-state': onState, 'on-toggle': onToggle});
   });
 
@@ -37,7 +37,7 @@ describe('Boolean', function() {
       expect(this.toggled).to.equal(false);
     });
 
-    it.skip("fires the 'state' event", function() {
+    it("fires the 'state' event", function() {
       expect(onStateEvent.called).to.equal(true);
     });
 
@@ -45,7 +45,7 @@ describe('Boolean', function() {
       expect(onState.calledWith(false)).to.equal(true);
     });
 
-    it.skip("fires the 'toggle' event", function() {
+    it("fires the 'toggle' event", function() {
       expect(onStateEvent.called).to.equal(true);
     });
 
