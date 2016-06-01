@@ -55,6 +55,4 @@ describe.only('Microstates', function() {
       expect(onCustom.calledWith({totally: 'custom'})).to.equal(true);
     });
   });
-
-
 });
