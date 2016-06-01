@@ -33,16 +33,27 @@ export default Ember.Helper.extend({
     return value;
   },
 
-  setState(updateFn = (current)=> current) {
+  setState(eventName, updateFn = (current)=> current) {
+    if (arguments.length === 1) {
+      eventName = null;
+      updateFn = eventName || ((o)=> {});
+    }
+
     this._update = true;
     var nextState = updateFn.call(this, this.value);
     if (nextState !== this.value) {
       this.value = nextState;
       this.recompute();
       sendActionNotification(this, 'state', nextState);
+
+      if (eventName) {
+        sendActionNotification(this, eventName, nextState);
+      }
     }
     return this.value;
-  }
+  },
+
+  actions: {}
 });
 
 function sendActionNotification(helper, actionName, state) {
