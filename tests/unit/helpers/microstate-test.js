@@ -5,7 +5,7 @@ import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import { MicroState } from 'ember-microstates';
 
-describe.only('Microstates', function() {
+describe('Microstates', function() {
   let onState = null;
   let onCustom = null;
   let onStateEvent = null;

@@ -8,14 +8,13 @@ export default Ember.Helper.extend({
     if (!this.value || !this._update) {
       this.value = value;
     }
+    delete this._update;
     let current = this.value;
     let actions = Object.keys(this.actions).reduce((actions, key)=> {
       actions[key] = {
         value: (...args)=> {
           let action = this.actions[key];
-          var nextState = this.setState((curr) => action.call(null, curr, ...args));
-          sendActionNotification(this, key, nextState);
-          return nextState;
+          return this.setState(key, (curr) => action.call(null, curr, ...args));
         },
         // If this is Ember < 2, we want to make this property re-configurable
         // so that it can add a setter when embedded in handlebars. This setter
@@ -36,7 +35,7 @@ export default Ember.Helper.extend({
   setState(eventName, updateFn = (current)=> current) {
     if (arguments.length === 1) {
       eventName = null;
-      updateFn = eventName || ((o)=> {});
+      updateFn = eventName || (o=> o);
     }
 
     this._update = true;
