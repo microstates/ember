@@ -3,10 +3,17 @@ import Ember from 'ember';
 const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
 
 export default Ember.Helper.extend({
+
+  default: {},
+
+  initialize(value) {
+    return value;
+  },
+
   compute([value = this.default], options) {
     this.options = options;
     if (!this.value || !this._update) {
-      this.value = value;
+      this.value = this.initialize(value, options);
     }
     delete this._update;
     let current = this.value;

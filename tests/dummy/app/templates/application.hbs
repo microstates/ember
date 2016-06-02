@@ -1,5 +1,11 @@
 <h2 id="title">Welcome to Ember</h2>
-{{#bind (boolean) (list groceries) (string "a string") (number 5) as |switch items str num|}}
+{{#bind
+   (boolean)
+   (list groceries)
+   (string "a string")
+   (number 5)
+   (choice animals selection="Cow")
+   (choice animals selection="Horse" multiple=true) as |switch items str num pets livestock|}}
   <h3>Boolean</h3>
   value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
@@ -27,4 +33,30 @@
   <hr/>
   <button class="spec-add" onclick={{action num.add 1}}>+</button>
   <button class="spec-subtract" onclick={{action num.subtract 1}}>-</button>
+
+  <h3> Single Choice </h3>
+  Current Choice: {{pets.selection}}
+  <br/>
+  {{#each pets.options as |option|}}
+    <label>
+      <input class="spec-choice spec-choice-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action pets.toggle option}}/>
+      {{option.value}}
+    </label>
+  {{/each}}
+
+  <h3> Multiple Choice </h3>
+  {{#each livestock.options as |option|}}
+    <label>
+      <input class="spec-multiple-choice spec-multiple-choice-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action livestock.toggle option}}/>
+      {{option.value}}
+    </label>
+  {{/each}}
+  <br/>
+  Current Choices:
+  <ul>
+    {{#each livestock.selection as |selection|}}
+      <li> {{selection}}</li>
+    {{/each}}
+  </ul>
+
 {{/bind}}
