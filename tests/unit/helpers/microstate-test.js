@@ -30,13 +30,30 @@ describe('Microstates', function() {
     expect(this.value).to.deep.equal({initial: 'state'});
   });
 
+  describe("setting the state without a custom event", function() {
+    beforeEach(function() {
+      this.next =  this.microstate.setState(()=> ({average: 'joe'}));
+    });
+    it("sets the new state", function() {
+      expect(this.microstate.value).to.deep.equal({average: 'joe'});
+    });
+    it("returns the new state from the setState() function", function() {
+      expect(this.next).to.deep.equal({average: 'joe'});
+    });
+  });
+
+
   describe("setting the state with a custom event", function() {
     beforeEach(function() {
-      this.microstate.setState('custom', ()=> ({totally: 'custom'}));
+      this.next = this.microstate.setState('custom', ()=> ({totally: 'custom'}));
     });
 
     it("sets the new state", function() {
       expect(this.microstate.value).to.deep.equal({totally: 'custom'});
+    });
+
+    it("returns the new state from the setState() function", function() {
+      expect(this.next).to.deep.equal({totally: 'custom'});
     });
 
     it("fires the 'state' event", function() {

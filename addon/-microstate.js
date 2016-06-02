@@ -41,8 +41,8 @@ export default Ember.Helper.extend({
 
   setState(eventName, updateFn = (current)=> current) {
     if (arguments.length === 1) {
-      eventName = null;
       updateFn = eventName || (o=> o);
+      eventName = null;
     }
 
     this._update = true;
