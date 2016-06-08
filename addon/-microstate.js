@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import assign from './utils/assign';
-
-const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
+import descriptor from './utils/descriptor';
 
 export default Ember.Helper.extend({
 
@@ -17,37 +16,27 @@ export default Ember.Helper.extend({
     delete this._update;
     let current = this.value;
     let actions = Object.keys(this.actions).reduce((actions, key)=> {
-      actions[key] = {
-        value: (...args)=> {
+      return assign(actions, {
+        [key]: descriptor((...args)=> {
           let action = this.actions[key];
           return this.setState(key, (curr) => action.call(null, curr, ...args));
-        },
-        // If this is Ember < 2, we want to make this property re-configurable
-        // so that it can add a setter when embedded in handlebars. This setter
-        // should never be used, but will keep the handlebars templates from
-        // barking.
-        configurable: IS_EMBER_1 ? true : false
-      };
-      return actions;
+        })
+      });
     }, {});
 
     let collections = Object.keys(this.each).reduce((collections, collectionName)=> {
-      collections[collectionName] = {
-        value: current[collectionName].map((member)=> {
+      return assign(collections, {
+        [collectionName]: descriptor(current[collectionName].map((member)=> {
           return Object.create(member, Object.keys(this.each[collectionName]).reduce((actions, key)=> {
-            actions[key] = {
-              value: (...args)=> {
+            return assign(actions, {
+              [key]: descriptor((...args)=> {
                 let action = this.each[collectionName][key];
                 return this.setState(`${key}-{Ember.String.singularize(collectionName)}`, (curr)=> action.call(null, curr, member, ...args));
-              },
-              configurable: IS_EMBER_1 ? true : false
-            };
-            return actions;
+              })
+            });
           }, {}));
-        }),
-        configurable: IS_EMBER_1 ? true : false
-      };
-      return collections;
+        }))
+      });
     }, {});
     return Object.create(this.wrap(current), assign({}, actions, collections));
   },
