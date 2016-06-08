@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import assign from './utils/assign';
 
 const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
 
@@ -45,11 +46,12 @@ export default Ember.Helper.extend({
             };
             return actions;
           }, {}));
-        })
+        }),
+        configurable: IS_EMBER_1 ? true : false
       };
       return collections;
     }, {});
-    return Object.create(this.wrap(current), Ember.assign({}, actions, collections));
+    return Object.create(this.wrap(current), assign({}, actions, collections));
   },
 
   wrap(value) {
