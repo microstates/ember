@@ -14,7 +14,10 @@ const False = Object.create([], {
 
 
 export default MicroState.extend({
-  default: false,
+
+  initialize(previous, [value]) {
+    return value != null;
+  },
 
   wrap(value) {
     return !!value ? True : False;

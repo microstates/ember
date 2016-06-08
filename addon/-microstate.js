@@ -5,16 +5,14 @@ const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
 
 export default Ember.Helper.extend({
 
-  default: {},
-
-  initialize(value) {
+  initialize(previous, [value = {}]) {
     return value;
   },
 
-  compute([value = this.default], options) {
+  compute(params, options) {
     this.options = options;
-    if (!this.value || !this._update) {
-      this.value = this.initialize(value, options);
+    if (!this._update) {
+      this.value = this.initialize(this.value, params, options);
     }
     delete this._update;
     let current = this.value;

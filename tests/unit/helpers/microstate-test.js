@@ -17,7 +17,9 @@ describe('Microstates', function() {
     ];
 
     this.microstate = MicroState.create({
-      default: {initial: 'state'},
+      initialize(current, [state = {initial: 'state'}]) {
+        return state;
+      },
       recompute: onRecompute
     });
 

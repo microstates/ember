@@ -4,8 +4,6 @@ import assign from '../utils/assign';
 
 export default MicroState.extend({
 
-  default: 0,
-
   wrap: function(value) {
     return assign(new Number(value), {
       toString() { return String(value); }
