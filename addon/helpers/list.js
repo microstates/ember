@@ -1,8 +1,9 @@
 import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
-  default: [],
-
+  initialize(current, [array = []]) {
+    return array;
+  },
   actions: {
     add(list, item) {
       return list.concat(item);
