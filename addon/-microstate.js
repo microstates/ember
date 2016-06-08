@@ -32,7 +32,24 @@ export default Ember.Helper.extend({
       return actions;
     }, {});
 
-    return Object.create(this.wrap(current), actions);
+    let collections = Object.keys(this.each).reduce((collections, collectionName)=> {
+      collections[collectionName] = {
+        value: current[collectionName].map((member)=> {
+          return Object.create(member, Object.keys(this.each[collectionName]).reduce((actions, key)=> {
+            actions[key] = {
+              value: (...args)=> {
+                let action = this.each[collectionName][key];
+                return this.setState(`${key}-{Ember.String.singularize(collectionName)}`, (curr)=> action.call(null, curr, member, ...args));
+              },
+              configurable: IS_EMBER_1 ? true : false
+            };
+            return actions;
+          }, {}));
+        })
+      };
+      return collections;
+    }, {});
+    return Object.create(this.wrap(current), Ember.assign({}, actions, collections));
   },
 
   wrap(value) {
@@ -59,6 +76,7 @@ export default Ember.Helper.extend({
     return this.value;
   },
 
+  each: {},
   actions: {}
 });
 
