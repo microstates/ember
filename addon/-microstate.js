@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import assign from './utils/assign';
 
 const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
 
@@ -32,7 +33,25 @@ export default Ember.Helper.extend({
       return actions;
     }, {});
 
-    return Object.create(this.wrap(current), actions);
+    let collections = Object.keys(this.each).reduce((collections, collectionName)=> {
+      collections[collectionName] = {
+        value: current[collectionName].map((member)=> {
+          return Object.create(member, Object.keys(this.each[collectionName]).reduce((actions, key)=> {
+            actions[key] = {
+              value: (...args)=> {
+                let action = this.each[collectionName][key];
+                return this.setState(`${key}-{Ember.String.singularize(collectionName)}`, (curr)=> action.call(null, curr, member, ...args));
+              },
+              configurable: IS_EMBER_1 ? true : false
+            };
+            return actions;
+          }, {}));
+        }),
+        configurable: IS_EMBER_1 ? true : false
+      };
+      return collections;
+    }, {});
+    return Object.create(this.wrap(current), assign({}, actions, collections));
   },
 
   wrap(value) {
@@ -59,6 +78,7 @@ export default Ember.Helper.extend({
     return this.value;
   },
 
+  each: {},
   actions: {}
 });
 
