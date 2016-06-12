@@ -53,6 +53,18 @@ export default Ember.Helper.extend({
 
     this._update = true;
     var nextState = updateFn.call(this, this.value);
+
+    if (isThenable(nextState)) {
+      nextState.then((nextState)=>{
+        this.transitionState(eventName, nextState);
+      });
+      return this.value;
+    }
+
+    return this.transitionState(eventName, nextState);
+  },
+
+  transitionState(eventName, nextState) {
     if (nextState !== this.value) {
       this.value = nextState;
       this.recompute();
@@ -62,7 +74,7 @@ export default Ember.Helper.extend({
         sendActionNotification(this, eventName, nextState);
       }
     }
-    return this.value;
+    return nextState;
   },
 
   each: {},
@@ -75,4 +87,8 @@ function sendActionNotification(helper, actionName, state) {
   if (actionCallback && actionCallback.call) {
     actionCallback.call(null, state);
   }
+}
+
+function isThenable(value) {
+  return value && value.then && value.then.call;
 }
