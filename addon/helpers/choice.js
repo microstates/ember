@@ -7,7 +7,7 @@ export default MicroState.extend({
     return Type.create(values, options);
   },
 
-  each: {
+  actions: {
     options: {
       toggle(choice, option) {
         return choice.toggle(option);

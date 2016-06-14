@@ -14,31 +14,32 @@ export default Ember.Helper.extend({
       this.value = this.initialize(this.value, params, options);
     }
     delete this._update;
-    let current = this.value;
-    let actions = Object.keys(this.actions).reduce((actions, key)=> {
-      return assign(actions, {
-        [key]: descriptor((...args)=> {
-          let action = this.actions[key];
-          return this.setState(key, (curr) => action.call(null, curr, ...args));
-        })
-      });
-    }, {});
 
-    let collections = Object.keys(this.each).reduce((collections, collectionName)=> {
-      return assign(collections, {
-        [collectionName]: descriptor(current[collectionName].map((member)=> {
-          return Object.create(member, Object.keys(this.each[collectionName]).reduce((actions, key)=> {
-            return assign(actions, {
-              [key]: descriptor((...args)=> {
-                let action = this.each[collectionName][key];
-                return this.setState(`${key}-{Ember.String.singularize(collectionName)}`, (curr)=> action.call(null, curr, member, ...args));
-              })
-            });
-          }, {}));
-        }))
-      });
-    }, {});
-    return Object.create(this.wrap(current), assign({}, actions, collections));
+    return decorate(this, this.actions, this.wrap(this.value), [this.value]);
+
+    function decorate(microstate, actions, object, context) {
+      return Object.create(object, Object.keys(actions).reduce((values, key)=> {
+        return assign(values, {
+          [key]: descriptor(valueFor(actions, key))
+        });
+      }, {}));
+
+      function valueFor(actions, key) {
+        let action = actions[key];
+        if (typeof action === 'function') {
+          return function(...args) {
+            return microstate.setState(key, ()=> action.call(null, ...context, ...args));
+          };
+        } else {
+          let next = object[key];
+          if (next.map && next.length >=0) {
+            return next.map(val => decorate(microstate, action, val, context.concat(val)));
+          } else {
+            return decorate(microstate, action, next, context.concat(next));
+          }
+        }
+      }
+    }
   },
 
   wrap(value) {
