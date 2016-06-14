@@ -2,8 +2,8 @@ import { MultipleChoice, SingleChoice } from '../models/choice';
 import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
-  actions: {
 
+  actions: {
     recompute(previous, [values = []], options) {
       let Type = !!options.multiple ? MultipleChoice : SingleChoice;
       return Type.create(values, options);
