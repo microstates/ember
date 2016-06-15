@@ -7,13 +7,31 @@ import {
 import hbs from 'htmlbars-inline-precompile';
 
 import Ember from 'ember';
-import StringMicrostate from 'ember-microstates/helpers/string';
-import DeferredMixin from 'ember-microstates/mixins/deferred';
+import { DeferredMicroState } from 'ember-microstates';
+import assign from 'ember-microstates/utils/assign';
 
 const {
-  RSVP,
+  RSVP: { Promise },
   run: { later }
 } = Ember;
+
+const DeferredStringMicroState = DeferredMicroState.extend({
+  wrap(value) {
+    return assign(String(value), {
+      toString() { return value; }
+    });
+  },
+
+  actions: {
+    recompute(previous, [string = '']) {
+      return string;
+    },
+
+    set(string, value) {
+      return String(value);
+    }
+  }
+});
 
 describeComponent(
   'promise-handler',
@@ -25,7 +43,7 @@ describeComponent(
     
     it('renders', function() {
 
-      this.register('helper:promise-handler', StringMicrostate.extend(DeferredMixin));
+      this.register('helper:promise-handler', DeferredStringMicroState);
 
       this.render(hbs`{{promise-handler 'foo'}}`);
       expect(this.$()).to.have.length(1);
@@ -35,14 +53,10 @@ describeComponent(
 
     it('waits for promise to resolve', function(done){
 
-      this.register('helper:promise-handler', StringMicrostate.extend(DeferredMixin, {
+      this.register('helper:promise-handler', DeferredStringMicroState.extend({
         actions: {
           refresh() {
-            return new RSVP.Promise(function(resolve){
-              later(function(){ 
-                resolve('bar');
-              }, 50);
-            });
+            return resolveWithDelay('bar');
           }
         }
       }));
@@ -68,21 +82,13 @@ describeComponent(
 
     it('always receives value from last request', function(done){
 
-      this.register('helper:promise-handler', StringMicrostate.extend(DeferredMixin, {
+      this.register('helper:promise-handler', DeferredStringMicroState.extend({
         actions: {
           slow() {
-            return new RSVP.Promise(function(resolve){
-              later(function(){ 
-                resolve('slow response');
-              }, 100);
-            });
+            return resolveWithDelay('slow response', 100);
           },
           faster() {
-            return new RSVP.Promise(function(resolve){
-              later(function(){
-                resolve('faster response');
-              }, 50);
-            });
+            return resolveWithDelay('faster response', 50);
           }
         }
       }));
@@ -103,7 +109,6 @@ describeComponent(
 
       this.$(':contains(Faster request)').click(); 
 
-
       expect(this.$('.value').text()).to.equal('initial'); // value did not change
 
       later(function(){
@@ -113,5 +118,61 @@ describeComponent(
 
     });
 
+    it('has state properties', function(done){
+
+      this.register('helper:promise-handler', DeferredStringMicroState.extend({
+        actions: {
+          slow() {
+            return resolveWithDelay('slow response', 25);
+          }
+        }
+      }));
+
+      this.render(hbs`
+        {{#with (promise-handler 'foo') as |value|}}
+          <span class="value {{if value.isNew 'is-new'}} {{if value.isPending 'is-pending'}} {{if value.isComplete 'is-complete'}} {{if value.isError 'is-error'}}">
+            {{value}}
+          </span>
+          <button {{action value.slow}}>Slow</button>
+        {{/with}}
+      `);
+
+      expect(this.$('.value').text().trim()).to.equal('foo');
+
+      expect(this.$('.value').hasClass('is-new')).to.be.true;
+      expect(this.$('.value').hasClass('is-pending')).to.be.false;
+      expect(this.$('.value').hasClass('is-complete')).to.be.false;
+      expect(this.$('.value').hasClass('is-error')).to.be.false;
+
+      this.$('button:contains(Slow)').click();
+
+      expect(this.$('.value').text().trim()).to.equal('foo');
+
+      expect(this.$('.value').hasClass('is-new')).to.be.false;
+      expect(this.$('.value').hasClass('is-pending')).to.be.true;
+      expect(this.$('.value').hasClass('is-complete')).to.be.false;
+      expect(this.$('.value').hasClass('is-error')).to.be.false;
+
+      later(function(){
+        expect(this.$('.value').text().trim()).to.equal('slow response');
+
+        expect(this.$('.value').hasClass('is-new')).to.be.false;
+        expect(this.$('.value').hasClass('is-pending')).to.be.false;
+        expect(this.$('.value').hasClass('is-complete')).to.be.true;
+        expect(this.$('.value').hasClass('is-error')).to.be.false;
+
+        done();
+      }, 50);
+
+    });
+
   }
 );
+
+function resolveWithDelay(value, delay = 50) {
+  return new Promise(function(resolve){
+      later(function(){
+        resolve(value);
+      }, delay);
+    });
+}
