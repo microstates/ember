@@ -66,5 +66,52 @@ describeComponent(
       }, 100);
     });
 
+    it('always receives value from last request', function(done){
+
+      this.register('helper:promise-handler', StringMicrostate.extend(DeferredMixin, {
+        actions: {
+          slow() {
+            return new RSVP.Promise(function(resolve){
+              later(function(){ 
+                resolve('slow response');
+              }, 100);
+            });
+          },
+          faster() {
+            return new RSVP.Promise(function(resolve){
+              later(function(){
+                resolve('faster response');
+              }, 50);
+            });
+          }
+        }
+      }));
+
+      this.render(hbs`
+        {{#with (promise-handler 'initial') as |value|}}
+          <span class="value">{{value}}</span>
+          <button {{action value.faster}}>Faster request</button>
+          <button {{action value.slow}}>Slow request</button>
+        {{/with}}
+      `);
+
+      expect(this.$('.value').text()).to.equal('initial'); // value did not change
+
+      this.$(':contains(Slow request)').click();
+
+      expect(this.$('.value').text()).to.equal('initial');
+
+      this.$(':contains(Faster request)').click(); 
+
+
+      expect(this.$('.value').text()).to.equal('initial'); // value did not change
+
+      later(function(){
+        expect(this.$('.value').text()).to.equal('faster response');
+        done();
+      }, 150);
+
+    });
+
   }
 );
