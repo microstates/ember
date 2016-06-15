@@ -57,6 +57,14 @@ export default Ember.Helper.extend({
     }
 
     let nextState = updateFn.call(this, this.value);
+
+    this.setState(eventName, nextState);
+
+    return this.value;
+  },
+
+  setState(eventName, nextState) {
+
     if (nextState !== this.value) {
       this.value = nextState;
       this._update = true;
@@ -67,7 +75,7 @@ export default Ember.Helper.extend({
         sendActionNotification(this, eventName, nextState);
       }
     }
-    return nextState;
+
   },
 
   actions: {
