@@ -6,15 +6,16 @@ export default Ember.Helper.extend({
 
   compute(params, options) {
     this.options = options;
-
     // collect all of the actions from here up the prototype chain
     let actions = ancestorsOf(this).reduce(function(actions, ancestor) {
-      return assign(actions, ancestor.actions);
+      return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
     }, {});
 
+    let recompute = actions.recompute;
+    actions.recompute = ()=> recompute.call(null, this.value, params, options);
+
     if (!this._update) {
-      let initial = actions.recompute.call(null, this.value, params, options);
-      this.value = this.transition('recompute', ()=> initial);
+      this.value = this.transition('recompute', actions.recompute);
     }
     delete this._update;
 
@@ -89,6 +90,6 @@ function ancestorsOf(object, ancestors = [object]) {
   if (proto == null) {
     return ancestors;
   } else {
-    return ancestorsOf(proto, [proto].concat(ancestors));
+    return ancestorsOf(proto, ancestors.concat(proto));
   }
 }
