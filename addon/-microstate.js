@@ -4,18 +4,22 @@ import descriptor from './utils/descriptor';
 
 export default Ember.Helper.extend({
 
-  initialize(previous, [value = {}]) {
-    return value;
-  },
-
   compute(params, options) {
     this.options = options;
+    // collect all of the actions from here up the prototype chain
+    let actions = ancestorsOf(this).reduce(function(actions, ancestor) {
+      return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
+    }, {});
+
+    let recompute = actions.recompute;
+    actions.recompute = ()=> recompute.call(null, this.value, params, options);
+
     if (!this._update) {
-      this.value = this.initialize(this.value, params, options);
+      this.value = this.transition('recompute', actions.recompute);
     }
     delete this._update;
 
-    return decorate(this, this.actions, this.wrap(this.value), [this.value]);
+    return decorate(this, actions, this.wrap(this.value), [this.value]);
 
     function decorate(microstate, actions, object, context) {
       return Object.create(object, Object.keys(actions).reduce((values, key)=> {
@@ -28,7 +32,7 @@ export default Ember.Helper.extend({
         let action = actions[key];
         if (typeof action === 'function') {
           return function(...args) {
-            return microstate.setState(key, ()=> action.call(null, ...context, ...args));
+            return microstate.transition(key, ()=> action.call(null, ...context, ...args));
           };
         } else {
           let next = object[key];
@@ -46,16 +50,16 @@ export default Ember.Helper.extend({
     return value;
   },
 
-  setState(eventName, updateFn = (current)=> current) {
+  transition(eventName, updateFn = (current)=> current) {
     if (arguments.length === 1) {
       updateFn = eventName || (o=> o);
       eventName = null;
     }
 
-    this._update = true;
-    var nextState = updateFn.call(this, this.value);
+    let nextState = updateFn.call(this, this.value);
     if (nextState !== this.value) {
       this.value = nextState;
+      this._update = true;
       this.recompute();
       sendActionNotification(this, 'state', nextState);
 
@@ -63,11 +67,14 @@ export default Ember.Helper.extend({
         sendActionNotification(this, eventName, nextState);
       }
     }
-    return this.value;
+    return nextState;
   },
 
-  each: {},
-  actions: {}
+  actions: {
+    recompute(current, [state = {}]) {
+      return state;
+    }
+  }
 });
 
 function sendActionNotification(helper, actionName, state) {
@@ -75,5 +82,14 @@ function sendActionNotification(helper, actionName, state) {
   Ember.sendEvent(helper, actionName, [state]);
   if (actionCallback && actionCallback.call) {
     actionCallback.call(null, state);
+  }
+}
+
+function ancestorsOf(object, ancestors = [object]) {
+  let proto = Object.getPrototypeOf(object);
+  if (proto == null) {
+    return ancestors;
+  } else {
+    return ancestorsOf(proto, ancestors.concat(proto));
   }
 }

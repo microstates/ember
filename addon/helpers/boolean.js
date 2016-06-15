@@ -15,15 +15,15 @@ const False = Object.create([], {
 
 export default MicroState.extend({
 
-  initialize(previous, [value]) {
-    return value != null;
-  },
-
   wrap(value) {
     return !!value ? True : False;
   },
 
   actions: {
+    recompute(current, [value]) {
+      return !!value;
+    },
+
     toggle(current) {
       return !current;
     },
