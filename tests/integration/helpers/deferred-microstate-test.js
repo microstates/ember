@@ -11,7 +11,7 @@ import { DeferredMicroState } from 'ember-microstates';
 import assign from 'ember-microstates/utils/assign';
 
 const {
-  RSVP: { Promise },
+  RSVP: { Promise, reject },
   run: { later }
 } = Ember;
 
@@ -163,6 +163,48 @@ describeComponent(
 
         done();
       }, 50);
+
+    });
+
+    it('can be recomputed after an error', function(){
+
+      this.register('helper:promise-handler', DeferredStringMicroState.extend({
+        actions: {
+          bad() {
+            return reject('failed response');
+          }
+        }
+      }));
+
+      this.render(hbs`
+        {{#with (promise-handler 'foo') as |value|}}
+          <span class="value {{if value.isNew 'is-new'}} {{if value.isPending 'is-pending'}} {{if value.isComplete 'is-complete'}} {{if value.isError 'is-error'}}">
+            {{value}}
+          </span>
+          <span class="error">{{value.error}}</span>
+          <button {{action value.bad}}>Bad</button>
+          <button {{action value.recompute}}>Reset</button>
+        {{/with}}
+      `);
+
+      expect(this.$('.value').text().trim()).to.equal('foo');
+
+      expect(this.$('.value').hasClass('is-new')).to.be.true;
+      expect(this.$('.value').hasClass('is-error')).to.be.false;
+
+      this.$('button:contains(Bad)').click();
+
+      expect(this.$('.value').text().trim()).to.equal('foo');
+      expect(this.$('.error').text().trim()).to.equal('failed response');
+      expect(this.$('.value').hasClass('is-new')).to.be.false;
+      expect(this.$('.value').hasClass('is-error')).to.be.true;
+
+      this.$('button:contains(Reset)').click();
+      
+      expect(this.$('.value').text().trim()).to.equal('foo');
+      expect(this.$('.error').text().trim()).to.equal('');
+      expect(this.$('.value').hasClass('is-new')).to.be.true;
+      expect(this.$('.value').hasClass('is-error')).to.be.false;      
 
     });
 

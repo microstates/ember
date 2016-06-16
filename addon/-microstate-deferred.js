@@ -9,7 +9,7 @@ export default Microstate.extend({
   task: task(function * (eventName, promise) {
     try {
       let nextState = yield promise;
-      this._deferredState = success();
+      this._deferredState = complete();
       this.transition(eventName, () => nextState);
     } catch (e) {
       this._deferredState = error(e);
@@ -23,7 +23,9 @@ export default Microstate.extend({
     let value = this._super(...arguments);
 
     if (this._deferredState) {
-      return assign(value, this._deferredState);
+      value = assign(value, this._deferredState);
+      this._deferredState = null;
+      return value;
     }
 
     return value;
@@ -43,15 +45,17 @@ export default Microstate.extend({
       this.get('task').perform(eventName, nextState);
       // we shouldn't change the value yet, so let's reset it back to previous value
       nextState = this.value;
+      this._update = true;
+      this.recompute();
+    } else if (eventName === 'recompute') {
+      this._deferredState = initial();
+      this.recompute();
+      return nextState;
     }
 
     // when nextState is a promise, this code should not execute
     if (nextState !== this.value) {
-      if (!this._deferredState && eventName === 'recompute') {
-        this._deferredState = initial();
-      } else if (!this._deferredState) {
-        this._deferredState = complete();
-      }
+      this._deferredState = complete();
       this.value = nextState;
       this._update = true;
       this.recompute();
@@ -60,12 +64,6 @@ export default Microstate.extend({
       if (eventName) {
         sendActionNotification(this, eventName, nextState);
       }
-    }
-
-    // the value didn't change, but deferred state changed, so let's update the additonal properties
-    if (this._deferredState) {
-      this._update = true;
-      this.recompute();
     }
 
     return nextState;
@@ -93,16 +91,6 @@ function complete() {
   };
 }
 
-function success() {
-  return {
-    error: null,
-    isNew: false,
-    isError: false,
-    isPending: false,
-    isComplete: true
-  };
-}
-
 function pending() {
   return {
     error: null,
@@ -113,7 +101,7 @@ function pending() {
   };
 }
 
-function error() {
+function error(error) {
   return {
     error,
     isNew: false,
