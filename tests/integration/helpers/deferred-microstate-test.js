@@ -200,11 +200,48 @@ describeComponent(
       expect(this.$('.value').hasClass('is-error')).to.be.true;
 
       this.$('button:contains(Reset)').click();
-      
+
       expect(this.$('.value').text().trim()).to.equal('foo');
       expect(this.$('.error').text().trim()).to.equal('');
       expect(this.$('.value').hasClass('is-new')).to.be.true;
       expect(this.$('.value').hasClass('is-error')).to.be.false;      
+
+    });
+
+    it('can mix defered and regular actions', function(done){
+      this.register('helper:promise-handler', DeferredStringMicroState.extend({
+        actions: {
+          async() {
+            return resolveWithDelay('baz');
+          },
+          sync() {
+            return 'bar';
+          }
+        }
+      }));
+
+      this.render(hbs`
+        {{#with (promise-handler 'foo') as |value|}}
+          <span class="value">
+            {{value}}
+          </span>
+          <button {{action value.async}}>Async</button>
+          <button {{action value.sync}}>Sync</button>
+        {{/with}}
+      `);
+
+      expect(this.$('.value').text().trim()).to.equal('foo');
+
+      this.$('button:contains(Async)').click();
+
+      later(function(){
+        expect(this.$('.value').text().trim()).to.equal('baz');
+
+        this.$('button:contains(Sync)').click();
+        expect(this.$('.value').text().trim()).to.equal('bar');
+        
+        done();
+      }, 60);
 
     });
 
