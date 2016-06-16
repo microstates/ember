@@ -242,7 +242,56 @@ describeComponent(
         
         done();
       }, 60);
+    });
 
+    it('can accept a promise as initial value', function(done){
+      this.register('helper:promise-handler', DeferredStringMicroState.extend({
+        actions: {
+          boo() {
+            return 'boo';
+          }
+        }
+      }));
+
+      this.set('initial', resolveWithDelay('foo', 20));
+
+      this.render(hbs`
+        {{#with (promise-handler initial) as |value|}}
+          <span class="value {{if value.isNew 'is-new'}} {{if value.isPending 'is-pending'}} {{if value.isComplete 'is-complete'}} {{if value.isError 'is-error'}}">
+            {{value}}
+          </span>
+          <button {{action value.boo}}>Boo</button>
+          <button {{action value.recompute}}>Reset</button>
+        {{/with}}
+      `);
+
+      expect(this.$('.value').text().trim()).to.equal('');
+      
+      expect(this.$('.value').hasClass('is-new')).to.be.false;
+      expect(this.$('.value').hasClass('is-pending')).to.be.true;
+      expect(this.$('.value').hasClass('is-complete')).to.be.false;
+      expect(this.$('.value').hasClass('is-error')).to.be.false;
+
+      later(function(){
+        expect(this.$('.value').text().trim()).to.equal('foo');
+        
+        expect(this.$('.value').hasClass('is-new')).to.be.false;
+        expect(this.$('.value').hasClass('is-pending')).to.be.false;
+        expect(this.$('.value').hasClass('is-complete')).to.be.true;
+        expect(this.$('.value').hasClass('is-error')).to.be.false;
+
+        this.$('button:contains(Reset)').click();
+
+        // resolves right away because promise is already resolved
+        expect(this.$('.value').text().trim()).to.equal('foo');
+        
+        expect(this.$('.value').hasClass('is-new')).to.be.false;
+        expect(this.$('.value').hasClass('is-pending')).to.be.false;
+        expect(this.$('.value').hasClass('is-complete')).to.be.true;
+        expect(this.$('.value').hasClass('is-error')).to.be.false;        
+
+        done();
+      }, 30);
     });
 
   }

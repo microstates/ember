@@ -41,7 +41,10 @@ export default Microstate.extend({
 
     // nextState is a promise, we need to allow the promise to resolve before finishing the transition
     if (isThenable(nextState)) {
-      this._deferredState = pending();      
+      this._deferredState = pending();
+      if (eventName === 'recompute') {
+        eventName = 'recomputePromise';
+      }
       this.get('task').perform(eventName, nextState);
       // we shouldn't change the value yet, so let's reset it back to previous value
       nextState = this.value;
