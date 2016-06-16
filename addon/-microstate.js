@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import assign from './utils/assign';
 import descriptor from './utils/descriptor';
+import sendActionNotification from './utils/send-action-notification';
+import ancestorsOf from './utils/ancestors-of';
 
 export default Ember.Helper.extend({
 
@@ -76,20 +78,3 @@ export default Ember.Helper.extend({
     }
   }
 });
-
-function sendActionNotification(helper, actionName, state) {
-  var actionCallback = helper.options[Ember.String.dasherize(`on-${actionName}`)];
-  Ember.sendEvent(helper, actionName, [state]);
-  if (actionCallback && actionCallback.call) {
-    actionCallback.call(null, state);
-  }
-}
-
-function ancestorsOf(object, ancestors = [object]) {
-  let proto = Object.getPrototypeOf(object);
-  if (proto == null) {
-    return ancestors;
-  } else {
-    return ancestorsOf(proto, ancestors.concat(proto));
-  }
-}
