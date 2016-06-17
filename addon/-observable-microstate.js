@@ -18,6 +18,7 @@ export default class MicroState {
         return Object.create(prototype, Object.keys(actions).reduce((values, key)=> {
           return assign(values, {[key]: descriptor(valueFor(actions, key))});
         }, {
+          toString: descriptor(()=> val == null ? String(val) : val.toString()),
           valueOf: descriptor(()=> val)
         }));
 
