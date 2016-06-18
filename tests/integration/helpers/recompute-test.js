@@ -4,31 +4,19 @@ import { describeComponent, it } from 'ember-mocha';
 import { describe, beforeEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
 
-import MicroString from 'ember-microstates/helpers/string';
-
 describeComponent(
   'recompute-helper',
   'Integration: Recompute Action',
   {integration: true},
   function() {
     beforeEach(function() {
-      this.register('helper:hello', MicroString.extend({
-        actions: {
-          recompute(current, [value]) {
-            return `Hello ${value}!`;
-          },
-          set(current, value) {
-            return `Hello ${value}!`;
-          }
-        }
-      }));
 
       this.render(hbs`
-{{#with (hello "World") as |str|}}
+{{#with (string "Hello World!") as |str|}}
   <span class="message">{{str}}</span>
 
-  <button class="next" {{action (action str.set "Planet")}}>Planet</button>
-  <button class="recompute" {{action (action str.recompute)}}>Reset</button>
+  <button class="next" {{action (action str.set "Hello Planet!")}}>Planet</button>
+  <button class="recompute" {{action (action str.reset)}}>Reset</button>
 {{/with}}
 `);
     });

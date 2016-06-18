@@ -1,6 +1,11 @@
-import { MicroState } from 'ember-microstates';
+import MicrostateHelper  from '../-microstate-helper';
 
-export default MicroState.extend({
+export default MicrostateHelper.extend({
+
+  construct([list = []]) {
+    return list;
+  },
+
   actions: {
     recompute(current, [array = []]) {
       return array;

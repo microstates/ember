@@ -1,29 +1,20 @@
-import { MicroState } from 'ember-microstates';
+import { MicroStateHelper } from 'ember-microstates';
 
-const True = Object.create([true], {
-  value: { value: true },
-  valueOf: {value: ()=> { return true; }},
-  toString: {value: ()=> "true" }
-});
+const True = [true];
 
-const False = Object.create([], {
-  value: { value: false },
-  valueOf: { value: ()=> { return false; } },
-  toString: {value: ()=> "false" }
-});
+const False = [];
 
+export default MicroStateHelper.extend({
 
-export default MicroState.extend({
+  construct([value = false]) {
+    return !!value;
+  },
 
   wrap(value) {
     return !!value ? True : False;
   },
 
   actions: {
-    recompute(current, [value]) {
-      return !!value;
-    },
-
     toggle(current) {
       return !current;
     },

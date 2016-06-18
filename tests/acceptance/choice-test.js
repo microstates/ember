@@ -40,5 +40,17 @@ describe('Acceptance: SingleChoice', function() {
     it("unselects the cow checkbox", function() {
       expect($('.spec-choice-Cow').prop('checked')).to.equal(false);
     });
+    describe("then clicking on the horse", function() {
+      beforeEach(function() {
+        click('.spec-choice-Horse');
+      });
+      it("selects the the horse", function() {
+        expect($('.spec-choice-Horse').prop('checked')).to.equal(true);
+      });
+      it("unselects the lizard", function() {
+        expect($('.spec-choice-Lizard').prop('checked')).to.equal(false);
+      });
+    });
+
   });
 });
