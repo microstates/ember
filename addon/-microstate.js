@@ -1,95 +1,64 @@
-import Ember from 'ember';
 import assign from './utils/assign';
 import descriptor from './utils/descriptor';
+import ancestorsOf from './utils/ancestors-of';
+import { Observable } from './utils/observable';
 
-export default Ember.Helper.extend({
+export default class MicroState {
+  constructor(value, attrs = this) {
+    this[Symbol.observable] = new Observable(observer => {
+      let actions = ancestorsOf(attrs).reduce(function(actions, ancestor) {
+        return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
+      }, {
+        set(current, value) {
+          return value;
+        },
+        reset() {
+          return value;
+        }
+      });
 
-  compute(params, options) {
-    this.options = options;
-    // collect all of the actions from here up the prototype chain
-    let actions = ancestorsOf(this).reduce(function(actions, ancestor) {
-      return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
-    }, {});
+      let wrap = attrs.wrap || (o=> o);
+      observer._subscription.initial = decorate(value, wrap(value), actions, [value]);
 
-    let recompute = actions.recompute;
-    actions.recompute = ()=> recompute.call(null, this.value, params, options);
+      function decorate(val, prototype, properties, context) {
 
-    if (!this._update) {
-      this.value = this.transition('recompute', actions.recompute);
-    }
-    delete this._update;
+        return Object.create(prototype, Object.keys(properties).reduce((values, key)=> {
+          return assign(values, {[key]: descriptor(valueFor(properties, key))});
+        }, {
+          toString: descriptor(()=> val == null ? String(val) : val.toString()),
+          valueOf: descriptor(()=> val)
+        }));
 
-    return decorate(this, actions, this.wrap(this.value), [this.value]);
-
-    function decorate(microstate, actions, object, context) {
-      return Object.create(object, Object.keys(actions).reduce((values, key)=> {
-        return assign(values, {
-          [key]: descriptor(valueFor(actions, key))
-        });
-      }, {}));
-
-      function valueFor(actions, key) {
-        let action = actions[key];
-        if (typeof action === 'function') {
-          return function(...args) {
-            return microstate.transition(key, ()=> action.call(null, ...context, ...args));
-          };
-        } else {
-          let next = object[key];
-          if (next.map && next.length >=0) {
-            return next.map(val => decorate(microstate, action, val, context.concat(val)));
+        function valueFor(attrs, key) {
+          let action = attrs[key];
+          if (typeof action === 'function') {
+            return function(...args) {
+              let next = action.call(attrs, ...context, ...args);
+              return observer.next({
+                actionName: key,
+                previous: val,
+                next,
+                state: decorate(next, wrap(next), actions, [next])
+              });
+            };
           } else {
-            return decorate(microstate, action, next, context.concat(next));
+            let child = val[key];
+            if (child.map && child.length >= 0) {
+              return child.map(val => decorate(val, val, action, context.concat(val)));
+            } else {
+              return decorate(child, child, action, context.concat(child));
+            }
           }
         }
       }
-    }
-  },
+    });
+  }
+
+  subscribe() {
+    return this[Symbol.observable].subscribe(...arguments);
+  }
 
   wrap(value) {
     return value;
-  },
-
-  transition(eventName, updateFn = (current)=> current) {
-    if (arguments.length === 1) {
-      updateFn = eventName || (o=> o);
-      eventName = null;
-    }
-
-    let nextState = updateFn.call(this, this.value);
-    if (nextState !== this.value) {
-      this.value = nextState;
-      this._update = true;
-      this.recompute();
-      sendActionNotification(this, 'state', nextState);
-
-      if (eventName) {
-        sendActionNotification(this, eventName, nextState);
-      }
-    }
-    return nextState;
-  },
-
-  actions: {
-    recompute(current, [state = {}]) {
-      return state;
-    }
-  }
-});
-
-function sendActionNotification(helper, actionName, state) {
-  var actionCallback = helper.options[Ember.String.dasherize(`on-${actionName}`)];
-  Ember.sendEvent(helper, actionName, [state]);
-  if (actionCallback && actionCallback.call) {
-    actionCallback.call(null, state);
-  }
-}
-
-function ancestorsOf(object, ancestors = [object]) {
-  let proto = Object.getPrototypeOf(object);
-  if (proto == null) {
-    return ancestors;
-  } else {
-    return ancestorsOf(proto, ancestors.concat(proto));
   }
 }

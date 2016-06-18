@@ -1,22 +1,13 @@
 /*jshint -W053 */
-import { MicroState } from 'ember-microstates';
-import assign from '../utils/assign';
+import MicroStateHelper  from 'ember-microstates/-microstate-helper';
 
-export default MicroState.extend({
+export default MicroStateHelper.extend({
 
-  wrap(value) {
-    return assign(new String(value), {
-      toString() { return value; }
-    });
+  construct([string = '']) {
+    return String(string);
   },
 
-  actions: {
-    recompute(previous, [string = '']) {
-      return string;
-    },
-
-    set(string, value) {
-      return String(value);
-    }
+  wrap(value) {
+    return new String(value);
   }
 });

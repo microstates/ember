@@ -1,8 +1,7 @@
 /*jshint -W053 */
 import { expect } from 'chai';
 import { describe, beforeEach, afterEach, it } from 'mocha';
-import MicroState from 'ember-microstates/-observable-microstate';
-
+import { MicroState } from 'ember-microstates';
 
 describe("Completely Independent Microstate", function() {
   let microstate, transition, subscription;

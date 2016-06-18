@@ -1,8 +1,9 @@
 import MicrostateHelper  from '../-microstate-helper';
 
 export default MicrostateHelper.extend({
-  compute([list = []], options) {
-    return this._super([list], options);
+
+  construct([list = []]) {
+    return list;
   },
 
   actions: {

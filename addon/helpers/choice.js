@@ -1,14 +1,13 @@
 import { MultipleChoice, SingleChoice } from '../models/choice';
-import { MicroState } from 'ember-microstates';
+import { MicroStateHelper } from 'ember-microstates';
 
-export default MicroState.extend({
+export default MicroStateHelper.extend({
+  construct([list = []], options) {
+    let Type = !!options.multiple ? MultipleChoice : SingleChoice;
+    return Type.create(list, options);
+  },
 
   actions: {
-    recompute(previous, [values = []], options) {
-      let Type = !!options.multiple ? MultipleChoice : SingleChoice;
-      return Type.create(values, options);
-    },
-
     options: {
       toggle(choice, option) {
         return choice.toggle(option);

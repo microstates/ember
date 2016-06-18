@@ -25,7 +25,7 @@ describe('Boolean', function() {
   });
 
   it("computes to the initial state ", function() {
-    expect(this.value.value).to.equal(true);
+    expect(this.value.valueOf()).to.equal(true);
   });
 
   describe("toggling", function() {
@@ -34,7 +34,7 @@ describe('Boolean', function() {
     });
 
     it("swaps the state to false", function() {
-      expect(this.toggled).to.equal(false);
+      expect(this.helper.current.valueOf()).to.equal(false);
     });
 
     it("fires the 'state' event", function() {

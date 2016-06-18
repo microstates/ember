@@ -1,11 +1,11 @@
 import Ember from 'ember';
-import MicroState from './-observable-microstate';
+import MicroState from './-microstate';
 
 export default Ember.Helper.extend({
 
   subscription: { unsubscribe() {} },
 
-  compute([value], options) {
+  compute(params, options) {
     // we're recomputing because of a newly observed state.
     if (this.didMakeObservation) {
       delete this.didMakeObservation;
@@ -13,7 +13,7 @@ export default Ember.Helper.extend({
     } else {
       //we're recomputing because the inputs changed.
       this.subscription.unsubscribe();
-      let microstate = new MicroState(value, this);
+      let microstate = new MicroState(this.construct(params, options), this);
 
       this.subscription = microstate.subscribe(transition => {
         this.didMakeObservation = true;
@@ -24,6 +24,14 @@ export default Ember.Helper.extend({
       });
       return this.subscription.initial;
     }
+  },
+
+  /**
+   * Adapts the helper api, and converts the params and options into
+   * a value to be passed into the microstate.
+   */
+  construct([value] /*, options*/) {
+    return value;
   }
 });
 
