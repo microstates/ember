@@ -14,6 +14,8 @@ export default Ember.Helper.extend({
     this.options = options;
     if (!this.value || !this._update) {
       this.value = this.initialize(value, options);
+      //hack to provide the `on-init` event. Yuck!
+      this._didJustInitialize = true;
     }
     delete this._update;
     let current = this.value;
@@ -32,7 +34,12 @@ export default Ember.Helper.extend({
       return actions;
     }, {});
 
-    return Object.create(this.wrap(current), actions);
+    var model = Object.create(this.wrap(current), actions);
+    if (this._didJustInitialize) {
+      sendActionNotification(this, 'init', model);
+    }
+    delete this._didJustInitialize;
+    return model;
   },
 
   wrap(value) {
