@@ -22,15 +22,21 @@ describe('Boolean', function() {
     Ember.addListener(this.helper, 'state', this, onStateEvent);
     Ember.addListener(this.helper, 'toggle', this, onToggleEvent);
     this.value = this.helper.compute([true], {'on-state': onState, 'on-toggle': onToggle});
+    this.valueOf = this.value.valueOf();
   });
 
-  it("computes to the initial state ", function() {
+  it("computes to the initial state", function() {
     expect(this.value.value).to.equal(true);
+  });
+
+  it("unboxed to original value", function() {
+    expect(this.valueOf).to.equal(true);
   });
 
   describe("toggling", function() {
     beforeEach(function() {
       this.toggled = this.value.toggle();
+      this.toggledValueOf = this.toggled.valueOf();
     });
 
     it("swaps the state to false", function() {
@@ -51,6 +57,10 @@ describe('Boolean', function() {
 
     it("invokes the on-toggle callback", function() {
       expect(onToggle.calledWith(false)).to.equal(true);
+    });
+
+    it("unboxed to toggled value", function() {
+      expect(this.toggledValueOf).to.equal(false);
     });
   });
 
