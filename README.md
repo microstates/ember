@@ -18,10 +18,6 @@ application for an explanation.
 * `addon/helpers/string.js`
 * `addon/helpers/number.js`
 
-## Binding
-
-* `addon/initializers/register-bind-helper.js`
-
 ## Example Usage
 
 * [tests/dummy/app/templates/application.hbs](https://github.com/cowboyd/ember-microstates/blob/master/tests/dummy/app/templates/application.hbs)
