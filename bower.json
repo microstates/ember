@@ -1,11 +1,13 @@
 {
   "name": "ember-microstates",
   "dependencies": {
-    "ember": "~2.5.0",
-    "ember-cli-shims": "0.1.1",
-    "ember-cli-test-loader": "0.2.2",
+    "ember": "2.8.2",
+    "ember-cli-shims": "0.1.3",
     "mocha": "~2.2.4",
     "chai": "~2.3.0",
     "ember-mocha-adapter": "~0.3.1"
+  },
+  "resolutions": {
+    "ember": "canary"
   }
 }
