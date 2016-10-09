@@ -1,6 +1,16 @@
 import { MicroState } from 'ember-microstates';
+import assign from '../utils/assign';
 
 export default MicroState.extend({
+
+  wrap(value) {
+    return assign(value, {
+      valueOf() {
+        return value.slice();
+      }
+    });
+  },
+
   actions: {
     recompute(current, [array = []]) {
       return array;
