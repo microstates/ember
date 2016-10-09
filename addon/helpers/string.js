@@ -6,7 +6,8 @@ export default MicroState.extend({
 
   wrap(value) {
     return assign(new String(value), {
-      toString() { return value; }
+      toString() { return value; },
+      valueOf() { return value; }
     });
   },
 
