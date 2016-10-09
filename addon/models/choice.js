@@ -18,6 +18,10 @@ export class SingleChoice extends Choice {
     return selectedOption ? selectedOption.value : null;
   }
 
+  valueOf() {
+    return this.selection;
+  }
+
   toggle(option, isSelected = !option.isSelected) {
     return new SingleChoice(this.options.map(o => o.toggle(o === option && isSelected)));
   }
@@ -28,13 +32,17 @@ export class MultipleChoice extends Choice {
   static create(values, options) {
     let selection = [];
     if (options.selection) {
-      selection = options.forEach ? options.selection : [options.selection];
+      selection = options.selection.forEach ? options.selection : [options.selection];
     }
     return new MultipleChoice(values.map(v => new Option(v, includes(selection, v))));
   }
 
   get selection() {
     return this.options.filter(o => o.isSelected).map(o => o.value);
+  }
+
+  valueOf() {
+    return this.selection;
   }
 
   toggle(option, isSelected = !option.isSelected) {
