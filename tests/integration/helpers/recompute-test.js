@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import { describe, beforeEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
+import { register } from 'ember-owner-test-utils/test-support/register';
 
 import MicroString from 'ember-microstates/helpers/string';
 
@@ -12,7 +13,7 @@ describeComponent(
   {integration: true},
   function() {
     beforeEach(function() {
-      this.register('helper:hello', MicroString.extend({
+      register(this, 'helper:greeting-sayer', MicroString.extend({
         actions: {
           recompute(current, [value]) {
             return `Hello ${value}!`;
@@ -24,7 +25,7 @@ describeComponent(
       }));
 
       this.render(hbs`
-{{#with (hello "World") as |str|}}
+{{#with (greeting-sayer "World") as |str|}}
   <span class="message">{{str}}</span>
 
   <button class="next" {{action (action str.set "Planet")}}>Planet</button>

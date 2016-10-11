@@ -1,11 +1,14 @@
-<h2 id="title">Welcome to Ember</h2>
-{{#bind
+{{#let
    (boolean)
    (list groceries)
    (string "a string")
    (number 5)
    (choice animals selection="Cow")
-   (choice animals selection="Horse" multiple=true) as |switch items str num pets livestock|}}
+   (choice animals selection="Horse" multiple=true)
+   as |switch items str num pets livestock|
+}}
+  <h2 id="title">Welcome to Ember</h2>
+
   <h3>Boolean</h3>
   value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
@@ -20,7 +23,7 @@
       <li>{{item}} <button class="spec-remove-item-{{i}}" onclick={{action items.remove item}}>x</button></li>
     {{/each}}
   </ol>
-  <label>Add Item: {{input action=(action items.push)}}</label>
+  <label>Add Item: {{input enter=(action items.push)}}</label>
   <hr/>
   <button class="spec-pop" onclick={{items.pop}}>Pop</button>
   <button class="spec-shift" onclick={{items.shift}}>Shift</button>
@@ -58,5 +61,4 @@
       <li> {{selection}}</li>
     {{/each}}
   </ul>
-
-{{/bind}}
+{{/let}}
