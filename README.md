@@ -180,10 +180,11 @@ merged in with its current key-value pairs.
 #### `concat(string)`
 
 ### `number`
-### `add(number)`
-### `subtract(number)`
-### `multiply(number)`
-### `divide(number)`
+
+#### `add(number)`
+#### `subtract(number)`
+#### `multiply(number)`
+#### `divide(number)`
 
 ## Example Usage
 
