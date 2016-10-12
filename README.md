@@ -114,56 +114,76 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
 ## API
 
 * [`object`](#object)
-  + [`assign`](#assign)
-  + [`delete`](#delete)
-  + [`put`](#put)
-  + [`set`](#set)
+  + [`assign(attributes)`](#assignattributes)
+  + [`delete(key)`](#deletekey)
+  + [`put(key,value)`](#putkeyvalue)
+  + [`set(value)`](#setvalue)
 * [`list`](#list)
-  + [`concat`](#list-concat)
-  + [`pop`](#concat)
-  + [`push`](#concat)
-  + [`remove`](#remove)
-  + [`replace`](#remove)
-  + [`shift`](#concat)
-  + [`unshift`](#concat)
+  + [`concat(list)`](#concatlist)
+  + [`pop`](#pop)
+  + [`push(item)`](#pushitem)
+  + [`remove(item)`](#removeitem)
+  + [`replace(item,other)`](#removeitemother)
+  + [`shift`](#shift)
+  + [`unshift(item)`](#unshiftitem)
 * [`boolean`](#boolean)
   + [`toggle`](#toggle)
 * [`string`](#string)
-  + [`concat`](#string-concat)
+  + [`concat(string)`](#concatstring)
 * [`number`](#number)
-  + [`add`](#add)
-  + [`subtract`](#subtract)
-  + [`multiply`](#multiply)
-  + [`divide`](#divide)
+  + [`add(number)`](#addnumber)
+  + [`subtract(number)`](#subtractnumber)
+  + [`multiply(number)`](#multiplynumber)
+  + [`divide(number)`](#dividenumber)
 
 ### `object`
 
-#### `put`
-#### `delete`
-#### `assign`
-#### `set`
+The object state serves as the base for all other microstates. The
+transitions that are available to it are available on all objects:
+
+``` handlebars
+{{let car=(object make="Ford" model="Mustang" year=1967)}}
+```
+
+#### `assign(attributes)`
+
+Transitions this microstate into a new version that has `attributes`
+merged in with its current key-value pairs.
+
+``` handlebars
+<button onclick={{car.assign (hash model="Taurus" year=2015)}}>
+  Make Sedan
+</button>
+{{!clicking will result in {make: 'Ford', model: 'Taurus', year: 2015}}}
+```
+
+#### `delete(key)`
+#### `put(key, value)`
+#### `set(value)`
 
 ### `list`
 
-<a name="list-concat"></a>
-#### `concat`
-#### `pop`
-#### `push`
-#### `remove`
-#### `replace`
-#### `shift`
-#### `unshift`
+#### `concat(list)`
+#### `pop()`
+#### `push(item)`
+#### `remove(item)`
+#### `replace(item,other)`
+#### `shift()`
+#### `unshift(item)`
 
 ### `boolean`
 
-#### `toggle`
+#### `toggle()`
 
 ### `string`
 
-<a name="string-concat"></a>
-#### `concat`
+#### `concat(string)`
 
 ### `number`
+### `add(number)`
+### `subtract(number)`
+### `multiply(number)`
+### `divide(number)`
 
 ## Example Usage
 
