@@ -69,8 +69,8 @@ need to be. We know we have a boolean, so why would we need code to
 manage it by hand?
 
 The same applies for other data types as well, and there are currently
-microstates for [objects][#object], [lists][#list], [strings][#string]
-and [numbers][#number].
+microstates for [objects](#object), [lists](#list), [strings](#string)
+and [numbers](#number).
 
 
 ## Isn't This Just Putting Logic In My Templates?
