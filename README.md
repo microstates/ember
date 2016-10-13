@@ -139,7 +139,7 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
 ### `object`
 
 The object state serves as the base for all other microstates. The
-transitions that are available to it are available on all objects:
+transitions that are available to object are available to all other types:
 
 ``` handlebars
 {{let car=(object make="Ford" model="Mustang" year=1967)}}
@@ -148,7 +148,10 @@ transitions that are available to it are available on all objects:
 #### `assign(attributes)`
 
 Transitions this microstate into a new version that has `attributes`
-merged in with its current key-value pairs.
+merged in with its current key-value pairs. Any key-values already present are
+retained. For example if we use our car, which has  "make", "model", and "year"
+properties, we can specify an action that will assign to the "model" and "year",
+but leave the "make" as is.
 
 ``` handlebars
 <button onclick={{car.assign (hash model="Taurus" year=2015)}}>
@@ -158,6 +161,17 @@ merged in with its current key-value pairs.
 ```
 
 #### `delete(key)`
+
+Remove a key (and subsequent value) from this object. For example, to delete the
+"year" property from our car:
+
+``` handlebars
+<button onclick={{car.delete "year"}}>
+  Remove Year
+</button>
+{{!clicking will result in {make: 'Ford', model: 'Mustang'}}}
+```
+
 #### `put(key, value)`
 #### `set(value)`
 
