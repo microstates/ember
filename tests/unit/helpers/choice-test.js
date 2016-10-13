@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import ChoiceHelper from 'ember-microstates/helpers/choice';
+import { SingleChoice, MultipleChoice } from 'ember-microstates/models/choice';
 
 describe('Choice', function() {
   let onState = null;
@@ -32,8 +33,9 @@ describe('Choice', function() {
       this.valueOf = this.value.valueOf();
     });
 
-    it('unboxed to selection', function() {
-      expect(this.valueOf).to.equal('bird');
+    it('unboxed to a choice', function() {
+      expect(this.valueOf).to.be.an.instanceof(SingleChoice);
+      expect(this.valueOf.selection).to.equal('bird');      
     });
 
     describe('select', function() {
@@ -42,8 +44,9 @@ describe('Choice', function() {
         this.selectedValueOf = this.selectedValue.valueOf();
       });
 
-      it('unboxed to selection', function() {
-        expect(this.selectedValueOf).to.equal('cat');
+      it('unboxed to a choice', function() {
+        expect(this.selectedValueOf).to.be.an.instanceof(SingleChoice);
+        expect(this.selectedValueOf.selection).to.equal('cat');          
       });
     });
   });
@@ -59,8 +62,9 @@ describe('Choice', function() {
       this.valueOf = this.value.valueOf();
     });
 
-    it('unboxed to selection', function() {
-      expect(this.valueOf).to.deep.equal(['dog', 'cat']);
+    it('unboxed to multipe choice', function() {
+      expect(this.valueOf).to.be.an.instanceof(MultipleChoice);
+      expect(this.valueOf.selection).to.deep.equal(['dog', 'cat']);
     });
 
     describe('toggle', function() {
@@ -69,8 +73,9 @@ describe('Choice', function() {
         this.selectedValueOf = this.selectedValue.valueOf();
       });
 
-      it('unboxed to selection', function() {
-        expect(this.selectedValueOf).to.deep.equal(['cat']);
+      it('unboxed to multiple choice', function() {
+        expect(this.selectedValueOf).to.be.an.instanceof(MultipleChoice);
+        expect(this.selectedValueOf.selection).to.deep.equal(['cat']);
       });
     });
   });

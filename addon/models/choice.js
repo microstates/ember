@@ -4,6 +4,10 @@ class Choice {
   constructor(options) {
     this.options = options;
   }
+
+  valueOf() {
+    return this;
+  }
 }
 
 export class SingleChoice extends Choice {
@@ -16,10 +20,6 @@ export class SingleChoice extends Choice {
     let selectedOption = find(this.options, o => o.isSelected);
 
     return selectedOption ? selectedOption.value : null;
-  }
-
-  valueOf() {
-    return this.selection;
   }
 
   toggle(option, isSelected = !option.isSelected) {
@@ -39,10 +39,6 @@ export class MultipleChoice extends Choice {
 
   get selection() {
     return this.options.filter(o => o.isSelected).map(o => o.value);
-  }
-
-  valueOf() {
-    return this.selection;
   }
 
   toggle(option, isSelected = !option.isSelected) {
