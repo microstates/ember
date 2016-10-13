@@ -24,6 +24,11 @@ describe('List', function() {
     this.valueOf = this.value.valueOf();
   });
 
+  it('has non enumerable valueOf', function() {
+    expect(this.value.valueOf).to.be.a('function');
+    expect(this.value.propertyIsEnumerable()).to.be.equal(false);
+  });
+
   it('unboxed to original value', function() {
     expect(this.valueOf).to.deep.equal(['a', 'b', 'c']);
   });
