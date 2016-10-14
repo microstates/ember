@@ -1,14 +1,28 @@
 /*jshint -W053 */
 import { MicroState } from 'ember-microstates';
-import assign from '../utils/assign';
+
+const {
+  defineProperty
+} = Object;
 
 export default MicroState.extend({
 
   wrap(value) {
-    return assign(new String(value), {
-      toString() { return value; },
-      valueOf() { return value; }
+    let wrapped = new String(value);
+
+    defineProperty(wrapped, 'toString', {
+      value() {
+        return value;
+      }
     });
+
+    defineProperty(wrapped, 'valueOf', {
+      value() {
+        return value;
+      }
+    });
+
+    return wrapped;
   },
 
   actions: {
