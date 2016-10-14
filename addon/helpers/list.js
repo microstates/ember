@@ -1,6 +1,19 @@
 import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
+
+  wrap(value = []) {
+    let wrapped = value.slice();
+
+    Object.defineProperty(wrapped, 'valueOf', {
+      value() {
+        return value;
+      }
+    });
+
+    return wrapped;
+  },
+
   actions: {
     recompute(current, [array = []]) {
       return array;

@@ -4,6 +4,10 @@ class Choice {
   constructor(options) {
     this.options = options;
   }
+
+  valueOf() {
+    return this;
+  }
 }
 
 export class SingleChoice extends Choice {
@@ -28,7 +32,7 @@ export class MultipleChoice extends Choice {
   static create(values, options) {
     let selection = [];
     if (options.selection) {
-      selection = options.forEach ? options.selection : [options.selection];
+      selection = options.selection.forEach ? options.selection : [options.selection];
     }
     return new MultipleChoice(values.map(v => new Option(v, includes(selection, v))));
   }
