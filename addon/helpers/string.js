@@ -3,7 +3,7 @@ import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
 
-  wrap(value) {
+  prototypeFor(value) {
     let wrapped = new String(value);
 
     Object.defineProperties(wrapped, {

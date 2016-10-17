@@ -15,7 +15,7 @@ const False = Object.create([], {
 
 export default MicroState.extend({
 
-  wrap(value) {
+  prototypeFor(value) {
     return !!value ? True : False;
   },
 
