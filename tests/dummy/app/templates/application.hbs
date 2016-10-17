@@ -5,7 +5,8 @@
    (number 5)
    (choice animals selection="Cow")
    (choice animals selection="Horse" multiple=true)
-   as |switch items str num pets livestock|
+   (object color="red" model="Mustang" make="Ford")
+   as |switch items str num pets livestock car|
 }}
   <h2 id="title">Welcome to Ember</h2>
 
@@ -60,5 +61,13 @@
     {{#each livestock.selection as |selection|}}
       <li> {{selection}}</li>
     {{/each}}
+  </ul>
+  <h3>Object</h3>
+  <ul>
+    {{#each (keys car) as |name|}}
+      <li class="spec-object-prop spec-object-prop-{{name}}"><strong>{{name}}</strong>: <span class="spec-object-prop-value">{{get car name}}</span> <button {{action car.delete name}} class="spec-delete-prop">X</button></li>
+    {{/each}}
+    <button class="spec-object-assign" {{action car.assign (hash speed="fast" suspension="stiff")}}>Add Properties</button>
+    <button class="spec-object-put" {{action car.put "year" 1967}}>Put property</button>
   </ul>
 {{/let}}
