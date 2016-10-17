@@ -19,7 +19,7 @@ export default Ember.Helper.extend({
     }
     delete this._update;
 
-    return decorate(this, actions, this.prototypeFor(this.value), [this.value]);
+    return this.handlebarsValueFor(decorate(this, actions, this.prototypeFor(this.value), [this.value]), this.value);
 
     function decorate(microstate, actions, object, context) {
       return Object.create(object, Object.keys(actions).reduce((values, key)=> {
@@ -44,6 +44,10 @@ export default Ember.Helper.extend({
         }
       }
     }
+  },
+
+  handlebarsValueFor(value) {
+    return value;
   },
 
   prototypeFor(value) {
