@@ -4,6 +4,10 @@ import { reduceObject } from '../utils/object-utils';
 
 export default MicroState.extend({
 
+  prototypeFor(value) {
+    return assign({}, value);
+  },
+
   handlebarsValueFor(object, value) {
     return reduceObject(value, function(result, name, value) {
       return assign(result, {
