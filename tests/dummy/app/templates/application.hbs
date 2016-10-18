@@ -5,7 +5,8 @@
    (number 5)
    (choice animals selection="Cow")
    (choice animals selection="Horse" multiple=true)
-   as |switch items str num pets livestock|
+   (object color="red" model="Mustang" make="Ford")
+   as |switch items str num pets livestock car|
 }}
   <h2 id="title">Welcome to Ember</h2>
 
@@ -13,7 +14,7 @@
   value: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
   <hr/>
 
-  <button class="spec-toggle" onclick={{switch.toggle}}>Toggle</button>
+  <button class="spec-toggle" onclick={{action switch.toggle}}>Toggle</button>
   <button class="spec-set-true" onclick={{action switch.set true}}>Set True</button>
   <button class="spec-set-false" onclick={{action switch.set false}}>Set False</button>
 
@@ -25,8 +26,8 @@
   </ol>
   <label>Add Item: {{input enter=(action items.push)}}</label>
   <hr/>
-  <button class="spec-pop" onclick={{items.pop}}>Pop</button>
-  <button class="spec-shift" onclick={{items.shift}}>Shift</button>
+  <button class="spec-pop" onclick={{action items.pop}}>Pop</button>
+  <button class="spec-shift" onclick={{action items.shift}}>Shift</button>
 
   <h3>String</h3>
   {{one-way-input class="spec-string-input" update=str.set}} <span class="spec-string">"{{str}}"</span>
@@ -60,5 +61,13 @@
     {{#each livestock.selection as |selection|}}
       <li> {{selection}}</li>
     {{/each}}
+  </ul>
+  <h3>Object</h3>
+  <ul>
+    {{#each (keys car) as |name|}}
+      <li class="spec-object-prop spec-object-prop-{{name}}"><strong>{{name}}</strong>: <span class="spec-object-prop-value">{{get car name}}</span> <button {{action car.delete name}} class="spec-delete-prop">X</button></li>
+    {{/each}}
+    <button class="spec-object-assign" {{action car.assign (hash speed="fast" suspension="stiff")}}>Add Properties</button>
+    <button class="spec-object-put" {{action car.put "year" 1967}}>Put property</button>
   </ul>
 {{/let}}
