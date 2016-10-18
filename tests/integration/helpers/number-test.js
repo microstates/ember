@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
 import { describe, beforeEach } from 'mocha';
 import hbs from 'htmlbars-inline-precompile';
+import Microstates from 'ember-microstates/initializers/microstates';
 
 describeComponent(
   'recompute-helper',
@@ -10,9 +11,10 @@ describeComponent(
   {integration: true},
   function() {
     beforeEach(function() {
+      Microstates.initialize(this.container.registry);      
       this.render(hbs`
-{{#with (number 5) as |num|}}
-{{#with (number 11) as |other|}}
+{{#with (Number 5) as |num|}}
+{{#with (Number 11) as |other|}}
   <span class="number">{{num}}</span>
   <span class="other">{{other}}</span>
 
