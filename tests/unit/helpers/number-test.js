@@ -39,4 +39,14 @@ describe('Number', function() {
     });
   });
 
+  describe('set', function() {
+    beforeEach(function(){
+      this.setValue = this.value.set(5);
+    });
+
+    it('sets to new value', function() {
+      expect(this.setValue.valueOf()).to.equal(5);
+    });
+  });
+
 });

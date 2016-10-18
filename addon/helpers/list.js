@@ -35,9 +35,6 @@ export default MicroState.extend({
     },
     unshift(list, item) {
       return [item].concat(list);
-    },
-    set(list, value = []) {
-      return value;
     }
   }
 });
