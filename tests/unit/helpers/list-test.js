@@ -44,4 +44,14 @@ describe('List', function() {
     });
   });
 
+  describe('set', function() {
+    beforeEach(function() {
+      this.setValue = this.value.set(['x', 'y', 'z']);
+    });
+
+    it('sets new value', function() {
+      expect(this.setValue.valueOf()).to.deep.equal(['x', 'y', 'z']);
+    });
+  });
+
 });
