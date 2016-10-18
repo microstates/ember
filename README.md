@@ -16,9 +16,9 @@ each state transition. Forexample, how often have you seen or written
 an action like this?
 
 ```javascript
-actions: { 
-  toggleOpen() { 
-    this.toggleProperty("isOpen"); 
+actions: {
+  toggleOpen() {
+    this.toggleProperty("isOpen");
   }
 }
 ```
@@ -52,10 +52,10 @@ known before hand so that you can simply declare which operations
 correspond to which HTML events.
 
 Using Microstates, we would rewrite the example above using the
-`boolean` helper like so:
+`Boolean` helper like so:
 
 ```handlebars
-{{let isOpen=(boolean)}}
+{{let isOpen=(Boolean)}}
 
 <button onclick={{action isOpen.toggle}}>Toggle</button>
 
@@ -113,12 +113,12 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
 
 ## API
 
-* [`object`](#object)
+* [`Object`](#object)
   + [`assign(attributes)`](#assignattributes)
   + [`delete(key)`](#deletekey)
   + [`put(key,value)`](#putkeyvalue)
   + [`set(value)`](#setvalue)
-* [`list`](#list)
+* [`List`](#list)
   + [`concat(list)`](#concatlist)
   + [`pop`](#pop)
   + [`push(item)`](#pushitem)
@@ -126,11 +126,11 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`replace(item,other)`](#removeitemother)
   + [`shift`](#shift)
   + [`unshift(item)`](#unshiftitem)
-* [`boolean`](#boolean)
+* [`Boolean`](#boolean)
   + [`toggle`](#toggle)
-* [`string`](#string)
+* [`String`](#string)
   + [`concat(string)`](#concatstring)
-* [`number`](#number)
+* [`Number`](#number)
   + [`add(number)`](#addnumber)
   + [`subtract(number)`](#subtractnumber)
   + [`multiply(number)`](#multiplynumber)
@@ -142,7 +142,7 @@ The object state serves as the base for all other microstates. The
 transitions that are available to object are available to all other types:
 
 ``` handlebars
-{{let car=(object make="Ford" model="Mustang" year=1967)}}
+{{let car=(Object make="Ford" model="Mustang" year=1967)}}
 ```
 
 #### `assign(attributes)`
@@ -175,7 +175,7 @@ Remove a key (and subsequent value) from this object. For example, to delete the
 #### `put(key, value)`
 #### `set(value)`
 
-### `list`
+### `List`
 
 #### `concat(list)`
 #### `pop()`
@@ -185,15 +185,15 @@ Remove a key (and subsequent value) from this object. For example, to delete the
 #### `shift()`
 #### `unshift(item)`
 
-### `boolean`
+### `Boolean`
 
 #### `toggle()`
 
-### `string`
+### `String`
 
 #### `concat(string)`
 
-### `number`
+### `Number`
 
 #### `add(number)`
 #### `subtract(number)`
