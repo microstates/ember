@@ -77,6 +77,9 @@ export default Ember.Helper.extend({
   actions: {
     recompute(current, [state = {}]) {
       return state;
+    },
+    set(current, value) {
+      return value;
     }
   }
 });

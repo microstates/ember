@@ -1,4 +1,3 @@
-import Ember from 'ember';
 import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
@@ -6,29 +5,16 @@ import ChoiceHelper from 'ember-microstates/helpers/choice';
 import { SingleChoice, MultipleChoice } from 'ember-microstates/models/choice';
 
 describe('Choice', function() {
-  let onState = null;
-  let onToggle = null;
-  let onStateEvent = null;
-  let onToggleEvent = null;
-  let onRecompute = null;
   beforeEach(function() {
-    [onState, onToggle, onStateEvent, onToggleEvent, onRecompute] = [
-      sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy()
-    ];
     this.helper = ChoiceHelper.create({
-      recompute: onRecompute
+      recompute: sinon.spy()
     });
-
-    Ember.addListener(this.helper, 'state', this, onStateEvent);
-    Ember.addListener(this.helper, 'toggle', this, onToggleEvent);
   });
 
   describe('single', function() {
     beforeEach(function() {
       this.value = this.helper.compute([['cat', 'dog', 'bird']], {
-        selection: 'bird',      
-        'on-state': onState, 
-        'on-toggle': onToggle
+        selection: 'bird'
       });
       this.valueOf = this.value.valueOf();
     });
@@ -55,9 +41,7 @@ describe('Choice', function() {
     beforeEach(function() {
       this.value = this.helper.compute([['dog', 'cat', 'bird']], {
         multiple: true,
-        selection: ['dog', 'cat'],      
-        'on-state': onState, 
-        'on-toggle': onToggle
+        selection: ['dog', 'cat']
       });
       this.valueOf = this.value.valueOf();
     });

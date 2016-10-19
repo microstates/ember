@@ -25,10 +25,6 @@ export default MicroState.extend({
   actions: {
     recompute(previous, [string = '']) {
       return string;
-    },
-
-    set(string, value) {
-      return String(value);
     }
   }
 });

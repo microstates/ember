@@ -23,7 +23,6 @@ export default MicroState.extend({
     recompute(current, [value]) {
       return !!value;
     },
-
     toggle(current) {
       return !current;
     },

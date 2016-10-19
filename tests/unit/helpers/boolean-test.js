@@ -64,5 +64,16 @@ describe('Boolean', function() {
     });
   });
 
+  describe("set", function() {
+    beforeEach(function() {
+      this.setValue = this.value.set(false);
+      this.setValueOf = this.setValue.valueOf();
+    });
+
+    it('transitioned to set value', function() {
+      expect(this.setValueOf).to.equal(false);
+    });
+  });
+
 
 });

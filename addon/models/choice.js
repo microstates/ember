@@ -13,7 +13,7 @@ class Choice {
 export class SingleChoice extends Choice {
 
   static create(values, options) {
-    return  new this(values.map(v => new Option(v, v === options.selection)));
+    return new this(values.map(v => new Option(v, v === options.selection)));
   }
 
   get selection() {
