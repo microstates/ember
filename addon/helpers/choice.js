@@ -9,11 +9,6 @@ export default MicroState.extend({
       return Type.create(values, options);
     },
 
-    set(choice, values, options) {
-      let Type = !!options.multiple ? MultipleChoice : SingleChoice;
-      return Type.create(values, options);
-    },
-
     options: {
       toggle(choice, option) {
         return choice.toggle(option);
