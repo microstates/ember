@@ -1,26 +1,15 @@
-import Ember from 'ember';
 import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import ListHelper from 'ember-microstates/helpers/list';
 
 describe('List', function() {
-  let onState = null;
-  let onToggle = null;
-  let onStateEvent = null;
-  let onToggleEvent = null;
-  let onRecompute = null;
   beforeEach(function() {
-    [onState, onToggle, onStateEvent, onToggleEvent, onRecompute] = [
-      sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy()
-    ];
     this.helper = ListHelper.create({
-      recompute: onRecompute
+      recompute: sinon.spy()
     });
 
-    Ember.addListener(this.helper, 'state', this, onStateEvent);
-    Ember.addListener(this.helper, 'toggle', this, onToggleEvent);
-    this.value = this.helper.compute([['a', 'b', 'c']], {'on-state': onState, 'on-toggle': onToggle});
+    this.value = this.helper.compute([['a', 'b', 'c']], {});
     this.valueOf = this.value.valueOf();
   });
 
