@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
-import ChoiceHelper from 'ember-microstates/helpers/choice';
-import { SingleChoice, MultipleChoice } from 'ember-microstates/models/choice';
+import SelectHelper from 'ember-microstates/helpers/select';
+import { SingleSelect, MultipleSelect } from 'ember-microstates/models/select';
 
-describe('Choice', function() {
+describe('Select', function() {
   beforeEach(function() {
-    this.helper = ChoiceHelper.create({
+    this.helper = SelectHelper.create({
       recompute: sinon.spy()
     });
   });
@@ -19,8 +19,8 @@ describe('Choice', function() {
       this.valueOf = this.value.valueOf();
     });
 
-    it('unboxed to a choice', function() {
-      expect(this.valueOf).to.be.an.instanceof(SingleChoice);
+    it('unboxed to a select', function() {
+      expect(this.valueOf).to.be.an.instanceof(SingleSelect);
       expect(this.valueOf.selection).to.equal('bird');      
     });
 
@@ -30,8 +30,8 @@ describe('Choice', function() {
         this.selectedValueOf = this.selectedValue.valueOf();
       });
 
-      it('unboxed to a choice', function() {
-        expect(this.selectedValueOf).to.be.an.instanceof(SingleChoice);
+      it('unboxed to a select', function() {
+        expect(this.selectedValueOf).to.be.an.instanceof(SingleSelect);
         expect(this.selectedValueOf.selection).to.equal('cat');          
       });
     });
@@ -46,8 +46,8 @@ describe('Choice', function() {
       this.valueOf = this.value.valueOf();
     });
 
-    it('unboxed to multipe choice', function() {
-      expect(this.valueOf).to.be.an.instanceof(MultipleChoice);
+    it('unboxed to multipe select', function() {
+      expect(this.valueOf).to.be.an.instanceof(MultipleSelect);
       expect(this.valueOf.selection).to.deep.equal(['dog', 'cat']);
     });
 
@@ -57,8 +57,8 @@ describe('Choice', function() {
         this.selectedValueOf = this.selectedValue.valueOf();
       });
 
-      it('unboxed to multiple choice', function() {
-        expect(this.selectedValueOf).to.be.an.instanceof(MultipleChoice);
+      it('unboxed to multiple select', function() {
+        expect(this.selectedValueOf).to.be.an.instanceof(MultipleSelect);
         expect(this.selectedValueOf.selection).to.deep.equal(['cat']);
       });
     });

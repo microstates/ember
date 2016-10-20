@@ -1,6 +1,6 @@
 import { find, includes } from '../utils/array-polyfill';
 
-class Choice {
+class Select {
   constructor(options) {
     this.options = options;
   }
@@ -10,7 +10,7 @@ class Choice {
   }
 }
 
-export class SingleChoice extends Choice {
+export class SingleSelect extends Select {
 
   static create(values, options) {
     return new this(values.map(v => new Option(v, v === options.selection)));
@@ -23,18 +23,18 @@ export class SingleChoice extends Choice {
   }
 
   toggle(option, isSelected = !option.isSelected) {
-    return new SingleChoice(this.options.map(o => o.toggle(o === option && isSelected)));
+    return new SingleSelect(this.options.map(o => o.toggle(o === option && isSelected)));
   }
 }
 
-export class MultipleChoice extends Choice {
+export class MultipleSelect extends Select {
 
   static create(values, options) {
     let selection = [];
     if (options.selection) {
       selection = options.selection.forEach ? options.selection : [options.selection];
     }
-    return new MultipleChoice(values.map(v => new Option(v, includes(selection, v))));
+    return new MultipleSelect(values.map(v => new Option(v, includes(selection, v))));
   }
 
   get selection() {
@@ -42,7 +42,7 @@ export class MultipleChoice extends Choice {
   }
 
   toggle(option, isSelected = !option.isSelected) {
-    return new MultipleChoice(this.options.map(o => option === o ? o.toggle(isSelected) : o));
+    return new MultipleSelect(this.options.map(o => option === o ? o.toggle(isSelected) : o));
   }
 }
 
