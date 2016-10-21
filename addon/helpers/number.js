@@ -28,6 +28,12 @@ export default MicroState.extend({
     },
     subtract(current, amount) {
       return current - amount;
+    },
+    increment(current) {
+      return current + 1;
+    },
+    decrement(current) {
+      return current - 1;
     }
   }
 });
