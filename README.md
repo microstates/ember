@@ -113,12 +113,12 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
 
 ## API
 
-* [`Object`](#object)
+* [`(Object [attr=value])`](#object)
   + [`assign(attributes)`](#assignattributes)
   + [`delete(key)`](#deletekey)
   + [`put(key,value)`](#putkeyvalue)
   + [`set(object)`](#setobject)
-* [`List`](#list)
+* [`(List array)`](#list)
   + [`concat(list)`](#concatlist)
   + [`pop`](#pop)
   + [`push(item)`](#pushitem)
@@ -127,18 +127,22 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`shift`](#shift)
   + [`unshift(item)`](#unshiftitem)
   + [`set(list)`](#setlist)
-* [`Boolean`](#boolean)
+* [`(Boolean true|false)`](#boolean)
   + [`toggle`](#toggle)
   + [`set(boolean)`](#setboolean)  
-* [`String`](#string)
+* [`(String string)`](#string)
   + [`concat(string)`](#concatstring)
   + [`set(string)`](#setstring)  
-* [`Number`](#number)
+* [`(Number number)`](#number)
   + [`add(number)`](#addnumber)
   + [`subtract(number)`](#subtractnumber)
   + [`multiply(number)`](#multiplynumber)
   + [`divide(number)`](#dividenumber)
   + [`set(number)`](#setnumber)
+* [`(Select options [selection=array|value] [multiple=false|true]`](#select)
+  + [`option.toggle()`](#optiontoggle)
+  + [`option.select()`](#optionelect)
+  + [`option.deselect()`](#optiondeselect)
 
 ### `object`
 
@@ -410,6 +414,59 @@ Replace the value with given number.
 <button onclick={{action age.set 21}}>
   Set age to 21
 </button>
+```
+
+### `(Select options [selection=value|array] [multiple=true|false])
+
+Select microstate allows to represent a collection of items with selection state. Selection can be of multiple items or one item.
+
+```handlebars
+{{let animals=(Select (array 'cat' 'dog' 'bird'))}}
+
+<h3> Choose your favourite pet </h3>
+{{#each animals as |option|}}
+  <button onclick={{action option.toggle}}>{{option}}</button>
+{{/each}}
+
+{{let animals=(Select (array 'cat' 'dog' 'bird') multiple=true)}}
+
+<h3> Choose animals you like </h3>
+{{#each animals as |option|}}
+  <input type="checkbox" checked=option.isSelected onclick={{action option.toggle}}> {{option}} 
+{{/each}}
+
+<h3> Stefan's Choice </h3>
+{{let animals=(Select (array 'cat' 'dog' 'bird') selection='bird')}}
+```
+
+#### `option.toggle()`
+
+Make a new selection with toggled option in opposite of its current state.
+
+```handlebars
+{{#each animals as |option|}}
+  <button onclick={{action option.toggle}}>{{option}}</button>
+{{/each}}
+```
+
+#### `option.select()`
+
+Make a new selection with this option in selected state.
+
+```handlebars
+{{#each animals as |option|}}
+  <button onclick={{action option.select}}>{{option}}</button>
+{{/each}}
+```
+
+#### `option.deselect()`
+
+Make a new selection with this option unselected.
+
+```handlebars
+{{#each animals as |option|}}
+  <button onclick={{action option.deselect}}>{{option}}</button>
+{{/each}}
 ```
 
 ## Example Usage
