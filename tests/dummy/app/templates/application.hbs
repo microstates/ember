@@ -3,8 +3,8 @@
    (List groceries)
    (String "a string")
    (Number 5)
-   (Choice animals selection="Cow")
-   (Choice animals selection="Horse" multiple=true)
+   (Select animals selection="Cow")
+   (Select animals selection="Horse" multiple=true)
    (Object color="red" model="Mustang" make="Ford")   
    as |switch items str num pets livestock car|
 }}
@@ -38,20 +38,20 @@
   <button class="spec-add" onclick={{action num.add 1}}>+</button>
   <button class="spec-subtract" onclick={{action num.subtract 1}}>-</button>
 
-  <h3> Single Choice </h3>
-  Current Choice: {{pets.selection}}
+  <h3> Single Select </h3>
+  Current Select: {{pets.selection}}
   <br/>
   {{#each pets.options as |option|}}
     <label>
-      <input class="spec-choice spec-choice-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
+      <input class="spec-select spec-select-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
       {{option.value}}
     </label>
   {{/each}}
 
-  <h3> Multiple Choice </h3>
+  <h3> Multiple Select </h3>
   {{#each livestock.options as |option|}}
     <label>
-      <input class="spec-multiple-choice spec-multiple-choice-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
+      <input class="spec-multiple-select spec-multiple-select-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
       {{option.value}}
     </label>
   {{/each}}
