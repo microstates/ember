@@ -312,7 +312,7 @@ Transition the Boolean microstate to opposite of it's current value.
 </button>
 ```
 
-#### `set(bool)`
+#### `set(boolean)`
 
 Transition the microstate to give the value.
 
