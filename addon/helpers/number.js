@@ -34,6 +34,12 @@ export default MicroState.extend({
     },
     decrement(current) {
       return current - 1;
+    },
+    divide(current, value) {
+      return current / value;
+    },
+    multiply(current, value) {
+      return current * value;
     }
   }
 });

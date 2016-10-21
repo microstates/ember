@@ -35,11 +35,12 @@
   <h3>Number</h3>
   value: <span class="spec-number">{{num}}</span>
   <hr/>
-  <button class="spec-add" onclick={{action num.add 2}}>+ 2</button>
-  <button class="spec-subtract" onclick={{action num.subtract 2}}>- 2</button>
-  <button class="spec-increment" onclick={{action num.increment}}>increment</button>
-  <button class="spec-decrement" onclick={{action num.decrement}}>decrement</button>
-
+  <button class="spec-add" onclick={{action num.add 2}}>{{num}} + 2</button>
+  <button class="spec-subtract" onclick={{action num.subtract 2}}>{{num}} - 2</button>
+  <button class="spec-increment" onclick={{action num.increment}}>{{num}}++</button>
+  <button class="spec-decrement" onclick={{action num.decrement}}>{{num}}--</button>
+  <button class="spec-multiply" onclick={{action num.multiply 5}}>{{num}} * 5</button>
+  <button class="spec-divide" onclick={{action num.divide 5}}>{{num}} / 5</button>
 
   <h3> Single Select </h3>
   Current Select: {{pets.selection}}

@@ -58,4 +58,22 @@ describe('Acceptance: Number', function() {
     });
   });
 
+  describe("multiply", function() {
+    beforeEach(function() {
+      click('.spec-multiply');
+    });
+    it("multiply by 5", function() {
+      expect($('.spec-number').text()).to.equal('25');
+    });
+  });
+
+  describe("divide", function() {
+    beforeEach(function() {
+      click('.spec-divide');
+    });
+    it("divide by 5", function() {
+      expect($('.spec-number').text()).to.equal('1');
+    });
+  });
+
 });
