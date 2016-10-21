@@ -117,7 +117,7 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`assign(attributes)`](#assignattributes)
   + [`delete(key)`](#deletekey)
   + [`put(key,value)`](#putkeyvalue)
-  + [`set(object)`](#setvalue)
+  + [`set(object)`](#setobject)
 * [`List`](#list)
   + [`concat(list)`](#concatlist)
   + [`pop`](#pop)
@@ -129,16 +129,16 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`set(list)`](#setlist)
 * [`Boolean`](#boolean)
   + [`toggle`](#toggle)
-  + [`set(bool)`](#setbool)  
+  + [`set(boolean)`](#setboolean)  
 * [`String`](#string)
   + [`concat(string)`](#concatstring)
-  + [`set(str)`](#setstr)  
+  + [`set(string)`](#setstring)  
 * [`Number`](#number)
   + [`add(number)`](#addnumber)
   + [`subtract(number)`](#subtractnumber)
   + [`multiply(number)`](#multiplynumber)
   + [`divide(number)`](#dividenumber)
-  + [`set(num)`](#setnum)
+  + [`set(number)`](#setnumber)
 
 ### `object`
 
@@ -186,7 +186,7 @@ Add property with a given name and value to the object. It will update the prope
 </button>
 ```
 
-#### `set(obj)`
+#### `set(object)`
 
 Replace current object microstate with a new object microstate from given hash.
 
@@ -198,7 +198,7 @@ Replace current object microstate with a new object microstate from given hash.
 
 ### `List`
 
-List microstate represents an indexed array of values. 
+List microstate represents an ordered collection of values. 
 
 ```hbs
 {{let numbers=(List (array 1 2 3))}}
@@ -210,7 +210,7 @@ List microstate represents an indexed array of values.
 
 #### `concat(list)`
 
-Merges given array with existing list.
+Makes a new list with all of the items from the given list added to the end of the current list.
 
 ```handlebars
 <button onclick={{action numbers.concat (array 4 5 6)}}>
@@ -220,7 +220,7 @@ Merges given array with existing list.
 
 #### `pop()`
 
-Removing the last item from the list.
+Makes a new list the last item removed from current list.
 
 ```handlebars
 <button onclick={{action numbers.pop}}>
@@ -230,7 +230,7 @@ Removing the last item from the list.
 
 #### `push(item)`
 
-Add an item to the end of the list.
+Makes a new list with item added to the end of the current list.
 
 ```handlebars
 <button onclick={{action numbers.push 4}}>
@@ -240,7 +240,7 @@ Add an item to the end of the list.
 
 #### `remove(item)`
 
-Remove an item from the list.
+Makes a new list the given item removed from the current list.
 
 ```handlebars
 <button onclick={{action numbers.remove 3}}>
@@ -250,7 +250,7 @@ Remove an item from the list.
 
 #### `replace(item, other)`
 
-Replace an item with another item.
+Makes a new list with a new item in place of the given item in the current list.
 
 ```handlebars
 <button onclick={{action numbers.replace 3 6}}>
@@ -260,7 +260,7 @@ Replace an item with another item.
 
 #### `shift()`
 
-Removes first item from the list.
+Makes a new list with the first item of the list removed.
 
 ```handlebars
 <button onclick={{action numbers.shift}}>
@@ -280,7 +280,7 @@ Add an item to the beginning of the list.
 
 #### `set(list)`
 
-Replace the current list with the given list.
+Replaces current list with given list.
 
 ```handlebars
 <button onclick={{action list.set (array 4 5 6)}}>
@@ -342,7 +342,7 @@ Add string to the end of the existing value.
 </button>
 ```
 
-#### `set(str)`
+#### `set(string)`
 
 Replace current value with new string.
 
@@ -402,7 +402,7 @@ Divide the value by given number.
 </button>
 ```
 
-#### `set(num)`
+#### `set(number)`
 
 Replace the value with given number.
 
