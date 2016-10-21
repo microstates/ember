@@ -117,24 +117,28 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`assign(attributes)`](#assignattributes)
   + [`delete(key)`](#deletekey)
   + [`put(key,value)`](#putkeyvalue)
-  + [`set(value)`](#setvalue)
+  + [`set(object)`](#setobject)
 * [`List`](#list)
   + [`concat(list)`](#concatlist)
   + [`pop`](#pop)
   + [`push(item)`](#pushitem)
   + [`remove(item)`](#removeitem)
-  + [`replace(item,other)`](#removeitemother)
+  + [`replace(item, other)`](#removeitemother)
   + [`shift`](#shift)
   + [`unshift(item)`](#unshiftitem)
+  + [`set(list)`](#setlist)
 * [`Boolean`](#boolean)
   + [`toggle`](#toggle)
+  + [`set(boolean)`](#setboolean)  
 * [`String`](#string)
   + [`concat(string)`](#concatstring)
+  + [`set(string)`](#setstring)  
 * [`Number`](#number)
   + [`add(number)`](#addnumber)
   + [`subtract(number)`](#subtractnumber)
   + [`multiply(number)`](#multiplynumber)
   + [`divide(number)`](#dividenumber)
+  + [`set(number)`](#setnumber)
 
 ### `object`
 
@@ -154,7 +158,7 @@ properties, we can specify an action that will assign to the "model" and "year",
 but leave the "make" as is.
 
 ``` handlebars
-<button onclick={{car.assign (hash model="Taurus" year=2015)}}>
+<button onclick={{action car.assign (hash model="Taurus" year=2015)}}>
   Make Sedan
 </button>
 {{!clicking will result in {make: 'Ford', model: 'Taurus', year: 2015}}}
@@ -166,39 +170,247 @@ Remove a key (and subsequent value) from this object. For example, to delete the
 "year" property from our car:
 
 ``` handlebars
-<button onclick={{car.delete "year"}}>
+<button onclick={{action car.delete "year"}}>
   Remove Year
 </button>
 {{!clicking will result in {make: 'Ford', model: 'Mustang'}}}
 ```
 
 #### `put(key, value)`
-#### `set(value)`
+
+Add property with a given name and value to the object. It will update the property with the given value if it already exists.
+
+```handlebars
+<button onclick={{action car.put "color" "blue"}}>
+  Add color
+</button>
+```
+
+#### `set(object)`
+
+Replace current object microstate with a new object microstate from given hash.
+
+```handlebars
+<button onclick={{action car.set (hash make="Toyota" model="Supra" year="1982")}}>
+  Update car
+</button>
+```
 
 ### `List`
 
+List microstate represents an ordered collection of values. 
+
+```hbs
+{{let numbers=(List (array 1 2 3))}}
+
+{{each numbers as |item|}}
+  {{item}}
+{{/each}}
+```
+
 #### `concat(list)`
+
+Makes a new list with all of the items from the given list added to the end of the current list.
+
+```handlebars
+<button onclick={{action numbers.concat (array 4 5 6)}}>
+  Add more items
+</button>
+```
+
 #### `pop()`
+
+Makes a new list the last item removed from current list.
+
+```handlebars
+<button onclick={{action numbers.pop}}>
+  Remove last item
+</button>
+```
+
 #### `push(item)`
+
+Makes a new list with item added to the end of the current list.
+
+```handlebars
+<button onclick={{action numbers.push 4}}>
+  Add 4
+</button>
+```
+
 #### `remove(item)`
-#### `replace(item,other)`
+
+Makes a new list the given item removed from the current list.
+
+```handlebars
+<button onclick={{action numbers.remove 3}}>
+  Remove 3
+</button>
+```
+
+#### `replace(item, other)`
+
+Makes a new list with a new item in place of the given item in the current list.
+
+```handlebars
+<button onclick={{action numbers.replace 3 6}}>
+  Replace 3 with 6
+</button>
+```
+
 #### `shift()`
+
+Makes a new list with the first item of the list removed.
+
+```handlebars
+<button onclick={{action numbers.shift}}>
+  Remove first
+</button>
+```
+
 #### `unshift(item)`
+
+Add an item to the beginning of the list.
+
+```handlebars
+<button onclick={{action numbers.unshift 7}}>
+  Add to the beginning
+</button>
+```
+
+#### `set(list)`
+
+Replaces current list with given list.
+
+```handlebars
+<button onclick={{action list.set (array 4 5 6)}}>
+  Replace the list
+</button>
+```
 
 ### `Boolean`
 
+Boolean represent a `true` or `false` value.
+
+```handlebars
+{{let isYa=(Boolean true)}}
+
+{{#if isYa}}
+  Yes
+{{else}}
+  No
+{{/if}}
+```
+
 #### `toggle()`
+
+Transition the Boolean microstate to opposite of it's current value.
+
+```handlebars
+<button onclick={{action isYa.toggle}}>
+  Flip the value
+</button>
+```
+
+#### `set(boolean)`
+
+Transition the microstate to give the value.
+
+```handlebars
+<button onclick={{action isYa.set false}}>
+  Make false
+</button>
+```
 
 ### `String`
 
+Represents a String object.
+
+```handlebars
+{{let message=(String 'hello world')}}
+
+{{message}}
+```
+
 #### `concat(string)`
+
+Add string to the end of the existing value.
+
+```handlebars
+<button onclick={{action message.concat '!!!'}}>
+  Exclaim!!!
+</button>
+```
+
+#### `set(string)`
+
+Replace current value with new string.
+
+```handlebars
+<button onclick={{action message.set 'I come in pieces'}}>
+  Confuse
+</button>
+```
 
 ### `Number`
 
+Represents a numerical value.
+
+```handlebars
+{{let age=(Number 34)}}
+
+{{age}}
+```
+
 #### `add(number)`
+
+Increase the value by given number.
+
+```handlebars
+<button onclick={{action age.add 1}}>
+  Increase by one
+</button>
+```
+
 #### `subtract(number)`
+
+Decrease the value by given number.
+
+```handlebars
+<button onclick={{action age.subtract 1}}>
+  Decrease by one
+</button>
+```
+
 #### `multiply(number)`
+
+Multiply the value by given number.
+
+```handlebars
+<button onclick={{action age.multiply 10}}>
+  Multipy by 10
+</button>
+```
+
 #### `divide(number)`
+
+Divide the value by given number.
+
+```handlebars
+<button onclick={{action age.divide 10}}>
+  Divide by 10
+</button>
+```
+
+#### `set(number)`
+
+Replace the value with given number.
+
+```handlebars
+<button onclick={{action age.set 21}}>
+  Set age to 21
+</button>
+```
 
 ## Example Usage
 
