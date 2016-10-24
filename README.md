@@ -129,10 +129,10 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`set(list)`](#setlist)
 * [`(Boolean true|false)`](#boolean)
   + [`toggle`](#toggle)
-  + [`set(boolean)`](#setboolean)  
+  + [`set(boolean)`](#setboolean)
 * [`(String string)`](#string)
   + [`concat(string)`](#concatstring)
-  + [`set(string)`](#setstring)  
+  + [`set(string)`](#setstring)
 * [`(Number number)`](#number)
   + [`add(number)`](#addnumber)
   + [`subtract(number)`](#subtractnumber)
@@ -202,7 +202,7 @@ Replace current object microstate with a new object microstate from given hash.
 
 ### `List`
 
-List microstate represents an ordered collection of values. 
+List microstate represents an ordered collection of values.
 
 ```hbs
 {{let numbers=(List (array 1 2 3))}}
@@ -438,7 +438,25 @@ Replace the value with given number.
 
 ### `(Select options [selection=value|array] [multiple=true|false])
 
-Select microstate allows to represent a collection of items with selection state. Selection can be of multiple items or one item.
+The Select microstate represents a set of distinct options from which choices
+can be made. For any given value in the set, it tracks whether that
+value has been selected for inclusion. You would use it when you want
+to build something analogous to a set of checkboxes, radio buttons, or
+select box.
+
+The select state has a list of `options` wrapping each choice to track
+where that option is selected, and also to contain the actions for
+either selecting or deselecting that option (`toggle`, `select`, and `deselect`)
+
+It comes in two varieties: multiple selection and single
+selection. With multiple selection, the number of possible choices is
+unlimited and the value of the `selection` property is an array of the
+selected values. With a single selection, choosing one option means
+that all other options will be deselected. Furthermore, the value of
+the `selection` property is a single value.
+
+> Head's up! The actions for changing which options are selected live
+> on the options themselves and _not_ the actual select microstate.
 
 ```handlebars
 {{let animals=(Select (array 'cat' 'dog' 'bird'))}}
@@ -452,7 +470,7 @@ Select microstate allows to represent a collection of items with selection state
 
 <h3> Choose animals you like </h3>
 {{#each animals as |option|}}
-  <input type="checkbox" checked=option.isSelected onclick={{action option.toggle}}> {{option}} 
+  <input type="checkbox" checked=option.isSelected onclick={{action option.toggle}}> {{option}}
 {{/each}}
 
 <h3> Stefan's Choice </h3>
@@ -461,7 +479,10 @@ Select microstate allows to represent a collection of items with selection state
 
 #### `option.toggle()`
 
-Make a new selection with toggled option in opposite of its current state.
+Make a new selection with `option` having the opposite of its current
+selection state. In other words, If this option is currently selected,
+it will become unselected. If it is unselected, it will become
+selected.
 
 ```handlebars
 {{#each animals as |option|}}
@@ -471,7 +492,9 @@ Make a new selection with toggled option in opposite of its current state.
 
 #### `option.select()`
 
-Make a new selection with this option in selected state.
+Make a new selection with this option selected. If this is a single
+select, then any other currently selected option will become
+unselected as a result.
 
 ```handlebars
 {{#each animals as |option|}}
