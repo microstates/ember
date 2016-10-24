@@ -20,8 +20,8 @@ export default MicroState.extend({
   },
 
   actions: {
-    recompute(current, params, options) {
-      return assign({}, options);
+    recompute(current, [object = {}]) {
+      return object;
     },
     delete(current, target) {
       return reduceObject(current, function(result, name, value) {

@@ -10,7 +10,7 @@ describe('Object', function() {
       recompute: sinon.spy()
     });
 
-    this.value = this.helper.compute([], { hello: 'world' });
+    this.value = this.helper.compute([{ hello: 'world' }], {});
     this.valueOf = this.value.valueOf();
   });
 
