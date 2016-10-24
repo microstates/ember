@@ -366,9 +366,29 @@ Represents a numerical value.
 {{age}}
 ```
 
+#### `increment()`
+
+Make a new number that's greater than current number by 1.
+
+```handlebars
+<button onclick={{action age.increment}}>
+  Increment
+</button>
+```
+
+#### `decrement()`
+
+Make a new number that's less than current number by 1.
+
+```handlebars
+<button onclick={{action age.decrement}}>
+  Decrement
+</button>
+```
+
 #### `add(number)`
 
-Increase the value by given number.
+Make a new number that's greater than current value by provided amount.
 
 ```handlebars
 <button onclick={{action age.add 1}}>
@@ -378,7 +398,7 @@ Increase the value by given number.
 
 #### `subtract(number)`
 
-Decrease the value by given number.
+Make a new number that's lesser than current value by provided amount.
 
 ```handlebars
 <button onclick={{action age.subtract 1}}>
