@@ -3,7 +3,7 @@ import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import StringHelper from 'ember-microstates/helpers/string';
 
-describe('String', function() {
+describe('Unit: String', function() {
   beforeEach(function() {
     this.helper = StringHelper.create({
       recompute: sinon.spy()

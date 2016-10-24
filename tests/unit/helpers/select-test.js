@@ -4,7 +4,7 @@ import sinon from 'sinon';
 import SelectHelper from 'ember-microstates/helpers/select';
 import { SingleSelect, MultipleSelect } from 'ember-microstates/models/select';
 
-describe('Select', function() {
+describe('Unit: Select', function() {
   beforeEach(function() {
     this.helper = SelectHelper.create({
       recompute: sinon.spy()

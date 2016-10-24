@@ -4,7 +4,7 @@ import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import BooleanHelper from 'ember-microstates/helpers/boolean';
 
-describe('Boolean', function() {
+describe('Unit: Boolean', function() {
   let onState = null;
   let onToggle = null;
   let onRecompute = null;

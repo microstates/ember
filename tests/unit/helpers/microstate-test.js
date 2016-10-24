@@ -4,7 +4,7 @@ import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import { MicroState } from 'ember-microstates';
 
-describe('Microstates', function() {
+describe('Unit: Microstates', function() {
   let onState = null;
   let onCustom = null;
   let onRecompute = null;
