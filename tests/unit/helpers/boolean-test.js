@@ -10,7 +10,7 @@ describe('Boolean', function() {
   let onRecompute = null;
   beforeEach(function() {
     [onState, onToggle, onRecompute] = [
-      sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy()
+      sinon.spy(), sinon.spy(), sinon.spy()
     ];
     this.helper = BooleanHelper.create({
       recompute: onRecompute

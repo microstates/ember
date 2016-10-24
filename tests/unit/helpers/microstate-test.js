@@ -10,7 +10,7 @@ describe('Microstates', function() {
   let onRecompute = null;
   beforeEach(function() {
     [onState, onCustom, onRecompute] = [
-      sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy()
+      sinon.spy(), sinon.spy(), sinon.spy()
     ];
 
     this.microstate = MicroState.create({
