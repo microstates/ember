@@ -45,7 +45,7 @@
   <h3> Single Select </h3>
   Current Select: {{pets.selection}}
   <br/>
-  {{#each pets.options as |option|}}
+  {{#each pets as |option|}}
     <label>
       <input class="spec-select spec-select-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
       {{option.value}}
@@ -53,7 +53,7 @@
   {{/each}}
 
   <h3> Multiple Select </h3>
-  {{#each livestock.options as |option|}}
+  {{#each livestock as |option|}}
     <label>
       <input class="spec-multiple-select spec-multiple-select-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
       {{option.value}}

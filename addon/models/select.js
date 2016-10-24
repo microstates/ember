@@ -5,6 +5,10 @@ class Select {
     this.options = options;
   }
 
+  forEach() {
+    return this.options.forEach(...arguments);
+  }
+
   valueOf() {
     return this;
   }
