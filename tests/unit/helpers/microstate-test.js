@@ -1,5 +1,4 @@
 /* jshint expr:true */
-import Ember from 'ember';
 import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
@@ -8,11 +7,9 @@ import { MicroState } from 'ember-microstates';
 describe('Microstates', function() {
   let onState = null;
   let onCustom = null;
-  let onStateEvent = null;
-  let onCustomEvent = null;
   let onRecompute = null;
   beforeEach(function() {
-    [onState, onCustom, onStateEvent, onCustomEvent, onRecompute] = [
+    [onState, onCustom, onRecompute] = [
       sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy(), sinon.spy()
     ];
 
@@ -25,8 +22,6 @@ describe('Microstates', function() {
       }
     });
 
-    Ember.addListener(this.microstate, 'state', this, onStateEvent);
-    Ember.addListener(this.microstate, 'custom', this, onCustomEvent);
     this.value = this.microstate.compute([], {'on-state': onState, 'on-custom': onCustom});
   });
 
@@ -60,16 +55,8 @@ describe('Microstates', function() {
       expect(this.next).to.deep.equal({totally: 'custom'});
     });
 
-    it("fires the 'state' event", function() {
-      expect(onStateEvent.called).to.equal(true);
-    });
-
     it("invokes the on-state callback", function() {
       expect(onState.calledWith({totally: 'custom'})).to.equal(true);
-    });
-
-    it("fires the 'custom' event", function() {
-      expect(onCustomEvent.calledWith({totally: 'custom'})).to.equal(true);
     });
 
     it("invokes the on-custom callback", function() {
