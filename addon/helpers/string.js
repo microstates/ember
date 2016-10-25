@@ -3,8 +3,14 @@ import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
 
-  initialValueFor([string = '']) {
-    return string;
+  initialValueFor([string]) {
+    if (string === undefined || string === null) {
+      return '';
+    } else if (string && string.toString) {
+      return string.toString();
+    } else {
+      return string;
+    }
   },
 
   prototypeFor(value) {
