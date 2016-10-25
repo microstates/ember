@@ -29,19 +29,6 @@ describe('Unit: Microstates', function() {
     expect(this.value).to.deep.equal({initial: 'state'});
   });
 
-  describe("setting the state without a custom event", function() {
-    beforeEach(function() {
-      this.next =  this.microstate.transition(()=> ({average: 'joe'}));
-    });
-    it("sets the new state", function() {
-      expect(this.microstate.value).to.deep.equal({average: 'joe'});
-    });
-    it("returns the new state from the transition() function", function() {
-      expect(this.next).to.deep.equal({average: 'joe'});
-    });
-  });
-
-
   describe("setting the state with a custom event", function() {
     beforeEach(function() {
       this.next = this.microstate.transition('custom', ()=> ({totally: 'custom'}));

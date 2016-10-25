@@ -55,11 +55,6 @@ export default Ember.Helper.extend({
   },
 
   transition(eventName, updateFn = (current)=> current) {
-    if (arguments.length === 1) {
-      updateFn = eventName || (o=> o);
-      eventName = null;
-    }
-
     let nextState = updateFn.call(this, this.value);
     if (nextState !== this.value) {
       this.value = nextState;
