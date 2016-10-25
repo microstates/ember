@@ -61,10 +61,7 @@ export default Ember.Helper.extend({
       this._update = true;
       this.recompute();
       this.sendAction('state', nextState);
-
-      if (eventName) {
-        this.sendAction(eventName, nextState);
-      }
+      this.sendAction(eventName, nextState);
     }
     return nextState;
   },
