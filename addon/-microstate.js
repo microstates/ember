@@ -67,7 +67,7 @@ export default Ember.Helper.extend({
   },
 
   sendAction(name, state) {
-    var actionCallback = this.options[Ember.String.dasherize(`on-${name}`)];
+    let actionCallback = this.options[Ember.String.dasherize(`on-${name}`)];
     if (actionCallback && actionCallback.call) {
       actionCallback.call(null, state);
     }
