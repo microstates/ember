@@ -2,6 +2,10 @@ import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
 
+  initialValueFor([array = []]) {
+    return array;
+  },
+
   prototypeFor(value = []) {
     let wrapped = value.slice();
 
@@ -15,9 +19,6 @@ export default MicroState.extend({
   },
 
   actions: {
-    recompute(current, [array = []]) {
-      return array;
-    },
     add(list, item) {
       return list.concat(item);
     },

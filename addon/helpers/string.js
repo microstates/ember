@@ -3,6 +3,10 @@ import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
 
+  initialValueFor([string = '']) {
+    return string;
+  },
+
   prototypeFor(value) {
     let wrapped = new String(value);
 
@@ -20,11 +24,5 @@ export default MicroState.extend({
     });
 
     return wrapped;
-  },
-
-  actions: {
-    recompute(previous, [string = '']) {
-      return string;
-    }
   }
 });

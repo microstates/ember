@@ -4,6 +4,10 @@ import { reduceObject } from '../utils/object-utils';
 
 export default MicroState.extend({
 
+  initialValueFor([object = {}]) {
+    return object;
+  },
+
   /**
    * Make all of the object properties explicitly enumerable in the template
    * 
@@ -20,9 +24,6 @@ export default MicroState.extend({
   },
 
   actions: {
-    recompute(current, [object = {}]) {
-      return object;
-    },
     delete(current, target) {
       return reduceObject(current, function(result, name, value) {
         if (target === name) {

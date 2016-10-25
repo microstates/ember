@@ -11,11 +11,8 @@ export default Ember.Helper.extend({
       return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
     }, {});
 
-    let recompute = actions.recompute;
-    actions.recompute = ()=> recompute.call(null, this.value, params, options);
-
     if (!this._update) {
-      this.value = this.transition('recompute', actions.recompute);
+      this.value = this.initialValueFor(params, options);
     }
     delete this._update;
 
@@ -46,6 +43,10 @@ export default Ember.Helper.extend({
     }
   },
 
+  initialValueFor([value]) {
+    return value;
+  },
+
   handlebarsValueFor(value) {
     return value;
   },
@@ -74,9 +75,6 @@ export default Ember.Helper.extend({
   },
 
   actions: {
-    recompute(current, [state = {}]) {
-      return state;
-    },
     set(current, value) {
       return value;
     }
