@@ -2,8 +2,14 @@ import { MicroState } from 'ember-microstates';
 
 export default MicroState.extend({
 
-  initialValueFor([array = []]) {
-    return array;
+  initialValueFor([array]) {
+    if (array === undefined) {
+      return [];
+    } else if (array && array.length != null && array.forEach) {
+      return array;
+    } else {
+      return [ array ];
+    }
   },
 
   prototypeFor(value = []) {
