@@ -3,7 +3,7 @@ import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import ListHelper from 'ember-microstates/helpers/list';
 
-describe('List', function() {
+describe('Unit: List', function() {
   beforeEach(function() {
     this.helper = ListHelper.create({
       recompute: sinon.spy()

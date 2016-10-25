@@ -150,7 +150,7 @@ The object state serves as the base for all other microstates. The
 transitions that are available to object are available to all other types:
 
 ``` handlebars
-{{let car=(Object make="Ford" model="Mustang" year=1967)}}
+{{let car=(Object (hash make="Ford" model="Mustang" year=1967))}}
 ```
 
 #### `assign(attributes)`

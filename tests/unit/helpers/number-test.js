@@ -3,7 +3,7 @@ import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import NumberHelper from 'ember-microstates/helpers/number';
 
-describe('Number', function() {
+describe('Unit: Number', function() {
   beforeEach(function() {
     this.helper = NumberHelper.create({
       recompute: sinon.spy()

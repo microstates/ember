@@ -55,23 +55,22 @@ export default Ember.Helper.extend({
   },
 
   transition(eventName, updateFn = (current)=> current) {
-    if (arguments.length === 1) {
-      updateFn = eventName || (o=> o);
-      eventName = null;
-    }
-
     let nextState = updateFn.call(this, this.value);
     if (nextState !== this.value) {
       this.value = nextState;
       this._update = true;
       this.recompute();
-      sendActionNotification(this, 'state', nextState);
-
-      if (eventName) {
-        sendActionNotification(this, eventName, nextState);
-      }
+      this.sendAction('state', nextState);
+      this.sendAction(eventName, nextState);
     }
     return nextState;
+  },
+
+  sendAction(name, state) {
+    var actionCallback = this.options[Ember.String.dasherize(`on-${name}`)];
+    if (actionCallback && actionCallback.call) {
+      actionCallback.call(null, state);
+    }
   },
 
   actions: {
@@ -83,14 +82,6 @@ export default Ember.Helper.extend({
     }
   }
 });
-
-function sendActionNotification(helper, actionName, state) {
-  var actionCallback = helper.options[Ember.String.dasherize(`on-${actionName}`)];
-  Ember.sendEvent(helper, actionName, [state]);
-  if (actionCallback && actionCallback.call) {
-    actionCallback.call(null, state);
-  }
-}
 
 function ancestorsOf(object, ancestors = [object]) {
   let proto = Object.getPrototypeOf(object);
