@@ -5,7 +5,7 @@ export default MicroState.extend({
 
   actions: {
     recompute(previous, [values = []], options) {
-      let Type = !!options.multiple ? MultipleSelect : SingleSelect;
+      let Type = options.multiple ? MultipleSelect : SingleSelect;
       return Type.create(values, options);
     },
 
