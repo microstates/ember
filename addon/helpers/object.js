@@ -6,7 +6,7 @@ import isPrimitive from '../utils/is-primitive';
 export default MicroState.extend({
 
   initialValueFor([object = {}]) {
-    if (isPrimitive(object) || object == null) {
+    if (isPrimitive(object)) {
       throw new Error(`Object microstate expects a non primitive value in its constructor, but received ${object}`);
     }
     return object;

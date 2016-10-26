@@ -1,4 +1,8 @@
 export default function isPrimitive(value) {
-  let type = typeof value;
-  return type != "object" && type != "function";
+  if (value == null) {
+    return true;
+  } else {
+    let type = typeof value;
+    return type != "object" && type != "function";
+  }
 }
