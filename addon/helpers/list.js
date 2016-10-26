@@ -3,10 +3,8 @@ import isInteger from '../utils/is-integer';
 
 export default MicroState.extend({
 
-  initialValueFor([array]) {
-    if (array === undefined) {
-      return [];
-    } else if (array instanceof Array) {
+  initialValueFor([array = []]) {
+    if (array instanceof Array) {
       return array;
     } else if (array && typeof array !== 'string' && isInteger(array.length)) {
       let copy = [];
