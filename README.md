@@ -139,12 +139,12 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
   + [`multiply(number)`](#multiplynumber)
   + [`divide(number)`](#dividenumber)
   + [`set(number)`](#setnumber)
-* [`(Select options [selection=array|value] [multiple=false|true]`](#select)
+* [`(Select array [selection=array|value] [multiple=false|true])`](#select)
   + [`option.toggle()`](#optiontoggle)
   + [`option.select()`](#optionelect)
   + [`option.deselect()`](#optiondeselect)
 
-### `object`
+### Object
 
 The object state serves as the base for all other microstates. The
 transitions that are available to object are available to all other types:
@@ -200,7 +200,7 @@ Replace current object microstate with a new object microstate from given hash.
 </button>
 ```
 
-### `List`
+### List
 
 List microstate represents an ordered collection of values.
 
@@ -292,7 +292,7 @@ Replaces current list with given list.
 </button>
 ```
 
-### `Boolean`
+### Boolean
 
 Boolean represent a `true` or `false` value.
 
@@ -356,7 +356,7 @@ Replace current value with new string.
 </button>
 ```
 
-### `Number`
+### Number
 
 Represents a numerical value.
 
@@ -436,7 +436,7 @@ Replace the value with given number.
 </button>
 ```
 
-### `(Select options [selection=value|array] [multiple=true|false])
+### Select
 
 The Select microstate represents a set of distinct options from which choices
 can be made. For any given value in the set, it tracks whether that
