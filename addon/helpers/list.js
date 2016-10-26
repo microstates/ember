@@ -7,6 +7,8 @@ export default MicroState.extend({
       return [];
     } else if (array instanceof Array) {
       return array;
+    } else if (array && typeof array !== 'string' && array.length != null) {
+      return array;
     } else {
       return [ array ];
     }

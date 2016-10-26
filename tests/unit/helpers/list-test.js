@@ -19,7 +19,7 @@ describe('Unit: List', function() {
       this.nullValue = this.helper.initialValueFor([null]);
       this.undefinedValue = this.helper.initialValueFor([undefined]);
       this.arrayValue = this.helper.initialValueFor([['a', 'b', 'c']]);
-      this.objectWithLengthValue = this.helper.initialValueFor([{ length: 'foo' }]);
+      this.objectWithLengthValue = this.helper.initialValueFor([{ length: 3 }]);
     });
 
     it('wraps string value in an array', function() {
@@ -38,8 +38,8 @@ describe('Unit: List', function() {
       expect(this.arrayValue).deep.equal(['a', 'b', 'c']);
     });
 
-    it('treats objects with length property as values', function() {
-      expect(this.objectWithLengthValue).to.deep.equal([{length: 'foo'}]);
+    it('treats objects with length property as arrays', function() {
+      expect(this.objectWithLengthValue).to.deep.equal({length: 3});
     });
   });
 
