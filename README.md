@@ -113,7 +113,7 @@ bet is to hit up `#e-microstates` channel in the ember community slack.
 
 ## API
 
-* [`(Object [attr=value])`](#object)
+* [`(Object (hash [attr=value])`](#object)
   + [`assign(attributes)`](#assignattributes)
   + [`delete(key)`](#deletekey)
   + [`put(key,value)`](#putkeyvalue)
