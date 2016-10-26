@@ -16,6 +16,28 @@ describe('Unit: Object', function() {
     this.valueOf = this.value.valueOf();
   });
 
+  describe('initial value', function() {
+    beforeEach(function() {
+      this.undefinedValue = this.helper.initialValueFor([undefined]);
+    });
+    it('uses empty hash for undefined', function() {
+      expect(this.undefinedValue).to.deep.equal({});
+    });
+    it('does not coerce primitive values', function() {
+      expect(() => {
+        this.helper.initialValueFor([10]);
+      }).to.throw('Object microstate expects a non primitive value in its constructor, but received 10');
+
+      expect(() => {
+        this.helper.initialValueFor(['hello']);
+      }).to.throw('Object microstate expects a non primitive value in its constructor, but received hello');
+
+      expect(() => {
+        this.helper.initialValueFor([null]);
+      }).to.throw('Object microstate expects a non primitive value in its constructor, but received null');
+    });
+  });
+
   it('valueOf returns unboxed value', function() {
     expect(this.valueOf).to.deep.equal({ hello: 'world' });
   });
