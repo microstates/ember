@@ -38,8 +38,8 @@ describe('Unit: List', function() {
       expect(this.arrayValue).deep.equal(['a', 'b', 'c']);
     });
 
-    it('treats objects with length property as arrays', function() {
-      expect(this.objectWithLengthValue).to.deep.equal({length: 3});
+    it('copies objects with length to an array', function() {
+      expect(this.objectWithLengthValue).to.deep.equal([]);
     });
   });
 

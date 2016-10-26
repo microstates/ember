@@ -1,4 +1,5 @@
 import { MicroState } from 'ember-microstates';
+import isInteger from '../utils/is-integer';
 
 export default MicroState.extend({
 
@@ -7,8 +8,12 @@ export default MicroState.extend({
       return [];
     } else if (array instanceof Array) {
       return array;
-    } else if (array && typeof array !== 'string' && array.length != null) {
-      return array;
+    } else if (array && typeof array !== 'string' && isInteger(array.length)) {
+      let copy = [];
+      for (let i = array.length; i < array.length; i++) {
+        copy.push(array[i]);
+      }
+      return copy;
     } else {
       return [ array ];
     }
