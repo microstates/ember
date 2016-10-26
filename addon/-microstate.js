@@ -60,7 +60,7 @@ export default Ember.Helper.extend({
       this.value = nextState;
       this._update = true;
       this.recompute();
-      this.sendAction('state', nextState);
+      this.sendAction('transition', nextState);
       this.sendAction(eventName, nextState);
     }
     return nextState;
