@@ -5,7 +5,7 @@ export default MicroState.extend({
   initialValueFor([array]) {
     if (array === undefined) {
       return [];
-    } else if (array && array.length != null && array.forEach) {
+    } else if (array instanceof Array) {
       return array;
     } else {
       return [ array ];
