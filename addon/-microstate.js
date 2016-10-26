@@ -43,15 +43,29 @@ export default Ember.Helper.extend({
     }
   },
 
+  /**
+   * initialValueFor hook is used to coerce params value into 
+   * type that the microstate expects. It's called when the helper 
+   * is computed the first time or consequently when incoming parameters 
+   * or arguments change.  
+   */
   initialValueFor([value]) {
     return value;
   },
 
-  handlebarsValueFor(value) {
+  /**
+   * prototypeFor hook provides the prototype for the object that 
+   * will be exposed to the template.
+   */
+  prototypeFor(value) {
     return value;
   },
 
-  prototypeFor(value) {
+  /**
+   * handlebarsValueFor hooks is used to provide value that is formatted 
+   * to accomidate specificies of Handlebars.
+   */
+  handlebarsValueFor(value) {
     return value;
   },
 
