@@ -5,11 +5,11 @@ import sinon from 'sinon';
 import { MicroState } from 'ember-microstates';
 
 describe('Unit: Microstates', function() {
-  let onState = null;
+  let onTransition = null;
   let onCustom = null;
   let onRecompute = null;
   beforeEach(function() {
-    [onState, onCustom, onRecompute] = [
+    [onTransition, onCustom, onRecompute] = [
       sinon.spy(), sinon.spy(), sinon.spy()
     ];
 
@@ -22,7 +22,7 @@ describe('Unit: Microstates', function() {
       }
     });
 
-    this.value = this.microstate.compute([], {'on-state': onState, 'on-custom': onCustom});
+    this.value = this.microstate.compute([], {'on-transition': onTransition, 'on-custom': onCustom});
   });
 
   it("computes to the initial state ", function() {
@@ -42,8 +42,8 @@ describe('Unit: Microstates', function() {
       expect(this.next).to.deep.equal({totally: 'custom'});
     });
 
-    it("invokes the on-state callback", function() {
-      expect(onState.calledWith({totally: 'custom'})).to.equal(true);
+    it("invokes the on-transition callback", function() {
+      expect(onTransition.calledWith({totally: 'custom'})).to.equal(true);
     });
 
     it("invokes the on-custom callback", function() {

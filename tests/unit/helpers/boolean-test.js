@@ -5,18 +5,18 @@ import sinon from 'sinon';
 import BooleanHelper from 'ember-microstates/helpers/boolean';
 
 describe('Unit: Boolean', function() {
-  let onState = null;
+  let onTransition = null;
   let onToggle = null;
   let onRecompute = null;
   beforeEach(function() {
-    [onState, onToggle, onRecompute] = [
+    [onTransition, onToggle, onRecompute] = [
       sinon.spy(), sinon.spy(), sinon.spy()
     ];
     this.helper = BooleanHelper.create({
       recompute: onRecompute
     });
 
-    this.value = this.helper.compute([true], {'on-state': onState, 'on-toggle': onToggle});
+    this.value = this.helper.compute([true], {'on-transition': onTransition, 'on-toggle': onToggle});
     this.valueOf = this.value.valueOf();
   });
 
@@ -38,8 +38,8 @@ describe('Unit: Boolean', function() {
       expect(this.toggled).to.equal(false);
     });
 
-    it("invokes the on-state callback", function() {
-      expect(onState.calledWith(false)).to.equal(true);
+    it("invokes the on-transition callback", function() {
+      expect(onTransition.calledWith(false)).to.equal(true);
     });
 
     it("invokes the on-toggle callback", function() {
