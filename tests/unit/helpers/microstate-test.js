@@ -15,10 +15,9 @@ describe('Unit: Microstates', function() {
 
     this.microstate = MicroState.create({
       recompute: onRecompute,
-      actions: {
-        recompute(current, [state = {initial: 'state'}]) {
-          return state;
-        }
+
+      initialValueFor([state = {initial: 'state'}]) {
+        return state;
       }
     });
 

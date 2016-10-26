@@ -1,6 +1,21 @@
 import { MicroState } from 'ember-microstates';
+import isInteger from '../utils/is-integer';
 
 export default MicroState.extend({
+
+  initialValueFor([array = []]) {
+    if (array instanceof Array) {
+      return array;
+    } else if (array && typeof array !== 'string' && isInteger(array.length)) {
+      let copy = [];
+      for (let i = array.length; i < array.length; i++) {
+        copy.push(array[i]);
+      }
+      return copy;
+    } else {
+      return [ array ];
+    }
+  },
 
   prototypeFor(value = []) {
     let wrapped = value.slice();
@@ -15,9 +30,6 @@ export default MicroState.extend({
   },
 
   actions: {
-    recompute(current, [array = []]) {
-      return array;
-    },
     add(list, item) {
       return list.concat(item);
     },

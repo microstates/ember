@@ -1,8 +1,16 @@
 import { MicroState } from 'ember-microstates';
 import assign from '../utils/assign';
 import { reduceObject } from '../utils/object-utils';
+import isPrimitive from '../utils/is-primitive';
 
 export default MicroState.extend({
+
+  initialValueFor([object = {}]) {
+    if (isPrimitive(object)) {
+      throw new Error(`Object microstate expects a non primitive value in its constructor, but received ${object}`);
+    }
+    return object;
+  },
 
   /**
    * Make all of the object properties explicitly enumerable in the template
@@ -20,9 +28,6 @@ export default MicroState.extend({
   },
 
   actions: {
-    recompute(current, [object = {}]) {
-      return object;
-    },
     delete(current, target) {
       return reduceObject(current, function(result, name, value) {
         if (target === name) {

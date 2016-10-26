@@ -13,6 +13,36 @@ describe('Unit: List', function() {
     this.valueOf = this.value.valueOf();
   });
 
+  describe('initial value', function() {
+    beforeEach(function() {
+      this.stringValue = this.helper.initialValueFor(['hello']);
+      this.nullValue = this.helper.initialValueFor([null]);
+      this.undefinedValue = this.helper.initialValueFor([undefined]);
+      this.arrayValue = this.helper.initialValueFor([['a', 'b', 'c']]);
+      this.objectWithLengthValue = this.helper.initialValueFor([{ length: 3 }]);
+    });
+
+    it('wraps string value in an array', function() {
+      expect(this.stringValue).to.deep.equal(['hello']);
+    });
+
+    it('wraps null value in an array', function() {
+      expect(this.nullValue).deep.equal([null]);
+    });
+
+    it('returns an empty array for undefined', function() {
+      expect(this.undefinedValue).deep.equal([]);
+    });
+
+    it('keeps array unmodified', function() {
+      expect(this.arrayValue).deep.equal(['a', 'b', 'c']);
+    });
+
+    it('copies objects with length to an array', function() {
+      expect(this.objectWithLengthValue).to.deep.equal([]);
+    });
+  });
+
   it('has non enumerable valueOf', function() {
     expect(this.value.valueOf).to.be.a('function');
     expect(this.value.propertyIsEnumerable()).to.be.equal(false);

@@ -11,11 +11,8 @@ export default Ember.Helper.extend({
       return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
     }, {});
 
-    let recompute = actions.recompute;
-    actions.recompute = ()=> recompute.call(null, this.value, params, options);
-
     if (!this._update) {
-      this.value = this.transition('recompute', actions.recompute);
+      this.value = this.initialValueFor(params, options);
     }
     delete this._update;
 
@@ -46,11 +43,29 @@ export default Ember.Helper.extend({
     }
   },
 
-  handlebarsValueFor(value) {
+  /**
+   * initialValueFor hook is used to coerce params value into 
+   * type that the microstate expects. It's called when the helper 
+   * is computed the first time or consequently when incoming parameters 
+   * or arguments change.  
+   */
+  initialValueFor([value]) {
     return value;
   },
 
+  /**
+   * prototypeFor hook provides the prototype for the object that 
+   * will be exposed to the template.
+   */
   prototypeFor(value) {
+    return value;
+  },
+
+  /**
+   * handlebarsValueFor hooks is used to provide value that is formatted 
+   * to accomidate specificies of Handlebars.
+   */
+  handlebarsValueFor(value) {
     return value;
   },
 
@@ -74,9 +89,6 @@ export default Ember.Helper.extend({
   },
 
   actions: {
-    recompute(current, [state = {}]) {
-      return state;
-    },
     set(current, value) {
       return value;
     }

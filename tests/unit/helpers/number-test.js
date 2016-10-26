@@ -13,6 +13,46 @@ describe('Unit: Number', function() {
     this.valueOf = this.value.valueOf();
   });
 
+  describe('initial value', function() {
+    beforeEach(function() {
+      this.undefinedValue = this.helper.initialValueFor([undefined]);
+      this.nullValue = this.helper.initialValueFor([null]);
+      this.stringValue = this.helper.initialValueFor(['hello']);
+      this.stringWithNumber = this.helper.initialValueFor(['123']);
+    });
+
+    it('coerces undefined to 0', function() {
+      expect(this.undefinedValue).to.equal(0);
+    });
+
+    it('coerces null to 0', function() {
+      expect(this.nullValue).to.equal(0);
+    });
+
+    it('coerces string to NaN', function() {
+      expect(this.stringValue).to.be.NaN;
+    });
+
+    it('coerces number string to number', function() {
+      expect(this.stringWithNumber).to.equal(123);
+    });
+  });
+
+  describe('NaN handling', function() {
+    beforeEach(function() {
+      this.nullValue = this.helper.compute([null], {});
+    });
+    
+    it("handles NaN gracefully", function() {
+      let result;
+      expect(() => {
+        result = this.nullValue.add(3);
+      }).to.not.throw();
+
+      expect(result).to.equal(3);
+    });
+  });
+
   it('unboxed to original value', function() {
     expect(this.valueOf).to.equal(42);
   });
