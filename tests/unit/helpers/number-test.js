@@ -29,12 +29,27 @@ describe('Unit: Number', function() {
       expect(this.nullValue).to.equal(0);
     });
 
-    it('coerces string to 0', function() {
-      expect(this.stringValue).to.equal(0);
+    it('coerces string to NaN', function() {
+      expect(this.stringValue).to.be.NaN;
     });
 
     it('coerces number string to number', function() {
       expect(this.stringWithNumber).to.equal(123);
+    });
+  });
+
+  describe('NaN handling', function() {
+    beforeEach(function() {
+      this.nullValue = this.helper.compute([null], {});
+    });
+    
+    it("handles NaN gracefully", function() {
+      let result;
+      expect(() => {
+        result = this.nullValue.add(3);
+      }).to.not.throw();
+
+      expect(result).to.equal(3);
     });
   });
 

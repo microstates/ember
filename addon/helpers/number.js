@@ -4,12 +4,7 @@ import { MicroState } from 'ember-microstates';
 export default MicroState.extend({
 
   initialValueFor([value = 0]) {
-    let num = Number(value);
-    if (`${num}` === 'NaN') {
-      return 0;
-    } else {
-      return num;
-    }
+    return Number(value);
   },
 
   prototypeFor(value) {
