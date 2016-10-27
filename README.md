@@ -55,7 +55,7 @@ Using Microstates, we would rewrite the example above using the
 `Boolean` helper like so:
 
 ```handlebars
-{{let isOpen=(Boolean)}}
+{{let isOpen=(Boolean false)}}
 
 <button onclick={{action isOpen.toggle}}>Toggle</button>
 
@@ -99,6 +99,13 @@ opposed to hidden in a component `.js` file. Notice also how the
 transition to be invoked is explicit and obvious without the need to
 look any where else. Power is gained. Intention is revealed.
 
+## More Examples
+
+To see more exhaustive examples of microstates in action, you can
+start the dummy app and have a look at the
+[demos found here](https://github.com/cowboyd/ember-microstates/blob/master/tests/dummy/app/templates/application.hbs) to
+see at least one case of each microstate.
+
 ## Writing Your Own Microstates
 
 What if you're not satisfied with the microstates provided? What if
@@ -109,7 +116,9 @@ around building your own microstate helpers a lot easier, but for now
 it involves some leg-work.
 
 That said, it *is* possible today, and if you're interested your best
-bet is to hit up `#e-microstates` channel in the ember community slack.
+bet is to hit up `#e-microstates` channel in the ember community
+slack.
+
 
 ## API
 
@@ -512,9 +521,6 @@ Make a new selection with this option unselected.
 {{/each}}
 ```
 
-## Example Usage
-
-* [tests/dummy/app/templates/application.hbs](https://github.com/cowboyd/ember-microstates/blob/master/tests/dummy/app/templates/application.hbs)
 
 ## Installation
 
