@@ -27,7 +27,7 @@ export default MicroState.extend({
     }, object);
   },
 
-  actions: {
+  transitions: {
     delete(current, target) {
       return reduceObject(current, function(result, name, value) {
         if (target === name) {

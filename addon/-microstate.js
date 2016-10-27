@@ -6,9 +6,9 @@ export default Ember.Helper.extend({
 
   compute(params, options) {
     this.options = options;
-    // collect all of the actions from here up the prototype chain
-    let actions = ancestorsOf(this).reduce(function(actions, ancestor) {
-      return ancestor.actions ? assign({}, ancestor.actions, actions) : actions;
+    // collect all of the transitions from here up the prototype chain
+    let transitions = ancestorsOf(this).reduce(function(transitions, ancestor) {
+      return ancestor.transitions ? assign({}, ancestor.transitions, transitions) : transitions;
     }, {});
 
     if (!this._update) {
@@ -16,27 +16,27 @@ export default Ember.Helper.extend({
     }
     delete this._update;
 
-    return this.handlebarsValueFor(decorate(this, actions, this.prototypeFor(this.value), [this.value]), this.value);
+    return this.handlebarsValueFor(decorate(this, transitions, this.prototypeFor(this.value), [this.value]), this.value);
 
-    function decorate(microstate, actions, object, context) {
-      return Object.create(object, Object.keys(actions).reduce((values, key)=> {
+    function decorate(microstate, transitions, object, context) {
+      return Object.create(object, Object.keys(transitions).reduce((values, key)=> {
         return assign(values, {
-          [key]: descriptor(valueFor(actions, key))
+          [key]: descriptor(valueFor(transitions, key))
         });
       }, {}));
 
-      function valueFor(actions, key) {
-        let action = actions[key];
-        if (typeof action === 'function') {
+      function valueFor(transitions, key) {
+        let transition = transitions[key];
+        if (typeof transition === 'function') {
           return function(...args) {
-            return microstate.transition(key, ()=> action.call(null, ...context, ...args));
+            return microstate.transition(key, ()=> transition.call(null, ...context, ...args));
           };
         } else {
           let next = object[key];
           if (next.map && next.length >=0) {
-            return next.map(val => decorate(microstate, action, val, context.concat(val)));
+            return next.map(val => decorate(microstate, transition, val, context.concat(val)));
           } else {
-            return decorate(microstate, action, next, context.concat(next));
+            return decorate(microstate, transition, next, context.concat(next));
           }
         }
       }
@@ -88,7 +88,7 @@ export default Ember.Helper.extend({
     }
   },
 
-  actions: {
+  transitions: {
     set(current, value) {
       return value;
     }

@@ -23,7 +23,7 @@ export default MicroState.extend({
     return value ? True : False;
   },
 
-  actions: {
+  transitions: {
     toggle(current) {
       return !current;
     },
