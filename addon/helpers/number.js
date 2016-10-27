@@ -26,7 +26,7 @@ export default MicroState.extend({
     return wrapped;
   },
 
-  actions: {
+  transitions: {
     add(current, amount) {
       return current + amount;
     },

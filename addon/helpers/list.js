@@ -29,7 +29,7 @@ export default MicroState.extend({
     return wrapped;
   },
 
-  actions: {
+  transitions: {
     add(list, item) {
       return list.concat(item);
     },
