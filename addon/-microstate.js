@@ -26,17 +26,17 @@ export default Ember.Helper.extend({
       }, {}));
 
       function valueFor(transitions, key) {
-        let action = transitions[key];
-        if (typeof action === 'function') {
+        let transition = transitions[key];
+        if (typeof transition === 'function') {
           return function(...args) {
-            return microstate.transition(key, ()=> action.call(null, ...context, ...args));
+            return microstate.transition(key, ()=> transition.call(null, ...context, ...args));
           };
         } else {
           let next = object[key];
           if (next.map && next.length >=0) {
-            return next.map(val => decorate(microstate, action, val, context.concat(val)));
+            return next.map(val => decorate(microstate, transition, val, context.concat(val)));
           } else {
-            return decorate(microstate, action, next, context.concat(next));
+            return decorate(microstate, transition, next, context.concat(next));
           }
         }
       }
