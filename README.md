@@ -1,6 +1,6 @@
 # Ember Microstates
 
-### [API Index](#api)
+### [API Index](#api) [Live Demo](https://cowboyd.github.io/ember-microstates/)
 
 [![npm version](https://badge.fury.io/js/ember-microstates.svg)](https://badge.fury.io/js/ember-microstates)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-microstates.svg)](https://emberobserver.com/addons/ember-microstates)
