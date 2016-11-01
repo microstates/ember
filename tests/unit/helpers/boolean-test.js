@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import BooleanHelper from 'ember-microstates/helpers/boolean';
+import Ember from 'ember';
+const { isEqual } = Ember;
 
 describe('Unit: Boolean', function() {
   let onTransition = null;
@@ -26,6 +28,10 @@ describe('Unit: Boolean', function() {
 
   it("unboxed to original value", function() {
     expect(this.valueOf).to.equal(true);
+  });
+
+  it('supports Ember.isEqual', function() {
+    expect(isEqual(this.value, true)).to.equal(true);
   });
 
   describe("toggling", function() {
