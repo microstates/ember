@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import StringHelper from 'ember-microstates/helpers/string';
+import Ember from 'ember';
+const { isEqual } = Ember;
 
 describe('Unit: String', function() {
   beforeEach(function() {
@@ -46,6 +48,10 @@ describe('Unit: String', function() {
 
   it('unboxed to original value', function() {
     expect(this.valueOf).to.equal('hello world');
+  });
+
+  it('supports Ember.isEqual', function() {
+    expect(isEqual(this.value, 'hello world')).to.equal(true);
   });
 
   describe('set', function() {
