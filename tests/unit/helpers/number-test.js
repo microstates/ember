@@ -2,6 +2,8 @@ import { expect } from 'chai';
 import { describe, beforeEach, it } from 'mocha';
 import sinon from 'sinon';
 import NumberHelper from 'ember-microstates/helpers/number';
+import Ember from 'ember';
+const { isEqual } = Ember;
 
 describe('Unit: Number', function() {
   beforeEach(function() {
@@ -11,6 +13,10 @@ describe('Unit: Number', function() {
 
     this.value = this.helper.compute([42], {});
     this.valueOf = this.value.valueOf();
+  });
+
+  it('supports Ember.isEqual', function() {
+    expect(isEqual(this.value, 42)).to.equal(true);
   });
 
   describe('initial value', function() {

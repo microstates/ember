@@ -11,7 +11,7 @@ export default MicroState.extend({
     let wrapped = new Number(value);
 
     Object.defineProperties(wrapped, {
-      toString : {
+      toString: {
         value() {
           return String(value);
         }
@@ -19,6 +19,11 @@ export default MicroState.extend({
       valueOf: {
         value() {
           return Number(value);
+        }
+      },
+      isEqual: {
+        value(target) {
+          return value === target;
         }
       }
     });
