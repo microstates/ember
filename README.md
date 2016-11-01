@@ -315,6 +315,9 @@ Boolean represent a `true` or `false` value.
 {{/if}}
 ```
 
+**Note**: In JavaScript, you must use [`Ember.isEqual`](http://emberjs.com/api/#method_isEqual) helper 
+to evaluate equality of this microstate to other values. Read [Equality of Microstates](#aqualityofmicrostates) for more information.
+
 #### `toggle()`
 
 Transition the Boolean microstate to opposite of it's current value.
@@ -345,6 +348,9 @@ Represents a String object.
 {{message}}
 ```
 
+**Note**: In JavaScript, you must use [`Ember.isEqual`](http://emberjs.com/api/#method_isEqual) helper 
+to evaluate equality of this microstate to other values. Read [Equality of Microstates](#aqualityofmicrostates) for more information.
+
 #### `concat(string)`
 
 Add string to the end of the existing value.
@@ -374,6 +380,9 @@ Represents a numerical value.
 
 {{age}}
 ```
+
+**Note**: In JavaScript, you must use [`Ember.isEqual`](http://emberjs.com/api/#method_isEqual) helper 
+to evaluate equality of this microstate to other values. Read [Equality of Microstates](#aqualityofmicrostates) for more information.
 
 #### `increment()`
 
@@ -521,6 +530,79 @@ Make a new selection with this option unselected.
 {{/each}}
 ```
 
+## Equality of Microstates
+
+Microstates are objects that wrap primitive values. Microstates are designed to follow Handlebars equality rules and you 
+can expect tham to work correctly in this environment. For example `{{if (Boolean true) 'yes' 'no'}}` will show `yes` and 
+`{{if (Boolean false) 'yes' 'no'}}` will show `no`. 
+
+In JavaScript, microstates loosely equal(ie `==`) but not strictly equal(ie `===`) to its primitive value. To compare equality 
+of a Microstate in JavaScript, you must use [`Ember.isEqual`](http://emberjs.com/api/#method_isEqual) utility helper.
+
+### Boolean equality
+
+```hbs
+{{let isOpen=(Boolean false)}}
+
+<button {{action 'showModal' isOpen}}>Show Modal</button>
+```
+
+```js
+import Ember from 'ember';
+const { isEqual } from Ember;
+
+export default Ember.Component.extend({
+  actions: {
+    showModal(isOpen) {
+      if (isEqual(isOpen, true)) {
+        // do something positive
+      }
+    }
+  }
+});
+```
+
+### String equality
+
+```hbs
+{{let message=(String 'loren ipsum')}}
+
+{{hide-default message}}
+```
+
+```js
+import Ember from 'ember';
+const { isEqual } from Ember;
+
+export default Ember.Helper.helper(function([str]) {
+  if (isEqual(str, 'loren ipsum')) {
+    return '';
+  } else {
+    return str;
+  }
+});
+```
+
+### Number equality
+
+```hbs
+{{let answer=(Number 42)}}
+
+{{what-question answer}}
+```
+
+```js
+import Ember from 'ember';
+const { isEqual } from Ember;
+
+export default Ember.Helper.helper(function([answer]) {
+  if (isEqual(answer, 42)) {
+    return 'The Almighty Answer to the Meaning of Life, the Universe, and Everything.';
+  } else {
+    return 'What is the question?';
+  }
+});
+```
 
 ## Installation
 
