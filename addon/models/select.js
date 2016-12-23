@@ -17,7 +17,7 @@ class Select {
 export class SingleSelect extends Select {
 
   static create(values, options) {
-    return new this(values.map(v => new Option(v, v === options.selection)));
+    return new this((values || []).map(v => new Option(v, v === options.selection)));
   }
 
   get selection() {
@@ -38,7 +38,7 @@ export class MultipleSelect extends Select {
     if (options.selection) {
       selection = options.selection.forEach ? options.selection : [options.selection];
     }
-    return new MultipleSelect(values.map(v => new Option(v, includes(selection, v))));
+    return new MultipleSelect((values || []).map(v => new Option(v, includes(selection, v))));
   }
 
   get selection() {
