@@ -18,9 +18,11 @@
   "author": "cowboyd@frontside.io",
   "license": "MIT",
   "devDependencies": {
-    "broccoli-asset-rev": "^2.4.2",
+    "ajv": "4.10.0",
+    "ember-cli-shims": "^1.1.0",
+    "broccoli-asset-rev": "^2.6.0",
     "ember-ajax": "^2.0.1",
-    "ember-cli": "2.8.0",
+    "ember-cli": "~2.14.0",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-eslint": "3.0.0",
@@ -28,29 +30,30 @@
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-htmlbars-inline-precompile": "^1.0.2",
     "ember-cli-inject-live-reload": "^1.4.0",
-    "ember-cli-mocha": "0.10.4",
+    "ember-cli-mocha": "^0.13.3",
     "ember-cli-release": "^0.2.9",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
-    "ember-code-snippet": "1.8.0",
+    "ember-code-snippet": "2.0.0",
     "ember-data": "^2.8.0",
     "ember-disable-prototype-extensions": "^1.1.0",
     "ember-export-application-global": "^1.0.5",
-    "ember-let": "0.5.2",
-    "ember-load-initializers": "^0.5.1",
+    "ember-let": "0.6.0",
+    "ember-load-initializers": "^1.0.0",
     "ember-one-way-controls": "0.8.0",
     "ember-owner-test-utils": "0.1.1",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.1",
-    "eslint-plugin-prefer-let": "^0.1.0",
+    "eslint-plugin-prefer-let": "^1.0.1",
+    "ember-cli-chai": "0.4.3",
     "loader.js": "^4.0.1"
   },
   "keywords": [
     "ember-addon"
   ],
   "dependencies": {
-    "ember-cli-babel": "^6.10.0"
+    "ember-cli-babel": "^6.8.2"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
