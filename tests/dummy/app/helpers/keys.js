@@ -1,5 +1,5 @@
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
-export default Ember.Helper.helper(function([object]) {
+export default helper(function([object]) {
   return Object.keys(object);
 });

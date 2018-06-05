@@ -1,3 +1,4 @@
+import { click, find } from '@ember/test-helpers';
 /* jshint expr:true */
 import { expect } from 'chai';
 import { describeComponent, it } from 'ember-mocha';
@@ -24,16 +25,16 @@ describeComponent(
 `);
     });
     it("starts out with a value 5", function() {
-      expect(this.$('.number').text()).to.equal('5');
-      expect(this.$('.other').text()).to.equal('11');
+      expect(find('.number').textContent).to.equal('5');
+      expect(find('.other').textContent).to.equal('11');
     });
 
     describe("clicking on the next button", function() {
-      beforeEach(function() {
-        this.$('.add').click();
+      beforeEach(async function() {
+        await click('.add');
       });
       it("adds the numbers", function() {
-        expect(this.$('.number').text()).to.equal('16');
+        expect(find('.number').textContent).to.equal('16');
       });
     });
 

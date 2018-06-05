@@ -1,3 +1,4 @@
+import { click, visit } from '@ember/test-helpers';
 /* jshint expr:true */
 import {
   describe,

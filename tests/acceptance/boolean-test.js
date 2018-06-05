@@ -1,3 +1,4 @@
+import { click, visit } from '@ember/test-helpers';
 /* jshint expr:true */
 import {
   describe,
@@ -22,24 +23,24 @@ describe('Acceptance: Boolean', function() {
     expect($('.spec-boolean-value').text()).to.equal('false');
   });
   describe("hitting the toggle button", function() {
-    beforeEach(function() {
-      click('.spec-toggle');
+    beforeEach(async function() {
+      await click('.spec-toggle');
     });
     it("changes the boolean state to true", function() {
       expect($('.spec-boolean-value').text()).to.equal('true');
     });
   });
   describe("hitting the set true button", function() {
-    beforeEach(function() {
-      click('.spec-set-true');
+    beforeEach(async function() {
+      await click('.spec-set-true');
     });
     it("changes the boolean state to true", function() {
       expect($('.spec-boolean-value').text()).to.equal('true');
     });
   });
   describe("hitting the set false button", function() {
-    beforeEach(function() {
-      click('.spec-set-false');
+    beforeEach(async function() {
+      await click('.spec-set-false');
     });
     it("has no effect", function() {
       expect($('.spec-boolean-value').text()).to.equal('false');

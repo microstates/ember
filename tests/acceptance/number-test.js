@@ -1,5 +1,11 @@
+import { click, visit } from '@ember/test-helpers';
 /* jshint expr:true */
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {
+  describe,
+  it,
+  beforeEach,
+  afterEach
+} from 'mocha';
 import { expect } from 'chai';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
@@ -16,16 +22,16 @@ describe('Acceptance: Number', function() {
     destroyApp(application);
   });
 
-  beforeEach(function() {
-    visit('/');
+  beforeEach(async function() {
+    await visit('/');
   });
   it("initializes to the proper value", function() {
     expect($('.spec-number').text()).to.equal('5');
   });
 
   describe("subtracting 2", function() {
-    beforeEach(function() {
-      click('.spec-subtract');
+    beforeEach(async function() {
+      await click('.spec-subtract');
     });
     it("subtracts 2 from the initial value", function() {
       expect($('.spec-number').text()).to.equal('3');
@@ -33,8 +39,8 @@ describe('Acceptance: Number', function() {
   });
 
   describe("adding 2", function() {
-    beforeEach(function() {
-      click('.spec-add');
+    beforeEach(async function() {
+      await click('.spec-add');
     });
     it("adds 2 to the initial value", function() {
       expect($('.spec-number').text()).to.equal('7');
@@ -42,8 +48,8 @@ describe('Acceptance: Number', function() {
   });
 
   describe("increment", function() {
-    beforeEach(function() {
-      click('.spec-increment');
+    beforeEach(async function() {
+      await click('.spec-increment');
     });
     it("increased by 1", function() {
       expect($('.spec-number').text()).to.equal('6');
@@ -51,8 +57,8 @@ describe('Acceptance: Number', function() {
   });
 
   describe("decrement", function() {
-    beforeEach(function() {
-      click('.spec-decrement');
+    beforeEach(async function() {
+      await click('.spec-decrement');
     });
     it("increased by 1", function() {
       expect($('.spec-number').text()).to.equal('4');
@@ -60,8 +66,8 @@ describe('Acceptance: Number', function() {
   });
 
   describe("multiply", function() {
-    beforeEach(function() {
-      click('.spec-multiply');
+    beforeEach(async function() {
+      await click('.spec-multiply');
     });
     it("multiply by 5", function() {
       expect($('.spec-number').text()).to.equal('25');
@@ -69,8 +75,8 @@ describe('Acceptance: Number', function() {
   });
 
   describe("divide", function() {
-    beforeEach(function() {
-      click('.spec-divide');
+    beforeEach(async function() {
+      await click('.spec-divide');
     });
     it("divide by 5", function() {
       expect($('.spec-number').text()).to.equal('1');

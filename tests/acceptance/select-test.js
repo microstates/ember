@@ -1,5 +1,11 @@
+import { click, visit } from '@ember/test-helpers';
 /* jshint expr:true */
-import { describe, it, beforeEach, afterEach } from 'mocha';
+import {
+  describe,
+  it,
+  beforeEach,
+  afterEach
+} from 'mocha';
 import { expect } from 'chai';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
@@ -32,8 +38,8 @@ describe('Acceptance: SingleSelect', function() {
     expect($('.spec-select-Lizard').prop('checked')).to.equal(false);
   });
   describe("clicking on the lizard input", function() {
-    beforeEach(function() {
-      click('.spec-select-Lizard');
+    beforeEach(async function() {
+      await click('.spec-select-Lizard');
     });
     it("selects the lizard checkbox", function() {
       expect($('.spec-select-Lizard').prop('checked')).to.equal(true);
