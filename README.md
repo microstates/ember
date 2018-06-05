@@ -522,26 +522,29 @@ Make a new selection with this option unselected.
 ```
 
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 * `git clone` this repository
 * `npm install`
-* `bower install`
 
-## Running
+### Linting
 
 * `ember server`
 * Visit your app at http://localhost:4200.
 
-## Running Tests
+* `ember test` – Runs the test suite on the current Ember version
+* `ember test --server` – Runs the test suite in "watch mode"
+* `ember try:each` – Runs the test suite against multiple Ember versions
 
 * `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-## Building
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
-* `ember build`
+License
+------------------------------------------------------------------------------
 
 For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
 

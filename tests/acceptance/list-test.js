@@ -4,17 +4,11 @@ import { expect } from 'chai';
 import startApp from '../helpers/start-app';
 import destroyApp from '../helpers/destroy-app';
 import $ from 'jquery';
+import { setupTest } from 'ember-mocha';
 
 describe('Acceptance: List', function() {
-  let application;
+  setupTest();
 
-  beforeEach(function() {
-    application = startApp();
-  });
-
-  afterEach(function() {
-    destroyApp(application);
-  });
   beforeEach(function() {
     visit('/');
   });
