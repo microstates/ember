@@ -1,1 +1,6 @@
 <h1 id="title">ember-microstates Demo</h1>
+
+{{#state-for MyApp value=(hash counter=1) as |app|}}
+  {{app.state.counter}}
+  <button type='button' onclick={{action app.counter.increment}}>+1</button>
+{{/state-for}}
