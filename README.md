@@ -1,6 +1,6 @@
 # Ember Microstates
 
-### [API Index](#api) [Live Demo](https://cowboyd.github.io/ember-microstates/)
+### [Live Demo](https://cowboyd.github.io/ember-microstates/)
 
 [![npm version](https://badge.fury.io/js/ember-microstates.svg)](https://badge.fury.io/js/ember-microstates)
 [![Ember Observer Score](https://emberobserver.com/badges/ember-microstates.svg)](https://emberobserver.com/addons/ember-microstates)
@@ -25,7 +25,7 @@ actions: {
 
 and then bound it to an event in your template:
 
-``` handlebars
+```handlebars
 <button onclick={{action "toggleOpen"}}>Toggle</button>
 
 <div class={{if isOpen "showing" "hidden"}}>
@@ -68,10 +68,6 @@ There is no accompanying JavaScript here because there doesn't
 need to be. We know we have a boolean, so why would we need code to
 manage it by hand?
 
-The same applies for other data types as well, and there are currently
-microstates for [objects](#object), [lists](#list), [strings](#string)
-and [numbers](#number).
-
 
 ## Isn't This Just Putting Logic In My Templates?
 
@@ -84,13 +80,13 @@ Ember Microstates is _not about deriving new state from existing state_.
 Instead, it is about declarativly mapping transitions of one state to
 the next. So:
 
-``` handlebars
+```handlebars
 {{action "toggleOpen"}}
 ```
 
 becomes
 
-``` handlebars
+```handlebars
 {{action isOpen.toggle}}
 ```
 
@@ -122,408 +118,11 @@ slack.
 
 ## API
 
-* [`(Object (hash [attr=value])`](#object)
-  + [`assign(attributes)`](#assignattributes)
-  + [`delete(key)`](#deletekey)
-  + [`put(key,value)`](#putkeyvalue)
-  + [`set(object)`](#setobject)
-* [`(List array)`](#list)
-  + [`concat(list)`](#concatlist)
-  + [`pop`](#pop)
-  + [`push(item)`](#pushitem)
-  + [`remove(item)`](#removeitem)
-  + [`replace(item, other)`](#removeitemother)
-  + [`shift`](#shift)
-  + [`unshift(item)`](#unshiftitem)
-  + [`set(list)`](#setlist)
-* [`(Boolean true|false)`](#boolean)
-  + [`toggle`](#toggle)
-  + [`set(boolean)`](#setboolean)
-* [`(String string)`](#string)
-  + [`concat(string)`](#concatstring)
-  + [`set(string)`](#setstring)
-* [`(Number number)`](#number)
-  + [`add(number)`](#addnumber)
-  + [`subtract(number)`](#subtractnumber)
-  + [`multiply(number)`](#multiplynumber)
-  + [`divide(number)`](#dividenumber)
-  + [`set(number)`](#setnumber)
-* [`(Select array [selection=array|value] [multiple=false|true])`](#select)
-  + [`option.toggle()`](#optiontoggle)
-  + [`option.select()`](#optionelect)
-  + [`option.deselect()`](#optiondeselect)
-
-### Object
-
-The object state serves as the base for all other microstates. The
-transitions that are available to object are available to all other types:
-
-``` handlebars
-{{let car=(Object (hash make="Ford" model="Mustang" year=1967))}}
-```
-
-#### `assign(attributes)`
-
-Transitions this microstate into a new version that has `attributes`
-merged in with its current key-value pairs. Any key-values already present are
-retained. For example if we use our car, which has  "make", "model", and "year"
-properties, we can specify an action that will assign to the "model" and "year",
-but leave the "make" as is.
-
-``` handlebars
-<button onclick={{action car.assign (hash model="Taurus" year=2015)}}>
-  Make Sedan
-</button>
-{{!clicking will result in {make: 'Ford', model: 'Taurus', year: 2015}}}
-```
-
-#### `delete(key)`
-
-Remove a key (and subsequent value) from this object. For example, to delete the
-"year" property from our car:
-
-``` handlebars
-<button onclick={{action car.delete "year"}}>
-  Remove Year
-</button>
-{{!clicking will result in {make: 'Ford', model: 'Mustang'}}}
-```
-
-#### `put(key, value)`
-
-Add property with a given name and value to the object. It will update the property with the given value if it already exists.
-
-```handlebars
-<button onclick={{action car.put "color" "blue"}}>
-  Add color
-</button>
-```
-
-#### `set(object)`
-
-Replace current object microstate with a new object microstate from given hash.
-
-```handlebars
-<button onclick={{action car.set (hash make="Toyota" model="Supra" year="1982")}}>
-  Update car
-</button>
-```
-
-### List
-
-List microstate represents an ordered collection of values.
-
-```hbs
-{{let numbers=(List (array 1 2 3))}}
-
-{{each numbers as |item|}}
-  {{item}}
-{{/each}}
-```
-
-#### `concat(list)`
-
-Makes a new list with all of the items from the given list added to the end of the current list.
-
-```handlebars
-<button onclick={{action numbers.concat (array 4 5 6)}}>
-  Add more items
-</button>
-```
-
-#### `pop()`
-
-Makes a new list the last item removed from current list.
-
-```handlebars
-<button onclick={{action numbers.pop}}>
-  Remove last item
-</button>
-```
-
-#### `push(item)`
-
-Makes a new list with item added to the end of the current list.
-
-```handlebars
-<button onclick={{action numbers.push 4}}>
-  Add 4
-</button>
-```
-
-#### `remove(item)`
-
-Makes a new list the given item removed from the current list.
-
-```handlebars
-<button onclick={{action numbers.remove 3}}>
-  Remove 3
-</button>
-```
-
-#### `replace(item, other)`
-
-Makes a new list with a new item in place of the given item in the current list.
-
-```handlebars
-<button onclick={{action numbers.replace 3 6}}>
-  Replace 3 with 6
-</button>
-```
-
-#### `shift()`
-
-Makes a new list with the first item of the list removed.
-
-```handlebars
-<button onclick={{action numbers.shift}}>
-  Remove first
-</button>
-```
-
-#### `unshift(item)`
-
-Add an item to the beginning of the list.
-
-```handlebars
-<button onclick={{action numbers.unshift 7}}>
-  Add to the beginning
-</button>
-```
-
-#### `set(list)`
-
-Replaces current list with given list.
-
-```handlebars
-<button onclick={{action list.set (array 4 5 6)}}>
-  Replace the list
-</button>
-```
-
-### Boolean
-
-Boolean represent a `true` or `false` value.
-
-```handlebars
-{{let isYa=(Boolean true)}}
-
-{{#if isYa}}
-  Yes
-{{else}}
-  No
-{{/if}}
-```
-
-#### `toggle()`
-
-Transition the Boolean microstate to opposite of it's current value.
-
-```handlebars
-<button onclick={{action isYa.toggle}}>
-  Flip the value
-</button>
-```
-
-#### `set(boolean)`
-
-Transition the microstate to give the value.
-
-```handlebars
-<button onclick={{action isYa.set false}}>
-  Make false
-</button>
-```
-
-### `String`
-
-Represents a String object.
-
-```handlebars
-{{let message=(String 'hello world')}}
-
-{{message}}
-```
-
-#### `concat(string)`
-
-Add string to the end of the existing value.
-
-```handlebars
-<button onclick={{action message.concat '!!!'}}>
-  Exclaim!!!
-</button>
-```
-
-#### `set(string)`
-
-Replace current value with new string.
-
-```handlebars
-<button onclick={{action message.set 'I come in pieces'}}>
-  Confuse
-</button>
-```
-
-### Number
-
-Represents a numerical value.
-
-```handlebars
-{{let age=(Number 34)}}
-
-{{age}}
-```
-
-#### `increment()`
-
-Make a new number that's greater than current number by 1.
-
-```handlebars
-<button onclick={{action age.increment}}>
-  Increment
-</button>
-```
-
-#### `decrement()`
-
-Make a new number that's less than current number by 1.
-
-```handlebars
-<button onclick={{action age.decrement}}>
-  Decrement
-</button>
-```
-
-#### `add(number)`
-
-Make a new number that's greater than current value by provided amount.
-
-```handlebars
-<button onclick={{action age.add 1}}>
-  Increase by one
-</button>
-```
-
-#### `subtract(number)`
-
-Make a new number that's lesser than current value by provided amount.
-
-```handlebars
-<button onclick={{action age.subtract 1}}>
-  Decrease by one
-</button>
-```
-
-#### `multiply(number)`
-
-Multiply the value by given number.
-
-```handlebars
-<button onclick={{action age.multiply 10}}>
-  Multipy by 10
-</button>
-```
-
-#### `divide(number)`
-
-Divide the value by given number.
-
-```handlebars
-<button onclick={{action age.divide 10}}>
-  Divide by 10
-</button>
-```
-
-#### `set(number)`
-
-Replace the value with given number.
-
-```handlebars
-<button onclick={{action age.set 21}}>
-  Set age to 21
-</button>
-```
-
-### Select
-
-The Select microstate represents a set of distinct options from which choices
-can be made. For any given value in the set, it tracks whether that
-value has been selected for inclusion. You would use it when you want
-to build something analogous to a set of checkboxes, radio buttons, or
-select box.
-
-The select state has a list of `options` wrapping each choice to track
-where that option is selected, and also to contain the actions for
-either selecting or deselecting that option (`toggle`, `select`, and `deselect`)
-
-It comes in two varieties: multiple selection and single
-selection. With multiple selection, the number of possible choices is
-unlimited and the value of the `selection` property is an array of the
-selected values. With a single selection, choosing one option means
-that all other options will be deselected. Furthermore, the value of
-the `selection` property is a single value.
-
-> Head's up! The actions for changing which options are selected live
-> on the options themselves and _not_ the actual select microstate.
-
-```handlebars
-{{let animals=(Select (array 'cat' 'dog' 'bird'))}}
-
-<h3> Choose your favourite pet </h3>
-{{#each animals as |option|}}
-  <button onclick={{action option.toggle}}>{{option}}</button>
-{{/each}}
-
-{{let animals=(Select (array 'cat' 'dog' 'bird') multiple=true)}}
-
-<h3> Choose animals you like </h3>
-{{#each animals as |option|}}
-  <input type="checkbox" checked=option.isSelected onclick={{action option.toggle}}> {{option}}
-{{/each}}
-
-<h3> Stefan's Choice </h3>
-{{let animals=(Select (array 'cat' 'dog' 'bird') selection='bird')}}
-```
-
-#### `option.toggle()`
-
-Make a new selection with `option` having the opposite of its current
-selection state. In other words, If this option is currently selected,
-it will become unselected. If it is unselected, it will become
-selected.
-
-```handlebars
-{{#each animals as |option|}}
-  <button onclick={{action option.toggle}}>{{option}}</button>
-{{/each}}
-```
-
-#### `option.select()`
-
-Make a new selection with this option selected. If this is a single
-select, then any other currently selected option will become
-unselected as a result.
-
-```handlebars
-{{#each animals as |option|}}
-  <button onclick={{action option.select}}>{{option}}</button>
-{{/each}}
-```
-
-#### `option.deselect()`
-
-Make a new selection with this option unselected.
-
-```handlebars
-{{#each animals as |option|}}
-  <button onclick={{action option.deselect}}>{{option}}</button>
-{{/each}}
-```
+...
 
 
 Installation
-------------------------------------------------------------------------------
+--------------
 
 * `git clone` this repository
 * `npm install`
@@ -544,7 +143,7 @@ Installation
 For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
 
 License
-------------------------------------------------------------------------------
+--------
 
 For more information on using ember-cli, visit [http://ember-cli.com/](http://ember-cli.com/).
 
