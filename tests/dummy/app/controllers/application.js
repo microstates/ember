@@ -5,5 +5,12 @@ class MyApp {
 }
 
 export default Controller.extend({
-  MyApp
+  MyApp,
+  
+  init() {
+    this._super(...arguments);
+    this.value = {
+      counter: 1
+    };
+  }
 });
