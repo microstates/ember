@@ -22,10 +22,9 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
-    "broccoli-rollup": "^2.0.0",
     "ember-cli-babel": "^6.11.0",
-    "ember-cli-es6-transform": "^0.0.3",
-    "ember-cli-htmlbars": "^2.0.1"
+    "ember-cli-htmlbars": "^2.0.1",
+    "microstates": "microstates/microstates.js#b144933f1394a8d804cb1a1bdd67c852f5134b4e"
   },
   "devDependencies": {
     "@ember-decorators/babel-transforms": "^2.0.1",
@@ -53,8 +52,7 @@
     "ember-try": "^0.2.23",
     "eslint-plugin-ember": "^5.0.0",
     "eslint-plugin-node": "^6.0.1",
-    "loader.js": "^4.2.3",
-    "microstates": "microstates/microstates.js#b144933f1394a8d804cb1a1bdd67c852f5134b4e"
+    "loader.js": "^4.2.3"
   },
   "engines": {
     "node": "^4.5 || 6.* || >= 7.*"
