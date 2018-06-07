@@ -54,7 +54,6 @@ correspond to which event.
 Using Microstates, we would rewrite the example above using `state-for`:
 
 ```js
-// app/controllers/application.js
 class MyState {
   isOpen = Boolean
 }
