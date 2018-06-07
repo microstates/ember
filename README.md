@@ -12,13 +12,13 @@
 In Ember components, managing state has historically been a manual
 process. We render values in our templates, and then inside our
 components, controllers and routes, we write custom code to oversee
-each state transition. Forexample, how often have you seen or written
+each state transition. For example, how often have you seen or written
 an action like this?
 
 ```javascript
 actions: {
   toggleOpen() {
-    this.toggleProperty("isOpen");
+    this.toggleProperty('isOpen');
   }
 }
 ```
@@ -26,17 +26,17 @@ actions: {
 and then bound it to an event in your template:
 
 ```handlebars
-<button onclick={{action "toggleOpen"}}>Toggle</button>
+<button onclick={{action 'toggleOpen'}}>Toggle</button>
 
-<div class={{if isOpen "showing" "hidden"}}>
-  Here is the content !~!REVEALED!~!
-</div>
+{{#if isOpen}}
+  <div>Here is the content !~!REVEALED!~!</div>
+{{/if}}
 ```
 
 In this case, a boolean value is stored on the `isOpen` property of
 the component, and the toggle action transitions it from its current
 value to its logical inverse. But if we think about it, all boolean
-values _by their vary nature_ can be toggled.
+values _by their very nature_ can be toggled.
 
 And really, the same can be said about any data type you care to
 choose, be it a list, number, string or what have you. The point is
@@ -49,24 +49,34 @@ the action implementations were just written for you?
 That's where microstates come in. They take advantage of the fact that
 the operations which can be performed on a piece of data are fully
 known before hand so that you can simply declare which operations
-correspond to which HTML events.
+correspond to which event.
 
-Using Microstates, we would rewrite the example above using the
-`Boolean` helper like so:
+Using Microstates, we would rewrite the example above using `state-for`:
 
-```handlebars
-{{let isOpen=(Boolean false)}}
+```js
+// app/controllers/application.js
+class MyState {
+  isOpen = Boolean
+}
 
-<button onclick={{action isOpen.toggle}}>Toggle</button>
-
-<div class={{if isOpen "showing" "hidden"}}>
-  Here is the content !~!REVEALED!~!
-</div>
+export default Controller.extends({
+  MyState
+});
 ```
 
-There is no accompanying JavaScript here because there doesn't
-need to be. We know we have a boolean, so why would we need code to
-manage it by hand?
+```handlebars
+{{#state-for MyState value=(hash isOpen=false) as |api|}}
+  <button onclick={{invoke api.isOpen 'toggle'}}>Toggle</button>
+
+  {{#if api.state.isOpen}}
+    <div>Here is the content !~!REVEALED!~!</div>
+  {{/if}}
+{{/state-for}}
+```
+
+There is no accompanying JavaScript here saying what toggling means,
+because there doesn't need to be. We know we have a boolean,
+so why would we need code to manage it by hand?
 
 
 ## Isn't This Just Putting Logic In My Templates?
@@ -81,13 +91,13 @@ Instead, it is about declarativly mapping transitions of one state to
 the next. So:
 
 ```handlebars
-{{action "toggleOpen"}}
+{{action 'toggleOpen'}}
 ```
 
 becomes
 
 ```handlebars
-{{action isOpen.toggle}}
+{{invoke api.isOpen 'toggle'}}
 ```
 
 Notice how the value being referred to is explicit and obvious as
