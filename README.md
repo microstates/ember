@@ -111,6 +111,54 @@ start the dummy app and have a look at the
 [demos found here](https://github.com/cowboyd/ember-microstates/blob/master/tests/dummy/app/templates/application.hbs) to
 see at least one case of each microstate.
 
+## Microstate Services
+
+```js
+// services/current-user.js
+import { Service } from 'ember-microstates';
+
+class User {
+  name = String;
+  email = String;
+  superuser = Boolean;
+}
+
+export default Service.extend({
+  typeClass: User,
+
+  defaultValue() {
+    return {
+      superuser: false
+    };
+  }
+});
+```
+
+Using
+
+```js
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+
+export default Component.extend({
+  currentUserService: service('current-user'),
+  user: alais('currentUserService.microstate')
+});
+```
+
+Template
+
+```hbs
+<form {{action 'save' on='submit'}}>
+  <input type='text' placeholder='Name' onupdate={{invoke user.name 'set'}}>
+  <input type='text' placeholder='Email' onupdate={{invoke user.email 'set'}}>
+  <label>
+    Is an admin?
+    <input type='checkbox' checked={{user.state.superuser}} onchecked={{invoke user.superuser 'toggle'}}>
+  </label>
+</form>
+```
+
 ## Writing Your Own Microstates
 
 What if you're not satisfied with the microstates provided? What if

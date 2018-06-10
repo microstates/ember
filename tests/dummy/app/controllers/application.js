@@ -1,10 +1,15 @@
 import Controller from '@ember/controller';
+import { inject as service } from '@ember/service';
+import { alias } from '@ember/object/computed';
 
 class MyApp {
   counter = Number;
 }
 
 export default Controller.extend({
+  currentUserService: service('user'),
+  user: alias('currentUserService.microstate'),
+
   MyApp,
   
   init() {
@@ -12,5 +17,14 @@ export default Controller.extend({
     this.value = {
       counter: 1
     };
+  },
+
+  actions: {
+    save() {
+      let userMicrostate = this.user;
+      let value = userMicrostate.valueOf();
+
+      alert(JSON.stringify(value));
+    }
   }
 });

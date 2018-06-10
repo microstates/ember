@@ -1,1 +1,1 @@
-export { default as MicroState } from './-microstate';
+export { default as Service } from './service';
