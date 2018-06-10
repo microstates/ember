@@ -142,7 +142,16 @@ import Component from '@ember/component';
 
 export default Component.extend({
   currentUserService: service('current-user'),
-  user: alais('currentUserService.microstate')
+  user: alais('currentUserService.microstate'),
+
+  actions: {
+    save() {
+      let userMicrostate = this.user;
+      let value = userMicrostate.valueOf();
+
+      alert(JSON.stringify(value));
+    }
+  }
 });
 ```
 
@@ -150,12 +159,13 @@ Template
 
 ```hbs
 <form {{action 'save' on='submit'}}>
-  <input type='text' placeholder='Name' onupdate={{invoke user.name 'set'}}>
-  <input type='text' placeholder='Email' onupdate={{invoke user.email 'set'}}>
+  <input type='text' placeholder='Name' oninput={{invoke user.name 'set' value='target.value'}}>
+  <input type='text' placeholder='Email' oninput={{invoke user.email 'set' value='target.value'}}>
   <label>
     Is an admin?
-    <input type='checkbox' checked={{user.state.superuser}} onchecked={{invoke user.superuser 'toggle'}}>
+    <input type='checkbox' checked={{user.state.superuser}} onchange={{invoke user.superuser 'toggle' value='target.checked'}}>
   </label>
+  <button>Submit</button>
 </form>
 ```
 
