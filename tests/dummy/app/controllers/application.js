@@ -17,6 +17,9 @@ export default Controller.extend({
     this.value = {
       counter: 1
     };
+    this.value2 = {
+      counter: 1
+    };
   },
 
   actions: {

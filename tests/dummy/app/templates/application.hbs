@@ -5,6 +5,11 @@
   <button type='button' onclick={{invoke app.counter 'increment' value=false}}>+1</button>
 {{/state-for}}  
 
+{{#state-for MyApp value=value2 onchange=(action (mut value2)) as |app|}}
+  {{app.counter.state}}
+  <button type='button' onclick={{invoke app.counter 'increment' 2 value=false}}>+2</button>
+{{/state-for}}  
+
 <form {{action 'save' on='submit'}}>
   <input type='text' placeholder='Name' oninput={{invoke user.name 'set' value='target.value'}}>
   <input type='text' placeholder='Email' oninput={{invoke user.email 'set' value='target.value'}}>
