@@ -2,7 +2,7 @@
 
 {{#state-for MyApp value=value onchange=(action (mut value)) as |app|}}
   {{app.state.counter}}
-  <button type='button' onclick={{invoke app.counter 'increment'}}>+1</button>
+  <button type='button' onclick={{invoke app.counter 'increment' value=false}}>+1</button>
 {{/state-for}}  
 
 <form {{action 'save' on='submit'}}>

@@ -5,7 +5,7 @@ export function invoke([context, name, ...args], { value: valuePath }) {
   let fn = context[name];
 
   return (res) => {
-    let value = valuePath ? get(res, valuePath) : res;
+    let value = valuePath ? get(res, valuePath) : (valuePath === false ? undefined : res);
     return fn.apply(context, args.concat(value));
   };
 }
