@@ -24,7 +24,7 @@
   "dependencies": {
     "ember-cli-babel": "^6.11.0",
     "ember-cli-htmlbars": "^2.0.1",
-    "microstates": "microstates/microstates.js#b144933f1394a8d804cb1a1bdd67c852f5134b4e"
+    "microstates": "0.7.4-bata.1"
   },
   "devDependencies": {
     "@ember-decorators/babel-transforms": "^2.0.1",
