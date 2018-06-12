@@ -1,7 +1,7 @@
 <h1 id="title">ember-microstates Demo</h1>
 
 {{#state-for MyApp value=value onchange=(action (mut value)) as |app|}}
-  {{app.state.counter}}
+  {{app.counter.state}}
   <button type='button' onclick={{invoke app.counter 'increment' value=false}}>+1</button>
 {{/state-for}}  
 
@@ -10,7 +10,7 @@
   <input type='text' placeholder='Email' oninput={{invoke user.email 'set' value='target.value'}}>
   <label>
     Is an admin?
-    <input type='checkbox' checked={{user.state.superuser}} onchange={{invoke user.superuser 'toggle' value='target.checked'}}>
+    <input type='checkbox' checked={{user.superuser.state}} onchange={{invoke user.superuser 'toggle' value='target.checked'}}>
   </label>
   <button>Submit</button>
 </form>
