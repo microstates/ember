@@ -24,7 +24,7 @@
   "dependencies": {
     "ember-cli-babel": "^6.11.0",
     "ember-cli-htmlbars": "^2.0.1",
-    "ember-auto-import": "0.2.2",
+    "ember-auto-import": "0.2.6",
     "microstates": "0.7.4-bata.1"
   },
   "devDependencies": {
