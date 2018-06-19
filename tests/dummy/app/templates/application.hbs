@@ -12,5 +12,5 @@
     Is an admin?
     <input type='checkbox' checked={{user.superuser.state}} onchange={{invoke user.superuser 'toggle' value='target.checked'}}>
   </label>
-  <button>Submit</button>
+  <button disabled={{user.state.notFilled}}>Submit</button>
 </form>
