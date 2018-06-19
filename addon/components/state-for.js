@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import layout from '../templates/components/state-for';
-import { create, map } from 'microstates';
+import { create, use } from 'microstates';
 
 const StateFor = Component.extend({
   tagName: '',
@@ -9,6 +9,7 @@ const StateFor = Component.extend({
   init() {
     this._super(...arguments);
 
+    let onchange = this.get('onchange');
     let type = this.get('type');
     let value = this.get('value');
 
@@ -18,7 +19,6 @@ const StateFor = Component.extend({
     let middleware = next => (microstate, transition, args) => {
       // when a transition is called, compute the next microstate
       let nextMicrostate = next(microstate, transition, args);
-      let onchange = this.onchange;
       
       // If onchange action is defined call it with the new state
       if (typeof onchange === 'function') {
@@ -33,7 +33,7 @@ const StateFor = Component.extend({
     };
 
     // map the initial microstate and add the middleware into the tree
-    let withMiddleware = map(tree => tree.use(middleware), initial);
+    let withMiddleware = use(middleware, initial);
 
     // set the components state to microstate with middleware in it
     this.set('microstate', withMiddleware);

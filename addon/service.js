@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import { create, map } from 'microstates';
+import { create, use } from 'microstates';
 
 export default Service.extend({
   init() {
@@ -22,7 +22,7 @@ export default Service.extend({
     };
 
     // map the initial microstate and add the middleware into the tree
-    let withMiddleware = map(tree => tree.use(middleware), initial);
+    let withMiddleware = use(middleware, initial);
 
     // set the services state to microstate with middleware in it
     this.set('microstate', withMiddleware);
