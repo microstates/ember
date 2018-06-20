@@ -2,15 +2,15 @@
 
 {{#state-for MyApp value=value onchange=(action (mut value)) as |app|}}
   {{app.counter.state}}
-  <button type='button' onclick={{invoke app.counter 'increment' value=false}}>+1</button>
+  <button type='button' onclick={{action app.counter.increment value=1}}>+1</button>
 {{/state-for}}  
 
 <form {{action 'save' on='submit'}}>
-  <input type='text' placeholder='Name' oninput={{invoke user.name 'set' value='target.value'}}>
-  <input type='text' placeholder='Email' oninput={{invoke user.email 'set' value='target.value'}}>
+  <input type='text' placeholder='Name' oninput={{action user.name.set value='target.value'}}>
+  <input type='text' placeholder='Email' oninput={{action user.email.set value='target.value'}}>
   <label>
     Is an admin?
-    <input type='checkbox' checked={{user.superuser.state}} onchange={{invoke user.superuser 'toggle' value='target.checked'}}>
+    <input type='checkbox' checked={{user.superuser.state}} onchange={{action user.superuser.toggle}}>
   </label>
   <button disabled={{user.state.notFilled}}>Submit</button>
 </form>
