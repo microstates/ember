@@ -1,4 +1,5 @@
-import { Service } from 'ember-microstates';
+import { createService } from 'ember-microstates';
+import { create } from 'microstates';
 
 class User {
   name = String;
@@ -14,12 +15,9 @@ class User {
   }
 }
 
-export default Service.extend({
-  typeClass: User,
+const value = {
+  superuser: false
+};
+const microstate = create(User, value);
 
-  defaultValue() {
-    return {
-      superuser: false
-    };
-  }
-});
+export default createService(microstate);

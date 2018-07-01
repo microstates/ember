@@ -1,30 +1,32 @@
 import Service from '@ember/service';
-import { create, use } from 'microstates';
+import { use } from 'microstates';
 
-export default Service.extend({
-  init() {
-    this._super(...arguments);
+/**
+ * Creates a service using the provided Microstate
+ * 
+ * @param {Microstate} initial Microstate instance
+ * @returns {Ember.Service} The service backed by the given microstate
+ */
+export default function createService(initial) {
+  return Service.extend({
+    init() {
+      this._super(...arguments);
 
-    let type = this.typeClass;
-    let value = this.defaultValue() || {};
+      let middleware = next => (microstate, transition, args) => {
+        // when a transition is called, compute the next microstate
+        let nextMicrostate = next(microstate, transition, args);
 
-    // create initial microstate from type and value
-    let initial = create(type, value);
+        // set the internal state to the next state
+        this.set('microstate', nextMicrostate);
 
-    let middleware = next => (microstate, transition, args) => {
-      // when a transition is called, compute the next microstate
-      let nextMicrostate = next(microstate, transition, args);
+        return nextMicrostate;
+      };
 
-      // set the internal state to the next state
-      this.set('microstate', nextMicrostate);
+      // map the initial microstate and add the middleware into the tree
+      let withMiddleware = use(middleware, initial);
 
-      return nextMicrostate;
-    };
-
-    // map the initial microstate and add the middleware into the tree
-    let withMiddleware = use(middleware, initial);
-
-    // set the services state to microstate with middleware in it
-    this.set('microstate', withMiddleware);
-  }
-});
+      // set the services state to microstate with middleware in it
+      this.set('microstate', withMiddleware);
+    }
+  });
+}

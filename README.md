@@ -65,9 +65,9 @@ export default Controller.extends({
 
 ```handlebars
 {{#state-for MyState value=(hash isOpen=false) as |api|}}
-  <button onclick={{invoke api.isOpen 'toggle'}}>Toggle</button>
+  <button onclick={{action api.isOpen.toggle}}>Toggle</button>
 
-  {{#if api.state.isOpen}}
+  {{#if api.isOpen.state}}
     <div>Here is the content !~!REVEALED!~!</div>
   {{/if}}
 {{/state-for}}
@@ -96,7 +96,7 @@ the next. So:
 becomes
 
 ```handlebars
-{{invoke api.isOpen 'toggle'}}
+{{action api.isOpen.toggle}}
 ```
 
 Notice how the value being referred to is explicit and obvious as
@@ -115,23 +115,29 @@ see at least one case of each microstate.
 
 ```js
 // services/current-user.js
-import { Service } from 'ember-microstates';
+import { createService } from 'ember-microstates';
+import { create } from 'microstates';
 
 class User {
   name = String;
   email = String;
   superuser = Boolean;
+
+  get isFilled() {
+    return this.name && this.email;
+  }
+
+  get notFilled() {
+    return !this.isFilled;
+  }
 }
 
-export default Service.extend({
-  typeClass: User,
+const value = {
+  superuser: false
+};
+const microstate = create(User, value);
 
-  defaultValue() {
-    return {
-      superuser: false
-    };
-  }
-});
+export default createService(microstate);
 ```
 
 Using
@@ -159,13 +165,13 @@ Template
 
 ```hbs
 <form {{action 'save' on='submit'}}>
-  <input type='text' placeholder='Name' oninput={{invoke user.name 'set' value='target.value'}}>
-  <input type='text' placeholder='Email' oninput={{invoke user.email 'set' value='target.value'}}>
+  <input type='text' placeholder='Name' oninput={{action user.name.set value='target.value'}}>
+  <input type='text' placeholder='Email' oninput={{action user.email.set value='target.value'}}>
   <label>
     Is an admin?
-    <input type='checkbox' checked={{user.state.superuser}} onchange={{invoke user.superuser 'toggle' value='target.checked'}}>
+    <input type='checkbox' checked={{user.superuser.state}} onchange={{action user.superuser.toggle}}>
   </label>
-  <button>Submit</button>
+  <button disabled={{user.notFilled.state}}>Submit</button>
 </form>
 ```
 
