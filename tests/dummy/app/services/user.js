@@ -4,6 +4,14 @@ class User {
   name = String;
   email = String;
   superuser = Boolean;
+
+  get isFilled() {
+    return this.name && this.email;
+  }
+
+  get notFilled() {
+    return !this.isFilled;
+  }
 }
 
 export default Service.extend({
