@@ -25,7 +25,7 @@
     "ember-cli-babel": "^6.11.0",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-auto-import": "0.2.6",
-    "microstates": "0.8.0"
+    "microstates": "0.10.1"
   },
   "devDependencies": {
     "@ember-decorators/babel-transforms": "^2.0.1",
