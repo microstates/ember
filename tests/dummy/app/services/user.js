@@ -1,5 +1,5 @@
-import { createService } from 'ember-microstates';
-import { create } from 'microstates';
+import Service from '@ember/service';
+import { Store, create } from 'microstates';
 
 class User {
   name = String;
@@ -18,6 +18,16 @@ class User {
 const value = {
   superuser: false
 };
-const microstate = create(User, value);
 
-export default createService(microstate);
+export default Service.extend({
+  init() {
+    this._super(...arguments);
+
+    const initial = create(User, value);
+
+    this.set('microstate', Store(initial, (next) => {
+      // set the internal state of the component to the next state
+      this.set('microstate', next);
+    }));
+  }
+});
