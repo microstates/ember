@@ -48,7 +48,12 @@
     {{!BEGIN-SNIPPET string}}
     {{#let (String "a string") as |str|}}
       <strong>Value</strong>: <span class="spec-string">"{{str}}"</span><br>
-      <strong>Transition</strong> {{one-way-input class="spec-string-input" update=str.set}}
+      <strong>Transition</strong>
+      <input
+        class="spec-string-input"
+        value={{str}}
+        oninput={{action str.set value="target.value"}}
+      >
     {{/let}}
     {{!END-SNIPPET list}}
   </div>
