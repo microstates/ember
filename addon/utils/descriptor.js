@@ -1,5 +1,5 @@
-import Ember from 'ember';
-const IS_EMBER_1 = Ember.VERSION.split(".").shift() === "1";
+import { VERSION } from '@ember/version';
+const IS_EMBER_1 = VERSION.split(".").shift() === "1";
 
 /**
  * Takes a single static value and makes a property descriptor that

@@ -1,8 +1,9 @@
-import Ember from 'ember';
+import { dasherize } from '@ember/string';
+import Helper from '@ember/component/helper';
 import assign from './utils/assign';
 import descriptor from './utils/descriptor';
 
-export default Ember.Helper.extend({
+export default Helper.extend({
 
   compute(params, options) {
     this.options = options;
@@ -82,7 +83,7 @@ export default Ember.Helper.extend({
   },
 
   sendAction(name, state) {
-    let actionCallback = this.options[Ember.String.dasherize(`on-${name}`)];
+    let actionCallback = this.options[dasherize(`on-${name}`)];
     if (actionCallback && actionCallback.call) {
       actionCallback.call(null, state);
     }
