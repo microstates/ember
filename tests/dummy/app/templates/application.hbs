@@ -3,16 +3,16 @@
 <h2>Boolean</h2>
 <section>
   <div class="column demo">
-  {{!BEGIN-SNIPPET boolean}}
-  {{#let (Boolean) as |switch|}}
-    <strong>Value</strong>: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
-    <br>
-    <strong>Transitions</strong>
-    <button class="spec-toggle" onclick={{action switch.toggle}}>Toggle</button>
-    <button class="spec-set-true" onclick={{action switch.set true}}>Set True</button>
-    <button class="spec-set-false" onclick={{action switch.set false}}>Set False</button>
-  {{/let}}
-  {{!END-SNIPPET}}
+    {{!BEGIN-SNIPPET boolean}}
+    {{#let (Boolean) as |switch|}}
+      <strong>Value</strong>: <span class="spec-boolean-value">{{#if switch}}true{{else}}false{{/if}}</span>
+      <br>
+      <strong>Transitions</strong>
+      <button class="spec-toggle" onclick={{action switch.toggle}}>Toggle</button>
+      <button class="spec-set-true" onclick={{action switch.set true}}>Set True</button>
+      <button class="spec-set-false" onclick={{action switch.set false}}>Set False</button>
+    {{/let}}
+    {{!END-SNIPPET}}
   </div>
   <div class="column code">
     {{code-snippet name="boolean.hbs"}}
@@ -22,20 +22,20 @@
 <h2>List</h2>
 <section>
   <div class="column demo">
-  {{!BEGIN-SNIPPET list}}
-  {{#let (List groceries) as |items|}}
-    <strong>Value</strong>
-    <ol class="spec-list">
-      {{#each items as |item i|}}
-        <li>{{item}} <button class="spec-remove-item-{{i}}" onclick={{action items.remove item}}>x</button></li>
-      {{/each}}
-    </ol>
-    <strong>Transitions</strong><br>
-    <label>Add Item: {{input enter=(action items.push)}}</label><br>
-    <button class="spec-pop" onclick={{action items.pop}}>Pop</button>
-    <button class="spec-shift" onclick={{action items.shift}}>Shift</button>
-  {{/let}}
-  {{!END-SNIPPET}}
+    {{!BEGIN-SNIPPET list}}
+    {{#let (List groceries) as |items|}}
+      <strong>Value</strong>
+      <ol class="spec-list">
+        {{#each items as |item i|}}
+          <li>{{item}} <button class="spec-remove-item-{{i}}" onclick={{action items.remove item}}>x</button></li>
+        {{/each}}
+      </ol>
+      <strong>Transitions</strong><br>
+      <label>Add Item: {{input enter=(action items.push)}}</label><br>
+      <button class="spec-pop" onclick={{action items.pop}}>Pop</button>
+      <button class="spec-shift" onclick={{action items.shift}}>Shift</button>
+    {{/let}}
+    {{!END-SNIPPET}}
   </div>
   <div class="column code">
     {{code-snippet name="list.hbs"}}
@@ -45,12 +45,17 @@
 <h2>String</h2>
 <section>
   <div class="column demo">
-  {{!BEGIN-SNIPPET string}}
-  {{#let (String "a string") as |str|}}
-    <strong>Value</strong>: <span class="spec-string">"{{str}}"</span><br>
-    <strong>Transition</strong> {{one-way-input class="spec-string-input" update=str.set}}
-  {{/let}}
-  {{!END-SNIPPET list}}
+    {{!BEGIN-SNIPPET string}}
+    {{#let (String "a string") as |str|}}
+      <strong>Value</strong>: <span class="spec-string">"{{str}}"</span><br>
+      <strong>Transition</strong>
+      <input
+        class="spec-string-input"
+        value={{str}}
+        oninput={{action str.set value="target.value"}}
+      >
+    {{/let}}
+    {{!END-SNIPPET list}}
   </div>
   <div class="column code">
     {{code-snippet name="string.hbs"}}
@@ -61,18 +66,18 @@
 <h2>Number</h2>
 <section>
   <div class="column demo">
-  {{!BEGIN-SNIPPET number}}
-  {{#let (Number 5) as |num|}}
-    <strong>Value</strong>: <span class="spec-number">{{num}}</span><br>
-    <strong>Transitions</strong>: 
-    <button class="spec-add" onclick={{action num.add 2}}>{{num}} + 2</button>
-    <button class="spec-subtract" onclick={{action num.subtract 2}}>{{num}} - 2</button>
-    <button class="spec-increment" onclick={{action num.increment}}>{{num}}++</button>
-    <button class="spec-decrement" onclick={{action num.decrement}}>{{num}}--</button>
-    <button class="spec-multiply" onclick={{action num.multiply 5}}>{{num}} * 5</button>
-    <button class="spec-divide" onclick={{action num.divide 5}}>{{num}} / 5</button>
-  {{/let}}
-  {{!END-SNIPPET}}
+    {{!BEGIN-SNIPPET number}}
+    {{#let (Number 5) as |num|}}
+      <strong>Value</strong>: <span class="spec-number">{{num}}</span><br>
+      <strong>Transitions</strong>:
+      <button class="spec-add" onclick={{action num.add 2}}>{{num}} + 2</button>
+      <button class="spec-subtract" onclick={{action num.subtract 2}}>{{num}} - 2</button>
+      <button class="spec-increment" onclick={{action num.increment}}>{{num}}++</button>
+      <button class="spec-decrement" onclick={{action num.decrement}}>{{num}}--</button>
+      <button class="spec-multiply" onclick={{action num.multiply 5}}>{{num}} * 5</button>
+      <button class="spec-divide" onclick={{action num.divide 5}}>{{num}} / 5</button>
+    {{/let}}
+    {{!END-SNIPPET}}
   </div>
   <div class="column code">
     {{code-snippet name="number.hbs"}}
@@ -85,11 +90,17 @@
   <div class="column demo">
     {{!BEGIN-SNIPPET single-select}}
     {{#let (Select animals selection="Cow") as |pets|}}
-      <strong>Current Selection</strong>: {{pets.selection}}<br/>
+      <strong>Current Selection</strong>: {{pets.selection}}
+      <br>
       <br>
       {{#each pets as |option|}}
         <label>
-          <input class="spec-select spec-select-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
+          <input
+            class="spec-select spec-select-{{option.value}}"
+            type="checkbox"
+            checked={{option.isSelected}}
+            onclick={{action option.toggle}}
+          >
           {{option.value}}
         </label>
       {{/each}}
@@ -104,24 +115,29 @@
 <h2> Multiple Select </h2>
 <section>
   <div class="column demo">
-  {{!BEGIN-SNIPPET multiple-select}}
-  {{#let (Select animals selection="Horse" multiple=true) as |livestock|}}
-    {{#each livestock as |option|}}
-      <label>
-        <input class="spec-multiple-select spec-multiple-select-{{option.value}}" type="checkbox" checked={{option.isSelected}} onclick={{action option.toggle}}>
-        {{option.value}}
-      </label>
-    {{/each}}
-    <br>
-    <br/>
-    <strong>Current Selection</strong>:
-    <ul>
-      {{#each livestock.selection as |selection|}}
-        <li>{{selection}}</li>
+    {{!BEGIN-SNIPPET multiple-select}}
+    {{#let (Select animals selection="Horse" multiple=true) as |livestock|}}
+      {{#each livestock as |option|}}
+        <label>
+          <input
+            class="spec-multiple-select spec-multiple-select-{{option.value}}"
+            type="checkbox"
+            checked={{option.isSelected}}
+            onclick={{action option.toggle}}
+          >
+          {{option.value}}
+        </label>
       {{/each}}
-    </ul>
-  {{/let}}
-  {{!END-SNIPPET}}
+      <br>
+      <br>
+      <strong>Current Selection</strong>:
+      <ul>
+        {{#each livestock.selection as |selection|}}
+          <li>{{selection}}</li>
+        {{/each}}
+      </ul>
+    {{/let}}
+    {{!END-SNIPPET}}
   </div>
   <div class="column code">
     {{code-snippet name="multiple-select.hbs"}}
@@ -132,17 +148,22 @@
 <h2>Object</h2>
 <section>
   <div class="column demo">
-  {{!BEGIN-SNIPPET object}}
-  {{#let (Object (hash color="red" model="Mustang" make="Ford")) as |car|}}
-    <ul>
-      {{#each (keys car) as |name|}}
-        <li class="spec-object-prop spec-object-prop-{{name}}"><strong>{{name}}</strong>: <span class="spec-object-prop-value">{{get car name}}</span> <button {{action car.delete name}} class="spec-delete-prop">X</button></li>
-      {{/each}}
-      <button class="spec-object-assign" {{action car.assign (hash speed="fast" suspension="stiff")}}>Add Properties</button>
-      <button class="spec-object-put" {{action car.put "year" 1967}}>Put property</button>
-    </ul>
-  {{/let}}
-  {{!END-SNIPPET}}
+    {{!BEGIN-SNIPPET object}}
+    {{#let (Object (hash color="red" model="Mustang" make="Ford")) as |car|}}
+      <ul>
+        {{#each (keys car) as |name|}}
+          <li class="spec-object-prop spec-object-prop-{{name}}"><strong>{{name}}</strong>: <span class="spec-object-prop-value">{{get car name}}</span> <button {{action car.delete name}} class="spec-delete-prop">X</button></li>
+        {{/each}}
+        <button
+          class="spec-object-assign"
+          {{action car.assign (hash speed="fast" suspension="stiff")}}
+        >
+          Add Properties
+        </button>
+        <button class="spec-object-put" {{action car.put "year" 1967}}>Put property</button>
+      </ul>
+    {{/let}}
+    {{!END-SNIPPET}}
   </div>
   <div class="column code">
     {{code-snippet name="object.hbs"}}
