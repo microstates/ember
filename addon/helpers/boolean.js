@@ -1,34 +1,7 @@
-import { MicroState } from 'ember-microstates';
+import PrimitiveTypeHelper from '../-private/primitive-type-helper';
 
-const True = Object.create([true], {
-  value: { value: true },
-  valueOf: {value: ()=> { return true; }},
-  toString: {value: ()=> "true" }
-});
+import { BooleanType } from 'microstates/dist/microstates.cjs';
 
-const False = Object.create([], {
-  value: { value: false },
-  valueOf: { value: ()=> { return false; } },
-  toString: {value: ()=> "false" }
-});
-
-
-export default MicroState.extend({
-
-  initialValueFor([value]) {
-    return !!value;
-  },
-
-  prototypeFor(value) {
-    return value ? True : False;
-  },
-
-  transitions: {
-    toggle(current) {
-      return !current;
-    },
-    set(current, value) {
-      return !!value;
-    }
-  }
-});
+export default PrimitiveTypeHelper.extend({
+  Type: BooleanType,
+})

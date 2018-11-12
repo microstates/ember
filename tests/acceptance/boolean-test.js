@@ -26,14 +26,14 @@ describe('Acceptance: Boolean', function() {
   });
 
   it("shows the initial boolean state", function() {
-    expect($('.spec-boolean-value').text()).to.equal('false');
+    expect($('.spec-boolean-value').text().trim()).to.equal('false');
   });
   describe("hitting the toggle button", function() {
     beforeEach(function() {
       click('.spec-toggle');
     });
     it("changes the boolean state to true", function() {
-      expect($('.spec-boolean-value').text()).to.equal('true');
+      expect($('.spec-boolean-value').text().trim()).to.equal('true');
     });
   });
   describe("hitting the set true button", function() {
@@ -41,7 +41,7 @@ describe('Acceptance: Boolean', function() {
       click('.spec-set-true');
     });
     it("changes the boolean state to true", function() {
-      expect($('.spec-boolean-value').text()).to.equal('true');
+      expect($('.spec-boolean-value').text().trim()).to.equal('true');
     });
   });
   describe("hitting the set false button", function() {
@@ -49,7 +49,7 @@ describe('Acceptance: Boolean', function() {
       click('.spec-set-false');
     });
     it("has no effect", function() {
-      expect($('.spec-boolean-value').text()).to.equal('false');
+      expect($('.spec-boolean-value').text().trim()).to.equal('false');
     });
   });
 });

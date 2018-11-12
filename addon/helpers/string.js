@@ -1,32 +1,7 @@
-/*jshint -W053 */
-import { MicroState } from 'ember-microstates';
+import PrimitiveTypeHelper from '../-private/primitive-type-helper';
 
-export default MicroState.extend({
+import { StringType } from 'microstates/dist/microstates.cjs';
 
-  initialValueFor([string = '']) {
-    if (string == null) {
-      return '';
-    } else {
-      return String(string);
-    }
-  },
-
-  prototypeFor(value) {
-    let wrapped = new String(value);
-
-    Object.defineProperties(wrapped, {
-      toString : {
-        value() {
-          return value;
-        }
-      },
-      valueOf: {
-        value() {
-          return value;
-        }
-      }
-    });
-
-    return wrapped;
-  }
-});
+export default PrimitiveTypeHelper.extend({
+  Type: StringType,
+})
