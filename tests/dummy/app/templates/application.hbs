@@ -6,15 +6,7 @@
     {{!BEGIN-SNIPPET boolean}}
     {{#let (Boolean) as |switch|}}
       <strong>Value</strong>: 
-      <span 
-        class="spec-boolean-value"
-      >
-        {{#if switch.state~}}
-          true
-        {{~else~}}
-          false
-        {{~/if}}
-      </span>
+      <span class="spec-boolean-value">{{if switch.state "true" "false"}}</span>
       <br>
       <strong>Transitions</strong>
       <button class="spec-toggle" {{action switch.toggle}}>Toggle</button>
@@ -90,5 +82,28 @@
   </div>
   <div class="column code">
     {{code-snippet name="object.hbs"}}
+  </div>
+</section>
+
+<h2>Array</h2>
+<section>
+  <div class="column demo">
+    {{!BEGIN-SNIPPET list}}
+    {{#let (Array groceries) as |items|}}
+      <strong>Value</strong>
+      <ol class="spec-list">
+        {{#each items as |item|}}
+          <li>{{item.state}} {{!--- <button class="spec-remove-item-{{i}}" {{action items.remove item}}>x</button> --}}</li>
+        {{/each}}
+      </ol>
+      <strong>Transitions</strong><br>
+      <label>Add Item: {{input enter=(action items.push)}}</label><br>
+      <button class="spec-pop" {{action items.pop}}>Pop</button>
+      <button class="spec-shift" {{action items.shift}}>Shift</button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="list.hbs"}}
   </div>
 </section>

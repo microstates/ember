@@ -1,13 +1,15 @@
-import BooleanState from '../helpers/boolean';
-import NumberState from '../helpers/number';
-import StringState from '../helpers/string';
-import ObjectState from '../helpers/object';
+import BooleanHelper from '../helpers/boolean';
+import NumberHelper from '../helpers/number';
+import StringHelper from '../helpers/string';
+import ObjectHelper from '../helpers/object';
+import ArrayHelper from '../helpers/array';
 
 export function initialize(application) {
-  application.register('helper:Boolean', BooleanState);
-  application.register('helper:Number', NumberState);
-  application.register('helper:String', StringState);   
-  application.register('helper:Object', ObjectState);
+  application.register('helper:Boolean', BooleanHelper);
+  application.register('helper:Number', NumberHelper);
+  application.register('helper:String', StringHelper);   
+  application.register('helper:Object', ObjectHelper);
+  application.register('helper:Array', ArrayHelper);
 }
 
 export default {
