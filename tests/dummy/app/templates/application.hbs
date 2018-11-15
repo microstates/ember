@@ -4,7 +4,7 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET boolean}}
-    {{#let (Boolean) as |switch|}}
+    {{#let (use-state false) as |switch|}}
       <strong>Value</strong>: 
       <span class="spec-boolean-value">{{if switch.state "true" "false"}}</span>
       <br>
@@ -24,7 +24,7 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET number}}
-    {{#let (Number 5) as |num|}}
+    {{#let (use-state 5) as |num|}}
       <strong>Value</strong>: <span class="spec-number">{{num.state}}</span><br>
       <strong>Transitions</strong>:
       <button class="spec-increment" {{action num.increment}}>{{num.state}}++</button>
@@ -41,7 +41,7 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET string}}
-    {{#let (String "a string") as |str|}}
+    {{#let (use-state "a string") as |str|}}
       <strong>Value</strong>: <span class="spec-string">"{{str.state}}"</span><br>
       <strong>Transition</strong>
       <input 
@@ -61,7 +61,7 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET object}}
-    {{#let (Object (hash color="red" model="Mustang" make="Ford")) as |car|}}
+    {{#let (use-state (hash color="red" model="Mustang" make="Ford")) as |car|}}
       <ul>
         {{#each-in car as |name|}}
           <li class="spec-object-prop spec-object-prop-{{name}}">
@@ -89,7 +89,7 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET list}}
-    {{#let (Array groceries) as |items|}}
+    {{#let (use-state groceries) as |items|}}
       <strong>Value</strong>
       <ol class="spec-list">
         {{#each items as |item|}}
