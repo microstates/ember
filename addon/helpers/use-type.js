@@ -1,6 +1,6 @@
 import Helper from '@ember/component/helper';
 import { computed, observer } from '@ember/object';
-import { create, Store, Any } from 'microstates/dist/microstates.cjs';
+import { create, Store } from 'microstates/dist/microstates.cjs';
 
 export default Helper.extend({
   
@@ -20,7 +20,7 @@ export default Helper.extend({
     this.recompute();
   }),
 
-  compute([Type = Any, value]) {
+  compute([Type, value]) {
     this.setProperties({
       Type,
       value,
