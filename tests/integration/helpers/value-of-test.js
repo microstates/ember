@@ -2,26 +2,27 @@ import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { setupComponentTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
+import { click } from '@ember/test-helpers';
 
 describe('Integration | Helper | value-of', function() {
   setupComponentTest('value-of', {
     integration: true
   });
 
-  it('renders', function() {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
-    // Template block usage:
-    // this.render(hbs`
-    //   {{#value-of}}
-    //     template content
-    //   {{/value-of}}
-    // `);
-    this.set('inputValue', '1234');
+  it('extracts value from the microstate', async function() {
 
-    this.render(hbs`{{value-of inputValue}}`);
+    this.render(hbs`
+      {{#let (use-state 42) as |$|}}
+        {{on-render (action (mut value)) (value-of $)}}
+        <button {{action $.increment}} />
+      {{/let}}
+    `);
 
-    expect(this.$().text().trim()).to.equal('1234');
+    expect(this.get('value')).to.equal(42);
+
+    await click(this.$('button')[0]);
+
+    expect(this.get('value')).to.equal(43);
   });
 });
 

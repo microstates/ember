@@ -1,7 +1,8 @@
 import { helper } from '@ember/component/helper';
+import { valueOf } from '../index';
 
-export function valueOf(params/*, hash*/) {
-  return params;
+export function valueOfHelper([object]/*, hash*/) {
+  return valueOf(object);
 }
 
-export default helper(valueOf);
+export default helper(valueOfHelper);
