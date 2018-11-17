@@ -1,16 +1,16 @@
 /* jshint expr:true */
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { useType } from 'ember-microstates';
+import { use, create } from 'ember-microstates';
 import Object from '@ember/object';
 
-describe('Unit: Macro | useType', function() {
+describe('Unit: Macro | use', function() {
   describe('with arguments', function() {
     let Container = Object.extend({
-      n: useType(Number, 42)
+      n: use(create(Number, 42))
     });
   
-    it('allows to create a number type using useType(Number, 42)', function() {
+    it('allows to create a number type using use(create(Number, 42))', function() {
       expect(Container.create().get('n.state')).to.equal(42);
     });
 
@@ -31,7 +31,7 @@ describe('Unit: Macro | useType', function() {
 
   describe('without arguments', function() {
     let Container = Object.extend({
-      n: useType()
+      n: use()
     });
 
     it('allows to create a value without a Type', function() {
