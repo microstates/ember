@@ -4,7 +4,7 @@ import { describe, it } from 'mocha';
 import { useState } from 'ember-microstates';
 import Object from '@ember/object';
 
-describe('Unit: useState', function() {
+describe('Unit: useState Computed Property Macro', function() {
   describe('with arguments', function() {
     let Container = Object.extend({
       n: useState(42)

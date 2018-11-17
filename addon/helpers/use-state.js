@@ -22,7 +22,7 @@ export default Helper.extend({
   compute([value]) {
     // Objects created with Object.create(null) don't have a prototype,
     // detect this and spread them to Object. Should be fixed in Microstates.
-    this.set('value', Object.getPrototypeOf(value) === null ? {...value} : value);
+    this.set('value', value && Object.getPrototypeOf(value) === null ? {...value} : value);
 
     return this.get('state');
   }
