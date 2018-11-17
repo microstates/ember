@@ -1,1 +1,1 @@
-export { BooleanType as default } from 'microstates/dist/microstates.cjs';
+export { BooleanType as default } from '../index';

@@ -1,5 +1,5 @@
 import { computed } from '@ember/object';
-import { from, Store } from 'microstates/dist/microstates.cjs';
+import { from, Store } from '../index';
 
 export default function useType(value) {
   return computed({

@@ -1,1 +1,1 @@
-export { StringType as default } from 'microstates/dist/microstates.cjs';
+export { StringType as default } from '../index';
