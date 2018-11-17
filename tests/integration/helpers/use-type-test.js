@@ -36,7 +36,7 @@ describe('Integration | Helper | use-type', function() {
 
   it('allows to create a Number type using ember-import from ember-microstates/types/number', async function() {
     this.render(hbs`
-      {{#let (use-type (import 'ember-microstates/types/number') 42) as |$|}}
+      {{#let (use-type (type "number") 42) as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.increment}} />
       {{/let}}
@@ -51,7 +51,7 @@ describe('Integration | Helper | use-type', function() {
 
   it('allows to create a Boolean type using ember-import from ember-microstates/types/boolean', async function() {
     this.render(hbs`
-      {{#let (use-type (import 'ember-microstates/types/boolean') true) as |$|}}
+      {{#let (use-type (type "boolean") true) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
         <button {{action $.toggle}} />
       {{/let}}
@@ -66,7 +66,7 @@ describe('Integration | Helper | use-type', function() {
 
   it('allows to create a String type using ember-import from ember-microstates/types/string', async function() {
     this.render(hbs`
-      {{#let (use-type (import 'ember-microstates/types/string') 'hello world') as |$|}}
+      {{#let (use-type (type "string") 'hello world') as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.concat '!!!'}} />
       {{/let}}
@@ -82,7 +82,7 @@ describe('Integration | Helper | use-type', function() {
   it('allows to create a Object type using ember-import from ember-microstates/types/object', async function() {
     this.set('obj', { dog: 'Santa\'s Little Helper', cat: 'Snowball' })
     this.render(hbs`
-      {{#let (use-type (import 'ember-microstates/types/object') obj) as |$|}}
+      {{#let (use-type (type "object") obj) as |$|}}
         <ul>
           {{#each-in $ as |pet name|}}
             <li>{{pet}}: {{name.state}}</li>
@@ -104,7 +104,7 @@ describe('Integration | Helper | use-type', function() {
     this.set('pets', ['dog', 'cat', 'bird']);
 
     this.render(hbs`
-      {{#let (use-type (import 'ember-microstates/types/array') pets) as |$|}}
+      {{#let (use-type (type "array") pets) as |$|}}
         <ul>
           {{#each $ as |pet|}}
             <li>{{pet.state}}</li>
