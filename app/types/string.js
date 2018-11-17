@@ -1,1 +1,1 @@
-export { default } from 'ember-microstates/types/string';
+export { StringType as default } from 'ember-microstates';

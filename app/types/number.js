@@ -1,1 +1,1 @@
-export { default } from 'ember-microstates/types/number';
+export { NumberType as default } from 'ember-microstates';

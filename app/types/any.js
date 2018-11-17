@@ -1,1 +1,1 @@
-export { default } from 'ember-microstates/types/any';
+export { Any as default } from 'ember-microstates';

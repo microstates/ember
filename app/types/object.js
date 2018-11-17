@@ -1,1 +1,1 @@
-export { default } from 'ember-microstates/types/object';
+export { ObjectType as default } from 'ember-microstates';

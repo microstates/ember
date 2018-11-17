@@ -1,1 +1,0 @@
-export { Any as default } from '../index';
