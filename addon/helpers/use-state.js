@@ -1,14 +1,14 @@
 import Helper from "@ember/component/helper";
 import { computed, observer } from "@ember/object";
-import { from, Store } from "microstates/dist/microstates.cjs";
+import { from, Store } from "../index";
 import { ensurePrototype } from "../-private";
 
 export default Helper.extend({
   state: computed("value", {
-    get(key) {
+    get() {
       let value = ensurePrototype(this.get("value"));
 
-      return Store(from(value), state => this.set(key, state));
+      return Store(from(value), state => this.set('state', state));
     },
     set(key, state) {
       return state;
