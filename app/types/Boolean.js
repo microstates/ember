@@ -1,1 +1,0 @@
-export { BooleanType as default } from 'ember-microstates';
