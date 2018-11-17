@@ -35,7 +35,7 @@ describe('Integration | Helper | use', function() {
     expect(this.$('span').text()).to.equal('hello world');
   });
 
-  it('allows to create a Number type using ember-import from ember-microstates/types/number', async function() {
+  it('allows to create a Microstate<Number>', async function() {
     this.set('microstate', create(Number, 42));
 
     this.render(hbs`
@@ -52,7 +52,7 @@ describe('Integration | Helper | use', function() {
     expect(this.$('span').text()).to.equal('43');
   });
 
-  it('allows to create a Boolean type using ember-import from ember-microstates/types/boolean', async function() {
+  it('allows to create a Microstate<Boolean>', async function() {
     this.set('microstate', create(Boolean, true));
     this.render(hbs`
       {{#let (use microstate) as |$|}}
@@ -68,7 +68,7 @@ describe('Integration | Helper | use', function() {
     expect(this.$('span').text()).to.equal('false');
   });
 
-  it('allows to create a String type using ember-import from ember-microstates/types/string', async function() {
+  it('allows to create a Microstate<String>', async function() {
     this.set('microstate', create(String, 'hello world'));
 
     this.render(hbs`
@@ -85,7 +85,7 @@ describe('Integration | Helper | use', function() {
     expect(this.$('span').text()).to.equal('hello world!!!');
   });
 
-  it('allows to create a Object type using ember-import from ember-microstates/types/object', async function() {
+  it('allows to create a Microstate<Object>', async function() {
     this.set('microstate', create(Object, { dog: 'Santa\'s Little Helper', cat: 'Snowball' }));
     
     this.render(hbs`
@@ -107,7 +107,7 @@ describe('Integration | Helper | use', function() {
     expect(this.$('li:eq(2)').text()).to.equal('second cat: Snowball');
   });
 
-  it('allows to create an Array type using ember-import from ember-microstates/types/array', async function() {
+  it('allows to create a Microstate<Array>', async function() {
     this.set('microstate', create(Array, ['dog', 'cat', 'bird']));
 
     this.render(hbs`
@@ -131,7 +131,7 @@ describe('Integration | Helper | use', function() {
     expect(this.$('li:eq(3)').text()).to.equal('fish');
   });
 
-  it('allows person to be created from custom type', async function() {
+  it('allows to create a Microstate<Person>', async function() {
     class Person {
       constructor() {
         this.firstName = String;

@@ -34,7 +34,7 @@ describe('Integration | Helper | use-type', function() {
     expect(this.$('span').text()).to.equal('hello world');
   });
 
-  it('allows to create a Number type using ember-import from ember-microstates/types/number', async function() {
+  it('allows to create a Microstate<Number> using (type "number")', async function() {
     this.render(hbs`
       {{#let (use-type (type "number") 42) as |$|}}
         <span>{{$.state}}</span>
@@ -49,7 +49,7 @@ describe('Integration | Helper | use-type', function() {
     expect(this.$('span').text()).to.equal('43');
   });
 
-  it('allows to create a Boolean type using ember-import from ember-microstates/types/boolean', async function() {
+  it('allows to create a Microstate<Boolean> using (type "boolean")', async function() {
     this.render(hbs`
       {{#let (use-type (type "boolean") true) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
@@ -64,7 +64,7 @@ describe('Integration | Helper | use-type', function() {
     expect(this.$('span').text()).to.equal('false');
   });
 
-  it('allows to create a String type using ember-import from ember-microstates/types/string', async function() {
+  it('allows to create a Microstate<String> using (type "string")', async function() {
     this.render(hbs`
       {{#let (use-type (type "string") 'hello world') as |$|}}
         <span>{{$.state}}</span>
@@ -79,7 +79,7 @@ describe('Integration | Helper | use-type', function() {
     expect(this.$('span').text()).to.equal('hello world!!!');
   });
 
-  it('allows to create a Object type using ember-import from ember-microstates/types/object', async function() {
+  it('allows to create a Microstate<Object> using (type "object")', async function() {
     this.set('obj', { dog: 'Santa\'s Little Helper', cat: 'Snowball' })
     this.render(hbs`
       {{#let (use-type (type "object") obj) as |$|}}
@@ -100,7 +100,7 @@ describe('Integration | Helper | use-type', function() {
     expect(this.$('li:eq(2)').text()).to.equal('second cat: Snowball');
   });
 
-  it('allows to create an Array type using ember-import from ember-microstates/types/array', async function() {
+  it('allows to create a Microstate<Array> using (type "array")', async function() {
     this.set('pets', ['dog', 'cat', 'bird']);
 
     this.render(hbs`
@@ -124,7 +124,7 @@ describe('Integration | Helper | use-type', function() {
     expect(this.$('li:eq(3)').text()).to.equal('fish');
   });
 
-  it('allows person to be created from custom type', async function() {
+  it('allows to create a Microstate<Person> using (type "person")', async function() {
     class Person {
       constructor() {
         this.firstName = String;
