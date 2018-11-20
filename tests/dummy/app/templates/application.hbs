@@ -61,18 +61,18 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET object}}
-    {{#let (use-state (hash color="red" model="Mustang" make="Ford")) as |car|}}
+    {{#let (use-state initialCar) as |car|}}
       <ul>
-        {{#each-in car as |name|}}
-          <li class="spec-object-prop spec-object-prop-{{name}}">
-            <strong>{{name}}</strong>: <span class="spec-object-prop-value">{{get car name}}</span> 
-            <button {{action car.delete name}} class="spec-delete-prop">X</button>
+        {{#each car as |attr|}}
+          <li class="spec-object-prop spec-object-prop-{{attr.key}}">
+            <strong>{{attr.key}}</strong>: <span class="spec-object-prop-value">{{attr.value.state}}</span> 
+            <button {{action car.delete attr.key}} class="spec-delete-prop">X</button>
           </li>
-        {{/each-in}}
+        {{/each}}
       </ul>
       <button 
         class="spec-object-assign" 
-        {{action car.assign (hash speed="fast" suspension="stiff")}}
+        {{action car.assign additional}}
       >
         Add Properties
       </button>

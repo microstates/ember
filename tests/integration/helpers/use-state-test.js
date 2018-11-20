@@ -84,9 +84,9 @@ describe('Integration | Helper | use-state', function() {
     this.render(hbs`
       {{#let (use-state obj) as |$|}}
         <ul>
-          {{#each-in $ as |pet name|}}
-            <li>{{pet}}: {{name.state}}</li>
-          {{/each-in}}
+          {{#each $ as |entry|}}
+            <li>{{entry.key}}: {{entry.value.state}}</li>
+          {{/each}}
         </ul>
         <button {{action $.put 'second cat' 'Snowball II'}} />
       {{/let}}
@@ -97,7 +97,7 @@ describe('Integration | Helper | use-state', function() {
 
     await click(this.$('button')[0]);
 
-    expect(this.$('li:eq(2)').text()).to.equal('second cat: Snowball');
+    expect(this.$('li:eq(2)').text()).to.equal('second cat: Snowball II');
   });
 
   it('allows to create an Microstate<Array> from value', async function() {

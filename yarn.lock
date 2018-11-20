@@ -7724,10 +7724,10 @@ micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4, micromatch@^3.1.8:
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
 
-microstates@0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.12.0.tgz#bf0606ef758f439b36d46e312e1b400eeb2f96e5"
-  integrity sha512-nskVv714Dd3q9E9n7+8vJEkACZQLsnYZOF9ve+2kTCcVnwGkkCDpOqQtmER8jRabo0OPq6SYLZz7RJYgwPBQZg==
+microstates@0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.12.1.tgz#8dc543bdc733cd378fc87800270593317eef560b"
+  integrity sha512-Ao7JsgOF/1NSaq6rko3zAHdTbwxnzgO7WEKyn++YP+n+Bh8uBTV4lYCvEo6MoDBIzZHauquv/TiUqFoIWdGSOw==
   dependencies:
     funcadelic "^0.5.0"
     symbol-observable "^1.2.0"
