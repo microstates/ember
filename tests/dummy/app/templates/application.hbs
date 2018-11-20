@@ -107,3 +107,22 @@
     {{code-snippet name="list.hbs"}}
   </div>
 </section>
+
+<h2>Tree</h2>
+<section>
+  <div class="column demo">
+    {{!BEGIN-SNIPPET tree-demo}}
+    {{#let (state (type "node")) as |node|}}
+      <Tree @node={{node}} />
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    <h3>State</h3>
+    {{code-snippet name="node.js"}}
+    <h3>Component</h3>
+    {{code-snippet name="tree.hbs"}}
+    <h3>Render</h3>
+    {{code-snippet name="tree-demo.hbs"}}
+  </div>
+</section>
