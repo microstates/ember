@@ -1,6 +1,6 @@
 {{!BEGIN-SNIPPET tree}}
 {{#if node.children}}
-  <button {{action node.isOpen.toggle}}>{{if node.isOpen.state '▼' '►'}}</button>
+  <button {{action node.isOpen.toggle}}>{{if node.isOpen.state "▼" "►"}}</button>
 {{/if}}
 <button {{action node.counter.increment}}>Increment ({{node.counter.state}})</button>
 <button {{action node.addChild}}>➕</button>
@@ -9,9 +9,9 @@
 {{/if}}
 {{#if node.isOpen.state}}
   <ul>
-  {{#each node.children as |child|}}
-    <li><Tree @node={{child}} @onRemoveChild={{action node.children.remove child}}/></li>
-  {{/each}}
+    {{#each node.children as |child|}}
+      <li><Tree @node={{child}} @onRemoveChild={{action node.children.remove child}}/></li>
+    {{/each}}
   </ul>
 {{/if}}
 {{!END-SNIPPET}}
