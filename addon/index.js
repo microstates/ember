@@ -1,6 +1,4 @@
-export { default as useType } from "./macros/use-type";
-export { default as useState } from "./macros/use-state";
-export { default as use } from "./macros/use";
+export { default as state } from "./macros/state";
 export {
   create,
   Store,

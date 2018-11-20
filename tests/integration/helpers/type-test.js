@@ -111,7 +111,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (get (use-type (type "validated-number")) 'isValid') "true" "false"}}`
+      hbs`{{if (get (state (type "validated-number")) 'isValid') "true" "false"}}`
     );
 
     expect(

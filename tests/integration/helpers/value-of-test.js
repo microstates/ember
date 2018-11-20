@@ -12,7 +12,7 @@ describe('Integration | Helper | value-of', function() {
   it('extracts value from the microstate', async function() {
 
     this.render(hbs`
-      {{#let (use-state 42) as |$|}}
+      {{#let (state 42) as |$|}}
         {{on-render (action (mut value)) (value-of $)}}
         <button {{action $.increment}} />
       {{/let}}
