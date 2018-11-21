@@ -13,7 +13,7 @@ module.exports = {
   rules: {
     'ember/closure-actions': 'off',
     'ember/avoid-leaking-state-in-ember-objects': 'off',
-
+    'ember/no-side-effects': 'off',
     'prefer-let/prefer-let': 2
   },
   overrides: [
