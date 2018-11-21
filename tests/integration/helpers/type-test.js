@@ -107,20 +107,6 @@ describe("Integration | Helper | type", function() {
     ).to.equal("true");
   });
 
-  it("allows to extend types", async function() {
-    initialize(this);
-
-    this.render(
-      hbs`{{if (get (state (type "validated-number")) 'isValid') "true" "false"}}`
-    );
-
-    expect(
-      this.$()
-        .text()
-        .trim()
-    ).to.equal("true");
-  });
-
   it('throws an exception for unregistered type', async function() {
     initialize(this);
 
