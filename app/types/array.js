@@ -1,1 +1,1 @@
-export { ArrayType as default } from 'ember-microstates';
+export { ArrayType as default } from '@microstates/ember';

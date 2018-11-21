@@ -1,1 +1,1 @@
-export { ObjectType as default } from 'ember-microstates';
+export { ObjectType as default } from '@microstates/ember';

@@ -1,1 +1,1 @@
-export { default, state } from 'ember-microstates/helpers/state';
+export { default, state } from '@microstates/ember/helpers/state';

@@ -1,10 +1,10 @@
 # Ember Microstates
 
-### [API Index](#api) [Live Demo](https://cowboyd.github.io/ember-microstates/)
+### [API Index](#api) [Live Demo](https://cowboyd.github.io/@microstates/ember/)
 
-[![npm version](https://badge.fury.io/js/ember-microstates.svg)](https://badge.fury.io/js/ember-microstates)
-[![Ember Observer Score](https://emberobserver.com/badges/ember-microstates.svg)](https://emberobserver.com/addons/ember-microstates)
-[![Build Status](https://travis-ci.org/cowboyd/ember-microstates.svg?branch=master)](https://travis-ci.org/cowboyd/ember-microstates)
+[![npm version](https://badge.fury.io/js/@microstates/ember.svg)](https://badge.fury.io/js/@microstates/ember)
+[![Ember Observer Score](https://emberobserver.com/badges/@microstates/ember.svg)](https://emberobserver.com/addons/@microstates/ember)
+[![Build Status](https://travis-ci.org/cowboyd/@microstates/ember.svg?branch=master)](https://travis-ci.org/cowboyd/@microstates/ember)
 
 
 ## The State of State
@@ -103,7 +103,7 @@ look any where else. Power is gained. Intention is revealed.
 
 To see more exhaustive examples of microstates in action, you can
 start the dummy app and have a look at the
-[demos found here](https://github.com/cowboyd/ember-microstates/blob/master/tests/dummy/app/templates/application.hbs) to
+[demos found here](https://github.com/cowboyd/@microstates/ember/blob/master/tests/dummy/app/templates/application.hbs) to
 see at least one case of each microstate.
 
 ## Writing Your Own Microstates

@@ -1,1 +1,1 @@
-export { StringType as default } from 'ember-microstates';
+export { StringType as default } from '@microstates/ember';

@@ -1,1 +1,1 @@
-export { BooleanType as default } from 'ember-microstates';
+export { BooleanType as default } from '@microstates/ember';

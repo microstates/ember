@@ -1,1 +1,1 @@
-export { default, valueOf } from 'ember-microstates/helpers/value-of';
+export { default, valueOf } from '@microstates/ember/helpers/value-of';

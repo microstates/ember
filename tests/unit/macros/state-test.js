@@ -1,7 +1,7 @@
 /* jshint expr:true */
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { state, create } from 'ember-microstates';
+import { state, create } from '@microstates/ember';
 import Object from '@ember/object';
 
 describe('Unit: Macro | state', function() {

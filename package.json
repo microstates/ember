@@ -1,11 +1,11 @@
 {
-  "name": "ember-microstates",
+  "name": "@microstates/ember",
   "version": "0.3.0",
   "description": "Data Down, Actions Up: at the molecular level.",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "https://github.com/cowboyd/ember-microstates.git",
+  "repository": "https://github.com/cowboyd/@microstates/ember.git",
   "license": "MIT",
   "author": "cowboyd@frontside.io",
   "directories": {
