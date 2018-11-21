@@ -120,4 +120,14 @@ describe("Integration | Helper | type", function() {
         .trim()
     ).to.equal("true");
   });
+
+  it('throws an exception for unregistered type', async function() {
+    initialize(this);
+
+    expect(() => {
+      this.render(
+        hbs`{{type "car"}}`
+      );
+    }).to.throw(/\(type "car"\) could not be looked up/)
+  });
 });
