@@ -111,11 +111,13 @@
 <h2>Tree</h2>
 <section>
   <div class="column demo">
-    {{!BEGIN-SNIPPET tree-demo}}
-    {{#let (state (type "node")) as |node|}}
-      <Tree @node={{node}} />
-    {{/let}}
-    {{!END-SNIPPET}}
+    <div class="spec-tree">
+      {{!BEGIN-SNIPPET tree-demo}}
+      {{#let (state (type "node") tree) as |node|}}
+        <Tree @node={{node}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </div>
   </div>
   <div class="column code">
     {{code-snippet name="tree-demo.hbs"}}

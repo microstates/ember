@@ -561,6 +561,16 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@bigtest/convergence@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@bigtest/convergence/-/convergence-1.1.1.tgz#b314d8b1edc392d3e8780f99499a9a03aa528d54"
+
+"@bigtest/interactor@0.9.1":
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/@bigtest/interactor/-/interactor-0.9.1.tgz#2cc9f6e962d6dc42503af08a1e6ba38ca2129347"
+  dependencies:
+    "@bigtest/convergence" "^1.1.1"
+
 "@ember/optional-features@^0.6.3":
   version "0.6.4"
   resolved "https://registry.yarnpkg.com/@ember/optional-features/-/optional-features-0.6.4.tgz#8199f853c1781234fcb1f05090cddd0b822bff69"
