@@ -54,8 +54,9 @@ To learn more about Microstates, go to [microstates/microstate.js](http://github
 
 ## How to use Microstates?
 
-You can create a microstate in JavaScript using `state` macro or in a template using `state` helper. In both cases, you will get an 
-object that will have transitions that you can invoke. When you call the transition, the state will update accordingly and your change will be reflected. Here is one of the simplest Microstates you can make.
+`@microstates/ember` makes it easy to create microstates that cause Ember to re-render when a transition on the microstate is called. You can create a microstate in JavaScript using `state` macro or in a template using `state` helper. In both cases, you will get an object that will have transitions that you can invoke. When you call the transition, the state will update accordingly and your change will be reflected. 
+
+Here is one of the simplest Microstates you can make.
 
 ```hbs
 {{#let (state 10) as |counter|}}
@@ -87,6 +88,27 @@ class Person {
   <button {{action person.isEmberino.toggle}}>Change projects</button>
 {{/let}}
 ```
+
+## API
+
+### Helpers
+
+#### `(state typeOrValueOrMicrostate value)`
+
+`(state)` helper converts initial value into a microstate. Any transition on this microstate will cause a rerender.
+The initial value can be any POJO value, a microstate or a combination of type and value. 
+
+If you provide a POJO value, Microstates will use this value to construct a microstate. It'll determine the type based
+on the type of the value that you provide. It'll automatically give you transitions for that value. For example, `(state 10)` will give you a `Microstate<Number>` with `increment` transition and `(state false)` will give you a `Microstate<Boolean>` with `toggle` transition. This also works with complex data structures like Objects and Arrays.  
+
+```hbs
+{{#let (state (array 10 20 30)) as |numbers|}}
+  {{#each numbers as |number|}}
+    <button {{action number.increment}}>{{number.state}}</button>
+  {{/each}}
+{{/let}}
+```
+
 
 ### How do Microstates work in Ember?
 

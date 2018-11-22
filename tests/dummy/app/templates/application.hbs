@@ -1,17 +1,34 @@
 <h1 id="title">@microstates/ember Demo</h1>
 
+<h2>Any</h2>
+<section>
+  <div class="column demo">
+    {{!BEGIN-SNIPPET any}}
+    {{#let (state) as |value|}}
+      <input 
+        value={{number.state}} 
+        onchange={{action value.set value="target.value"}}
+      >
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="any.hbs"}}
+  </div>
+</section>
+
 <h2>Boolean</h2>
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET boolean}}
     {{#let (state false) as |switch|}}
-      <strong>Value</strong>: 
-      <span class="spec-boolean-value">{{if switch.state "true" "false"}}</span>
-      <br>
-      <strong>Transitions</strong>
-      <button class="spec-toggle" {{action switch.toggle}}>Toggle</button>
-      <button class="spec-set-true" {{action switch.set true}}>Set True</button>
-      <button class="spec-set-false" {{action switch.set false}}>Set False</button>
+      <input 
+        type="checkbox" 
+        checked={{switch.state}} 
+        onclick={{action switch.toggle}}
+      >
+      <button {{action switch.set true}}>Set True</button>
+      <button {{action switch.set false}}>Set False</button>
     {{/let}}
     {{!END-SNIPPET}}
   </div>
@@ -24,11 +41,14 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET number}}
-    {{#let (state 5) as |num|}}
-      <strong>Value</strong>: <span class="spec-number">{{num.state}}</span><br>
-      <strong>Transitions</strong>:
-      <button class="spec-increment" {{action num.increment}}>{{num.state}}++</button>
-      <button class="spec-decrement" {{action num.decrement}}>{{num.state}}--</button>
+    {{#let (state 5) as |number|}}
+      <input 
+        type="number" 
+        value={{number.state}} 
+        onchange={{action number.set value="target.value"}}
+      >
+      <button {{action number.decrement}}>{{number.state}}--</button>
+      <button {{action number.increment}}>{{number.state}}++</button>
     {{/let}}
     {{!END-SNIPPET}}
   </div>
@@ -41,14 +61,13 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET string}}
-    {{#let (state "a string") as |str|}}
-      <strong>Value</strong>: <span class="spec-string">"{{str.state}}"</span><br>
-      <strong>Transition</strong>
+    {{#let (state "hello world") as |string|}}
       <input 
-        class="spec-string-input" 
-        value={{str.state}} 
-        oninput={{action str.set value="target.value"}}
+        value={{string.state}} 
+        oninput={{action string.set value="target.value"}}
       >
+      <button {{action string.concat "!!!"}}>Append !!!</button>
+      <button {{action string.set ""}}>Clear</button>
     {{/let}}
     {{!END-SNIPPET list}}
   </div>
@@ -61,23 +80,27 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET object}}
-    {{#let (state initialCar) as |car|}}
-      <ul>
-        {{#each car as |attr|}}
-          <li class="spec-object-prop spec-object-prop-{{attr.key}}">
-            <strong>{{attr.key}}</strong>: <span class="spec-object-prop-value">{{attr.value.state}}</span> 
-            <button {{action car.delete attr.key}} class="spec-delete-prop">X</button>
-          </li>
-        {{/each}}
-      </ul>
-      <button 
-        class="spec-object-assign" 
-        {{action car.assign additional}}
-      >
-        Add Properties
-      </button>
-      <button class="spec-object-put" {{action car.put "year" 1967}}>Put property</button>
-    {{/let}}
+      {{#let (state 
+          (object 
+            Address="742 Evergreen Terrace" 
+            City="Springfield" 
+            State=""
+          )
+        ) as |address|
+      }}
+        <ul>
+          {{#each address as |line|}}
+            <li>
+              {{log line.value}}
+              {{line.key}}
+              <input 
+                value={{line.value.state}} 
+                onchange={{action line.value.set value="target.value"}}
+              >
+            </li>
+          {{/each}}        
+        </ul>
+      {{/let}}
     {{!END-SNIPPET}}
   </div>
   <div class="column code">
@@ -89,17 +112,13 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET list}}
-    {{#let (state groceries) as |items|}}
-      <strong>Value</strong>
-      <ol class="spec-list">
-        {{#each items as |item|}}
-          <li>{{item.state}} {{!--- <button class="spec-remove-item-{{i}}" {{action items.remove item}}>x</button> --}}</li>
-        {{/each}}
-      </ol>
-      <strong>Transitions</strong><br>
-      <label>Add Item: {{input enter=(action items.push)}}</label><br>
-      <button class="spec-pop" {{action items.pop}}>Pop</button>
-      <button class="spec-shift" {{action items.shift}}>Shift</button>
+    {{!-- array helper from ember-composable-helpers --}}
+    {{#let (state (array 10 20 30)) as |numbers|}}
+      <button {{action numbers.unshift 0}}>Unshift 0</button>
+      {{#each numbers as |number|}}
+        <button {{action number.increment}}>{{number.state}}++</button>
+      {{/each}}
+      <button {{action numbers.push 0}}>Push 0</button>
     {{/let}}
     {{!END-SNIPPET}}
   </div>
@@ -126,4 +145,4 @@
     <h3>State</h3>
     {{code-snippet name="node.js"}}
   </div>
-</section>
+</section> 
