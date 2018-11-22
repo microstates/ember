@@ -1,526 +1,152 @@
 # Ember Microstates
 
-### [API Index](#api) [Live Demo](https://cowboyd.github.io/@microstates/ember/)
+## [API Index](#api) [Live Demo](https://cowboyd.github.io/@microstates/ember/)
 
 [![npm version](https://badge.fury.io/js/@microstates/ember.svg)](https://badge.fury.io/js/@microstates/ember)
 [![Ember Observer Score](https://emberobserver.com/badges/@microstates/ember.svg)](https://emberobserver.com/addons/@microstates/ember)
 [![Build Status](https://travis-ci.org/cowboyd/@microstates/ember.svg?branch=master)](https://travis-ci.org/cowboyd/@microstates/ember)
 
+## Why Microstates?
 
-## The State of State
+Short explanation, it's going to be the most fun you've had working with state in any framework.
 
-In Ember components, managing state has historically been a manual
-process. We render values in our templates, and then inside our
-components, controllers and routes, we write custom code to oversee
-each state transition. Forexample, how often have you seen or written
-an action like this?
+Long explanation, components have values and actions that can be invoked to change these values. We call this state. 
+To change the state of a component, you call an action that calls `this.set` to change the value. State and its
+transitions become an inseperable part of the component. Microstates make component state seperable from the component. 
+To learn what makes this seperation possible, checkout [How do Microstates work in Ember]()?
 
-```javascript
-actions: {
-  toggleOpen() {
-    this.toggleProperty("isOpen");
-  }
+A Microstate is an object that is created from type and value. Type declares what states are created when a microstate is created
+from this type and how these microstates can be transitioned. Seperating state from the component makes many difficult things easy and fun.
+
+Here are some benefits,
+
+* Unit testing state becomes trivially easy.
+* Serializing and deserializing complex graphs of state is built in.
+* Never have to use `this.set` or `this.get` in a Microstate.
+* Never have to write actions.
+* Write mostly template only components.
+* Make state portable across apps and frameworks.
+
+## What is a Microstate?
+
+A microstate is an immmutable object that knows how to derive changed version of itself. 
+
+Microstates comes with 6 built-in types: `Boolean`, `Number`, `String`, `Array`, `Object` and `Any`. All other types you create yourself by composing primitive types into data structures that reflect the needs of your UI. You can declare custom types by using ES6 class syntax.
+
+```js
+class Person {
+  age = Number;
+  name = String;
+  isEmberiño = Boolean;
 }
 ```
 
-and then bound it to an event in your template:
+These custom types can be composed further to create complex graphs of state that match complexity of your component. Microstates handles lazily materializing complex data structures allowing you to represent complex one directional graphs without worrying about penality of materializing state that your component might not be using.
 
-``` handlebars
-<button onclick={{action "toggleOpen"}}>Toggle</button>
+Microstates have simple rules:
 
-<div class={{if isOpen "showing" "hidden"}}>
-  Here is the content !~!REVEALED!~!
-</div>
-```
+1. Parents have access to their children
+2. Children *do not* have access to their parents
+3. Transitions are pure and immutable
+4. Derived state can be safely cached
 
-In this case, a boolean value is stored on the `isOpen` property of
-the component, and the toggle action transitions it from its current
-value to its logical inverse. But if we think about it, all boolean
-values _by their vary nature_ can be toggled.
+To learn more about Microstates, go to [microstates/microstate.js](http://github.com/microstates/microstates.js). For a deeper funner introduction to Microstates checkout Charles Lowell's [presentation at EmberATX meetup](https://www.youtube.com/watch?v=kt5aRmhaE2M).
 
-And really, the same can be said about any data type you care to
-choose, be it a list, number, string or what have you. The point is
-that the set of valid state transitions is _implicit_ to type of data
-you have. So why should we have to implement state transitions at all?
+## How to use Microstates?
 
-What if you could declare the type of data that you had, and then all
-the action implementations were just written for you?
-
-That's where microstates come in. They take advantage of the fact that
-the operations which can be performed on a piece of data are fully
-known before hand so that you can simply declare which operations
-correspond to which HTML events.
-
-Using Microstates, we would rewrite the example above using the
-`Boolean` helper like so:
-
-```handlebars
-{{let isOpen=(Boolean false)}}
-
-<button onclick={{action isOpen.toggle}}>Toggle</button>
-
-<div class={{if isOpen "showing" "hidden"}}>
-  Here is the content !~!REVEALED!~!
-</div>
-```
-
-There is no accompanying JavaScript here because there doesn't
-need to be. We know we have a boolean, so why would we need code to
-manage it by hand?
-
-The same applies for other data types as well, and there are currently
-microstates for [objects](#object), [lists](#list), [strings](#string)
-and [numbers](#number).
-
-
-## Isn't This Just Putting Logic In My Templates?
-
-No.
-
-Unlike templating power-ups like [Ember Truth Helpers][1]
-and [Ember Composeable Helpers][2] (which are awesome by the way),
-Ember Microstates is _not about deriving new state from existing state_.
-
-Instead, it is about declarativly mapping transitions of one state to
-the next. So:
-
-``` handlebars
-{{action "toggleOpen"}}
-```
-
-becomes
-
-``` handlebars
-{{action isOpen.toggle}}
-```
-
-Notice how the value being referred to is explicit and obvious as
-opposed to hidden in a component `.js` file. Notice also how the
-transition to be invoked is explicit and obvious without the need to
-look any where else. Power is gained. Intention is revealed.
-
-## More Examples
-
-To see more exhaustive examples of microstates in action, you can
-start the dummy app and have a look at the
-[demos found here](https://github.com/cowboyd/@microstates/ember/blob/master/tests/dummy/app/templates/application.hbs) to
-see at least one case of each microstate.
-
-## Writing Your Own Microstates
-
-What if you're not satisfied with the microstates provided? What if
-you want more?
-
-This is currently an advanced topic. Our plan is to make the story
-around building your own microstate helpers a lot easier, but for now
-it involves some leg-work.
-
-That said, it *is* possible today, and if you're interested your best
-bet is to hit up `#e-microstates` channel in the ember community
-slack.
-
-
-## API
-
-* [`(Object (hash [attr=value])`](#object)
-  + [`assign(attributes)`](#assignattributes)
-  + [`delete(key)`](#deletekey)
-  + [`put(key,value)`](#putkeyvalue)
-  + [`set(object)`](#setobject)
-* [`(List array)`](#list)
-  + [`concat(list)`](#concatlist)
-  + [`pop`](#pop)
-  + [`push(item)`](#pushitem)
-  + [`remove(item)`](#removeitem)
-  + [`replace(item, other)`](#removeitemother)
-  + [`shift`](#shift)
-  + [`unshift(item)`](#unshiftitem)
-  + [`set(list)`](#setlist)
-* [`(Boolean true|false)`](#boolean)
-  + [`toggle`](#toggle)
-  + [`set(boolean)`](#setboolean)
-* [`(String string)`](#string)
-  + [`concat(string)`](#concatstring)
-  + [`set(string)`](#setstring)
-* [`(Number number)`](#number)
-  + [`add(number)`](#addnumber)
-  + [`subtract(number)`](#subtractnumber)
-  + [`multiply(number)`](#multiplynumber)
-  + [`divide(number)`](#dividenumber)
-  + [`set(number)`](#setnumber)
-* [`(Select array [selection=array|value] [multiple=false|true])`](#select)
-  + [`option.toggle()`](#optiontoggle)
-  + [`option.select()`](#optionelect)
-  + [`option.deselect()`](#optiondeselect)
-
-### Object
-
-The object state serves as the base for all other microstates. The
-transitions that are available to object are available to all other types:
-
-``` handlebars
-{{let car=(Object (hash make="Ford" model="Mustang" year=1967))}}
-```
-
-#### `assign(attributes)`
-
-Transitions this microstate into a new version that has `attributes`
-merged in with its current key-value pairs. Any key-values already present are
-retained. For example if we use our car, which has  "make", "model", and "year"
-properties, we can specify an action that will assign to the "model" and "year",
-but leave the "make" as is.
-
-``` handlebars
-<button onclick={{action car.assign (hash model="Taurus" year=2015)}}>
-  Make Sedan
-</button>
-{{!clicking will result in {make: 'Ford', model: 'Taurus', year: 2015}}}
-```
-
-#### `delete(key)`
-
-Remove a key (and subsequent value) from this object. For example, to delete the
-"year" property from our car:
-
-``` handlebars
-<button onclick={{action car.delete "year"}}>
-  Remove Year
-</button>
-{{!clicking will result in {make: 'Ford', model: 'Mustang'}}}
-```
-
-#### `put(key, value)`
-
-Add property with a given name and value to the object. It will update the property with the given value if it already exists.
-
-```handlebars
-<button onclick={{action car.put "color" "blue"}}>
-  Add color
-</button>
-```
-
-#### `set(object)`
-
-Replace current object microstate with a new object microstate from given hash.
-
-```handlebars
-<button onclick={{action car.set (hash make="Toyota" model="Supra" year="1982")}}>
-  Update car
-</button>
-```
-
-### List
-
-List microstate represents an ordered collection of values.
+You can create a microstate in JavaScript using `state` macro or in a template using `state` helper. In both cases, you will get an 
+object that will have transitions that you can invoke. When you call the transition, the state will update accordingly and your change will be reflected. Here is one of the simplest Microstates you can make.
 
 ```hbs
-{{let numbers=(List (array 1 2 3))}}
-
-{{each numbers as |item|}}
-  {{item}}
-{{/each}}
+{{#let (state 10) as |counter|}}
+  {{counter.state}}
+  <button {{action counter.increment}}>Increment</button>
+{{/let}}
 ```
 
-#### `concat(list)`
+`state` helper is polymorphic, meaning that it accepts arguments of different types. Based on the type of data that you pass to you,
+you will get a microstate with different transitions that you can invoke in your template. For primitive types, you can create a microstate
+by providing the initial value. 
 
-Makes a new list with all of the items from the given list added to the end of the current list.
+For custom type, you can use `(type name)` helper to resolve the type via Ember's dependency injection system. Here is how we'd use our Person type.
 
-```handlebars
-<button onclick={{action numbers.concat (array 4 5 6)}}>
-  Add more items
-</button>
+```js
+// app/types/person.js
+class Person {
+  age = Number;
+  name = String;
+  isEmberino = Boolean;
+}
 ```
 
-#### `pop()`
-
-Makes a new list the last item removed from current list.
-
-```handlebars
-<button onclick={{action numbers.pop}}>
-  Remove last item
-</button>
+```hbs
+{{#let (state (type "person") initial) as |person|}}
+  {{person.name.state}} - {{person.age.state}} {{person.isEmberino.state}}
+  <input type="text" onchange={{action person.name.set value="target.value"}}>
+  <button {{action person.age.increment}}>Make older</button>
+  <button {{action person.isEmberino.toggle}}>Change projects</button>
+{{/let}}
 ```
 
-#### `push(item)`
+### How do Microstates work in Ember?
 
-Makes a new list with item added to the end of the current list.
+To understand how Microstates work in Ember we must decompose actions into their distict parts. These parts are,
 
-```handlebars
-<button onclick={{action numbers.push 4}}>
-  Add 4
-</button>
+1. Transition of state
+2. Initiate rerender
+
+*Transition of state* is done by changing properties on the component with `this.set`. A rerender is initiated as a side-effect of
+calling `this.set`. 
+
+Microstates makes these two operations much clearer. Microstates by default are pure. They do not have any side-effects. However, 
+we still need to call `this.set` when a transition computed the next state to initiate a rerender. Microstates provides a `Store`
+mechanism that accepts a callback. We use this callback to invoke `this.set` to initiate a rerender.
+
+Here is what that would it would look like if we didn't use the macro that `@microstates/ember` provides.
+
+```js
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { create, Store } from 'microstates';
+
+class Person {
+  name = String;
+  age = Number;
+}
+
+let microstate = create(Person, { name: 'Taras' });
+
+export default Component.extend({
+  state: computed({
+    get() {
+      return Store(microstate, next => this.set({ state: next }))
+    },
+    set(key, state) {
+      return state;
+    }
+  })
+});
 ```
 
-#### `remove(item)`
+Now any transition that you invoke on the state, will automatically create the next state and trigger a re-render. Here is the same
+component with the macro.
 
-Makes a new list the given item removed from the current list.
+```js
+import Component from '@ember/component';
+import { computed } from '@ember/object';
+import { state } from 'microstates';
 
-```handlebars
-<button onclick={{action numbers.remove 3}}>
-  Remove 3
-</button>
+class Person {
+  name = String;
+  age = Number;
+}
+
+let microstate = create(Person, { name: 'Taras' });
+
+export default Component.extend({
+  state: state(microstate)
+});
 ```
-
-#### `replace(item, other)`
-
-Makes a new list with a new item in place of the given item in the current list.
-
-```handlebars
-<button onclick={{action numbers.replace 3 6}}>
-  Replace 3 with 6
-</button>
-```
-
-#### `shift()`
-
-Makes a new list with the first item of the list removed.
-
-```handlebars
-<button onclick={{action numbers.shift}}>
-  Remove first
-</button>
-```
-
-#### `unshift(item)`
-
-Add an item to the beginning of the list.
-
-```handlebars
-<button onclick={{action numbers.unshift 7}}>
-  Add to the beginning
-</button>
-```
-
-#### `set(list)`
-
-Replaces current list with given list.
-
-```handlebars
-<button onclick={{action list.set (array 4 5 6)}}>
-  Replace the list
-</button>
-```
-
-### Boolean
-
-Boolean represent a `true` or `false` value.
-
-```handlebars
-{{let isYa=(Boolean true)}}
-
-{{#if isYa}}
-  Yes
-{{else}}
-  No
-{{/if}}
-```
-
-#### `toggle()`
-
-Transition the Boolean microstate to opposite of it's current value.
-
-```handlebars
-<button onclick={{action isYa.toggle}}>
-  Flip the value
-</button>
-```
-
-#### `set(boolean)`
-
-Transition the microstate to give the value.
-
-```handlebars
-<button onclick={{action isYa.set false}}>
-  Make false
-</button>
-```
-
-### `String`
-
-Represents a String object.
-
-```handlebars
-{{let message=(String 'hello world')}}
-
-{{message}}
-```
-
-#### `concat(string)`
-
-Add string to the end of the existing value.
-
-```handlebars
-<button onclick={{action message.concat '!!!'}}>
-  Exclaim!!!
-</button>
-```
-
-#### `set(string)`
-
-Replace current value with new string.
-
-```handlebars
-<button onclick={{action message.set 'I come in pieces'}}>
-  Confuse
-</button>
-```
-
-### Number
-
-Represents a numerical value.
-
-```handlebars
-{{let age=(Number 34)}}
-
-{{age}}
-```
-
-#### `increment()`
-
-Make a new number that's greater than current number by 1.
-
-```handlebars
-<button onclick={{action age.increment}}>
-  Increment
-</button>
-```
-
-#### `decrement()`
-
-Make a new number that's less than current number by 1.
-
-```handlebars
-<button onclick={{action age.decrement}}>
-  Decrement
-</button>
-```
-
-#### `add(number)`
-
-Make a new number that's greater than current value by provided amount.
-
-```handlebars
-<button onclick={{action age.add 1}}>
-  Increase by one
-</button>
-```
-
-#### `subtract(number)`
-
-Make a new number that's lesser than current value by provided amount.
-
-```handlebars
-<button onclick={{action age.subtract 1}}>
-  Decrease by one
-</button>
-```
-
-#### `multiply(number)`
-
-Multiply the value by given number.
-
-```handlebars
-<button onclick={{action age.multiply 10}}>
-  Multipy by 10
-</button>
-```
-
-#### `divide(number)`
-
-Divide the value by given number.
-
-```handlebars
-<button onclick={{action age.divide 10}}>
-  Divide by 10
-</button>
-```
-
-#### `set(number)`
-
-Replace the value with given number.
-
-```handlebars
-<button onclick={{action age.set 21}}>
-  Set age to 21
-</button>
-```
-
-### Select
-
-The Select microstate represents a set of distinct options from which choices
-can be made. For any given value in the set, it tracks whether that
-value has been selected for inclusion. You would use it when you want
-to build something analogous to a set of checkboxes, radio buttons, or
-select box.
-
-The select state has a list of `options` wrapping each choice to track
-where that option is selected, and also to contain the actions for
-either selecting or deselecting that option (`toggle`, `select`, and `deselect`)
-
-It comes in two varieties: multiple selection and single
-selection. With multiple selection, the number of possible choices is
-unlimited and the value of the `selection` property is an array of the
-selected values. With a single selection, choosing one option means
-that all other options will be deselected. Furthermore, the value of
-the `selection` property is a single value.
-
-> Head's up! The actions for changing which options are selected live
-> on the options themselves and _not_ the actual select microstate.
-
-```handlebars
-{{let animals=(Select (array 'cat' 'dog' 'bird'))}}
-
-<h3> Choose your favourite pet </h3>
-{{#each animals as |option|}}
-  <button onclick={{action option.toggle}}>{{option}}</button>
-{{/each}}
-
-{{let animals=(Select (array 'cat' 'dog' 'bird') multiple=true)}}
-
-<h3> Choose animals you like </h3>
-{{#each animals as |option|}}
-  <input type="checkbox" checked=option.isSelected onclick={{action option.toggle}}> {{option}}
-{{/each}}
-
-<h3> Stefan's Choice </h3>
-{{let animals=(Select (array 'cat' 'dog' 'bird') selection='bird')}}
-```
-
-#### `option.toggle()`
-
-Make a new selection with `option` having the opposite of its current
-selection state. In other words, If this option is currently selected,
-it will become unselected. If it is unselected, it will become
-selected.
-
-```handlebars
-{{#each animals as |option|}}
-  <button onclick={{action option.toggle}}>{{option}}</button>
-{{/each}}
-```
-
-#### `option.select()`
-
-Make a new selection with this option selected. If this is a single
-select, then any other currently selected option will become
-unselected as a result.
-
-```handlebars
-{{#each animals as |option|}}
-  <button onclick={{action option.select}}>{{option}}</button>
-{{/each}}
-```
-
-#### `option.deselect()`
-
-Make a new selection with this option unselected.
-
-```handlebars
-{{#each animals as |option|}}
-  <button onclick={{action option.deselect}}>{{option}}</button>
-{{/each}}
-```
-
 
 ## Installation
 
