@@ -80,27 +80,24 @@
 <section>
   <div class="column demo">
     {{!BEGIN-SNIPPET object}}
-      {{#let (state 
-          (object 
-            Address="742 Evergreen Terrace" 
-            City="Springfield" 
-            State=""
-          )
-        ) as |address|
-      }}
-        <ul>
-          {{#each address as |line|}}
-            <li>
-              {{log line.value}}
-              {{line.key}}
-              <input 
-                value={{line.value.state}} 
-                onchange={{action line.value.set value="target.value"}}
-              >
-            </li>
-          {{/each}}        
-        </ul>
-      {{/let}}
+    {{#let 
+      (state 
+        (object Address="742 Evergreen Terrace" City="Springfield" State="")
+      ) 
+    as |address|
+    }}
+      <ul>
+        {{#each address as |line|}}
+          <li>
+            {{line.key}}
+            <input 
+              value={{line.value.state}} 
+              onchange={{action line.value.set value="target.value"}}
+            >
+          </li>
+        {{/each}}        
+      </ul>
+    {{/let}}
     {{!END-SNIPPET}}
   </div>
   <div class="column code">
