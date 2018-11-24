@@ -55,7 +55,7 @@ ul {
 
 .todoapp {
 	background: #fff;
-	margin: 130px 0 40px 0;
+	margin: 80px 0 40px 0;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -81,7 +81,7 @@ ul {
 
 .todoapp h1 {
 	position: absolute;
-	top: -155px;
+	top: -65px;
 	width: 100%;
 	font-size: 100px;
 	font-weight: 100;
@@ -268,7 +268,7 @@ ul {
 .todoapp .footer {
 	color: #777;
 	padding: 10px 15px;
-	height: 20px;
+	height: 40px;
 	text-align: center;
 	border-top: 1px solid #e6e6e6;
 }
