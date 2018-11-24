@@ -1,0 +1,67 @@
+.burger {
+  @apply .fixed;
+  left: 5px;
+  top: 5px;
+}
+
+.btn-white {
+  @apply .bg-white .text-grey-darkest .font-semibold .py-2 .px-4 .border .border-grey-light .rounded .shadow;    
+}
+
+.boolean-demo label {
+  @apply .inline-block .w-16 .cursor-pointer
+}
+
+.boolean-demo button, 
+.number-demo button, 
+.string-demo button,
+.object-demo button {
+  @apply .btn-white;
+}
+
+.boolean-demo button:hover, 
+.number-demo button:hover, 
+.string-demo button:hover,
+.object-demo button:hover {
+  @apply .bg-grey-lightest
+}
+
+.demo-any input, .number-demo input, .string-demo input, .object-demo input {
+  @apply .border .rounded .p-2;
+}
+
+.object-demo label {
+  @apply .block .cursor-pointer .font-bold;
+}
+
+.object-demo input {
+  @apply block .mb-2;
+}
+
+h1 {
+  @apply .mb-4;
+}
+
+section {
+  @apply .mb-4;
+}
+
+section header {
+  @apply .mb-4;
+}
+
+@screen sm {
+  section {
+    @apply .w-full;
+  }
+
+  section .demo {
+    @apply .mb-4;
+  }
+
+  section .code {
+    @apply .w-full
+  }
+}
+
+

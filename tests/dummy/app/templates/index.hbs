@@ -1,0 +1,266 @@
+<h1 id="title">@microstates/ember</h1>
+
+<section>
+  <header id="any-demo">
+    <h2>Any</h2>
+  </header>
+  <div class="column demo demo-any">
+    {{!BEGIN-SNIPPET any}}
+    {{#let (state) as |value|}}
+      <input
+        value={{number.state}}
+        onchange={{action value.set value="target.value"}}
+      />
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="any.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header id="boolean-demo">
+    <h2>Boolean</h2>
+  </header>
+  <div class="column demo boolean-demo">
+    {{!BEGIN-SNIPPET boolean}}
+    {{#let (state true) as |switch|}}
+      <label title="click to toggle state">
+        <input
+          type="checkbox"
+          checked={{switch.state}}
+          onclick={{action switch.toggle}}
+        >
+        {{switch.state}}
+      </label>
+      <button {{action switch.set false}}>
+        set to false
+      </button>
+      <button {{action switch.set true}}>
+        set to true
+      </button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="boolean.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header id="number-demo">
+    <h2>Number</h2>
+  </header>
+  <div class="column demo number-demo">
+    {{!BEGIN-SNIPPET number}}
+    {{#let (state 5) as |number|}}
+      <input
+        type="number"
+        value={{number.state}}
+        onchange={{action number.set value="target.value"}}
+      >
+      <button {{action number.decrement}}>
+        --
+      </button>
+      <button {{action number.increment}}>
+        ++
+      </button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="number.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="string-demo">String</h2></header>
+  <div class="column demo string-demo">
+    {{!BEGIN-SNIPPET string}}
+    {{#let (state "hello world") as |string|}}
+      <input
+        value={{string.state}}
+        oninput={{action string.set value="target.value"}}
+      >
+
+      <button {{action string.concat "!!!"}}>
+        Append !!!
+      </button>
+      <button {{action string.set ""}}>
+        Clear
+      </button>
+    {{/let}}
+    {{!END-SNIPPET list}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="string.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="object-demo">Object</h2></header>
+  <div class="column demo object-demo">
+    {{!BEGIN-SNIPPET object}}
+    {{#let
+      (state
+        (object Address="742 Evergreen Terrace" City="Springfield" State="")
+      ) as |address|
+    }}
+      {{#each address as |line|}}
+        <label>
+          {{line.key}}
+          <input
+            value={{line.value.state}}
+            onchange={{action line.value.set value="target.value"}}
+          >
+        </label>
+      {{/each}}
+      <button {{action address.put 'Country' ''}}>Add Country Field</button>
+      <button {{action address.set}}>Clear</button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="object.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="array-demo">Array</h2></header>
+  <div class="column demo">
+    {{!BEGIN-SNIPPET list}}
+    {{! array helper from ember-composable-helpers }}
+    {{#let (state (array 10 20 30)) as |numbers|}}
+      <button {{action numbers.unshift 0}}>
+        Unshift 0
+      </button>
+      {{#each numbers as |number|}}
+        <button {{action number.increment}}>
+          {{number.state}}
+          ++
+        </button>
+      {{/each}}
+      <button {{action numbers.push 0}}>
+        Push 0
+      </button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="list.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="tree-demo">Tree</h2></header>
+  <div class="column demo">
+    <div class="spec-tree">
+      {{!BEGIN-SNIPPET tree-demo}}
+      {{#let (state (type "node") tree) as |node|}}
+        <Tree @node={{node}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </div>
+  </div>
+  <div class="column code">
+    {{code-snippet name="tree-demo.hbs"}}
+    <h3>
+      Component
+    </h3>
+    {{code-snippet name="tree.hbs"}}
+    <h3>
+      State
+    </h3>
+    {{code-snippet name="node.js"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="todomvc-demo">TodoMVC</h2></header>
+  <div class="column demo">
+    <div class="todoapp-container">
+      {{!BEGIN-SNIPPET todomvc}}
+      {{#let (state (type "todomvc") initialTodomvc) as |todomvc|}}
+        <div class="todoapp">
+          <form class="header" {{action todomvc.insertNewTodo on="submit"}}>
+            <h1>todos</h1>
+            <input
+              class="new-todo"
+              placeholder="What needs to be done?"
+              value={{todomvc.newTodo.state}}
+              onchange={{action todomvc.newTodo.set value="target.value"}}
+            />
+          </form>
+          <div class="main">
+            <input class="toggle-all" type="checkbox" checked={{todomvc.isAllComplete}} />
+            <label for="toggle-all" {{action todomvc.toggleAll}}>
+              Mark all as complete
+            </label>
+            <ul class="todo-list">
+              {{#each todomvc.filtered as |todo|}}
+                <li class={{if todo.completed.state "completed"}}>
+                  {{#if todo.editing.state}}
+                    <input 
+                      class="edit" 
+                      value={{todo.text.state}} 
+                      onchange={{action todo.text.set value="target.value"}}
+                      onblur={{action todo.save}}
+                    />
+                  {{else}}
+                    <div class="view">
+                      <input 
+                        class="toggle" 
+                        type="checkbox" 
+                        checked={{todo.completed.state}} 
+                        onclick={{action todo.completed.toggle}} 
+                      />
+                      <label {{action todo.edit on="doubleClick"}}>
+                        {{todo.text.state}}
+                      </label>
+                      <button class="destroy" {{action todomvc.todos.remove todo}} />
+                    </div>
+                  {{/if}}
+                </li>
+              {{/each}}
+            </ul>
+          </div>
+          <footer class="footer">
+            <span class="todo-count">
+              <strong>
+                {{todomvc.active.length}}
+              </strong>
+              {{if (eq todomvc.active.length 1) 'item' 'items'}} left
+            </span>
+            <ul class="filters">
+              {{#each todomvc.filters as |filter|}}
+                <li>
+                  <button
+                    class={{if filter.selected "selected"}}
+                    {{action filter.select}}
+                  >
+                    {{filter.label}}
+                  </button>
+                </li>
+              {{/each}}
+            </ul>
+            {{#if todomvc.hasCompleted}}
+              <button class="clear-completed" {{action todomvc.clearCompleted}}>
+                Clear completed
+              </button>
+            {{/if}}
+          </footer>
+        </div>
+      {{/let}}
+      {{!END-SNIPPET}}
+    </div>
+  </div>
+  <div class="column code">
+    {{code-snippet name="todomvc.hbs"}}
+    <h3>Type</h3>
+    {{code-snippet name="todomvc-type.js"}}
+    This example uses TodoMVC type distributed as <a href="https://github.com/microstates/todomvc">@microstate/todomvc</a> package.
+    You can see the source of this type in <a href="https://github.com/microstates/todomvc/blob/master/todomvc.js">TodoMVC</a> module.
+    In the <a href="https://github.com/microstates/todomvc">README</a>, you can find links to the same type used to create React and Vue examples. 
+  </div>
+</section>
