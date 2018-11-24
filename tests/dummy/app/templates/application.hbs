@@ -1,31 +1,36 @@
-{{#burger-menu as |burger|}}
+{{#burger-menu animation="squeeze" width=200 as |burger|}}
   {{#burger.menu itemTagName="li" as |menu|}}
-    <button {{action burger.state.actions.close}}>Close</button>
-
-    <ul class="list-reset">
-    {{#each-in 
-      (object
-        Any="#any-demo" 
-        Boolean="#boolean-demo"
-        Number="#number-demo"
-        Object="#object-demo"
-        Array="#array-demo"
-        TodoMVC="#todomvc-demo"
-      ) as |name url|
-    }}
-      {{#menu.item}}
-        <a href={{url}}>{{name}}</a>
-      {{/menu.item}}
-    {{/each-in}}
-    </ul>
+    <div class="menu">
+      <h3>Demos</h3>
+      <ul>
+      {{#each-in 
+        (object
+          Any="#any-demo" 
+          Boolean="#boolean-demo"
+          Number="#number-demo"
+          Object="#object-demo"
+          Array="#array-demo"
+          TodoMVC="#todomvc-demo"
+        ) as |name url|
+      }}
+        {{#menu.item}}
+          <a href={{url}}>{{name}}</a>
+        {{/menu.item}}
+      {{/each-in}}
+      </ul>
+    </div>
   {{/burger.menu}}
 
   {{#burger.outlet}}
-    <button class="burger" {{action burger.state.actions.toggle}}>
-      {{fa-icon "bars" size=2}}
-    </button>
-
     <div class="container mx-auto px-4 flex flex-wrap">
+      <nav>
+        <h1 id="title">
+          <button class="burger" {{action burger.state.actions.toggle}}>
+            {{fa-icon "bars"}}
+          </button>
+          @microstates/ember
+        </h1>
+      </nav>
       {{outlet}}
     </div>
   {{/burger.outlet}}

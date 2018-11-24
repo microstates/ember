@@ -1,3 +1,6 @@
+$bm-transition-duration: 0.3s;
+$bm-overlay-background: transparent;
+
 @import 'ember-burger-menu';
 @import 'tailwind';
 @import './todomvc';

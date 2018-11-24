@@ -1,5 +1,3 @@
-<h1 id="title">@microstates/ember</h1>
-
 <section>
   <header id="any-demo">
     <h2>Any</h2>
@@ -128,21 +126,28 @@
 
 <section>
   <header><h2 id="array-demo">Array</h2></header>
-  <div class="column demo">
+  <div class="column demo array-demo">
     {{!BEGIN-SNIPPET list}}
     {{! array helper from ember-composable-helpers }}
     {{#let (state (array 10 20 30)) as |numbers|}}
       <button {{action numbers.unshift 0}}>
-        Unshift 0
+        add a number
       </button>
-      {{#each numbers as |number|}}
-        <button {{action number.increment}}>
-          {{number.state}}
-          ++
-        </button>
-      {{/each}}
+      <ul>
+        {{#each numbers as |number|}}
+          <li>
+            <button {{action number.decrement}}>--</button>
+            <input 
+              type="number" 
+              value={{number.state}} 
+              onchange={{action number.set value="target.value"}} 
+            />
+            <button {{action number.increment}}>++</button>
+          </li>
+        {{/each}}
+      </ul>
       <button {{action numbers.push 0}}>
-        Push 0
+        add a number
       </button>
     {{/let}}
     {{!END-SNIPPET}}

@@ -1,41 +1,5 @@
-.burger {
-  @apply .fixed;
-  left: 5px;
-  top: 5px;
-}
-
-.btn-white {
-  @apply .bg-white .text-grey-darkest .font-semibold .py-2 .px-4 .border .border-grey-light .rounded .shadow;    
-}
-
-.boolean-demo label {
-  @apply .inline-block .w-16 .cursor-pointer
-}
-
-.boolean-demo button, 
-.number-demo button, 
-.string-demo button,
-.object-demo button {
-  @apply .btn-white;
-}
-
-.boolean-demo button:hover, 
-.number-demo button:hover, 
-.string-demo button:hover,
-.object-demo button:hover {
-  @apply .bg-grey-lightest
-}
-
-.demo-any input, .number-demo input, .string-demo input, .object-demo input {
-  @apply .border .rounded .p-2;
-}
-
-.object-demo label {
-  @apply .block .cursor-pointer .font-bold;
-}
-
-.object-demo input {
-  @apply block .mb-2;
+nav {
+  @apply .sticky .pin-t .pt-4;
 }
 
 h1 {
@@ -64,4 +28,90 @@ section header {
   }
 }
 
+.menu {
+  @apply .p-4;
+}
 
+.menu h3 {
+  @apply .mb-2;
+}
+
+.menu .close {
+  @apply .mb-4;
+}
+
+.menu ul {
+  @apply .list-reset;
+}
+
+.menu ul li {
+  @apply .py-1;
+}
+
+.menu a {
+  @apply .text-black .no-underline;
+}
+
+.menu .close {
+  @apply .pin-r;
+}
+
+.btn-white {
+  @apply .bg-white .text-grey-darkest .font-semibold .py-2 .px-4 .border .border-grey-light .rounded .shadow;    
+}
+
+.boolean-demo label {
+  @apply .inline-block .w-16 .cursor-pointer
+}
+
+.boolean-demo button, 
+.number-demo button, 
+.string-demo button,
+.object-demo button,
+.array-demo button {
+  @apply .btn-white;
+}
+
+.boolean-demo button:hover, 
+.number-demo button:hover, 
+.string-demo button:hover,
+.object-demo button:hover,
+.array-demo button:hover {
+  @apply .bg-grey-lightest
+}
+
+.demo-any input, .number-demo input, .string-demo input, .object-demo input {
+  @apply .border .rounded .p-2;
+}
+
+.object-demo label {
+  @apply .block .cursor-pointer .font-bold;
+}
+
+.object-demo input {
+  @apply block .mb-2;
+}
+
+.array-demo {
+  @apply .w-1/2;
+}
+
+.array-demo > button {
+  @apply .w-full;
+}
+
+.array-demo ul {
+  @apply .list-reset;
+}
+
+.array-demo li {
+  @apply .flex .py-1;
+}
+
+.array-demo li button {
+  @apply .flex-none;
+}
+
+.array-demo input {
+  @apply .block .flex-grow .text-xl .text-center .border .rounded .mx-2;
+}
