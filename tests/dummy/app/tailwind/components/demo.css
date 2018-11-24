@@ -80,7 +80,10 @@ section header {
   @apply .bg-grey-lightest
 }
 
-.demo-any input, .number-demo input, .string-demo input, .object-demo input {
+.demo-any input, 
+.number-demo input, 
+.string-demo input, 
+.object-demo input {
   @apply .border .rounded .p-2;
 }
 
@@ -114,4 +117,16 @@ section header {
 
 .array-demo input {
   @apply .block .flex-grow .text-xl .text-center .border .rounded .mx-2;
+}
+
+.tree-demo ul {
+  @apply .list-reset .ml-6 .mt-2;
+}
+
+.tree-demo li {
+  @apply .mb-2;
+}
+
+.tree-demo input {
+  @apply .border .rounded .px-2;
 }
