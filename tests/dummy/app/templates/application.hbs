@@ -3,20 +3,21 @@
     <div class="menu">
       <h3>Demos</h3>
       <ul>
-      {{#each-in 
-        (object
-          Any="#any-demo" 
-          Boolean="#boolean-demo"
-          Number="#number-demo"
-          Object="#object-demo"
-          Array="#array-demo"
-          TodoMVC="#todomvc-demo"
-        ) as |name url|
+      {{#each 
+        (array
+          (component "anchor" "Any" "/#any-demo")
+          (component "anchor" "Boolean" "/#boolean-demo")
+          (component "anchor" "Number" "/#number-demo")
+          (component "anchor" "Object" "/#object-demo")
+          (component "anchor" "Array" "/#array-demo")
+          (component "link-to" "TodoMVC" "todomvc")
+          (component "link-to" "TodoMVC Manager" "todomvc-manager")
+        ) as |link|
       }}
         {{#menu.item}}
-          <a href={{url}}>{{name}}</a>
+          {{link}}
         {{/menu.item}}
-      {{/each-in}}
+      {{/each}}
       </ul>
     </div>
   {{/burger.menu}}
@@ -25,7 +26,7 @@
     <div class="container mx-auto px-4 flex flex-wrap">
       <nav>
         <h1 id="title">
-          <button class="burger" {{action burger.state.actions.toggle}}>
+          <button type="button" class="burger" {{action burger.state.actions.toggle}}>
             {{fa-icon "bars"}}
           </button>
           @microstates/ember

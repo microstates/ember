@@ -1,0 +1,27 @@
+<section id="many-todomvc-demo">
+  <header>
+    <h2>TodoMVC Manager</h2>
+  </header>
+  <div class="column demo">
+    {{!BEGIN-SNIPPET many-todomvc-template}}
+    {{#let (state (type "todomvc-manager")) as |manager|}}
+      <form class="manager-form" {{action manager.addList on="submit"}}>
+        <input
+          value={{manager.newListTitle.state}} 
+          onchange={{action manager.newListTitle.set value="target.value"}}
+        >
+        <button type="button" disabled={{not manager.isValid}}>Add list</button>
+      </form>
+      {{#each manager.lists as |list|}}
+        <Todomvc @todomvc={{list}} />
+      {{/each}}
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    <h3 class="mb-2">Type</h3>
+    {{code-snippet name="many-todomvc-type.js"}}
+    <h3 class="my-2">Template</h3>
+    {{code-snippet name="many-todomvc-template.hbs"}}
+  </div>
+</section>

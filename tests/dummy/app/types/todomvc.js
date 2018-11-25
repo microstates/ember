@@ -24,9 +24,11 @@ export class EditableTodo extends Todo {
 }
 
 export default class TodoMVC {
+  title   = String;
+
   todos   = [EditableTodo]  // Contains array of todo items
   newTodo = String
-  filter = String
+  filter  = String
 
   get nextId() {
     return reduce(this.todos, (acc, todo) => Math.max(todo.id.state, acc), 0) + 1;

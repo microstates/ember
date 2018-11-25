@@ -7,6 +7,9 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('tree');
+  this.route('todomvc');
+  this.route('todomvc-manager');
 });
 
 export default Router;

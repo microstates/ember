@@ -4,6 +4,7 @@ import { state } from '@microstates/ember';
 import TodoMVC from '../types/todomvc';
 
 const initial = {
+  title: 'todos',
   todos: [
     { id: 0, text: 'Checkout Microstates demo', completed: true },
     { id: 1, text: 'Try Microstates in a side project', completed: false },

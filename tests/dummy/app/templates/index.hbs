@@ -143,36 +143,3 @@
     {{code-snippet name="list.hbs"}}
   </div>
 </section>
-
-<section>
-  <header><h2 id="tree-demo">Tree</h2></header>
-  <div class="column demo tree-demo">
-    {{!BEGIN-SNIPPET tree-demo}}
-    <Tree @node={{state (type "node") treeInitial}} />
-    {{!END-SNIPPET}}
-  </div>
-  <div class="column code">
-    {{code-snippet name="tree-demo.hbs"}}
-    <h3 class="my-2">Type</h3>
-    {{code-snippet name="node.js"}}
-    <h3 class="my-2">Component</h3>
-    {{code-snippet name="tree.hbs"}}
-  </div>
-</section>
-
-<section>
-  <header><h2 id="todomvc-demo">TodoMVC</h2></header>
-  <div class="column demo">
-    <div class="todoapp-container">
-      <Todomvc />
-    </div>
-  </div>
-  <div class="column code">
-    <h3 class="mb-2">Type</h3>
-    {{code-snippet name="todomvc-type.js"}}
-    <h3 class="my-2">Component JavaScript</h3>
-    {{code-snippet name="todomvc-component-javascript.js"}}
-    <h3 class="my-2">Component Template</h3>
-    {{code-snippet name="todomvc-component-template.hbs"}}
-  </div>
-</section>

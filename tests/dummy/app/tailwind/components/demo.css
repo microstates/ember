@@ -68,7 +68,8 @@ section header {
 .number-demo button, 
 .string-demo button,
 .object-demo button,
-.array-demo button {
+.array-demo button,
+#many-todomvc-demo .manager-form button {
   @apply .btn-white;
 }
 
@@ -83,7 +84,8 @@ section header {
 .demo-any input, 
 .number-demo input, 
 .string-demo input, 
-.object-demo input {
+.object-demo input,
+#many-todomvc-demo .manager-form input {
   @apply .border .rounded .p-2;
 }
 
@@ -130,3 +132,4 @@ section header {
 .tree-demo input {
   @apply .border .rounded .px-2;
 }
+
