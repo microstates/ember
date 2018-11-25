@@ -164,85 +164,15 @@
   <header><h2 id="todomvc-demo">TodoMVC</h2></header>
   <div class="column demo">
     <div class="todoapp-container">
-      {{!BEGIN-SNIPPET todomvc}}
-      {{#let (state (type "todomvc") initialTodoMVC) as |todomvc|}}
-        <div class="todoapp">
-          <form class="header" {{action todomvc.insertNewTodo on="submit"}}>
-            <h1>todos</h1>
-            <input
-              class="new-todo"
-              placeholder="What needs to be done?"
-              value={{todomvc.newTodo.state}}
-              onchange={{action todomvc.newTodo.set value="target.value"}}
-            />
-          </form>
-          <div class="main">
-            <input class="toggle-all" type="checkbox" checked={{todomvc.isAllComplete}} />
-            <label for="toggle-all" {{action todomvc.toggleAll}}>
-              Mark all as complete
-            </label>
-            <ul class="todo-list">
-              {{#each todomvc.filtered as |todo|}}
-                <li class={{if todo.completed.state "completed"}}>
-                  {{#if todo.editing.state}}
-                    <input 
-                      class="edit" 
-                      value={{todo.text.state}} 
-                      onchange={{action todo.text.set value="target.value"}}
-                      onblur={{action todo.save}}
-                    />
-                  {{else}}
-                    <div class="view">
-                      <input 
-                        class="toggle" 
-                        type="checkbox" 
-                        checked={{todo.completed.state}} 
-                        onclick={{action todo.completed.toggle}} 
-                      />
-                      <label {{action todo.edit on="doubleClick"}}>
-                        {{todo.text.state}}
-                      </label>
-                      <button class="destroy" {{action todomvc.todos.remove todo}} />
-                    </div>
-                  {{/if}}
-                </li>
-              {{/each}}
-            </ul>
-          </div>
-          <footer class="footer">
-            <span class="todo-count">
-              <strong>
-                {{todomvc.active.length}}
-              </strong>
-              {{if (eq todomvc.active.length 1) 'item' 'items'}} left
-            </span>
-            <ul class="filters">
-              {{#each todomvc.filters as |filter|}}
-                <li>
-                  <button
-                    class={{if filter.selected "selected"}}
-                    {{action filter.select}}
-                  >
-                    {{filter.label}}
-                  </button>
-                </li>
-              {{/each}}
-            </ul>
-            {{#if todomvc.hasCompleted}}
-              <button class="clear-completed" {{action todomvc.clearCompleted}}>
-                Clear completed
-              </button>
-            {{/if}}
-          </footer>
-        </div>
-      {{/let}}
-      {{!END-SNIPPET}}
+      <Todomvc />
     </div>
   </div>
   <div class="column code">
     <h3 class="mb-2">Type</h3>
     {{code-snippet name="todomvc-type.js"}}
-    <h3 class="my-2">Implementation</h3>
-    {{code-snippet name="todomvc.hbs"}}
+    <h3 class="my-2">Component JavaScript</h3>
+    {{code-snippet name="todomvc-component-javascript.js"}}
+    <h3 class="my-2">Component Template</h3>
+    {{code-snippet name="todomvc-component-template.hbs"}}
   </div>
 </section>
