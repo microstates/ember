@@ -8,19 +8,21 @@
       <form class="manager-form" {{action manager.addList on="submit"}}>
         <input
           value={{manager.newListTitle.state}} 
-          onchange={{action manager.newListTitle.set value="target.value"}}
+          oninput={{action manager.newListTitle.set value="target.value"}}
         >
-        <button disabled={{not manager.isValid}}>Add list</button>
-        <button {{action manager.show "show_completed"}}>Show Completed</button>
-        <button {{action manager.show "show_active"}}>Show Active</button>
-        <button {{action manager.show ""}}>Show All</button>
+        <button disabled={{not manager.isValid}}>Create</button>
+        <button {{action manager.show ""}}>All</button>
+        <button {{action manager.show "show_active"}}>Active</button>
+        <button {{action manager.show "show_completed"}}>Completed</button>
         {{#if manager.remaining}}
-          <button {{action manager.completeRemaining}}><i class="badge">{{manager.remaining}}</i>Complete Remaining</button>
+          <button {{action manager.completeRemaining}}><i class="badge">{{manager.remaining}}</i>Complete All</button>
         {{/if}}
       </form>
-      {{#each manager.lists key="title.state" as |list|}}
-        <Todomvc @todomvc={{list}} />
-      {{/each}}
+      <section>
+        {{#each manager.lists key="title.state" as |list|}}
+          <Todomvc @todomvc={{list}} />
+        {{/each}}
+      </section>
     {{/let}}
     {{!END-SNIPPET}}
   </div>

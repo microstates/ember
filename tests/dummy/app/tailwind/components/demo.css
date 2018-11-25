@@ -133,7 +133,40 @@ section header {
   @apply .border .rounded .px-2;
 }
 
+#todomvc-manager-demo input {
+  @apply .w-32;
+}
+
 #todomvc-manager-demo .badge {
   @apply .inline-block .rounded-full .bg-indigo .uppercase .px-2 .py-1 .text-xs .font-bold .mr-2 .text-white .text-center .align-middle;
+}
+
+#todomvc-manager-demo button:disabled {
+  @apply .shadow-none .bg-grey-lightest;
+}
+
+#todomvc-manager-demo section {
+  @apply .flex .flex-wrap;
+}
+
+#todomvc-manager-demo section {
+  @apply .mt-8;
+  background: #f5f5f5;
+}
+
+@screen sm {
+  #todomvc-manager-demo .todoapp-container {
+    @apply .w-full .m-auto;
+  }
+}
+
+@screen lg {
+  #todomvc-manager-demo .todoapp-container {
+    @apply .w-1/2;
+    
+  }
+  #todomvc-manager-demo .todoapp-container:nth-child(n + 1) {
+    page-break-before: always; /* FF33 */
+  }
 }
 
