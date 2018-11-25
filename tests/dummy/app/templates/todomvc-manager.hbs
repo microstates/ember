@@ -1,4 +1,4 @@
-<section id="many-todomvc-demo">
+<section id="todomvc-manager-demo">
   <header>
     <h2>TodoMVC Manager</h2>
   </header>
@@ -15,7 +15,7 @@
         <button {{action manager.show "show_active"}}>Show Active</button>
         <button {{action manager.show ""}}>Show All</button>
         {{#if manager.remaining}}
-          <button {{action manager.completeRemaining}}>Complete Remaining {{manager.remaining}} items</button>
+          <button {{action manager.completeRemaining}}><i class="badge">{{manager.remaining}}</i>Complete Remaining</button>
         {{/if}}
       </form>
       {{#each manager.lists key="title.state" as |list|}}

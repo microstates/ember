@@ -69,7 +69,7 @@ section header {
 .string-demo button,
 .object-demo button,
 .array-demo button,
-#many-todomvc-demo .manager-form button {
+#todomvc-manager-demo .manager-form button {
   @apply .btn-white;
 }
 
@@ -85,7 +85,7 @@ section header {
 .number-demo input, 
 .string-demo input, 
 .object-demo input,
-#many-todomvc-demo .manager-form input {
+#todomvc-manager-demo .manager-form input {
   @apply .border .rounded .p-2;
 }
 
@@ -131,5 +131,9 @@ section header {
 
 .tree-demo input {
   @apply .border .rounded .px-2;
+}
+
+#todomvc-manager-demo .badge {
+  @apply .inline-block .rounded-full .bg-indigo .uppercase .px-2 .py-1 .text-xs .font-bold .mr-2 .text-white .text-center .align-middle;
 }
 
