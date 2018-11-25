@@ -1,9 +1,9 @@
 // BEGIN-SNIPPET todomvc-type
 import { reduce, filter } from "@microstates/ember";
 
-export const SHOW_ALL = "";
-export const SHOW_COMPLETED = "show_completed";
-export const SHOW_ACTIVE = "show_active";
+export const ALL = "";
+export const COMPLETED = "completed";
+export const ACTIVE = "active";
 
 export class Todo {
   id = Number
@@ -62,17 +62,17 @@ export default class TodoMVC {
     });
 
     return [
-      option(SHOW_ALL, 'All'),
-      option(SHOW_ACTIVE, 'Active'),
-      option(SHOW_COMPLETED, 'Completed')
+      option(ALL, 'All'),
+      option(ACTIVE, 'Active'),
+      option(COMPLETED, 'Completed')
     ];
   }
 
   get filtered() {
     switch (this.filter.state) {
-      case SHOW_COMPLETED: return this.completed;
-      case SHOW_ACTIVE: return this.active;
-      case SHOW_ALL:
+      case COMPLETED: return this.completed;
+      case ACTIVE: return this.active;
+      case ALL:
       default:
         return this.todos;
     }

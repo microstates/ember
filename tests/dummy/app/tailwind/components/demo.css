@@ -6,10 +6,6 @@ h1 {
   @apply .mb-4;
 }
 
-section {
-  @apply .mb-12;
-}
-
 section header {
   @apply .mb-4;
 }
@@ -58,6 +54,10 @@ section header {
 
 .btn-white {
   @apply .bg-white .text-grey-darkest .font-semibold .py-2 .px-4 .border .border-grey-light .rounded .shadow;    
+}
+
+.code pre {
+  @apply .mb-12;
 }
 
 .boolean-demo label {
@@ -133,12 +133,13 @@ section header {
   @apply .border .rounded .px-2;
 }
 
-#todomvc-manager-demo input {
+#todomvc-manager-demo .manager-form > input {
   @apply .w-32;
 }
 
 #todomvc-manager-demo .badge {
-  @apply .inline-block .rounded-full .bg-indigo .uppercase .px-2 .py-1 .text-xs .font-bold .mr-2 .text-white .text-center .align-middle;
+  @apply .inline-flex .rounded-full .bg-indigo;
+  @apply .px-2 .py-1 .text-xs .font-bold .mr-2 .text-white .text-center .align-middle;
 }
 
 #todomvc-manager-demo button:disabled {
@@ -154,10 +155,8 @@ section header {
   background: #f5f5f5;
 }
 
-@screen sm {
-  #todomvc-manager-demo .todoapp-container {
-    @apply .w-full .m-auto;
-  }
+.todoapp-container {
+  @apply .w-full .m-auto;
 }
 
 @screen lg {
