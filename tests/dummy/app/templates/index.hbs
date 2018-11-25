@@ -6,7 +6,7 @@
     {{!BEGIN-SNIPPET any}}
     {{#let (state) as |value|}}
       <input
-        value={{number.state}}
+        value={{value.state}}
         onchange={{action value.set value="target.value"}}
       />
     {{/let}}
@@ -58,12 +58,8 @@
         value={{number.state}}
         onchange={{action number.set value="target.value"}}
       >
-      <button {{action number.decrement}}>
-        --
-      </button>
-      <button {{action number.increment}}>
-        ++
-      </button>
+      <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+      <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
     {{/let}}
     {{!END-SNIPPET}}
   </div>
@@ -81,13 +77,8 @@
         value={{string.state}}
         oninput={{action string.set value="target.value"}}
       >
-
-      <button {{action string.concat "!!!"}}>
-        Append !!!
-      </button>
-      <button {{action string.set ""}}>
-        Clear
-      </button>
+      <button {{action string.concat "!!!"}}>Append !!!</button>
+      <button {{action string.set}}>Clear</button>
     {{/let}}
     {{!END-SNIPPET list}}
   </div>
@@ -130,25 +121,21 @@
     {{!BEGIN-SNIPPET list}}
     {{! array helper from ember-composable-helpers }}
     {{#let (state (array 10 20 30)) as |numbers|}}
-      <button {{action numbers.unshift 0}}>
-        add a number
-      </button>
+      <button {{action numbers.unshift 0}}>{{fa-icon "plus"}}</button>
       <ul>
         {{#each numbers as |number|}}
           <li>
-            <button {{action number.decrement}}>--</button>
+            <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
             <input 
               type="number" 
               value={{number.state}} 
               onchange={{action number.set value="target.value"}} 
             />
-            <button {{action number.increment}}>++</button>
+            <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
           </li>
         {{/each}}
       </ul>
-      <button {{action numbers.push 0}}>
-        add a number
-      </button>
+      <button {{action numbers.push 0}}>{{fa-icon "plus"}}</button>
     {{/let}}
     {{!END-SNIPPET}}
   </div>
@@ -161,21 +148,19 @@
   <header><h2 id="tree-demo">Tree</h2></header>
   <div class="column demo tree-demo">
     {{!BEGIN-SNIPPET tree-demo}}
-    {{#let (state (type "node") tree) as |node|}}
-      <Tree @node={{node}} />
-    {{/let}}
+    <Tree @node={{state (type "node") treeInitial}} />
     {{!END-SNIPPET}}
   </div>
   <div class="column code">
     {{code-snippet name="tree-demo.hbs"}}
     <h3>
+      Type
+    </h3>
+    {{code-snippet name="node.js"}}
+    <h3>
       Component
     </h3>
     {{code-snippet name="tree.hbs"}}
-    <h3>
-      State
-    </h3>
-    {{code-snippet name="node.js"}}
   </div>
 </section>
 
@@ -184,7 +169,7 @@
   <div class="column demo">
     <div class="todoapp-container">
       {{!BEGIN-SNIPPET todomvc}}
-      {{#let (state (type "todomvc") initialTodomvc) as |todomvc|}}
+      {{#let (state (type "todomvc") initialTodoMVC) as |todomvc|}}
         <div class="todoapp">
           <form class="header" {{action todomvc.insertNewTodo on="submit"}}>
             <h1>todos</h1>
@@ -259,11 +244,9 @@
     </div>
   </div>
   <div class="column code">
-    {{code-snippet name="todomvc.hbs"}}
-    <h3>Type</h3>
+    <h3 class="mb-2">Type</h3>
     {{code-snippet name="todomvc-type.js"}}
-    This example uses TodoMVC type distributed as <a href="https://github.com/microstates/todomvc">@microstate/todomvc</a> package.
-    You can see the source of this type in <a href="https://github.com/microstates/todomvc/blob/master/todomvc.js">TodoMVC</a> module.
-    In the <a href="https://github.com/microstates/todomvc">README</a>, you can find links to the same type used to create React and Vue examples. 
+    <h3 class="my-2">Implementation</h3>
+    {{code-snippet name="todomvc.hbs"}}
   </div>
 </section>

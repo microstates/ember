@@ -11,5 +11,8 @@ export {
   StringType,
   BooleanType,
   Any,
-  from
+  from,
+  reduce,
+  map,
+  filter
 } from "microstates/dist/microstates.cjs";
