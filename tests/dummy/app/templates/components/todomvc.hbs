@@ -1,15 +1,16 @@
+{{log }}
 {{!BEGIN-SNIPPET todomvc-component-template}}
 <div class="todoapp-container">
   <div class="todoapp">
-    <form class="header" {{action todomvc.insertNewTodo on="submit"}}>
+    <form class="header" {{action todomvc.insertNewTodo on="submit"}} autocomplete="off">
       <h1>{{todomvc.title.state}}</h1>
       <input
-        name="new-todo"
+        name="newTodo"
         class="new-todo"
         placeholder="What needs to be done?"
+        autofocus={{true}}
         value={{todomvc.newTodo.state}}
         onchange={{action todomvc.newTodo.set value="target.value"}}
-        autofocus=true
       />
     </form>
     <div class="main">
@@ -18,15 +19,18 @@
         Mark all as complete
       </label>
       <ul class="todo-list">
-        {{#each todomvc.filtered as |todo|}}
+        {{#each todomvc.filtered key="id.state" as |todo|}}
           <li class={{if todo.completed.state "completed"}}>
             {{#if todo.editing.state}}
-              <input
-                class="edit" 
-                value={{todo.text.state}} 
-                onchange={{action todo.text.set value="target.value"}}
-                onblur={{action todo.save}}
-              />
+              <form {{action todo.save on="submit"}}>
+                <input
+                  class="edit" 
+                  value={{todo.text.state}} 
+                  onchange={{action todo.text.set value="target.value"}}
+                  onblur={{action todo.save}}
+                  autofocus={{true}}
+                />
+              </form>
             {{else}}
               <div class="view">
                 <input 

@@ -25,7 +25,6 @@ export class EditableTodo extends Todo {
 
 export default class TodoMVC {
   title   = String;
-
   todos   = [EditableTodo]  // Contains array of todo items
   newTodo = String
   filter  = String

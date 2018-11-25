@@ -2,7 +2,7 @@
 import { reduce } from "@microstates/ember";
 import TodoMVC from "./todomvc";
 
-export default class ManyTodoMVCs {
+export default class TodoMVCManager {
   lists = [TodoMVC];
   newListTitle = String;
 
@@ -23,6 +23,18 @@ export default class ManyTodoMVCs {
 
   get isValid() {
     return this.newListTitle.state !== "" && this.isListTitleUnique;
+  }
+
+  show(filter) {
+    return this.lists.map(list => list.filter.set(filter));
+  }
+
+  get remaining() {
+    return reduce(this.lists, (count, list) => count + list.active.length, 0);
+  }
+
+  completeRemaining() {
+    return this.lists.map(list => list.toggleAll())
   }
 }
 // END-SNIPPET

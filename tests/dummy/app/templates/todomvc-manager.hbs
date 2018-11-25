@@ -4,15 +4,21 @@
   </header>
   <div class="column demo">
     {{!BEGIN-SNIPPET many-todomvc-template}}
-    {{#let (state (type "todomvc-manager")) as |manager|}}
+    {{#let (state (type "todomvc-manager") initial) as |manager|}}
       <form class="manager-form" {{action manager.addList on="submit"}}>
         <input
           value={{manager.newListTitle.state}} 
           onchange={{action manager.newListTitle.set value="target.value"}}
         >
-        <button type="button" disabled={{not manager.isValid}}>Add list</button>
+        <button disabled={{not manager.isValid}}>Add list</button>
+        <button {{action manager.show "show_completed"}}>Show Completed</button>
+        <button {{action manager.show "show_active"}}>Show Active</button>
+        <button {{action manager.show ""}}>Show All</button>
+        {{#if manager.remaining}}
+          <button {{action manager.completeRemaining}}>Complete Remaining {{manager.remaining}} items</button>
+        {{/if}}
       </form>
-      {{#each manager.lists as |list|}}
+      {{#each manager.lists key="title.state" as |list|}}
         <Todomvc @todomvc={{list}} />
       {{/each}}
     {{/let}}
