@@ -120,7 +120,7 @@
   <div class="column demo array-demo">
     {{!BEGIN-SNIPPET list}}
     {{! array helper from ember-composable-helpers }}
-    {{#let (state (array 10 20 30)) as |numbers|}}
+    {{#let (state (array-of "number") (array 10 20 30)) as |numbers|}}
       <button {{action numbers.unshift 0}}>{{fa-icon "plus"}}</button>
       <ul>
         {{#each numbers as |number|}}
@@ -153,13 +153,9 @@
   </div>
   <div class="column code">
     {{code-snippet name="tree-demo.hbs"}}
-    <h3>
-      Type
-    </h3>
+    <h3 class="my-2">Type</h3>
     {{code-snippet name="node.js"}}
-    <h3>
-      Component
-    </h3>
+    <h3 class="my-2">Component</h3>
     {{code-snippet name="tree.hbs"}}
   </div>
 </section>
