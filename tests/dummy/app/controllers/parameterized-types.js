@@ -15,5 +15,23 @@ export default Controller.extend({
         { id: 4, text: "Bagels", completed: false }
       ]
     }
-  ]
+  ],
+  simpsons: {
+    father: {
+      name: 'Homer Simpson',
+      age: 36
+    },
+    mother: {
+      name: 'Marge Simpson',
+      age: 34
+    },
+    son: {
+      name: 'Bart Simpson',
+      age: 9
+    },
+    daughter: {
+      name: 'Lisa Simpson',
+      age: 7
+    }
+  }
 }); 

@@ -1,5 +1,5 @@
 main {
-  @apply .my-6;
+  @apply .my-6 .max-w-full;
 }
 
 nav {
@@ -105,7 +105,8 @@ main .intro {
 #object button,
 #array button,
 #todomvc-manager .manager-form button,
-#array-of-todomvc .live > button {
+#array-of-todomvc .live > button,
+#object-of-person button {
   @apply .btn-white;
 }
 
@@ -113,7 +114,10 @@ main .intro {
 #number button:hover, 
 #string button:hover,
 #object button:hover,
-#array button:hover {
+#array button:hover,
+#todomvc-manager .manager-form button:hover,
+#array-of-todomvc .live > button:hover,
+#object-of-person button:hover {
   @apply .bg-grey-lightest
 }
 
@@ -121,7 +125,8 @@ main .intro {
 #number input, 
 #string input, 
 #object input,
-#todomvc-manager .manager-form input {
+#todomvc-manager .manager-form input,
+#object-of-person input {
   @apply .border .rounded .p-2;
 }
 
@@ -206,10 +211,21 @@ main .intro {
   @apply .w-full .m-auto;
 }
 
+#object-of-person ul {
+  @apply .list-reset .my-4;
+}
+
+#object-of-person .live span {
+  @apply .inline-block .w-24;
+}
+
+#object-of-person .live li {
+  @apply .mb-1;
+}
+
 @screen lg {
   #todomvc-manager .todoapp-container {
-    @apply .w-1/2;
-    
+    @apply .w-1/2;   
   }
   #todomvc-manager .todoapp-container:nth-child(n + 1) {
     page-break-before: always; /* FF33 */
