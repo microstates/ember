@@ -1,9 +1,17 @@
+main {
+  @apply .my-6;
+}
+
 nav {
   @apply .sticky .pin-t .pt-4;
 }
 
 h1 {
   @apply .mb-4;
+}
+
+main .intro {
+  @apply .py-4 .mb-6;
 }
 
 @screen sm {
@@ -38,6 +46,10 @@ h1 {
 }
 
 @screen lg {
+  main .intro {
+    @apply .w-2/3;
+  }
+
   .page-section .section-body {
     @apply .flex-row;
   }
