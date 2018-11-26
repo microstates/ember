@@ -1,0 +1,175 @@
+<Section 
+  @id="any"
+  @title="Any"
+  as |s|
+>
+  <s.notes>
+    <p>Not passing a value or passing <pre class="inline">undefined</pre> to the state helper will create a microstate of type <i>Any</i>.</p>
+    <p><strong>Transitions</strong>: Created microstate will only have a <i>set</i> transition. It will accept any value.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/any.js" target="_blank">Any</a></p>
+    <p><strong>Using type helper</strong>: <pre>(state (type "any") value)</pre></p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET any}}
+      {{#let (state) as |any|}}
+        <input
+          value={{any.state}}
+          oninput={{action any.set value="target.value"}}
+        />
+        <ValueBadge @value={{value-of any}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="any.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="boolean"
+  @title="Boolean"
+  as |s|
+>
+  <s.notes>
+    <p>Passing true or false as a value to the state helper will create a microstate of <i>Boolean</i> type.</p>
+    <p><strong>Transitions</strong>: Boolean has a <i>toggle</i> transition and <i>set</i> transitions.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/boolean.js" target="_blank">Boolean</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "boolean") value)</pre>
+      When using the type helper, the value will be coerced into a boolean.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET boolean}}
+      {{#let (state true) as |switch|}}
+        <input
+          type="checkbox"
+          checked={{switch.state}}
+          onclick={{action switch.toggle}}
+        >
+        <button {{action switch.set false}}>
+          set to false
+        </button>
+        <button {{action switch.set true}}>
+          set to true
+        </button>
+        <ValueBadge @value={{value-of switch}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="boolean.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="number"
+  @title="Number"
+  as |s|
+>
+  <s.notes>
+    <p>When state helper receives a number value, it will create a microstate of type <i>Number</i>.</p>
+    <p><strong>Transitions</strong>: Created microstate will have <i>increment</i>, <i>decrement</i> and <i>set</i> transitions. <i>set</i> transition will coerce the argument to a number.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/number.js" target="_blank">Number</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "number") value)</pre>
+      When using the type helper, the value will be coerced into a number.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+    {{!BEGIN-SNIPPET number}}
+    {{#let (state 5) as |number|}}
+      <input
+        type="number"
+        value={{number.state}}
+        oninput={{action number.set value="target.value"}}
+      >
+      <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+      <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+      <ValueBadge @value={{value-of number}} />
+    {{/let}}
+    {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="number.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<section>
+  <header><h2 id="string-demo">String</h2></header>
+  <div class="column demo string-demo">
+    {{!BEGIN-SNIPPET string}}
+    {{#let (state "hello world") as |string|}}
+      <input
+        value={{string.state}}
+        oninput={{action string.set value="target.value"}}
+      >
+      <button {{action string.concat "!!!"}}>Append !!!</button>
+      <button {{action string.set}}>Clear</button>
+    {{/let}}
+    {{!END-SNIPPET list}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="string.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="object-demo">Object</h2></header>
+  <div class="column demo object-demo">
+    {{!BEGIN-SNIPPET object}}
+    {{#let
+      (state
+        (object Address="742 Evergreen Terrace" City="Springfield" State="")
+      ) as |address|
+    }}
+      {{#each address as |line|}}
+        <label>
+          {{line.key}}
+          <input
+            value={{line.value.state}}
+            onchange={{action line.value.set value="target.value"}}
+          >
+        </label>
+      {{/each}}
+      <button {{action address.put 'Country' ''}}>Add Country Field</button>
+      <button {{action address.set}}>Clear</button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="object.hbs"}}
+  </div>
+</section>
+
+<section>
+  <header><h2 id="array-demo">Array</h2></header>
+  <div class="column demo array-demo">
+    {{!BEGIN-SNIPPET array-demo}}
+    {{#let (state (array 10 20 30)) as |numbers|}}
+      <ul>
+        {{#each numbers as |number|}}
+          <li>
+            <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+            <input 
+              type="number" 
+              value={{number.state}} 
+              onchange={{action number.set value="target.value"}} 
+            />
+            <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+          </li>
+        {{/each}}
+      </ul>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="array-demo.hbs"}}
+  </div>
+</section>

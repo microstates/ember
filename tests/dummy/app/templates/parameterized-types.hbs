@@ -1,3 +1,32 @@
+<section>
+  <header><h2 id="array-demo">Array</h2></header>
+  <div class="column demo array-demo">
+    {{!BEGIN-SNIPPET list}}
+    {{! array helper from ember-composable-helpers }}
+    {{#let (state (array-of "number") (array 10 20 30)) as |numbers|}}
+      <button {{action numbers.unshift 0}}>{{fa-icon "plus"}}</button>
+      <ul>
+        {{#each numbers as |number|}}
+          <li>
+            <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+            <input 
+              type="number" 
+              value={{number.state}} 
+              onchange={{action number.set value="target.value"}} 
+            />
+            <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+          </li>
+        {{/each}}
+      </ul>
+      <button {{action numbers.push 0}}>{{fa-icon "plus"}}</button>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    {{code-snippet name="list.hbs"}}
+  </div>
+</section>
+
 <section id="todomvc-manager-demo">
   <header>
     <h2>TodoMVC Manager</h2>

@@ -5,13 +5,11 @@
       <ul>
       {{#each 
         (array
-          (component "anchor" "Any" "/#any-demo")
-          (component "anchor" "Boolean" "/#boolean-demo")
-          (component "anchor" "Number" "/#number-demo")
-          (component "anchor" "Object" "/#object-demo")
-          (component "anchor" "Array" "/#array-demo")
-          (component "link-to" "TodoMVC" "todomvc")
-          (component "link-to" "TodoMVC Manager" "todomvc-manager")
+          (component "link-to" "Primitive Types" "primitive-types")
+          (component "link-to" "Composed Types" "composed-types")
+          (component "link-to" "Recursive Types" "recursive-types")
+          (component "link-to" "Parameterized Types" "parameterized-types")
+          (component "link-to" "Higher Order Types" "higher-order-types")
         ) as |link|
       }}
         {{#menu.item}}
