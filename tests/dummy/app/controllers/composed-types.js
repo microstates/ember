@@ -1,7 +1,7 @@
 import Controller from "@ember/controller";
 
 export default Controller.extend({
-  initial: {
+  todomvcManagerInitial: {
     lists: [
       {
         title: "bucket",

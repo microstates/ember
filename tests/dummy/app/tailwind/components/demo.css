@@ -104,7 +104,8 @@ main .intro {
 #string button,
 #object button,
 #array button,
-#todomvc-manager-demo .manager-form button {
+#todomvc-manager .manager-form button,
+#array-of-todomvc .live > button {
   @apply .btn-white;
 }
 
@@ -120,7 +121,7 @@ main .intro {
 #number input, 
 #string input, 
 #object input,
-#todomvc-manager-demo .manager-form input {
+#todomvc-manager .manager-form input {
   @apply .border .rounded .p-2;
 }
 
@@ -139,11 +140,6 @@ main .intro {
 #object .value-badge {
   @apply .block .mt-2;
 }
-
-#array > button {
-  @apply .w-full;
-}
-
 #array ul {
   @apply .list-reset;
 }
@@ -157,11 +153,19 @@ main .intro {
 }
 
 #array input {
-  @apply .block .text-xl .text-center .border .rounded .mx-2;
+  @apply .flex-grow .text-xl .text-center .border .rounded .mx-2;
 }
 
 #array .value-badge {
   @apply .mt-2;
+}
+
+#array .live > button {
+  @apply .w-full;
+}
+
+#array .live {
+  @apply .w-1/2;
 }
 
 .tree-demo ul {
@@ -176,24 +180,24 @@ main .intro {
   @apply .border .rounded .px-2;
 }
 
-#todomvc-manager-demo .manager-form > input {
+#todomvc-manager .manager-form > input {
   @apply .w-32;
 }
 
-#todomvc-manager-demo .badge {
+#todomvc-manager .badge {
   @apply .inline-flex .rounded-full .bg-indigo;
   @apply .px-2 .py-1 .text-xs .font-bold .mr-2 .text-white .text-center .align-middle;
 }
 
-#todomvc-manager-demo button:disabled {
+#todomvc-manager button:disabled {
   @apply .shadow-none .bg-grey-lightest;
 }
 
-#todomvc-manager-demo section {
+#todomvc-manager section {
   @apply .flex .flex-wrap;
 }
 
-#todomvc-manager-demo section {
+#todomvc-manager section {
   @apply .mt-8;
   background: #f5f5f5;
 }
@@ -203,11 +207,11 @@ main .intro {
 }
 
 @screen lg {
-  #todomvc-manager-demo .todoapp-container {
+  #todomvc-manager .todoapp-container {
     @apply .w-1/2;
     
   }
-  #todomvc-manager-demo .todoapp-container:nth-child(n + 1) {
+  #todomvc-manager .todoapp-container:nth-child(n + 1) {
     page-break-before: always; /* FF33 */
   }
 }

@@ -1,0 +1,39 @@
+<header>
+  <h1>Composed Types</h1>
+</header>
+
+<section id="todomvc-manager-demo">
+  <header>
+    <h2>TodoMVC Manager</h2>
+  </header>
+  <div class="column demo">
+    {{!BEGIN-SNIPPET many-todomvc-template}}
+    {{#let (state (type "todomvc-manager") todomvcManagerInitial) as |manager|}}
+      <form class="manager-form" {{action manager.addList on="submit"}}>
+        <input
+          value={{manager.newListTitle.state}} 
+          oninput={{action manager.newListTitle.set value="target.value"}}
+        >
+        <button disabled={{not manager.isValid}}>Create</button>
+        <button {{action manager.show ""}}>All</button>
+        <button {{action manager.show "active"}}>Active</button>
+        <button {{action manager.show "completed"}}>Completed</button>
+        {{#if manager.remaining}}
+          <button {{action manager.completeRemaining}}><i class="badge">{{manager.remaining}}</i>Complete All</button>
+        {{/if}}
+      </form>
+      <section>
+        {{#each manager.lists key="title.state" as |list|}}
+          <Todomvc @todomvc={{list}} />
+        {{/each}}
+      </section>
+    {{/let}}
+    {{!END-SNIPPET}}
+  </div>
+  <div class="column code">
+    <h3 class="mb-2">Type</h3>
+    {{code-snippet name="many-todomvc-type.js"}}
+    <h3 class="my-2">Template</h3>
+    {{code-snippet name="many-todomvc-template.hbs"}}
+  </div>
+</section>

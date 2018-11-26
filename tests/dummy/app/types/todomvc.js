@@ -1,5 +1,5 @@
 // BEGIN-SNIPPET todomvc-type
-import { reduce, filter } from "@microstates/ember";
+import { reduce, filter, create } from "@microstates/ember";
 
 export const ALL = "";
 export const COMPLETED = "completed";
@@ -24,8 +24,8 @@ export class EditableTodo extends Todo {
 }
 
 export default class TodoMVC {
-  title   = String;
-  todos   = [EditableTodo]  // Contains array of todo items
+  title   = create(String, 'todos');
+  todos   = [EditableTodo]
   newTodo = String
   filter  = String
 
