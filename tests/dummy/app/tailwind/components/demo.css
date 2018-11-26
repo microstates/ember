@@ -16,7 +16,8 @@ h1 {
   } 
 
   .page-section .section-notes {
-    @apply .bg-blue-lightest .border-blue-dark .border-l-2 .py-2 px-4;
+    @apply .bg-blue-lightest .border-blue-dark .border-l-2 .py-2 .px-4;
+    @apply .w-full .mb-4 .flex-no-shrink;
   }
 
   .page-section .section-notes p {
@@ -24,11 +25,11 @@ h1 {
   }
 
   .page-section .section-body {
-    @apply .flex;
+    @apply .flex .flex-col;
   }
 
   .page-section .section-demo {
-    @apply .ml-4 .flex-grow;
+    @apply .flex-grow;
   }
 
   .page-section .code, .page-section .live {
@@ -37,8 +38,16 @@ h1 {
 }
 
 @screen lg {
+  .page-section .section-body {
+    @apply .flex-row;
+  }
+
   .page-section .section-notes {
-    @apply .w-1/3;
+    @apply .w-1/3 .mb-0;
+  }
+
+  .page-section .section-demo {
+    @apply .ml-4;
   }
 }
 
@@ -74,35 +83,31 @@ h1 {
   @apply .bg-white .text-grey-darkest .font-semibold .py-2 .px-4 .border .border-grey-light .rounded .shadow;    
 }
 
-.code pre {
-  @apply .mb-12;
-}
-
 #boolean label {
   @apply .inline-block .w-16 .cursor-pointer
 }
 
 #boolean button, 
 #number button, 
-.string-demo button,
-.object-demo button,
-.array-demo button,
+#string button,
+#object button,
+#array button,
 #todomvc-manager-demo .manager-form button {
   @apply .btn-white;
 }
 
 #boolean button:hover, 
 #number button:hover, 
-.string-demo button:hover,
-.object-demo button:hover,
-.array-demo button:hover {
+#string button:hover,
+#object button:hover,
+#array button:hover {
   @apply .bg-grey-lightest
 }
 
 #any input, 
 #number input, 
-.string-demo input, 
-.object-demo input,
+#string input, 
+#object input,
 #todomvc-manager-demo .manager-form input {
   @apply .border .rounded .p-2;
 }
@@ -111,36 +116,40 @@ h1 {
   @apply .inline-flex .rounded-full .bg-indigo .px-2 .py-1 .text-xs .text-white .font-bold .mr-3
 }
 
-.object-demo label {
+#object label {
   @apply .block .cursor-pointer .font-bold;
 }
 
-.object-demo input {
-  @apply block .mb-2;
+#object input {
+  @apply .block .mb-2;
 }
 
-.array-demo {
-  @apply .w-1/2;
+#object .value-badge {
+  @apply .block .mt-2;
 }
 
-.array-demo > button {
+#array > button {
   @apply .w-full;
 }
 
-.array-demo ul {
+#array ul {
   @apply .list-reset;
 }
 
-.array-demo li {
+#array li {
   @apply .flex .py-1;
 }
 
-.array-demo li button {
+#array li button {
   @apply .flex-none;
 }
 
-.array-demo input {
-  @apply .block .flex-grow .text-xl .text-center .border .rounded .mx-2;
+#array input {
+  @apply .block .text-xl .text-center .border .rounded .mx-2;
+}
+
+#array .value-badge {
+  @apply .mt-2;
 }
 
 .tree-demo ul {
