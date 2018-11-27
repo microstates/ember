@@ -103,7 +103,7 @@ Microstates makes these two operations much clearer. Microstates by default are 
 we still need to call `this.set` when a transition computed the next state to initiate a rerender. Microstates provides a `Store`
 mechanism that accepts a callback. We use this callback to invoke `this.set` to initiate a rerender.
 
-Here is what that would it would look like if we didn't use the macro that `@microstates/ember` provides.
+Here is what that would look like if we didn't use the macro that `@microstates/ember` provides.
 
 ```js
 import Component from '@ember/component';
@@ -120,7 +120,7 @@ let microstate = create(Person, { name: 'Taras' });
 export default Component.extend({
   state: computed({
     get() {
-      return Store(microstate, next => this.set({ state: next }))
+      return Store(microstate, next => this.set('state', next))
     },
     set(key, state) {
       return state;
