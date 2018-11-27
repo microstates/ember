@@ -23,7 +23,7 @@
   "dependencies": {
     "ember-auto-import": "1.2.15",
     "ember-cli-babel": "^7.1.2",
-    "microstates": "0.12.1"
+    "microstates": "0.12.2"
   },
   "devDependencies": {
     "@bigtest/interactor": "0.9.1",

@@ -631,6 +631,12 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.8"
 
+"@fortawesome/free-brands-svg-icons@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-brands-svg-icons/-/free-brands-svg-icons-5.5.0.tgz#50e020aced5b9652db1d2d9d7909c73561ff1f4a"
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "^0.2.8"
+
 "@fortawesome/free-solid-svg-icons@5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-5.5.0.tgz#4d815df4bba076f209eb409bc56d9d830367a7c0"
@@ -681,10 +687,6 @@
   resolved "https://registry.yarnpkg.com/@glimmer/wire-format/-/wire-format-0.27.0.tgz#1d1729814da57b99f2dbbe718f71456259484b11"
   dependencies:
     "@glimmer/util" "^0.27.0"
-
-"@microstates/todomvc@1.0.0-beta.0":
-  version "1.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@microstates/todomvc/-/todomvc-1.0.0-beta.0.tgz#cd579a3b3bc410f78f61c4315eea8d7cf8df9a6b"
 
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
@@ -6773,9 +6775,9 @@ micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4, micromatch@^3.1.8:
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
 
-microstates@0.12.1:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.12.1.tgz#8dc543bdc733cd378fc87800270593317eef560b"
+microstates@0.12.2:
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.12.2.tgz#0885d9daee411e8a29a791f3ec35f74302496612"
   dependencies:
     funcadelic "^0.5.0"
     symbol-observable "^1.2.0"

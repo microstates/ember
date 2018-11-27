@@ -1,0 +1,23 @@
+<div class="menu">
+  <h3>Menu</h3>
+  <ul>
+  {{#each 
+    (array
+      (component "link-to" "Primitive Types" "primitive-types")
+      (component "link-to" "Composed Types" "composed-types")
+      (component "link-to" "Parameterized Types" "parameterized-types")
+      (component "link-to" "Higher Order Types" "higher-order-types")
+    ) as |link|
+  }}
+    {{#component item}}
+      {{link}}
+    {{/component}}
+  {{/each}}
+  </ul>
+
+  <h3 class="mt-8 mb-2">Links</h3>
+  <ul>
+    <li><a href="https://github.com/microstates/ember">github.com/microstates/ember</a></li>
+    <li><a href="https://github.com/microstates/microstates.js">github.com/microstates/microstates.js</a></li>
+  </ul>
+</div>

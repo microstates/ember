@@ -1,22 +1,6 @@
 {{#burger-menu animation="squeeze" width=200 as |burger|}}
   {{#burger.menu itemTagName="li" as |menu|}}
-    <div class="menu">
-      <h3>Demos</h3>
-      <ul>
-      {{#each 
-        (array
-          (component "link-to" "Primitive Types" "primitive-types")
-          (component "link-to" "Composed Types" "composed-types")
-          (component "link-to" "Parameterized Types" "parameterized-types")
-          (component "link-to" "Higher Order Types" "higher-order-types")
-        ) as |link|
-      }}
-        {{#menu.item}}
-          {{link}}
-        {{/menu.item}}
-      {{/each}}
-      </ul>
-    </div>
+    <Menu @item={{menu.item}} />
   {{/burger.menu}}
 
   {{#burger.outlet}}
