@@ -4,7 +4,7 @@
 
 [![npm version](https://badge.fury.io/js/microstates/ember.svg)](https://badge.fury.io/js/@microstates/ember)
 [![Ember Observer Score](https://emberobserver.com/badges/@microstates/ember.svg)](https://emberobserver.com/addons/@microstates/ember)
-[![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/cowboyd/@microstates/ember)
+[![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/microstates/ember)
 
 ## Why Microstates?
 
