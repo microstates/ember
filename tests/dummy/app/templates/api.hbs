@@ -5,7 +5,7 @@
   </div>
 </header>
 
-<h2 class="mb-4">Helpers</h2>
+<h2 class="mb-6">Template API</h2>
 
 <Section 
   @id="state-helper"
@@ -13,9 +13,6 @@
   as |s|
 >
   <s.notes>
-    <p>
-      <pre class="inline">(state)</pre> helper is the main helper in <i>@microstates/ember</i> addon. 
-    </p>
     <p>
       It allows to create a microstate that can be consumed in the template. This microstate is wrapped in a mechanism 
       that causes the template to re-render when a transition on the microstate is called. 
@@ -25,7 +22,76 @@
     <s.code>
       <h3>(state value)</h3>
       <p>When you pass a primitive value to (state) helper, it'll convert that value into a microstate that matches type of given value. Learn more in {{link-to 'Primitive Types' 'primitive-types'}}</p>
-      <h3>(state </h3>
+      <h3>(state type initialValue)</h3>
+      <p>Passing type to (state) helper allows you to create a microstate for explicit type. initial value will be used to create the microstate.</p>
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section 
+  @id="type-helper"
+  @title="(type) helper"
+  as |s|
+>
+  <s.notes>
+    <p>
+      This helper is usually combined with `(state)` helper to provide type when creating a microstate.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.code>
+      <h3>(type name)</h3>
+      <pre class="inline">(type name)</pre> allows you to resolve a type via Ember's dependency injection system. 
+      <p>
+        Use this to resolve a type that's provided by microstate or one that you created and placed in <i>types</i> directory. 
+      </p>
+      <p>
+        <i>@microstates/ember</i> comes with "any", "number", "boolean", "array" and "object" types.
+      </p>
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section 
+  @id="value-of-helper"
+  @title="(value-of) helper"
+  as |s|
+>
+  <s.notes>
+    <p>Allows you to export value from a microstate.</p>
+  </s.notes>
+  <s.demo>
+    <s.code>
+      <h3>(value-of microstate)</h3>
+      <p>
+        Value represents the serializable version of the Microstate. It can be used to restore a microstate with the same state.   
+      </p>
+    </s.code>
+  </s.demo>
+</Section>
+
+<h2 class="mb-6">JavaScript API</h2>
+
+<Section 
+  @id="state-macro"
+  @title="state - Computed Property Macro"
+  as |s|
+>
+  <s.notes>
+    state computed property macro allows to create a microstate in JavaScript of components.
+  </s.notes>
+  <s.demo>
+    <s.code>
+      <h3>state(value)</h3>
+      <p>
+        Returns a computed property with a microstate created from value. When a transition is invoked on the microstate,
+        the computed property will be updated.
+      </p>
+      <h3>state(type, value)</h3>
+      <p>
+        Returns a computed property with a microstate created from type and value. When a transition is invoked on the microstate,
+        the computed property will be updated.
+      </p>
     </s.code>
   </s.demo>
 </Section>
