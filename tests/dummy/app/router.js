@@ -7,6 +7,7 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.api('api');
   this.route('primitive-types');
   this.route('composed-types');
   this.route('parameterized-types');
