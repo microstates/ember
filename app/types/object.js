@@ -1,0 +1,1 @@
+export { ObjectType as default } from '@microstates/ember';

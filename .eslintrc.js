@@ -1,5 +1,6 @@
 module.exports = {
   root: true,
+  parser: "babel-eslint",
   parserOptions: {
     ecmaVersion: 2017,
     sourceType: 'module'
@@ -12,7 +13,7 @@ module.exports = {
   rules: {
     'ember/closure-actions': 'off',
     'ember/avoid-leaking-state-in-ember-objects': 'off',
-
+    'ember/no-side-effects': 'off',
     'prefer-let/prefer-let': 2
   },
   overrides: [

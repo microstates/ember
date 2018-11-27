@@ -1,0 +1,1 @@
+export { ArrayType as default } from '@microstates/ember';

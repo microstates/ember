@@ -1,0 +1,15 @@
+<section class="page-section" id={{id}}>
+  <header>
+    <h2>{{title}}</h2>
+  </header>
+  <div class="section-body">
+    {{yield 
+      (hash 
+        notes=(component "div" base="section-notes")
+        demo=(component "div" base="section-demo")
+        live=(component "div" base="live")
+        code=(component "div" base="code")
+      )
+    }}
+  </div>
+</section>

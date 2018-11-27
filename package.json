@@ -1,11 +1,12 @@
 {
-  "name": "ember-microstates",
+  "name": "@microstates/ember",
   "version": "0.3.0",
   "description": "Data Down, Actions Up: at the molecular level.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "microstates"
   ],
-  "repository": "https://github.com/cowboyd/ember-microstates.git",
+  "repository": "https://github.com/microstates/ember.git",
   "license": "MIT",
   "author": "cowboyd@frontside.io",
   "directories": {
@@ -14,18 +15,26 @@
   },
   "scripts": {
     "build": "ember build",
-    "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test",
     "test:all": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^7.1.2"
+    "ember-auto-import": "1.2.15",
+    "ember-cli-babel": "^7.1.2",
+    "microstates": "0.12.2"
   },
   "devDependencies": {
+    "@bigtest/interactor": "0.9.1",
     "@ember/optional-features": "^0.6.3",
+    "@ember/test-helpers": "1.0.1",
+    "@fortawesome/ember-fontawesome": "0.1.8",
+    "@fortawesome/free-solid-svg-icons": "5.5.0",
+    "babel-eslint": "10.0.1",
+    "babel-plugin-transform-class-properties": "6.24.1",
     "broccoli-asset-rev": "^2.7.0",
+    "ember-burger-menu": "3.3.3",
     "ember-cli": "~3.5.0",
     "ember-cli-chai": "^0.4.0",
     "ember-cli-dependency-checker": "^3.0.0",
@@ -35,12 +44,14 @@
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
     "ember-cli-inject-live-reload": "^2.0.1",
     "ember-cli-mocha": "^0.15.0",
+    "ember-cli-sass": "8.0.1",
     "ember-cli-sri": "^2.1.1",
-    "ember-cli-template-lint": "^1.0.0-beta.1",
+    "ember-cli-tailwind": "0.6.3",
     "ember-cli-uglify": "^2.1.0",
-    "ember-code-snippet": "1.8.0",
+    "ember-code-snippet": "2.3.1",
     "ember-disable-prototype-extensions": "^1.1.3",
     "ember-export-application-global": "^2.0.0",
+    "ember-import": "1.0.0",
     "ember-load-initializers": "^1.1.0",
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^5.0.1",
@@ -51,7 +62,8 @@
     "eslint-plugin-ember": "^5.2.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-prefer-let": "^1.0.1",
-    "loader.js": "^4.7.0"
+    "loader.js": "^4.7.0",
+    "sass": "1.15.1"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"

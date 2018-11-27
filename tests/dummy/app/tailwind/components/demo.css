@@ -1,0 +1,260 @@
+main {
+  @apply .my-6 .max-w-full .w-full;
+}
+
+nav {
+  @apply .sticky .pin-t .pt-4;
+}
+
+h1 {
+  @apply .mb-4;
+}
+
+main .intro {
+  @apply .py-4 .mb-6;
+}
+
+@screen sm {
+  .page-section {
+    @apply .w-full .mb-12;
+  }
+
+  .page-section header {
+    @apply .mb-4;
+  } 
+
+  .page-section .section-notes {
+    @apply .bg-blue-lightest .border-blue-dark .border-l-2 .py-2 .px-4;
+    @apply .w-full .mb-4 .flex-no-shrink;
+  }
+
+  .page-section .section-notes p {
+    @apply .mb-2;
+  }
+
+  .page-section .section-notes ul {
+    @apply .pl-4;
+  }
+
+  .page-section .section-notes li {
+    @apply .py-1;
+  }
+
+  .page-section .section-body {
+    @apply .flex .flex-col;
+  }
+
+  .page-section .section-demo {
+    @apply .flex-grow;
+  }
+
+  .page-section .code, .page-section .live {
+    @apply .w-full
+  }
+
+  .page-section .code h3 {
+    @apply .mt-4 .mb-2;
+  }
+
+  .page-section .code p {
+    @apply .mb-2;
+  }
+}
+
+@screen lg {
+  main .intro {
+    @apply .w-2/3;
+  }
+
+  .page-section .section-body {
+    @apply .flex-row;
+  }
+
+  .page-section .section-notes {
+    @apply .w-1/4 .mb-0;
+  }
+
+  .page-section .section-demo {
+    @apply .ml-4;
+  }
+}
+
+.menu {
+  @apply .p-4 .h-screen;
+}
+
+.menu h3 {
+  @apply .mb-2;
+}
+
+.menu .close {
+  @apply .mb-4;
+}
+
+.menu ul {
+  @apply .list-reset;
+}
+
+.menu ul li {
+  @apply .py-1;
+}
+
+.menu a {
+  @apply .text-black .no-underline;
+}
+
+.menu .close {
+  @apply .pin-r;
+}
+
+.btn-white {
+  @apply .bg-white .text-grey-darkest .font-semibold .py-2 .px-4 .border .border-grey-light .rounded .shadow;    
+}
+
+#boolean label {
+  @apply .inline-block .w-16 .cursor-pointer
+}
+
+#boolean button, 
+#number button, 
+#string button,
+#object button,
+#array button,
+#data-down-actions-up .manager-form button,
+#array-of-todomvc .live > button,
+#object-of-person button,
+#transitions-and-getters button {
+  @apply .btn-white;
+}
+
+#boolean button:hover, 
+#number button:hover, 
+#string button:hover,
+#object button:hover,
+#array button:hover,
+#data-down-actions-up .manager-form button:hover,
+#array-of-todomvc .live > button:hover,
+#object-of-person button:hover,
+#transitions-and-getters button:hover {
+  @apply .bg-grey-lightest
+}
+
+#any input, 
+#number input, 
+#string input, 
+#object input,
+#data-down-actions-up .manager-form input,
+#object-of-person input,
+#transitions-and-getters input {
+  @apply .border .rounded .p-2;
+}
+
+.value-badge {
+  @apply .inline-flex .rounded-full .bg-indigo .px-2 .py-1 .text-xs .text-white .font-bold .mr-3
+}
+
+#object label {
+  @apply .block .cursor-pointer .font-bold;
+}
+
+#object input {
+  @apply .block .mb-2;
+}
+
+#object .value-badge {
+  @apply .block .mt-2;
+}
+#array ul {
+  @apply .list-reset;
+}
+
+#array li {
+  @apply .flex .py-1;
+}
+
+#array li button {
+  @apply .flex-none;
+}
+
+#array input {
+  @apply .flex-grow .text-xl .text-center .border .rounded .mx-2;
+}
+
+#array .value-badge {
+  @apply .mt-2;
+}
+
+#array .live > button {
+  @apply .w-full;
+}
+
+#array .live {
+  @apply .w-1/2;
+}
+
+#recursive .live ul {
+  @apply .list-reset .ml-6 .mt-2;
+}
+
+#recursive .live li {
+  @apply .mb-2;
+}
+
+#recursive input {
+  @apply .border .rounded .px-2;
+}
+
+#recursive .value-badge {
+  @apply .my-2;
+}
+
+#data-down-actions-up .manager-form > input {
+  @apply .w-32;
+}
+
+#data-down-actions-up .badge {
+  @apply .inline-flex .rounded-full .bg-indigo;
+  @apply .px-2 .py-1 .text-xs .font-bold .mr-2 .text-white .text-center .align-middle;
+}
+
+#data-down-actions-up button:disabled {
+  @apply .shadow-none .bg-grey-lightest;
+}
+
+#data-down-actions-up section {
+  @apply .flex .flex-wrap;
+}
+
+#data-down-actions-up section {
+  @apply .mt-8;
+  background: #f5f5f5;
+}
+
+.todoapp-container {
+  @apply .w-full .m-auto;
+}
+
+#object-of-person ul {
+  @apply .list-reset .my-4;
+}
+
+#object-of-person .live span {
+  @apply .inline-block .w-24;
+}
+
+#object-of-person .live li {
+  @apply .mb-1;
+}
+
+@screen lg {
+  #data-down-actions-up .todoapp-container {
+    @apply .w-1/2;   
+  }
+  #data-down-actions-up .todoapp-container:nth-child(n + 1) {
+    page-break-before: always; /* FF33 */
+  }
+}
+
+#transitions-and-getters .live p {
+  @apply .my-2 .px-2;
+}

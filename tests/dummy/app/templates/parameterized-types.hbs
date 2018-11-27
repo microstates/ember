@@ -1,0 +1,161 @@
+<header>
+  <h1>Parameterized Types</h1>
+  <div class="intro">
+    <p>
+      Parameterized data types allow the developer to describe the type of data contained in a data structure. 
+      Microstates supports two kinds of parameterized data types: <i>Array</i> and <i>Object</i>. These
+      types can be parameterized with any other type.
+    </p>
+  </div>
+</header>
+
+<Section 
+  @id="array"
+  @title="Array<Number>"
+  as |s|
+>
+  <s.notes>
+    <p>Type argument describe the type of all elements in the array. This makes it possible to add new items to the array and Microstates will treat them as the argument type.</p>
+    <p><strong>Transitions</strong>: 
+      created microstate will have all transitions of an <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js#L14">Array</a> type.
+      Each element of the array will have its own transitions according to the argument type.
+    </p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js" target="_blank">Array</a></p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET array-of-numbers-template}}
+      {{#let (state (type "array-of-numbers") (array 10 20 30)) as |numbers|}}
+        <button {{action numbers.unshift 0}}>{{fa-icon "plus"}}</button>
+        <ul>
+          {{#each numbers as |number|}}
+            <li>
+              <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+              <input 
+                type="number" 
+                value={{number.state}} 
+                onchange={{action number.set value="target.value"}} 
+              />
+              <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+            </li>
+          {{/each}}
+        </ul>
+        <button {{action numbers.push 0}}>{{fa-icon "plus"}}</button>
+        <ValueBadge @value={{value-of numbers}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      <h3 class="mb-2">Type</h3>
+      <p>The only way to create a parameterized type is via JavaScript.</p>
+      {{code-snippet name="array-of-numbers.js"}}
+      <h3 class="mb-2 mt-4">Template</h3>
+      {{code-snippet name="array-of-numbers-template.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section 
+  @id="array-of-todomvc"
+  @title="Array<TodoMVC>"
+  as |s|
+>
+  <s.notes>
+    <p>
+      Once you define a type, it's very easy to combine into more complex types. You can for example turn a state into an array of states.
+      Microstates is designed to make composing state as easy as composing components.
+    </p>
+    <p><strong>Transitions</strong>: 
+      created microstate will have all transitions of an <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js#L14">Array</a> type.
+      Each element of the array will have its own transitions according to the argument type.
+    </p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js" target="_blank">Array</a></p>
+    <p><strong>Instructions</strong>: click "Add list" to add an empty TodoMVC list to the array.</p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET array-of-todomvc-template}}
+      {{#let (state (type "array-of-todomvc") todomvcInitial) as |lists|}}
+        <button {{action lists.push}}>Add list</button>
+        {{#each lists key="@index" as |list|}}
+          <Todomvc @todomvc={{list}} />
+        {{/each}}
+        <ValueBadge @value={{value-of lists}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      <h3 class="mb-2">Type</h3>
+      <p>The only way to create a parameterized type is via JavaScript.</p>
+      {{code-snippet name="array-of-todomvc.js"}}
+      <h3 class="mb-2 mt-4">Template</h3>
+      {{code-snippet name="array-of-todomvc-template.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section 
+  @id="object-of-person"
+  @title="Object<Person>"
+  as |s|
+>
+  <s.notes>
+    <p>
+      Object parameterized types work similar to Array types, except values are stored on properties instead of indexes. 
+      When you add a new property, it'll assume same type as the type argument.
+    </p>
+    <p><strong>Transitions</strong>: 
+      created microstate will have all transitions of an <a href="https://github.com/microstates/microstates.js/blob/master/src/types/object.js#L14">Object</a> type.
+      Each element of the array will have its own transitions according to the argument type.
+    </p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/object.js" target="_blank">Object</a></p>
+    <p><strong>Instructions</strong>: click "Add" to add another entry into the object.</p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{#let (state "dog") as |name|}}
+        {{!BEGIN-SNIPPET object-of-person}}
+        {{#let 
+          (state (type "object-of-person") simpsons)  
+          as |characters|
+        }}
+          <form {{action characters.put name.state on="submit"}}>
+            <input
+              value={{name.state}} 
+              oninput={{action name.set value="target.value"}}
+            >
+            <button {{action characters.put name.state}}>Add</button>
+          </form>
+          <ul>
+            {{#each characters key="key" as |entry|}}
+              <li>
+                <span>{{entry.key}}</span>
+                <input 
+                  value={{entry.value.name.state}} 
+                  oninput={{action entry.value.name.set value="target.value"}}
+                >
+                <input 
+                  type="number" 
+                  value={{entry.value.age.state}}
+                  oninput={{action entry.value.age.set value="target.value"}}
+                >
+                {{entry.value.summary}}
+              </li>
+            {{/each}}
+          </ul>
+          <ValueBadge @value={{value-of characters}} />
+        {{/let}}
+        {{!END-SNIPPET}}
+      {{/let}}
+    </s.live>
+
+    <s.code>
+      <h3 class="my-2">Person Type</h3>
+      {{code-snippet name="person-type.js"}}
+      <h3 class="my-2">Object&#x3C;Person&#x3E; Type</h3>
+      {{code-snippet name="object-of-person-type.js"}}
+      <h3 class="my-2">Template</h3>
+      {{code-snippet name="object-of-person.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>

@@ -1,0 +1,241 @@
+<header>
+  <h1>Primitive Types</h1>
+  <div class="intro">
+    <p>
+      Microstates comes with 6 primitive types. These types represent types that are present in JavaScript. 
+      You can use these types to compose complex data structures. The Microstate types for these built-in
+      JavaScript types are included in the <em>@microstates/ember</em> package.
+    </p>
+  </div>
+</header>
+
+<Section 
+  @id="any"
+  @title="Any"
+  as |s|
+>
+  <s.notes>
+    <p>Not passing a value or passing <pre class="inline">undefined</pre> to the state helper will create a microstate of type <i>Any</i>.</p>
+    <p><strong>Transitions</strong>: Created microstate will only have a <i>set</i> transition. It will accept any value.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/any.js" target="_blank">Any</a></p>
+    <p><strong>Using type helper</strong>: <pre class="my-2">(state (type "any") value)</pre></p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET any}}
+      {{#let (state) as |any|}}
+        <input
+          value={{any.state}}
+          oninput={{action any.set value="target.value"}}
+        />
+        <ValueBadge @value={{value-of any}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="any.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="boolean"
+  @title="Boolean"
+  as |s|
+>
+  <s.notes>
+    <p>Passing true or false as a value to the state helper will create a microstate of type <i>Boolean</i>.</p>
+    <p><strong>Transitions</strong>: Boolean has a <i>toggle</i> transition and <i>set</i> transitions.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/boolean.js" target="_blank">Boolean</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "boolean") value)</pre>
+      When using the type helper, the value will be coerced into a boolean.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET boolean}}
+      {{#let (state true) as |switch|}}
+        <input
+          type="checkbox"
+          checked={{switch.state}}
+          onclick={{action switch.toggle}}
+        >
+        <button {{action switch.set false}}>
+          set to false
+        </button>
+        <button {{action switch.set true}}>
+          set to true
+        </button>
+        <ValueBadge @value={{value-of switch}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="boolean.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="number"
+  @title="Number"
+  as |s|
+>
+  <s.notes>
+    <p>When state helper receives a number value, it will create a microstate of type <i>Number</i>.</p>
+    <p><strong>Transitions</strong>: Number has <i>increment</i>, <i>decrement</i> and <i>set</i> transitions. <i>set</i> transition will coerce the argument to a number.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/number.js" target="_blank">Number</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "number") value)</pre>
+      When using the type helper, the value will be coerced into a number.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+    {{!BEGIN-SNIPPET number}}
+    {{#let (state 5) as |number|}}
+      <input
+        type="number"
+        value={{number.state}}
+        oninput={{action number.set value="target.value"}}
+      >
+      <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+      <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+      <ValueBadge @value={{value-of number}} />
+    {{/let}}
+    {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="number.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="string"
+  @title="String"
+  as |s|
+>
+  <s.notes>
+    <p>When state helper receives a string value, it will create a microstate of type <i>String</i>.</p>
+    <p><strong>Transitions</strong>: String has <i>concat</i> and <i>set</i> transitions. <i>set</i> transition will coerce the argument to a string.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/string.js" target="_blank">String</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "string") value)</pre>
+      When using the type helper, the value will be coerced into a string.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+    {{!BEGIN-SNIPPET string}}
+    {{#let (state "hello world") as |string|}}
+      <input
+        value={{string.state}}
+        oninput={{action string.set value="target.value"}}
+      >
+      <button {{action string.concat "!!!"}}>Append !!!</button>
+      <button {{action string.set}}>Clear</button>
+      <ValueBadge @value={{value-of string}} />
+    {{/let}}
+    {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="string.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="object"
+  @title="Object"
+  as |s|
+>
+  <s.notes>
+    <p>
+      When the state helper receives an object, it will create a microstate of type <i>Object</i>. 
+      Every property in the microstate will automatically become a microstate based on it's type. This works recursively, 
+      as you read nested properties of a microstate, it'll automatically generate nested microstates of type matching the value. 
+    </p>
+    <p><strong>Transitions</strong>: Object has <i>assign</i>, <i>put</i>, <i>delete</i>, <i>map</i>, <i>filter</i> and <i>set</i> transitions.</p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/object.js" target="_blank">Object</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "object") value)</pre>
+      When using the type helper, the value will be coerced into an object.
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET object}}
+      {{#let
+        (state
+          (object Address="742 Evergreen Terrace" City="Springfield" State="")
+        ) as |address|
+      }}
+        {{#each address key="key" as |line|}}
+          <label>
+            {{line.key}}
+            <input
+              value={{line.value.state}}
+              oninput={{action line.value.set value="target.value"}}
+            >
+          </label>
+        {{/each}}
+        <button {{action address.put 'Country' ''}}>Add Country Field</button>
+        <ValueBadge @value={{value-of address}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="object.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>
+
+<Section
+  @id="array"
+  @title="Array"
+  as |s|
+>
+  <s.notes>
+    <p>
+      When the state helper receives an array, it will create a microstate of type <i>Array</i>. 
+      Every value in the array, will automatically become a microstate based on it's type. This works recursively, 
+      as you read nested properties of a microstate, it'll automatically generate nested microstates of type matching the value. 
+    </p>
+    <p>
+      <strong>Transitions</strong>: Array has <i>push</i>, 
+      <i>pop</i>, <i>shift</i>, <i>unshift</i>, <i>slice</i>, <i>map</i>, <i>filter</i>, 
+      <i>remove</i>, <i>clear</i> and <i>set</i> transitions.
+    </p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js" target="_blank">Array</a></p>
+    <p>
+      <strong>Using type helper</strong>: <pre class="my-2">(state (type "array") value)</pre>
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.live @class="mb-4">
+      {{!BEGIN-SNIPPET array-demo}}
+      {{#let (state (array 10 20 30)) as |numbers|}}
+          <ul>
+          {{#each numbers as |number|}}
+            <li>
+              <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+              <input 
+                type="number" 
+                value={{number.state}} 
+                onchange={{action number.set value="target.value"}} 
+              />
+              <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+            </li>
+          {{/each}}
+        </ul>
+        <ValueBadge @value={{value-of numbers}} />
+      {{/let}}
+      {{!END-SNIPPET}}
+    </s.live>
+    <s.code>
+      {{code-snippet name="array-demo.hbs"}}
+    </s.code>
+  </s.demo>
+</Section>

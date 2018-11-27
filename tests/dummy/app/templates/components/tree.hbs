@@ -1,0 +1,25 @@
+{{!BEGIN-SNIPPET tree}}
+{{#if node.children}}
+  <button {{action node.isOpen.toggle}}>
+    {{fa-icon (if node.isOpen.state 'minus-square' 'plus-square')}}
+  </button>
+{{/if}}
+<input 
+  type="text" 
+  value={{node.counter.state}} 
+  onchange={{action node.counter.set value="target.value"}}
+> 
+<button {{action node.counter.increment}}>{{fa-icon "caret-up"}}</button>
+<button {{action node.counter.decrement}}>{{fa-icon "caret-down"}}</button>
+<button {{action node.addChild}} class="add">{{fa-icon "plus"}}</button>
+{{#if onRemoveChild}}
+  <button {{action onRemoveChild}}>{{fa-icon "trash"}}</button>
+{{/if}}
+{{#if node.isOpen.state}}
+  <ul>
+    {{#each node.children key="@index" as |child|}}
+      <li><Tree @node={{child}} @onRemoveChild={{action node.children.remove child}}/></li>
+    {{/each}}
+  </ul>
+{{/if}}
+{{!END-SNIPPET}}

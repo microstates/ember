@@ -1,0 +1,1 @@
+export { StringType as default } from '@microstates/ember';
