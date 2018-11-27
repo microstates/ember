@@ -7,10 +7,12 @@
     <div class="container mx-auto px-4 flex flex-wrap">
       <nav>
         <h1 id="title">
-          <button type="button" class="burger" {{action burger.state.actions.toggle}}>
-            {{fa-icon "bars"}}
-          </button>
-          @microstates/ember
+          {{#unless (eq currentPath 'index')}}
+            <button type="button" class="burger" {{action burger.state.actions.toggle}}>
+              {{fa-icon "bars"}}
+            </button>
+          {{/unless}}
+          {{link-to '@microstates/ember' 'index'}}
         </h1>
       </nav>
       <main>

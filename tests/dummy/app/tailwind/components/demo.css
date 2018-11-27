@@ -1,5 +1,5 @@
 main {
-  @apply .my-6 .max-w-full;
+  @apply .my-6 .max-w-full .w-full;
 }
 
 nav {
