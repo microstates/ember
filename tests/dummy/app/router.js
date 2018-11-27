@@ -9,7 +9,6 @@ const Router = EmberRouter.extend({
 Router.map(function() {
   this.route('primitive-types');
   this.route('composed-types');
-  this.route('recursive-types');
   this.route('parameterized-types');
   this.route('higher-order-types');
 });

@@ -14,6 +14,7 @@ const initial = {
 
 export default Component.extend({
   tagName: '',
+  // this property is overwritten when context controls the state
   todomvc: state(TodoMVC, initial)
 });
 // END-SNIPPET

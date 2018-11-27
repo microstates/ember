@@ -17,7 +17,7 @@
 {{/if}}
 {{#if node.isOpen.state}}
   <ul>
-    {{#each node.children as |child|}}
+    {{#each node.children key="@index" as |child|}}
       <li><Tree @node={{child}} @onRemoveChild={{action node.children.remove child}}/></li>
     {{/each}}
   </ul>
