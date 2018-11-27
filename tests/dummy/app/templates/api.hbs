@@ -1,0 +1,31 @@
+<header>
+  <h1>API</h1>
+  <div class="intro">
+    <p><i>@microstates/ember</i> comes in two flavours, helpers to be used in templates and JavaScript API to be used in component's JavaScript.</p>
+  </div>
+</header>
+
+<h2 class="mb-4">Helpers</h2>
+
+<Section 
+  @id="state-helper"
+  @title="(state) helper"
+  as |s|
+>
+  <s.notes>
+    <p>
+      <pre class="inline">(state)</pre> helper is the main helper in <i>@microstates/ember</i> addon. 
+    </p>
+    <p>
+      It allows to create a microstate that can be consumed in the template. This microstate is wrapped in a mechanism 
+      that causes the template to re-render when a transition on the microstate is called. 
+    </p>
+  </s.notes>
+  <s.demo>
+    <s.code>
+      <h3>(state value)</h3>
+      <p>When you pass a primitive value to (state) helper, it'll convert that value into a microstate that matches type of given value. Learn more in {{link-to 'Primitive Types' 'primitive-types'}}</p>
+      <h3>(state </h3>
+    </s.code>
+  </s.demo>
+</Section>
