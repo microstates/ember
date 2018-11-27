@@ -1,4 +1,4 @@
-# Ember Microstates
+# @microstates/ember
 
 ## [API Index](https://ember-microstates.netlify.com/api) [Live Demo](https://ember-microstates.netlify.com)
 
