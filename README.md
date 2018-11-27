@@ -1,10 +1,10 @@
 # Ember Microstates
 
-## [API Index](#api) [Live Demo](https://cowboyd.github.io/@microstates/ember/)
+## [API Index](https://ember-microstates.netlify.com/api) [Live Demo](https://ember-microstates.netlify.com)
 
-[![npm version](https://badge.fury.io/js/@microstates/ember.svg)](https://badge.fury.io/js/@microstates/ember)
-[![Ember Observer Score](https://emberobserver.com/badges/@microstates/ember.svg)](https://emberobserver.com/addons/@microstates/ember)
-[![Build Status](https://travis-ci.org/cowboyd/@microstates/ember.svg?branch=master)](https://travis-ci.org/cowboyd/@microstates/ember)
+[![npm version](https://badge.fury.io/js/microstates/ember.svg)](https://badge.fury.io/js/@microstates/ember)
+[![Ember Observer Score](https://emberobserver.com/badges/microstates/ember.svg)](https://emberobserver.com/addons/@microstates/ember)
+[![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/cowboyd/@microstates/ember)
 
 ## Why Microstates?
 
@@ -89,27 +89,6 @@ class Person {
 {{/let}}
 ```
 
-## API
-
-### Helpers
-
-#### `(state typeOrValueOrMicrostate value)`
-
-`(state)` helper converts initial value into a microstate. Any transition on this microstate will cause a rerender.
-The initial value can be any POJO value, a microstate or a combination of type and value. 
-
-If you provide a POJO value, Microstates will use this value to construct a microstate. It'll determine the type based
-on the type of the value that you provide. It'll automatically give you transitions for that value. For example, `(state 10)` will give you a `Microstate<Number>` with `increment` transition and `(state false)` will give you a `Microstate<Boolean>` with `toggle` transition. This also works with complex data structures like Objects and Arrays.  
-
-```hbs
-{{#let (state (array 10 20 30)) as |numbers|}}
-  {{#each numbers as |number|}}
-    <button {{action number.increment}}>{{number.state}}</button>
-  {{/each}}
-{{/let}}
-```
-
-
 ### How do Microstates work in Ember?
 
 To understand how Microstates work in Ember we must decompose actions into their distict parts. These parts are,
@@ -169,6 +148,8 @@ export default Component.extend({
   state: state(microstate)
 });
 ```
+
+**[Checkout the demos for examples of how Microstates can be used.](https://ember-microstates.netlify.com)**
 
 ## Installation
 
