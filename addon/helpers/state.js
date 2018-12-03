@@ -18,6 +18,7 @@ export default Helper.extend({
     }
   }),
 
+  // eslint-disable-next-line ember/no-observers
   stateDidChange: observer("state", function() {
     this.recompute();
   }),
