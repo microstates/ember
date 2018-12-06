@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "ember-auto-import": "1.2.18",
-    "ember-cli-babel": "^7.1.2",
+    "ember-cli-babel": "^7.1.4",
     "microstates": "0.12.2"
   },
   "devDependencies": {
