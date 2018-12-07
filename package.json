@@ -29,7 +29,7 @@
     "@bigtest/interactor": "0.9.1",
     "@ember/optional-features": "^0.7.0",
     "@ember/test-helpers": "1.0.1",
-    "@fortawesome/ember-fontawesome": "0.1.8",
+    "@fortawesome/ember-fontawesome": "0.1.9",
     "@fortawesome/free-solid-svg-icons": "5.5.0",
     "babel-eslint": "10.0.1",
     "babel-plugin-transform-class-properties": "6.24.1",
