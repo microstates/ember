@@ -21,9 +21,9 @@
     "test:all": "ember try:each"
   },
   "dependencies": {
-    "ember-auto-import": "1.2.19",
+    "ember-auto-import": "^1.2.19",
     "ember-cli-babel": "^7.2.0",
-    "microstates": "0.12.3"
+    "microstates": "^0.12.4"
   },
   "devDependencies": {
     "@bigtest/interactor": "0.9.1",
