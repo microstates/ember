@@ -135,7 +135,7 @@ component with the macro.
 ```js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { state } from 'microstates';
+import { create, state } from 'microstates';
 
 class Person {
   name = String;
