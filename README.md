@@ -108,7 +108,7 @@ Here is what that would look like if we didn't use the macro that `@microstates/
 ```js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { create, Store } from 'microstates';
+import { create, Store } from '@microstates/ember';
 
 class Person {
   name = String;
@@ -135,7 +135,7 @@ component with the macro.
 ```js
 import Component from '@ember/component';
 import { computed } from '@ember/object';
-import { create, state } from 'microstates';
+import { create, state } from '@microstates/ember';
 
 class Person {
   name = String;
