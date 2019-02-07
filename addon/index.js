@@ -15,4 +15,4 @@ export {
   reduce,
   map,
   filter
-} from "microstates/dist/microstates.cjs";
+} from "microstates";
