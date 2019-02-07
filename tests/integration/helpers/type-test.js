@@ -13,7 +13,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (eq (type "any") (import "microstates/dist/microstates.cjs?Any")) "true" "false"}}`
+      hbs`{{if (eq (type "any") (import "microstates?Any")) "true" "false"}}`
     );
 
     expect(
@@ -27,7 +27,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (eq (type "boolean") (import "microstates/dist/microstates.cjs?BooleanType")) "true" "false"}}`
+      hbs`{{if (eq (type "boolean") (import "microstates?BooleanType")) "true" "false"}}`
     );
 
     expect(
@@ -41,7 +41,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (eq (type "string") (import "microstates/dist/microstates.cjs?StringType")) "true" "false"}}`
+      hbs`{{if (eq (type "string") (import "microstates?StringType")) "true" "false"}}`
     );
 
     expect(
@@ -55,7 +55,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (eq (type "number") (import "microstates/dist/microstates.cjs?NumberType")) "true" "false"}}`
+      hbs`{{if (eq (type "number") (import "microstates?NumberType")) "true" "false"}}`
     );
 
     expect(
@@ -69,7 +69,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (eq (type "array") (import "microstates/dist/microstates.cjs?ArrayType")) "true" "false"}}`
+      hbs`{{if (eq (type "array") (import "microstates?ArrayType")) "true" "false"}}`
     );
 
     expect(
@@ -83,7 +83,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     this.render(
-      hbs`{{if (eq (type "object") (import "microstates/dist/microstates.cjs?ObjectType")) "true" "false"}}`
+      hbs`{{if (eq (type "object") (import "microstates?ObjectType")) "true" "false"}}`
     );
 
     expect(
