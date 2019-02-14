@@ -7909,10 +7909,10 @@ micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4, micromatch@^3.1.8:
     snapdragon "^0.8.1"
     to-regex "^3.0.2"
 
-microstates@^0.12.4:
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.12.4.tgz#c9dd7786670df60b4f62c11c59084004bc18a341"
-  integrity sha512-qLWSfYlL0PD8NtAIphI37tqF5o3DSzY57BHInXJtWL4/W/ZnWNkUlTp44hrXBVzuKC2rWjygbvsjMA2fIn9Oyw==
+microstates@^0.13.0:
+  version "0.13.0"
+  resolved "https://registry.yarnpkg.com/microstates/-/microstates-0.13.0.tgz#9b3be37365af474af6453174d9a63583b1a9ff71"
+  integrity sha512-0Wk33/QNUsa2QsOW+xIkePVPYiftVxjoAyn5D6D19m7qKgPdJXN5FcqeWpZI5MViwJztQJQ6UKG8gEVQ3Qn3Rg==
   dependencies:
     funcadelic "^0.5.0"
     symbol-observable "^1.2.0"
