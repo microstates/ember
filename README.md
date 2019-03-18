@@ -4,7 +4,8 @@
 
 [![npm version](https://badge.fury.io/js/%40microstates%2Fember.svg)](https://badge.fury.io/js/%40microstates%2Fember)
 [![Ember Observer Score](https://emberobserver.com/badges/-microstates-ember.svg)](https://emberobserver.com/addons/@microstates/ember)
-[![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/microstates/ember) [![Greenkeeper badge](https://badges.greenkeeper.io/microstates/ember.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/microstates/ember) [![Greenkeeper badge](https://badges.greenkeeper.io/microstates/ember.svg)](https://greenkeeper.io/) [![Chat on Discord](https://img.shields.io/discord/556202291586269214.svg)](http://bit.ly/microstates-discord)
+
 
 ## Why Microstates?
 
