@@ -9875,10 +9875,10 @@ sane@^4.0.0:
     walker "~1.0.5"
     watch "~0.18.0"
 
-sass@1.17.2:
-  version "1.17.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.17.2.tgz#b5a28f2f13c6a219f28084c03623bb2c8d176323"
-  integrity sha512-TBNcwSIEXpXAIaFxQnWbHzhciwPKpHRprQ+1ww+g9eHCiY3PINJs6vQTu+LcBt1vIhrtQGRFIoxJO39TfLrptA==
+sass@1.20.3:
+  version "1.20.3"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.20.3.tgz#18284a7bac6eab9cbb80453288473194f29efb84"
+  integrity sha512-kvf+w5XT7FrmFrCKz1gPHqegufG+gxifC8oQesX/s8gkShdeiTqiuvP0c8TvfBwMAuI1YGOgobZQ2KIJGn//jA==
   dependencies:
     chokidar "^2.0.0"
 
