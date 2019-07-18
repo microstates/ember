@@ -63,7 +63,7 @@
     "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-prefer-let": "^1.0.1",
     "loader.js": "^4.7.0",
-    "sass": "1.17.4"
+    "sass": "1.22.7"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
