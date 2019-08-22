@@ -30,7 +30,7 @@
     "@ember/optional-features": "^0.7.0",
     "@ember/test-helpers": "1.5.0",
     "@fortawesome/ember-fontawesome": "0.1.13",
-    "@fortawesome/free-solid-svg-icons": "5.8.0",
+    "@fortawesome/free-solid-svg-icons": "5.10.2",
     "babel-eslint": "10.0.1",
     "babel-plugin-transform-class-properties": "6.24.1",
     "broccoli-asset-rev": "^3.0.0",
