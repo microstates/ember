@@ -26,7 +26,6 @@
     "microstates": "^0.14.0"
   },
   "devDependencies": {
-    "@bigtest/interactor": "0.9.2",
     "@ember/optional-features": "^0.7.0",
     "@ember/test-helpers": "1.5.0",
     "@fortawesome/ember-fontawesome": "0.1.13",
