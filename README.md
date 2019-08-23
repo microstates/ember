@@ -7,6 +7,10 @@
 [![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/microstates/ember) [![Greenkeeper badge](https://badges.greenkeeper.io/microstates/ember.svg)](https://greenkeeper.io/) [![Chat on Discord](https://img.shields.io/discord/556202291586269214.svg)](http://bit.ly/microstates-discord)
 
 
+* Ember.js v3.4 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
+
 ## Why Microstates?
 
 Short explanation, it's going to be the most fun you've had working with state in any framework.
