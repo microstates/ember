@@ -48,7 +48,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find("span").textContent).to.equal("42");
 
-    await click(find(("button"));
+    await click(find("button"));
 
     expect(find("span").textContent).to.equal("43");
   });
@@ -63,7 +63,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find("span").textContent).to.equal("42");
 
-    await click(find(("button"));
+    await click(find("button"));
 
     expect(find("span").textContent).to.equal("43");
   });
@@ -78,7 +78,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find('span').textContent).to.equal('42');
 
-    await click(find(('button'));
+    await click(find('button'));
 
     expect(find('span').textContent).to.equal('43');
   });
@@ -93,7 +93,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find("span").textContent).to.equal("true");
 
-    await click(find(("button"));
+    await click(find("button"));
 
     expect(find("span").textContent).to.equal("false");
   });
@@ -108,7 +108,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find('span').textContent).to.equal('true');
 
-    await click(find(('button'));
+    await click(find('button'));
 
     expect(find('span').textContent).to.equal('false');
   });
@@ -124,7 +124,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find("span").textContent).to.equal("true");
 
-    await click(find(("button"));
+    await click(find("button"));
 
     expect(find("span").textContent).to.equal("false");
   });
@@ -139,7 +139,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find("span").textContent).to.equal("hello world");
 
-    await click(find(("button"));
+    await click(find("button"));
 
     expect(find("span").textContent).to.equal("hello world!!!");
   });
@@ -171,7 +171,7 @@ describe("Integration | Helper | state", function() {
 
     expect(find('span').textContent).to.equal('hello world');
 
-    await click(this.$('button')[0]);
+    await click(find('button'));
 
     expect(find('span').textContent).to.equal('hello world!!!');
   });
