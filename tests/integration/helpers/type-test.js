@@ -1,4 +1,4 @@
-import { find } from '@ember/test-helpers';
+import { render, find } from '@ember/test-helpers';
 import { expect } from "chai";
 import { describe, it } from "mocha";
 import { setupRenderingTest } from "ember-mocha";
@@ -11,7 +11,7 @@ describe("Integration | Helper | type", function() {
   it("looks up Any", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "any") (import "microstates?Any")) "true" "false"}}`
     );
 
@@ -24,7 +24,7 @@ describe("Integration | Helper | type", function() {
   it("looks up BooleanType", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "boolean") (import "microstates?BooleanType")) "true" "false"}}`
     );
 
@@ -37,7 +37,7 @@ describe("Integration | Helper | type", function() {
   it("looks up StringType", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "string") (import "microstates?StringType")) "true" "false"}}`
     );
 
@@ -50,7 +50,7 @@ describe("Integration | Helper | type", function() {
   it("looks up NumberType", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "number") (import "microstates?NumberType")) "true" "false"}}`
     );
 
@@ -63,7 +63,7 @@ describe("Integration | Helper | type", function() {
   it("looks up ArrayType", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "array") (import "microstates?ArrayType")) "true" "false"}}`
     );
 
@@ -76,7 +76,7 @@ describe("Integration | Helper | type", function() {
   it("looks up ObjectType", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "object") (import "microstates?ObjectType")) "true" "false"}}`
     );
 
@@ -89,7 +89,7 @@ describe("Integration | Helper | type", function() {
   it("looks up Person from app", async function() {
     initialize(this);
 
-    this.render(
+    render(
       hbs`{{if (eq (type "person") (import "dummy/types/person")) "true" "false"}}`
     );
 
@@ -103,7 +103,7 @@ describe("Integration | Helper | type", function() {
     initialize(this);
 
     expect(() => {
-      this.render(
+      render(
         hbs`{{type "car"}}`
       );
     }).to.throw(/\(type "car"\) could not be looked up/)
