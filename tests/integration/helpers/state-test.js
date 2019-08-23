@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { describe, it } from "mocha";
 import { setupComponentTest } from "ember-mocha";
 import hbs from "htmlbars-inline-precompile";
-import { click } from "@ember/test-helpers";
+import { click, find, findAll } from "@ember/test-helpers";
 import { create } from "@microstates/ember";
 
 describe("Integration | Helper | state", function() {
@@ -18,8 +18,7 @@ describe("Integration | Helper | state", function() {
   `);
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("");
   });
@@ -32,11 +31,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("");
+    expect(find("span").textContent).to.equal("");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("hello world");
+    expect(find("span").textContent).to.equal("hello world");
   });
 
   it("allows to create a Microstate<Number> from a microstate", async function() {
@@ -49,11 +48,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("42");
+    expect(find("span").textContent).to.equal("42");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("43");
+    expect(find("span").textContent).to.equal("43");
   });
 
   it("allows to create a Microstate<Number> from value", async function() {
@@ -64,11 +63,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("42");
+    expect(find("span").textContent).to.equal("42");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("43");
+    expect(find("span").textContent).to.equal("43");
   });
 
   it('allows to create a Microstate<Number> using (type "number")', async function() {
@@ -79,11 +78,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('span').text()).to.equal('42');
+    expect(find('span').textContent).to.equal('42');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('span').text()).to.equal('43');
+    expect(find('span').textContent).to.equal('43');
   });
 
   it("allows to create a Microstate<Boolean> from value", async function() {
@@ -94,11 +93,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("true");
+    expect(find("span").textContent).to.equal("true");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("false");
+    expect(find("span").textContent).to.equal("false");
   });
 
   it('allows to create a Microstate<Boolean> using (type "boolean")', async function() {
@@ -109,11 +108,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('span').text()).to.equal('true');
+    expect(find('span').textContent).to.equal('true');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('span').text()).to.equal('false');
+    expect(find('span').textContent).to.equal('false');
   });
 
   it("allows to create a Microstate<Boolean> from a microstate", async function() {
@@ -125,11 +124,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("true");
+    expect(find("span").textContent).to.equal("true");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("false");
+    expect(find("span").textContent).to.equal("false");
   });
 
   it("allows to create a Microstate<String> from value", async function() {
@@ -140,11 +139,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("hello world");
+    expect(find("span").textContent).to.equal("hello world");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("hello world!!!");
+    expect(find("span").textContent).to.equal("hello world!!!");
   });
 
   it("allows to create a Microstate<String> from a microstate", async function() {
@@ -157,11 +156,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("span").text()).to.equal("hello world");
+    expect(find("span").textContent).to.equal("hello world");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("span").text()).to.equal("hello world!!!");
+    expect(find("span").textContent).to.equal("hello world!!!");
   });
 
   it('allows to create a Microstate<String> using (type "string")', async function() {
@@ -172,11 +171,11 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('span').text()).to.equal('hello world');
+    expect(find('span').textContent).to.equal('hello world');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('span').text()).to.equal('hello world!!!');
+    expect(find('span').textContent).to.equal('hello world!!!');
   });
 
   it("allows to create a Microstate<Object> from value", async function() {
@@ -193,12 +192,12 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("li:eq(0)").text()).to.equal("dog: Santa's Little Helper");
-    expect(this.$("li:eq(1)").text()).to.equal("cat: Snowball");
+    expect(find('li').textContent).to.equal("dog: Santa's Little Helper");
+    expect(find(findAll('li')[1]).textContent).to.equal("cat: Snowball");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("li:eq(2)").text()).to.equal("second cat: Snowball II");
+    expect(find(findAll('li')[2]).textContent).to.equal("second cat: Snowball II");
   });
 
   it("allows to create a Microstate<Object> from a microstate", async function() {
@@ -218,12 +217,12 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("li:eq(0)").text()).to.equal("dog: Santa's Little Helper");
-    expect(this.$("li:eq(1)").text()).to.equal("cat: Snowball");
+    expect(find('li').textContent).to.equal("dog: Santa's Little Helper");
+    expect(find(findAll('li')[1]).textContent).to.equal("cat: Snowball");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("li:eq(2)").text()).to.equal("second cat: Snowball II");
+    expect(find(findAll('li')[2]).textContent).to.equal("second cat: Snowball II");
   });
 
   it('allows to create a Microstate<Object> using (type "object")', async function() {
@@ -239,12 +238,12 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('li:eq(0)').text()).to.equal('dog: Santa\'s Little Helper');
-    expect(this.$('li:eq(1)').text()).to.equal('cat: Snowball');
+    expect(find('li').textContent).to.equal('dog: Santa\'s Little Helper');
+    expect(find(findAll('li')[1]).textContent).to.equal('cat: Snowball');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('li:eq(2)').text()).to.equal('second cat: Snowball II');
+    expect(find(findAll('li')[2]).textContent).to.equal('second cat: Snowball II');
   });
 
   it("allows to create an Microstate<Array> from value", async function() {
@@ -262,13 +261,13 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$("li:eq(0)").text()).to.equal("dog");
-    expect(this.$("li:eq(1)").text()).to.equal("cat");
-    expect(this.$("li:eq(2)").text()).to.equal("bird");
+    expect(find('li').textContent).to.equal("dog");
+    expect(find(findAll('li')[1]).textContent).to.equal("cat");
+    expect(find(findAll('li')[2]).textContent).to.equal("bird");
 
     await click(this.$("button")[0]);
 
-    expect(this.$("li:eq(3)").text()).to.equal("fish");
+    expect(find(findAll('li')[3]).textContent).to.equal("fish");
   });
 
   it('allows to create a Microstate<Array> from a microstate', async function() {
@@ -286,13 +285,13 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('li:eq(0)').text()).to.equal('dog');
-    expect(this.$('li:eq(1)').text()).to.equal('cat');
-    expect(this.$('li:eq(2)').text()).to.equal('bird');
+    expect(find('li').textContent).to.equal('dog');
+    expect(find(findAll('li')[1]).textContent).to.equal('cat');
+    expect(find(findAll('li')[2]).textContent).to.equal('bird');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('li:eq(3)').text()).to.equal('fish');
+    expect(find(findAll('li')[3]).textContent).to.equal('fish');
   });
 
   it('allows to create a Microstate<Array> using (type "array")', async function() {
@@ -310,13 +309,13 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('li:eq(0)').text()).to.equal('dog');
-    expect(this.$('li:eq(1)').text()).to.equal('cat');
-    expect(this.$('li:eq(2)').text()).to.equal('bird');
+    expect(find('li').textContent).to.equal('dog');
+    expect(find(findAll('li')[1]).textContent).to.equal('cat');
+    expect(find(findAll('li')[2]).textContent).to.equal('bird');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('li:eq(3)').text()).to.equal('fish');
+    expect(find(findAll('li')[3]).textContent).to.equal('fish');
   });
 
   it('allows to create a Microstate<Person> using (type "person")', async function() {
@@ -342,10 +341,10 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(this.$('span').text()).to.equal('Homer Simpson');
+    expect(find('span').textContent).to.equal('Homer Simpson');
 
     await click(this.$('button')[0]);
 
-    expect(this.$('span').text()).to.equal('Homer J Simpson');
+    expect(find('span').textContent).to.equal('Homer J Simpson');
   });
 });

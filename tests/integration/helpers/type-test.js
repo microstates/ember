@@ -1,3 +1,4 @@
+import { find } from '@ember/test-helpers';
 import { expect } from "chai";
 import { describe, it } from "mocha";
 import { setupComponentTest } from "ember-mocha";
@@ -17,8 +18,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
@@ -31,8 +31,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
@@ -45,8 +44,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
@@ -59,8 +57,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
@@ -73,8 +70,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
@@ -87,8 +83,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
@@ -101,8 +96,7 @@ describe("Integration | Helper | type", function() {
     );
 
     expect(
-      this.$()
-        .text()
+      find('*').textContent
         .trim()
     ).to.equal("true");
   });
