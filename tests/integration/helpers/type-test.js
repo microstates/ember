@@ -102,10 +102,12 @@ describe("Integration | Helper | type", function() {
   it('throws an exception for unregistered type', async function() {
     initialize(this.owner);
 
-    expect(async () => {
+    try {
       await render(
         hbs`{{type "car"}}`
       );
-    }).to.throw(/\(type "car"\) could not be looked up/)
+    } catch (err) {
+      (() => { throw err; }).should.throw(/\(type "car"\) could not be looked up/);
+    }
   });
 });
