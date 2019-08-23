@@ -1,13 +1,11 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
-import { setupComponentTest } from 'ember-mocha';
+import { setupRenderingTest } from 'ember-mocha';
 import hbs from 'htmlbars-inline-precompile';
 import { click } from '@ember/test-helpers';
 
 describe('Integration | Helper | value-of', function() {
-  setupComponentTest('value-of', {
-    integration: true
-  });
+  setupRenderingTest();
 
   it('extracts value from the microstate', async function() {
 

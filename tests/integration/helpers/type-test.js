@@ -1,14 +1,12 @@
 import { find } from '@ember/test-helpers';
 import { expect } from "chai";
 import { describe, it } from "mocha";
-import { setupComponentTest } from "ember-mocha";
+import { setupRenderingTest } from "ember-mocha";
 import hbs from "htmlbars-inline-precompile";
 import { initialize } from 'dummy/initializers/microstates';
 
 describe("Integration | Helper | type", function() {
-  setupComponentTest("type", {
-    integration: true
-  });
+  setupRenderingTest();
 
   it("looks up Any", async function() {
     initialize(this);

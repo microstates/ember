@@ -1,14 +1,12 @@
 import { expect } from "chai";
 import { describe, it } from "mocha";
-import { setupComponentTest } from "ember-mocha";
+import { setupRenderingTest } from "ember-mocha";
 import hbs from "htmlbars-inline-precompile";
 import { click, find, findAll } from "@ember/test-helpers";
 import { create } from "@microstates/ember";
 
 describe("Integration | Helper | state", function() {
-  setupComponentTest("state", {
-    integration: true
-  });
+  setupRenderingTest();
 
   it("renders", function() {
     this.render(hbs`
