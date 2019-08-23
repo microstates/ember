@@ -8,8 +8,8 @@ import { create } from "@microstates/ember";
 describe("Integration | Helper | state", function() {
   setupRenderingTest();
 
-  it("renders", function() {
-    render(hbs`
+  it("renders", async function() {
+    await render(hbs`
       {{#let (state) as |$|}}
         {{$.state}}
       {{/let}}
@@ -22,7 +22,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it("allows value to be set", async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state) as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.set "hello world"}} />
@@ -39,7 +39,7 @@ describe("Integration | Helper | state", function() {
   it("allows to create a Microstate<Number> from a microstate", async function() {
     this.set("microstate", create(Number, 42));
 
-    render(hbs`
+    await render(hbs`
       {{#let (state microstate) as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.increment}} />
@@ -54,7 +54,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it("allows to create a Microstate<Number> from value", async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state 42) as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.increment}} />
@@ -69,7 +69,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it('allows to create a Microstate<Number> using (type "number")', async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state (type "number") 42) as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.increment}} />
@@ -84,7 +84,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it("allows to create a Microstate<Boolean> from value", async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state true) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
         <button {{action $.toggle}} />
@@ -99,7 +99,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it('allows to create a Microstate<Boolean> using (type "boolean")', async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state (type "boolean") true) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
         <button {{action $.toggle}} />
@@ -115,7 +115,7 @@ describe("Integration | Helper | state", function() {
 
   it("allows to create a Microstate<Boolean> from a microstate", async function() {
     this.set("microstate", create(Boolean, true));
-    render(hbs`
+    await render(hbs`
       {{#let (state microstate) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
         <button {{action $.toggle}} />
@@ -130,7 +130,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it("allows to create a Microstate<String> from value", async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state 'hello world') as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.concat '!!!'}} />
@@ -147,7 +147,7 @@ describe("Integration | Helper | state", function() {
   it("allows to create a Microstate<String> from a microstate", async function() {
     this.set("microstate", create(String, "hello world"));
 
-    render(hbs`
+    await render(hbs`
       {{#let (state microstate) as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.concat '!!!'}} />
@@ -162,7 +162,7 @@ describe("Integration | Helper | state", function() {
   });
 
   it('allows to create a Microstate<String> using (type "string")', async function() {
-    render(hbs`
+    await render(hbs`
       {{#let (state (type "string") 'hello world') as |$|}}
         <span>{{$.state}}</span>
         <button {{action $.concat '!!!'}} />
@@ -179,7 +179,7 @@ describe("Integration | Helper | state", function() {
   it("allows to create a Microstate<Object> from value", async function() {
     this.set("obj", { dog: "Santa's Little Helper", cat: "Snowball" });
 
-    render(hbs`
+    await render(hbs`
       {{#let (state obj) as |$|}}
         <ul>
           {{#each $ as |entry|}}
@@ -204,7 +204,7 @@ describe("Integration | Helper | state", function() {
       create(Object, { dog: "Santa's Little Helper", cat: "Snowball" })
     );
 
-    render(hbs`
+    await render(hbs`
       {{#let (state microstate) as |$|}}
         <ul>
           {{#each $ as |entry|}}
@@ -225,7 +225,7 @@ describe("Integration | Helper | state", function() {
 
   it('allows to create a Microstate<Object> using (type "object")', async function() {
     this.set('obj', { dog: 'Santa\'s Little Helper', cat: 'Snowball' })
-    render(hbs`
+    await render(hbs`
       {{#let (state (type "object") obj) as |$|}}
         <ul>
           {{#each $ as |entry|}}
@@ -247,7 +247,7 @@ describe("Integration | Helper | state", function() {
   it("allows to create an Microstate<Array> from value", async function() {
     this.set("pets", ["dog", "cat", "bird"]);
 
-    render(hbs`
+    await render(hbs`
       {{#let (state pets) as |$|}}
         <ul>
           {{#each $ as |pet|}}
@@ -271,7 +271,7 @@ describe("Integration | Helper | state", function() {
   it('allows to create a Microstate<Array> from a microstate', async function() {
     this.set('microstate', create(Array, ['dog', 'cat', 'bird']));
 
-    render(hbs`
+    await render(hbs`
       {{#let (state microstate) as |$|}}
         <ul>
           {{#each $ as |pet|}}
@@ -295,7 +295,7 @@ describe("Integration | Helper | state", function() {
   it('allows to create a Microstate<Array> using (type "array")', async function() {
     this.set('pets', ['dog', 'cat', 'bird']);
 
-    render(hbs`
+    await render(hbs`
       {{#let (state (type "array") pets) as |$|}}
         <ul>
           {{#each $ as |pet|}}
@@ -332,7 +332,7 @@ describe("Integration | Helper | state", function() {
 
     this.set('value', { firstName: 'Homer', lastName: 'Simpson'});
 
-    render(hbs`
+    await render(hbs`
       {{#let (state Person value) as |$|}}
         <span>{{$.fullName}}</span>
         <button {{action $.firstName.set 'Homer J'}} />

@@ -11,7 +11,7 @@ describe("Integration | Helper | type", function() {
   it("looks up Any", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "any") (import "microstates?Any")) "true" "false"}}`
     );
 
@@ -24,7 +24,7 @@ describe("Integration | Helper | type", function() {
   it("looks up BooleanType", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "boolean") (import "microstates?BooleanType")) "true" "false"}}`
     );
 
@@ -37,7 +37,7 @@ describe("Integration | Helper | type", function() {
   it("looks up StringType", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "string") (import "microstates?StringType")) "true" "false"}}`
     );
 
@@ -50,7 +50,7 @@ describe("Integration | Helper | type", function() {
   it("looks up NumberType", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "number") (import "microstates?NumberType")) "true" "false"}}`
     );
 
@@ -63,7 +63,7 @@ describe("Integration | Helper | type", function() {
   it("looks up ArrayType", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "array") (import "microstates?ArrayType")) "true" "false"}}`
     );
 
@@ -76,7 +76,7 @@ describe("Integration | Helper | type", function() {
   it("looks up ObjectType", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "object") (import "microstates?ObjectType")) "true" "false"}}`
     );
 
@@ -89,7 +89,7 @@ describe("Integration | Helper | type", function() {
   it("looks up Person from app", async function() {
     initialize(this);
 
-    render(
+    await render(
       hbs`{{if (eq (type "person") (import "dummy/types/person")) "true" "false"}}`
     );
 
@@ -102,8 +102,8 @@ describe("Integration | Helper | type", function() {
   it('throws an exception for unregistered type', async function() {
     initialize(this);
 
-    expect(() => {
-      render(
+    expect(async () => {
+      await render(
         hbs`{{type "car"}}`
       );
     }).to.throw(/\(type "car"\) could not be looked up/)
