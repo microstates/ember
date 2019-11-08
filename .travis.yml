@@ -20,6 +20,7 @@ env:
   global:
     # See https://git.io/vdao3 for details.
     - JOBS=1
+    - EMBER_TRY_SCENARIO=ember-default
 
 branches:
   only:
