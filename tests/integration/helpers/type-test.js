@@ -1,113 +1,90 @@
-import { render, find } from '@ember/test-helpers';
-import { expect } from "chai";
-import { describe, it } from "mocha";
-import { setupRenderingTest } from "ember-mocha";
-import hbs from "htmlbars-inline-precompile";
+import { module, test, skip } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from "@ember/test-helpers";
+import { hbs } from 'ember-cli-htmlbars';
 import { initialize } from 'dummy/initializers/microstates';
 
-describe("Integration | Helper | type", function() {
-  setupRenderingTest();
+module("Integration | Helper | type", function(hooks) {
+  setupRenderingTest(hooks);
 
-  it("looks up Any", async function() {
+  test("looks up Any", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "any") (import "microstates?Any")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it("looks up BooleanType", async function() {
+  test("looks up BooleanType", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "boolean") (import "microstates?BooleanType")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it("looks up StringType", async function() {
+  test("looks up StringType", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "string") (import "microstates?StringType")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it("looks up NumberType", async function() {
+  test("looks up NumberType", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "number") (import "microstates?NumberType")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it("looks up ArrayType", async function() {
+  test("looks up ArrayType", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "array") (import "microstates?ArrayType")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it("looks up ObjectType", async function() {
+  test("looks up ObjectType", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "object") (import "microstates?ObjectType")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it("looks up Person from app", async function() {
+  test("looks up Person from app", async function(assert) {
     initialize(this.owner);
 
     await render(
       hbs`{{if (eq (type "person") (import "dummy/types/person")) "true" "false"}}`
     );
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("true");
+    assert.equal(find('*').textContent.trim(), "true");
   });
 
-  it('throws an exception for unregistered type', async function() {
+  // @see: https://github.com/emberjs/ember-test-helpers/issues/310
+  skip('throws an exception for unregistered type', async function(assert) {
     initialize(this.owner);
 
-    try {
+    assert.throws(async () => {
       await render(
         hbs`{{type "car"}}`
       );
-    } catch (err) {
-      (() => { throw err; }).should.throw(/\(type "car"\) could not be looked up/);
-    }
+    }, /\(type "car"\) could not be looked up/)
   });
 });

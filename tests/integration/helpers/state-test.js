@@ -1,27 +1,23 @@
-import { expect } from "chai";
-import { describe, it } from "mocha";
-import { setupRenderingTest } from "ember-mocha";
-import hbs from "htmlbars-inline-precompile";
-import { render, click, find, findAll } from "@ember/test-helpers";
 import { create } from "@microstates/ember";
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, click, find, findAll } from "@ember/test-helpers";
+import { hbs } from 'ember-cli-htmlbars';
 
-describe("Integration | Helper | state", function() {
-  setupRenderingTest();
+module("Integration | Helper | state", function(hooks) {
+  setupRenderingTest(hooks);
 
-  it("renders", async function() {
+  test("renders", async function(assert) {
     await render(hbs`
       {{#let (state) as |$|}}
         {{$.state}}
       {{/let}}
     `);
 
-    expect(
-      find('*').textContent
-        .trim()
-    ).to.equal("");
+    assert.equal(find('*').textContent.trim(), "");
   });
 
-  it("allows value to be set", async function() {
+  test("allows value to be set", async function(assert) {
     await render(hbs`
       {{#let (state) as |$|}}
         <span>{{$.state}}</span>
@@ -29,14 +25,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("");
+    assert.equal(find("span").textContent, "");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("hello world");
+    assert.equal(find("span").textContent, "hello world");
   });
 
-  it("allows to create a Microstate<Number> from a microstate", async function() {
+  test("allows to create a Microstate<Number> from a microstate", async function(assert) {
     this.set("microstate", create(Number, 42));
 
     await render(hbs`
@@ -46,14 +42,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("42");
+    assert.equal(find("span").textContent, "42");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("43");
+    assert.equal(find("span").textContent, "43");
   });
 
-  it("allows to create a Microstate<Number> from value", async function() {
+  test("allows to create a Microstate<Number> from value", async function(assert) {
     await render(hbs`
       {{#let (state 42) as |$|}}
         <span>{{$.state}}</span>
@@ -61,14 +57,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("42");
+    assert.equal(find("span").textContent, "42");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("43");
+    assert.equal(find("span").textContent, "43");
   });
 
-  it('allows to create a Microstate<Number> using (type "number")', async function() {
+  test('allows to create a Microstate<Number> using (type "number")', async function(assert) {
     await render(hbs`
       {{#let (state (type "number") 42) as |$|}}
         <span>{{$.state}}</span>
@@ -76,14 +72,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('span').textContent).to.equal('42');
+    assert.equal(find('span').textContent, '42');
 
     await click(find('button'));
 
-    expect(find('span').textContent).to.equal('43');
+    assert.equal(find('span').textContent, '43');
   });
 
-  it("allows to create a Microstate<Boolean> from value", async function() {
+  test("allows to create a Microstate<Boolean> from value", async function(assert) {
     await render(hbs`
       {{#let (state true) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
@@ -91,14 +87,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("true");
+    assert.equal(find("span").textContent, "true");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("false");
+    assert.equal(find("span").textContent, "false");
   });
 
-  it('allows to create a Microstate<Boolean> using (type "boolean")', async function() {
+  test('allows to create a Microstate<Boolean> using (type "boolean")', async function(assert) {
     await render(hbs`
       {{#let (state (type "boolean") true) as |$|}}
         <span>{{if $.state 'true' 'false'}}</span>
@@ -106,14 +102,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('span').textContent).to.equal('true');
+    assert.equal(find('span').textContent, 'true');
 
     await click(find('button'));
 
-    expect(find('span').textContent).to.equal('false');
+    assert.equal(find('span').textContent, 'false');
   });
 
-  it("allows to create a Microstate<Boolean> from a microstate", async function() {
+  test("allows to create a Microstate<Boolean> from a microstate", async function(assert) {
     this.set("microstate", create(Boolean, true));
     await render(hbs`
       {{#let (state microstate) as |$|}}
@@ -122,14 +118,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("true");
+    assert.equal(find("span").textContent, "true");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("false");
+    assert.equal(find("span").textContent, "false");
   });
 
-  it("allows to create a Microstate<String> from value", async function() {
+  test("allows to create a Microstate<String> from value", async function(assert) {
     await render(hbs`
       {{#let (state 'hello world') as |$|}}
         <span>{{$.state}}</span>
@@ -137,14 +133,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("hello world");
+    assert.equal(find("span").textContent, "hello world");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("hello world!!!");
+    assert.equal(find("span").textContent, "hello world!!!");
   });
 
-  it("allows to create a Microstate<String> from a microstate", async function() {
+  test("allows to create a Microstate<String> from a microstate", async function(assert) {
     this.set("microstate", create(String, "hello world"));
 
     await render(hbs`
@@ -154,14 +150,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find("span").textContent).to.equal("hello world");
+    assert.equal(find("span").textContent, "hello world");
 
     await click(find("button"));
 
-    expect(find("span").textContent).to.equal("hello world!!!");
+    assert.equal(find("span").textContent, "hello world!!!");
   });
 
-  it('allows to create a Microstate<String> using (type "string")', async function() {
+  test('allows to create a Microstate<String> using (type "string")', async function(assert) {
     await render(hbs`
       {{#let (state (type "string") 'hello world') as |$|}}
         <span>{{$.state}}</span>
@@ -169,14 +165,14 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('span').textContent).to.equal('hello world');
+    assert.equal(find('span').textContent, 'hello world');
 
     await click(find('button'));
 
-    expect(find('span').textContent).to.equal('hello world!!!');
+    assert.equal(find('span').textContent, 'hello world!!!');
   });
 
-  it("allows to create a Microstate<Object> from value", async function() {
+  test("allows to create a Microstate<Object> from value", async function(assert) {
     this.set("obj", { dog: "Santa's Little Helper", cat: "Snowball" });
 
     await render(hbs`
@@ -190,15 +186,15 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('li').textContent).to.equal("dog: Santa's Little Helper");
-    expect(find(findAll('li')[1]).textContent).to.equal("cat: Snowball");
+    assert.equal(find('li').textContent, "dog: Santa's Little Helper");
+    assert.equal(find(findAll('li')[1]).textContent, "cat: Snowball");
 
     await click(find("button"));
 
-    expect(find(findAll('li')[2]).textContent).to.equal("second cat: Snowball II");
+    assert.equal(find(findAll('li')[2]).textContent, "second cat: Snowball II");
   });
 
-  it("allows to create a Microstate<Object> from a microstate", async function() {
+  test("allows to create a Microstate<Object> from a microstate", async function(assert) {
     this.set(
       "microstate",
       create(Object, { dog: "Santa's Little Helper", cat: "Snowball" })
@@ -215,15 +211,15 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('li').textContent).to.equal("dog: Santa's Little Helper");
-    expect(find(findAll('li')[1]).textContent).to.equal("cat: Snowball");
+    assert.equal(find('li').textContent, "dog: Santa's Little Helper");
+    assert.equal(find(findAll('li')[1]).textContent, "cat: Snowball");
 
     await click(find("button"));
 
-    expect(find(findAll('li')[2]).textContent).to.equal("second cat: Snowball II");
+    assert.equal(find(findAll('li')[2]).textContent, "second cat: Snowball II");
   });
 
-  it('allows to create a Microstate<Object> using (type "object")', async function() {
+  test('allows to create a Microstate<Object> using (type "object")', async function(assert) {
     this.set('obj', { dog: 'Santa\'s Little Helper', cat: 'Snowball' })
     await render(hbs`
       {{#let (state (type "object") obj) as |$|}}
@@ -236,15 +232,15 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('li').textContent).to.equal('dog: Santa\'s Little Helper');
-    expect(find(findAll('li')[1]).textContent).to.equal('cat: Snowball');
+    assert.equal(find('li').textContent, 'dog: Santa\'s Little Helper');
+    assert.equal(find(findAll('li')[1]).textContent, 'cat: Snowball');
 
     await click(find('button'));
 
-    expect(find(findAll('li')[2]).textContent).to.equal('second cat: Snowball II');
+    assert.equal(find(findAll('li')[2]).textContent, 'second cat: Snowball II');
   });
 
-  it("allows to create an Microstate<Array> from value", async function() {
+  test("allows to create an Microstate<Array> from value", async function(assert) {
     this.set("pets", ["dog", "cat", "bird"]);
 
     await render(hbs`
@@ -259,16 +255,16 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('li').textContent).to.equal("dog");
-    expect(find(findAll('li')[1]).textContent).to.equal("cat");
-    expect(find(findAll('li')[2]).textContent).to.equal("bird");
+    assert.equal(find('li').textContent, "dog");
+    assert.equal(find(findAll('li')[1]).textContent, "cat");
+    assert.equal(find(findAll('li')[2]).textContent, "bird");
 
     await click(find("button"));
 
-    expect(find(findAll('li')[3]).textContent).to.equal("fish");
+    assert.equal(find(findAll('li')[3]).textContent, "fish");
   });
 
-  it('allows to create a Microstate<Array> from a microstate', async function() {
+  test('allows to create a Microstate<Array> from a microstate', async function(assert) {
     this.set('microstate', create(Array, ['dog', 'cat', 'bird']));
 
     await render(hbs`
@@ -283,16 +279,16 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('li').textContent).to.equal('dog');
-    expect(find(findAll('li')[1]).textContent).to.equal('cat');
-    expect(find(findAll('li')[2]).textContent).to.equal('bird');
+    assert.equal(find('li').textContent, 'dog');
+    assert.equal(find(findAll('li')[1]).textContent, 'cat');
+    assert.equal(find(findAll('li')[2]).textContent, 'bird');
 
     await click(find('button'));
 
-    expect(find(findAll('li')[3]).textContent).to.equal('fish');
+    assert.equal(find(findAll('li')[3]).textContent, 'fish');
   });
 
-  it('allows to create a Microstate<Array> using (type "array")', async function() {
+  test('allows to create a Microstate<Array> using (type "array")', async function(assert) {
     this.set('pets', ['dog', 'cat', 'bird']);
 
     await render(hbs`
@@ -307,16 +303,16 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('li').textContent).to.equal('dog');
-    expect(find(findAll('li')[1]).textContent).to.equal('cat');
-    expect(find(findAll('li')[2]).textContent).to.equal('bird');
+    assert.equal(find('li').textContent, 'dog');
+    assert.equal(find(findAll('li')[1]).textContent, 'cat');
+    assert.equal(find(findAll('li')[2]).textContent, 'bird');
 
     await click(find('button'));
 
-    expect(find(findAll('li')[3]).textContent).to.equal('fish');
+    assert.equal(find(findAll('li')[3]).textContent, 'fish');
   });
 
-  it('allows to create a Microstate<Person> using (type "person")', async function() {
+  test('allows to create a Microstate<Person> using (type "person")', async function(assert) {
     class Person {
       constructor() {
         this.firstName = String;
@@ -339,10 +335,10 @@ describe("Integration | Helper | state", function() {
       {{/let}}
     `);
 
-    expect(find('span').textContent).to.equal('Homer Simpson');
+    assert.equal(find('span').textContent, 'Homer Simpson');
 
     await click(find('button'));
 
-    expect(find('span').textContent).to.equal('Homer J Simpson');
+    assert.equal(find('span').textContent, 'Homer J Simpson');
   });
 });

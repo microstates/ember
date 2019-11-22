@@ -1,13 +1,12 @@
-import { expect } from 'chai';
-import { describe, it } from 'mocha';
-import { setupRenderingTest } from 'ember-mocha';
-import hbs from 'htmlbars-inline-precompile';
-import { render, click, find } from '@ember/test-helpers';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, click, find } from "@ember/test-helpers";
+import { hbs } from 'ember-cli-htmlbars';
 
-describe('Integration | Helper | value-of', function() {
-  setupRenderingTest();
+module('Integration | Helper | value-of', function(hooks) {
+  setupRenderingTest(hooks);
 
-  it('extracts value from the microstate', async function() {
+  test('extracts value from the microstate', async function(assert) {
 
     await render(hbs`
       {{#let (state 42) as |$|}}
@@ -16,11 +15,11 @@ describe('Integration | Helper | value-of', function() {
       {{/let}}
     `);
 
-    expect(this.get('value')).to.equal(42);
+    assert.equal(this.get('value'), 42);
 
     await click(find('button'));
 
-    expect(this.get('value')).to.equal(43);
+    assert.equal(this.get('value'), 43);
   });
 });
 
