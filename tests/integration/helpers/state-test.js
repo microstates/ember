@@ -14,7 +14,7 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('*').textContent.trim(), "");
+    assert.dom('*').hasText('');
   });
 
   test("allows value to be set", async function(assert) {
@@ -25,11 +25,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "");
+    assert.dom("span").hasText('');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "hello world");
+    assert.dom("span").hasText('hello world');
   });
 
   test("allows to create a Microstate<Number> from a microstate", async function(assert) {
@@ -42,11 +42,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "42");
+    assert.dom("span").hasText('42');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "43");
+    assert.dom("span").hasText('43');
   });
 
   test("allows to create a Microstate<Number> from value", async function(assert) {
@@ -57,11 +57,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "42");
+    assert.dom("span").hasText('42');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "43");
+    assert.dom("span").hasText('43');
   });
 
   test('allows to create a Microstate<Number> using (type "number")', async function(assert) {
@@ -72,11 +72,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('span').textContent, '42');
+    assert.dom('span').hasText('42');
 
     await click(find('button'));
 
-    assert.equal(find('span').textContent, '43');
+    assert.dom('span').hasText('43');
   });
 
   test("allows to create a Microstate<Boolean> from value", async function(assert) {
@@ -87,11 +87,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "true");
+    assert.dom("span").hasText('true');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "false");
+    assert.dom("span").hasText('false');
   });
 
   test('allows to create a Microstate<Boolean> using (type "boolean")', async function(assert) {
@@ -102,11 +102,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('span').textContent, 'true');
+    assert.dom('span').hasText('true');
 
     await click(find('button'));
 
-    assert.equal(find('span').textContent, 'false');
+    assert.dom('span').hasText('false');
   });
 
   test("allows to create a Microstate<Boolean> from a microstate", async function(assert) {
@@ -118,11 +118,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "true");
+    assert.dom("span").hasText('true');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "false");
+    assert.dom("span").hasText('false');
   });
 
   test("allows to create a Microstate<String> from value", async function(assert) {
@@ -133,11 +133,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "hello world");
+    assert.dom("span").hasText('hello world');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "hello world!!!");
+    assert.dom("span").hasText('hello world!!!');
   });
 
   test("allows to create a Microstate<String> from a microstate", async function(assert) {
@@ -150,11 +150,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find("span").textContent, "hello world");
+    assert.dom("span").hasText('hello world');
 
     await click(find("button"));
 
-    assert.equal(find("span").textContent, "hello world!!!");
+    assert.dom("span").hasText('hello world!!!');
   });
 
   test('allows to create a Microstate<String> using (type "string")', async function(assert) {
@@ -165,11 +165,11 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('span').textContent, 'hello world');
+    assert.dom('span').hasText('hello world');
 
     await click(find('button'));
 
-    assert.equal(find('span').textContent, 'hello world!!!');
+    assert.dom('span').hasText('hello world!!!');
   });
 
   test("allows to create a Microstate<Object> from value", async function(assert) {
@@ -186,12 +186,12 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('li').textContent, "dog: Santa's Little Helper");
-    assert.equal(find(findAll('li')[1]).textContent, "cat: Snowball");
+    assert.dom('li').hasText('dog: Santa\'s Little Helper');
+    assert.dom(findAll('li')[1]).hasText('cat: Snowball');
 
     await click(find("button"));
 
-    assert.equal(find(findAll('li')[2]).textContent, "second cat: Snowball II");
+    assert.dom(findAll('li')[2]).hasText('second cat: Snowball II');
   });
 
   test("allows to create a Microstate<Object> from a microstate", async function(assert) {
@@ -211,12 +211,12 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('li').textContent, "dog: Santa's Little Helper");
-    assert.equal(find(findAll('li')[1]).textContent, "cat: Snowball");
+    assert.dom('li').hasText('dog: Santa\'s Little Helper');
+    assert.dom(findAll('li')[1]).hasText('cat: Snowball');
 
     await click(find("button"));
 
-    assert.equal(find(findAll('li')[2]).textContent, "second cat: Snowball II");
+    assert.dom(findAll('li')[2]).hasText('second cat: Snowball II');
   });
 
   test('allows to create a Microstate<Object> using (type "object")', async function(assert) {
@@ -232,12 +232,12 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('li').textContent, 'dog: Santa\'s Little Helper');
-    assert.equal(find(findAll('li')[1]).textContent, 'cat: Snowball');
+    assert.dom('li').hasText('dog: Santa\'s Little Helper');
+    assert.dom(findAll('li')[1]).hasText('cat: Snowball');
 
     await click(find('button'));
 
-    assert.equal(find(findAll('li')[2]).textContent, 'second cat: Snowball II');
+    assert.dom(findAll('li')[2]).hasText('second cat: Snowball II');
   });
 
   test("allows to create an Microstate<Array> from value", async function(assert) {
@@ -255,13 +255,13 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('li').textContent, "dog");
-    assert.equal(find(findAll('li')[1]).textContent, "cat");
-    assert.equal(find(findAll('li')[2]).textContent, "bird");
+    assert.dom('li').hasText('dog');
+    assert.dom(findAll('li')[1]).hasText('cat');
+    assert.dom(findAll('li')[2]).hasText('bird');
 
     await click(find("button"));
 
-    assert.equal(find(findAll('li')[3]).textContent, "fish");
+    assert.dom(findAll('li')[3]).hasText('fish');
   });
 
   test('allows to create a Microstate<Array> from a microstate', async function(assert) {
@@ -279,13 +279,13 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('li').textContent, 'dog');
-    assert.equal(find(findAll('li')[1]).textContent, 'cat');
-    assert.equal(find(findAll('li')[2]).textContent, 'bird');
+    assert.dom('li').hasText('dog');
+    assert.dom(findAll('li')[1]).hasText('cat');
+    assert.dom(findAll('li')[2]).hasText('bird');
 
     await click(find('button'));
 
-    assert.equal(find(findAll('li')[3]).textContent, 'fish');
+    assert.dom(findAll('li')[3]).hasText('fish');
   });
 
   test('allows to create a Microstate<Array> using (type "array")', async function(assert) {
@@ -303,13 +303,13 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('li').textContent, 'dog');
-    assert.equal(find(findAll('li')[1]).textContent, 'cat');
-    assert.equal(find(findAll('li')[2]).textContent, 'bird');
+    assert.dom('li').hasText('dog');
+    assert.dom(findAll('li')[1]).hasText('cat');
+    assert.dom(findAll('li')[2]).hasText('bird');
 
     await click(find('button'));
 
-    assert.equal(find(findAll('li')[3]).textContent, 'fish');
+    assert.dom(findAll('li')[3]).hasText('fish');
   });
 
   test('allows to create a Microstate<Person> using (type "person")', async function(assert) {
@@ -335,10 +335,10 @@ module("Integration | Helper | state", function(hooks) {
       {{/let}}
     `);
 
-    assert.equal(find('span').textContent, 'Homer Simpson');
+    assert.dom('span').hasText('Homer Simpson');
 
     await click(find('button'));
 
-    assert.equal(find('span').textContent, 'Homer J Simpson');
+    assert.dom('span').hasText('Homer J Simpson');
   });
 });
