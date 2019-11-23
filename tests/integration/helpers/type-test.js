@@ -1,7 +1,7 @@
 import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from "@ember/test-helpers";
-import hbs from 'htmlbars-inline-precompile';	
+import { hbs } from 'ember-cli-htmlbars';
 import { initialize } from 'dummy/initializers/microstates';
 
 module("Integration | Helper | type", function(hooks) {
