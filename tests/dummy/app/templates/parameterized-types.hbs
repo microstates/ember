@@ -34,7 +34,7 @@
               <input 
                 type="number" 
                 value={{number.state}} 
-                onchange={{action number.set value="target.value"}} 
+                onchange={{tval number.set}} 
               />
               <button {{on "click" number.increment}}><FaIcon @icon="caret-up"/></button>
             </li>
@@ -122,7 +122,7 @@
           <form {{on "submit" (fn this.characters.put name.state)}}>
             <input
               value={{name.state}} 
-              oninput={{action name.set value="target.value"}}
+              oninput={{tval name.set}}
             >
             <button {{on "click" (fn this.characters.put name.state)}}>Add</button>
           </form>
@@ -132,12 +132,12 @@
                 <span>{{entry.key}}</span>
                 <input 
                   value={{entry.value.name.state}} 
-                  oninput={{action entry.value.name.set value="target.value"}}
+                  oninput={{tval entry.value.name.set}}
                 >
                 <input 
                   type="number" 
                   value={{entry.value.age.state}}
-                  oninput={{action entry.value.age.set value="target.value"}}
+                  oninput={{tval entry.value.age.set}}
                 >
                 {{entry.value.summary}}
               </li>

@@ -9,7 +9,7 @@
         placeholder="What needs to be done?"
         autofocus={{true}}
         value={{this.todomvc.newTodo.state}}
-        onchange={{action this.todomvc.newTodo.set value="target.value"}}
+        onchange={{tval this.todomvc.newTodo.set}}
       />
     </form>
     <div class="main">
@@ -25,7 +25,7 @@
                 <input
                   class="edit" 
                   value={{todo.text.state}} 
-                  onchange={{action todo.text.set value="target.value"}}
+                  onchange={{tval todo.text.set}}
                   onblur={{todo.save}}
                   autofocus={{true}}
                 />
@@ -36,12 +36,12 @@
                   class="toggle" 
                   type="checkbox" 
                   checked={{todo.completed.state}} 
-                  onclick={{action todo.completed.toggle}} 
+                  onclick={{todo.completed.toggle}} 
                 />
-                <label {{action todo.edit on="doubleClick"}}>
+                <label {{on "dblclick" todo.edit}}>
                   {{todo.text.state}}
                 </label>
-                <button type="button" class="destroy" {{action todomvc.todos.remove todo}} />
+                <button type="button" class="destroy" {{on "click" (fn this.todomvc.todos.remove todo)}} />
               </div>
             {{/if}}
           </li>
@@ -51,25 +51,25 @@
     <footer class="footer">
       <span class="todo-count">
         <strong>
-          {{todomvc.active.length}}
+          {{this.todomvc.active.length}}
         </strong>
-        {{if (eq todomvc.active.length 1) 'item' 'items'}} left
+        {{if (eq this.todomvc.active.length 1) 'item' 'items'}} left
       </span>
       <ul class="filters">
-        {{#each todomvc.filters as |filter|}}
+        {{#each this.todomvc.filters as |filter|}}
           <li>
             <button
               type="button"
               class={{if filter.selected "selected"}}
-              {{action filter.select}}
+              {{on "click" filter.select}}
             >
               {{filter.label}}
             </button>
           </li>
         {{/each}}
       </ul>
-      {{#if todomvc.hasCompleted}}
-        <button type="button" class="clear-completed" {{action todomvc.clearCompleted}}>
+      {{#if this.todomvc.hasCompleted}}
+        <button type="button" class="clear-completed" {{on "click" this.todomvc.clearCompleted}}>
           Clear completed
         </button>
       {{/if}}

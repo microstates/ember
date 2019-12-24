@@ -35,12 +35,12 @@
         <input
           placeholder="first name"
           value={{person.firstName.state}}
-          oninput={{action person.firstName.set value="target.value"}}
+          oninput={{tval person.firstName.set}}
         />
         <input
           placeholder="last name"
           value={{person.lastName.state}}
-          oninput={{action person.lastName.set value="target.value"}}
+          oninput={{tval person.lastName.set}}
         />
         <button {{on "click" person.changeIdentity "Bart" "Simpson"}}>Change to Bart</button>
         <p>Full Name: {{person.fullName}}</p>
@@ -138,7 +138,7 @@
         <form class="manager-form" {{on "submit" manager.addList}}>
           <input
             value={{manager.newListTitle.state}} 
-            oninput={{action manager.newListTitle.set value="target.value"}}
+            oninput={{tval manager.newListTitle.set}}
           >
           <button disabled={{not manager.isValid}}>Create</button>
           <button {{on "click" (fn manager.show "")}}>All</button>

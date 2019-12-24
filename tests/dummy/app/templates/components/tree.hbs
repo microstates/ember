@@ -7,7 +7,7 @@
 <input 
   type="text" 
   value={{@node.counter.state}} 
-  onchange={{action node.counter.set value="target.value"}}
+  onchange={{tval @node.counter.set}}
 > 
 <button {{on "click" @node.counter.increment}}><FaIcon @icon="caret-up"/></button>
 <button {{on "click" @node.counter.decrement}}><FaIcon @icon="caret-down"/></button>
