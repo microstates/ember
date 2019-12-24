@@ -26,21 +26,21 @@
     <s.live @class="mb-4">
       {{!BEGIN-SNIPPET array-of-numbers-template}}
       {{#let (state (type "array-of-numbers") (array 10 20 30)) as |numbers|}}
-        <button {{on "click" (fn numbers.unshift 0)}}><FaIcon @icon="plus"/></button>
+        <button {{on "click" (fn numbers.unshift 0)}} type="button"><FaIcon @icon="plus"/></button>
         <ul>
           {{#each numbers as |number|}}
             <li>
-              <button {{on "click" (noargs number.decrement)}}><FaIcon @icon="caret-down"/></button>
+              <button {{on "click" (noargs number.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
               <input 
                 type="number" 
                 value={{number.state}} 
                 onchange={{tval number.set}} 
               />
-              <button {{on "click" number.increment}}><FaIcon @icon="caret-up"/></button>
+              <button {{on "click" number.increment}} type="button"><FaIcon @icon="caret-up"/></button>
             </li>
           {{/each}}
         </ul>
-        <button {{on "click" (fn numbers.push 0)}}><FaIcon @icon="plus"/></button>
+        <button {{on "click" (fn numbers.push 0)}} type="button"><FaIcon @icon="plus"/></button>
         <ValueBadge @value={{value-of numbers}} />
       {{/let}}
       {{!END-SNIPPET}}
@@ -76,7 +76,7 @@
     <s.live @class="mb-4">
       {{!BEGIN-SNIPPET array-of-todomvc-template}}
       {{#let (state (type "array-of-todomvc") this.todomvcInitial) as |lists|}}
-        <button {{on "click" lists.push}}>Add list</button>
+        <button {{on "click" lists.push}} type="button">Add list</button>
         {{#each lists key="@index" as |list|}}
           <Todomvc @todomvc={{list}} />
         {{/each}}
@@ -124,7 +124,7 @@
               value={{name.state}} 
               oninput={{tval name.set}}
             >
-            <button {{on "click" (fn this.characters.put name.state)}}>Add</button>
+            <button {{on "click" (fn this.characters.put name.state)}} type="button">Add</button>
           </form>
           <ul>
             {{#each characters key="key" as |entry|}}

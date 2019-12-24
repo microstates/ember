@@ -42,7 +42,7 @@
           value={{person.lastName.state}}
           oninput={{tval person.lastName.set}}
         />
-        <button {{on "click" (fn person.changeIdentity "Bart" "Simpson")}}>Change to Bart</button>
+        <button {{on "click" (fn person.changeIdentity "Bart" "Simpson")}} type="button">Change to Bart</button>
         <p>Full Name: {{person.fullName}}</p>
         <ValueBadge @value={{value-of person}} />
       {{/let}}
@@ -140,12 +140,12 @@
             value={{manager.newListTitle.state}} 
             oninput={{tval manager.newListTitle.set}}
           >
-          <button disabled={{not manager.isValid}}>Create</button>
-          <button {{on "click" (fn manager.show "")}}>All</button>
-          <button {{on "click" (fn manager.show "active")}}>Active</button>
-          <button {{on "click" (fn manager.show "completed")}}>Completed</button>
+          <button disabled={{not manager.isValid}} type="button">Create</button>
+          <button {{on "click" (fn manager.show "")}} type="button">All</button>
+          <button {{on "click" (fn manager.show "active")}} type="button">Active</button>
+          <button {{on "click" (fn manager.show "completed")}} type="button">Completed</button>
           {{#if manager.remaining}}
-            <button {{on "click" manager.completeRemaining}}>
+            <button {{on "click" manager.completeRemaining}} type="button">
               <i class="badge">{{manager.remaining}}</i>Complete All
             </button>
           {{/if}}

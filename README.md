@@ -66,7 +66,7 @@ Here is one of the simplest Microstates you can make.
 ```hbs
 {{#let (state 10) as |counter|}}
   {{counter.state}}
-  <button {{on "click" (noargs counter.increment)}}>Increment</button>
+  <button {{on "click" (noargs counter.increment)}} type="button">Increment</button>
 {{/let}}
 ```
 
@@ -101,9 +101,9 @@ class Person {
 ```hbs
 {{#let (state (type "person") initial) as |person|}}
   {{person.name.state}} - {{person.age.state}} {{person.isEmberino.state}}
-  <input type="text" onchange={{action person.name.set value="target.value"}}>
-  <button {{action person.age.increment}}>Make older</button>
-  <button {{action person.isEmberino.toggle}}>Change projects</button>
+  <input type="text" onchange={{tval person.name.set}}>
+  <button {{on "click" (noargs person.age.increment)}} type="button">Make older</button>
+  <button {{on "click" person.isEmberino.toggle}} type="button">Change projects</button>
 {{/let}}
 ```
 

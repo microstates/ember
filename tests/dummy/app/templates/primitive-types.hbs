@@ -61,10 +61,10 @@
           checked={{switch.state}}
           onclick={{switch.toggle}}
         >
-        <button {{on "click" (fn switch.set false)}}>
+        <button {{on "click" (fn switch.set false)}} type="button">
           set to false
         </button>
-        <button {{on "click" (fn switch.set true)}}>
+        <button {{on "click" (fn switch.set true)}} type="button">
           set to true
         </button>
         <ValueBadge @value={{value-of switch}} />
@@ -100,8 +100,8 @@
         value={{number.state}}
         oninput={{tval number.set}}
       >
-      <button {{on "click" (noargs number.decrement)}}><FaIcon @icon="caret-down"/></button>
-      <button {{on "click" (noargs number.increment)}}><FaIcon @icon="caret-up"/></button>
+      <button {{on "click" (noargs number.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
+      <button {{on "click" (noargs number.increment)}} type="button"><FaIcon @icon="caret-up"/></button>
       <ValueBadge @value={{value-of number}} />
     {{/let}}
     {{!END-SNIPPET}}
@@ -134,8 +134,8 @@
         value={{string.state}}
         oninput={{tval string.set}}
       >
-      <button {{on "click" (fn string.concat "!!!")}}>Append !!!</button>
-      <button {{on "click" string.set}}>Clear</button>
+      <button {{on "click" (fn string.concat "!!!")}} type="button">Append !!!</button>
+      <button {{on "click" string.set}} type="button">Clear</button>
       <ValueBadge @value={{value-of string}} />
     {{/let}}
     {{!END-SNIPPET}}
@@ -181,7 +181,7 @@
             >
           </label>
         {{/each}}
-        <button {{on "click" (fn address.put 'Country' '')}}>Add Country Field</button>
+        <button {{on "click" (fn address.put 'Country' '')}} type="button">Add Country Field</button>
         <ValueBadge @value={{value-of address}} />
       {{/let}}
       {{!END-SNIPPET}}
@@ -220,13 +220,13 @@
           <ul>
           {{#each numbers as |number|}}
             <li>
-              <button {{on "click" (noargs number.decrement)}}><FaIcon @icon="caret-down"/></button>
+              <button {{on "click" (noargs number.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
               <input 
                 type="number" 
                 value={{number.state}} 
                 onchange={{tval number.set}} 
               />
-              <button {{on "click" number.increment}}><FaIcon @icon="caret-up"/></button>
+              <button {{on "click" (noargs number.increment)}} type="button"><FaIcon @icon="caret-up"/></button>
             </li>
           {{/each}}
         </ul>

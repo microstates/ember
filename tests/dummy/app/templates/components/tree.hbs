@@ -1,6 +1,6 @@
 {{!BEGIN-SNIPPET tree}}
 {{#if @node.children}}
-  <button {{on "click" @node.isOpen.toggle}}>
+  <button {{on "click" @node.isOpen.toggle}} type="button">
     <FaIcon @icon={{if @node.isOpen.state 'minus-square' 'plus-square'}}/>
   </button>
 {{/if}}
@@ -9,11 +9,11 @@
   value={{@node.counter.state}} 
   onchange={{tval @node.counter.set}}
 > 
-<button {{on "click" (noargs @node.counter.increment)}}><FaIcon @icon="caret-up"/></button>
-<button {{on "click" (noargs @node.counter.decrement)}}><FaIcon @icon="caret-down"/></button>
-<button {{on "click" @node.addChild}} class="add"><FaIcon @icon="plus"/></button>
+<button {{on "click" (noargs @node.counter.increment)}} type="button"><FaIcon @icon="caret-up"/></button>
+<button {{on "click" (noargs @node.counter.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
+<button {{on "click" @node.addChild}} class="add" type="button"><FaIcon @icon="plus"/></button>
 {{#if @onRemoveChild}}
-  <button {{on "click" @onRemoveChild}}><FaIcon @icon="trash"/></button>
+  <button {{on "click" @onRemoveChild}} type="button"><FaIcon @icon="trash"/></button>
 {{/if}}
 {{#if @node.isOpen.state}}
   <ul>
