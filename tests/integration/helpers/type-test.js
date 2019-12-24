@@ -10,71 +10,85 @@ module("Integration | Helper | type", function(hooks) {
   test("looks up Any", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "any") (import "microstates?Any")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "any") (import "microstates?Any")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   test("looks up BooleanType", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "boolean") (import "microstates?BooleanType")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "boolean") (import "microstates?BooleanType")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   test("looks up StringType", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "string") (import "microstates?StringType")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "string") (import "microstates?StringType")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   test("looks up NumberType", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "number") (import "microstates?NumberType")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "number") (import "microstates?NumberType")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   test("looks up ArrayType", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "array") (import "microstates?ArrayType")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "array") (import "microstates?ArrayType")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   test("looks up ObjectType", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "object") (import "microstates?ObjectType")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "object") (import "microstates?ObjectType")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   test("looks up Person from app", async function(assert) {
     initialize(this.owner);
 
-    await render(
-      hbs`{{if (eq (type "person") (import "dummy/types/person")) "true" "false"}}`
-    );
+    await render(hbs`
+      <div id="inner">
+        {{if (eq (type "person") (import "dummy/types/person")) "true" "false"}}
+      </div>
+    `);
 
-    assert.dom('*').hasText('true');
+    assert.dom('#inner').hasText('true');
   });
 
   // @see: https://github.com/emberjs/ember-test-helpers/issues/310

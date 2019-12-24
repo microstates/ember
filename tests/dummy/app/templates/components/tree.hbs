@@ -9,8 +9,8 @@
   value={{@node.counter.state}} 
   onchange={{tval @node.counter.set}}
 > 
-<button {{on "click" @node.counter.increment}}><FaIcon @icon="caret-up"/></button>
-<button {{on "click" @node.counter.decrement}}><FaIcon @icon="caret-down"/></button>
+<button {{on "click" (noargs @node.counter.increment)}}><FaIcon @icon="caret-up"/></button>
+<button {{on "click" (noargs @node.counter.decrement)}}><FaIcon @icon="caret-down"/></button>
 <button {{on "click" @node.addChild}} class="add"><FaIcon @icon="plus"/></button>
 {{#if @onRemoveChild}}
   <button {{on "click" @onRemoveChild}}><FaIcon @icon="trash"/></button>

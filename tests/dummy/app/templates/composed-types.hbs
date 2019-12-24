@@ -42,7 +42,7 @@
           value={{person.lastName.state}}
           oninput={{tval person.lastName.set}}
         />
-        <button {{on "click" person.changeIdentity "Bart" "Simpson"}}>Change to Bart</button>
+        <button {{on "click" (fn person.changeIdentity "Bart" "Simpson")}}>Change to Bart</button>
         <p>Full Name: {{person.fullName}}</p>
         <ValueBadge @value={{value-of person}} />
       {{/let}}

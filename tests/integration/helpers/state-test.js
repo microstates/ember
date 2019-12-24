@@ -10,18 +10,17 @@ module("Integration | Helper | state", function(hooks) {
   test("renders", async function(assert) {
     await render(hbs`
       {{#let (state) as |$|}}
-        {{$.state}}
+        <div id="inner">{{$.state}}</div>
       {{/let}}
     `);
-
-    assert.dom('*').hasText('');
+    assert.dom('#inner').hasText('');
   });
 
   test("allows value to be set", async function(assert) {
     await render(hbs`
       {{#let (state) as |$|}}
         <span>{{$.state}}</span>
-        <button {{action $.set "hello world"}} />
+        <button {{on "click" (fn $.set "hello world")}} />
       {{/let}}
     `);
 

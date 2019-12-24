@@ -100,8 +100,8 @@
         value={{number.state}}
         oninput={{tval number.set}}
       >
-      <button {{on "click" number.decrement}}><FaIcon @icon="caret-down"/></button>
-      <button {{on "click" number.increment}}><FaIcon @icon="caret-up"/></button>
+      <button {{on "click" (noargs number.decrement)}}><FaIcon @icon="caret-down"/></button>
+      <button {{on "click" (noargs number.increment)}}><FaIcon @icon="caret-up"/></button>
       <ValueBadge @value={{value-of number}} />
     {{/let}}
     {{!END-SNIPPET}}
