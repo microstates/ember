@@ -1,10 +1,10 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = EmberRouter.extend({
-  location: config.locationType,
-  rootURL: config.rootURL
-});
+export default class Router extends EmberRouter {
+  location = config.locationType;
+  rootURL = config.rootURL;
+}
 
 Router.map(function() {
   this.route('api');
@@ -13,5 +13,3 @@ Router.map(function() {
   this.route('parameterized-types');
   this.route('higher-order-types');
 });
-
-export default Router;

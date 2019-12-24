@@ -7,6 +7,10 @@
 [![Build Status](https://travis-ci.org/microstates/ember.svg?branch=master)](https://travis-ci.org/microstates/ember) [![Greenkeeper badge](https://badges.greenkeeper.io/microstates/ember.svg)](https://greenkeeper.io/) [![Chat on Discord](https://img.shields.io/discord/556202291586269214.svg)](http://bit.ly/microstates-discord)
 
 
+* Ember.js v3.8 or above
+* Ember CLI v2.13 or above
+* Node.js v8 or above
+
 ## Why Microstates?
 
 Short explanation, it's going to be the most fun you've had working with state in any framework.
@@ -62,13 +66,26 @@ Here is one of the simplest Microstates you can make.
 ```hbs
 {{#let (state 10) as |counter|}}
   {{counter.state}}
-  <button {{action counter.increment}}>Increment</button>
+  <button {{on "click" (noargs counter.increment)}} type="button">Increment</button>
 {{/let}}
 ```
 
 `state` helper is polymorphic, meaning that it accepts arguments of different types. Based on the type of data that you pass to you,
 you will get a microstate with different transitions that you can invoke in your template. For primitive types, you can create a microstate
 by providing the initial value. 
+
+`(noargs)` helper is something to prevent passing down the event since `increment` and `decrement` take an optional value.
+It looks like this:
+
+```js
+import { helper } from '@ember/component/helper';
+
+export default helper(([act]) => {
+  return () => {
+    return act();
+  };
+});
+```
 
 For custom type, you can use `(type name)` helper to resolve the type via Ember's dependency injection system. Here is how we'd use our Person type.
 
@@ -84,9 +101,9 @@ class Person {
 ```hbs
 {{#let (state (type "person") initial) as |person|}}
   {{person.name.state}} - {{person.age.state}} {{person.isEmberino.state}}
-  <input type="text" onchange={{action person.name.set value="target.value"}}>
-  <button {{action person.age.increment}}>Make older</button>
-  <button {{action person.isEmberino.toggle}}>Change projects</button>
+  <input type="text" onchange={{tval person.name.set}}>
+  <button {{on "click" (noargs person.age.increment)}} type="button">Make older</button>
+  <button {{on "click" person.isEmberino.toggle}} type="button">Change projects</button>
 {{/let}}
 ```
 

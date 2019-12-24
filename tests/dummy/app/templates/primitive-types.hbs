@@ -17,7 +17,7 @@
   <s.notes>
     <p>Not passing a value or passing <pre class="inline">undefined</pre> to the state helper will create a microstate of type <i>Any</i>.</p>
     <p><strong>Transitions</strong>: Created microstate will only have a <i>set</i> transition. It will accept any value.</p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/any.js" target="_blank">Any</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/any.js" target="_blank" rel="noopener noreferrer">Any</a></p>
     <p><strong>Using type helper</strong>: <pre class="my-2">(state (type "any") value)</pre></p>
   </s.notes>
   <s.demo>
@@ -26,14 +26,14 @@
       {{#let (state) as |any|}}
         <input
           value={{any.state}}
-          oninput={{action any.set value="target.value"}}
+          oninput={{tval any.set}}
         />
         <ValueBadge @value={{value-of any}} />
       {{/let}}
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="any.hbs"}}
+      <CodeSnippet @name="any.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -46,7 +46,7 @@
   <s.notes>
     <p>Passing true or false as a value to the state helper will create a microstate of type <i>Boolean</i>.</p>
     <p><strong>Transitions</strong>: Boolean has a <i>toggle</i> transition and <i>set</i> transitions.</p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/boolean.js" target="_blank">Boolean</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/boolean.js" target="_blank" rel="noopener noreferrer">Boolean</a></p>
     <p>
       <strong>Using type helper</strong>: <pre class="my-2">(state (type "boolean") value)</pre>
       When using the type helper, the value will be coerced into a boolean.
@@ -59,12 +59,12 @@
         <input
           type="checkbox"
           checked={{switch.state}}
-          onclick={{action switch.toggle}}
+          onclick={{switch.toggle}}
         >
-        <button {{action switch.set false}}>
+        <button {{on "click" (fn switch.set false)}} type="button">
           set to false
         </button>
-        <button {{action switch.set true}}>
+        <button {{on "click" (fn switch.set true)}} type="button">
           set to true
         </button>
         <ValueBadge @value={{value-of switch}} />
@@ -72,7 +72,7 @@
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="boolean.hbs"}}
+      <CodeSnippet @name="boolean.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -85,7 +85,7 @@
   <s.notes>
     <p>When state helper receives a number value, it will create a microstate of type <i>Number</i>.</p>
     <p><strong>Transitions</strong>: Number has <i>increment</i>, <i>decrement</i> and <i>set</i> transitions. <i>set</i> transition will coerce the argument to a number.</p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/number.js" target="_blank">Number</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/number.js" target="_blank" rel="noopener noreferrer">Number</a></p>
     <p>
       <strong>Using type helper</strong>: <pre class="my-2">(state (type "number") value)</pre>
       When using the type helper, the value will be coerced into a number.
@@ -98,16 +98,16 @@
       <input
         type="number"
         value={{number.state}}
-        oninput={{action number.set value="target.value"}}
+        oninput={{tval number.set}}
       >
-      <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
-      <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+      <button {{on "click" (noargs number.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
+      <button {{on "click" (noargs number.increment)}} type="button"><FaIcon @icon="caret-up"/></button>
       <ValueBadge @value={{value-of number}} />
     {{/let}}
     {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="number.hbs"}}
+      <CodeSnippet @name="number.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -120,7 +120,7 @@
   <s.notes>
     <p>When state helper receives a string value, it will create a microstate of type <i>String</i>.</p>
     <p><strong>Transitions</strong>: String has <i>concat</i> and <i>set</i> transitions. <i>set</i> transition will coerce the argument to a string.</p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/string.js" target="_blank">String</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/string.js" target="_blank" rel="noopener noreferrer">String</a></p>
     <p>
       <strong>Using type helper</strong>: <pre class="my-2">(state (type "string") value)</pre>
       When using the type helper, the value will be coerced into a string.
@@ -132,16 +132,16 @@
     {{#let (state "hello world") as |string|}}
       <input
         value={{string.state}}
-        oninput={{action string.set value="target.value"}}
+        oninput={{tval string.set}}
       >
-      <button {{action string.concat "!!!"}}>Append !!!</button>
-      <button {{action string.set}}>Clear</button>
+      <button {{on "click" (fn string.concat "!!!")}} type="button">Append !!!</button>
+      <button {{on "click" string.set}} type="button">Clear</button>
       <ValueBadge @value={{value-of string}} />
     {{/let}}
     {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="string.hbs"}}
+      <CodeSnippet @name="string.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -158,7 +158,7 @@
       as you read nested properties of a microstate, it'll automatically generate nested microstates of type matching the value. 
     </p>
     <p><strong>Transitions</strong>: Object has <i>assign</i>, <i>put</i>, <i>delete</i>, <i>map</i>, <i>filter</i> and <i>set</i> transitions.</p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/object.js" target="_blank">Object</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/object.js" target="_blank" rel="noopener noreferrer">Object</a></p>
     <p>
       <strong>Using type helper</strong>: <pre class="my-2">(state (type "object") value)</pre>
       When using the type helper, the value will be coerced into an object.
@@ -177,17 +177,17 @@
             {{line.key}}
             <input
               value={{line.value.state}}
-              oninput={{action line.value.set value="target.value"}}
+              oninput={{tval line.value.set}}
             >
           </label>
         {{/each}}
-        <button {{action address.put 'Country' ''}}>Add Country Field</button>
+        <button {{on "click" (fn address.put 'Country' '')}} type="button">Add Country Field</button>
         <ValueBadge @value={{value-of address}} />
       {{/let}}
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="object.hbs"}}
+      <CodeSnippet @name="object.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -208,7 +208,7 @@
       <i>pop</i>, <i>shift</i>, <i>unshift</i>, <i>slice</i>, <i>map</i>, <i>filter</i>, 
       <i>remove</i>, <i>clear</i> and <i>set</i> transitions.
     </p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js" target="_blank">Array</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/array.js" target="_blank" rel="noopener noreferrer">Array</a></p>
     <p>
       <strong>Using type helper</strong>: <pre class="my-2">(state (type "array") value)</pre>
     </p>
@@ -220,13 +220,13 @@
           <ul>
           {{#each numbers as |number|}}
             <li>
-              <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
+              <button {{on "click" (noargs number.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
               <input 
                 type="number" 
                 value={{number.state}} 
-                onchange={{action number.set value="target.value"}} 
+                onchange={{tval number.set}} 
               />
-              <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+              <button {{on "click" (noargs number.increment)}} type="button"><FaIcon @icon="caret-up"/></button>
             </li>
           {{/each}}
         </ul>
@@ -235,7 +235,7 @@
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="array-demo.hbs"}}
+      <CodeSnippet @name="array-demo.hbs"/>
     </s.code>
   </s.demo>
 </Section>

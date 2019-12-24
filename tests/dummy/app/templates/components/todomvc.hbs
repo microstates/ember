@@ -1,32 +1,32 @@
 {{!BEGIN-SNIPPET todomvc-component-template}}
 <div class="todoapp-container">
   <div class="todoapp">
-    <form class="header" {{action todomvc.insertNewTodo on="submit"}} autocomplete="off">
-      <h1>{{todomvc.title.state}}</h1>
+    <form class="header" {{on "submit" this.todomvc.insertNewTodo}} autocomplete="off">
+      <h1>{{this.todomvc.title.state}}</h1>
       <input
         name="newTodo"
         class="new-todo"
         placeholder="What needs to be done?"
         autofocus={{true}}
-        value={{todomvc.newTodo.state}}
-        onchange={{action todomvc.newTodo.set value="target.value"}}
+        value={{this.todomvc.newTodo.state}}
+        onchange={{tval this.todomvc.newTodo.set}}
       />
     </form>
     <div class="main">
-      <input class="toggle-all" type="checkbox" checked={{todomvc.isAllComplete}} />
-      <label for="toggle-all" {{action todomvc.toggleAll}}>
+      <input class="toggle-all" type="checkbox" checked={{this.todomvc.isAllComplete}} />
+      <label for="toggle-all" {{on "click" this.todomvc.toggleAll}}>
         Mark all as complete
       </label>
       <ul class="todo-list">
-        {{#each todomvc.filtered key="id.state" as |todo|}}
+        {{#each this.todomvc.filtered key="id.state" as |todo|}}
           <li class={{if todo.completed.state "completed"}}>
             {{#if todo.editing.state}}
-              <form {{action todo.save on="submit"}}>
+              <form {{on "submit" todo.save}}>
                 <input
                   class="edit" 
                   value={{todo.text.state}} 
-                  onchange={{action todo.text.set value="target.value"}}
-                  onblur={{action todo.save}}
+                  onchange={{tval todo.text.set}}
+                  onblur={{todo.save}}
                   autofocus={{true}}
                 />
               </form>
@@ -36,12 +36,12 @@
                   class="toggle" 
                   type="checkbox" 
                   checked={{todo.completed.state}} 
-                  onclick={{action todo.completed.toggle}} 
+                  onclick={{todo.completed.toggle}} 
                 />
-                <label {{action todo.edit on="doubleClick"}}>
+                <label {{on "dblclick" todo.edit}}>
                   {{todo.text.state}}
                 </label>
-                <button type="button" class="destroy" {{action todomvc.todos.remove todo}} />
+                <button type="button" class="destroy" {{on "click" (fn this.todomvc.todos.remove todo)}} />
               </div>
             {{/if}}
           </li>
@@ -51,25 +51,25 @@
     <footer class="footer">
       <span class="todo-count">
         <strong>
-          {{todomvc.active.length}}
+          {{this.todomvc.active.length}}
         </strong>
-        {{if (eq todomvc.active.length 1) 'item' 'items'}} left
+        {{if (eq this.todomvc.active.length 1) 'item' 'items'}} left
       </span>
       <ul class="filters">
-        {{#each todomvc.filters as |filter|}}
+        {{#each this.todomvc.filters as |filter|}}
           <li>
             <button
               type="button"
               class={{if filter.selected "selected"}}
-              {{action filter.select}}
+              {{on "click" filter.select}}
             >
               {{filter.label}}
             </button>
           </li>
         {{/each}}
       </ul>
-      {{#if todomvc.hasCompleted}}
-        <button type="button" class="clear-completed" {{action todomvc.clearCompleted}}>
+      {{#if this.todomvc.hasCompleted}}
+        <button type="button" class="clear-completed" {{on "click" this.todomvc.clearCompleted}}>
           Clear completed
         </button>
       {{/if}}
