@@ -1,5 +1,5 @@
 // BEGIN-SNIPPET todomvc-component-javascript
-import Component from "@ember/component";
+import Component from "@glimmer/component";
 import { state } from "@microstates/ember";
 import TodoMVC from "../types/todomvc";
 
@@ -12,9 +12,9 @@ const initial = {
   ]
 };
 
-export default Component.extend({
-  tagName: '',
+export default class TodoMvc extends Component {
   // this property is overwritten when context controls the state
-  todomvc: state(TodoMVC, initial)
-});
+  @state(TodoMVC, initial)
+  todomvc;
+}
 // END-SNIPPET

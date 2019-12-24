@@ -10,7 +10,7 @@
 </header>
 
 <Section 
-  @id="any"
+  id="any"
   @title="Any"
   as |s|
 >
@@ -39,7 +39,7 @@
 </Section>
 
 <Section
-  @id="boolean"
+  id="boolean"
   @title="Boolean"
   as |s|
 >
@@ -78,7 +78,7 @@
 </Section>
 
 <Section
-  @id="number"
+  id="number"
   @title="Number"
   as |s|
 >
@@ -113,7 +113,7 @@
 </Section>
 
 <Section
-  @id="string"
+  id="string"
   @title="String"
   as |s|
 >
@@ -135,7 +135,7 @@
         oninput={{tval string.set}}
       >
       <button {{on "click" (fn string.concat "!!!")}} type="button">Append !!!</button>
-      <button {{on "click" string.set}} type="button">Clear</button>
+      <button {{on "click" (fn string.set "")}} type="button">Clear</button>
       <ValueBadge @value={{value-of string}} />
     {{/let}}
     {{!END-SNIPPET}}
@@ -147,7 +147,7 @@
 </Section>
 
 <Section
-  @id="object"
+  id="object"
   @title="Object"
   as |s|
 >
@@ -193,7 +193,7 @@
 </Section>
 
 <Section
-  @id="array"
+  id="array"
   @title="Array"
   as |s|
 >
@@ -220,13 +220,13 @@
           <ul>
           {{#each numbers as |number|}}
             <li>
-              <button {{on "click" (noargs number.decrement)}} type="button"><FaIcon @icon="caret-down"/></button>
+              <button {{on "click" (fn number.decrement 1)}} type="button"><FaIcon @icon="caret-down"/></button>
               <input 
                 type="number" 
                 value={{number.state}} 
                 onchange={{tval number.set}} 
               />
-              <button {{on "click" (noargs number.increment)}} type="button"><FaIcon @icon="caret-up"/></button>
+              <button {{on "click" (fn number.increment 1)}} type="button"><FaIcon @icon="caret-up"/></button>
             </li>
           {{/each}}
         </ul>
