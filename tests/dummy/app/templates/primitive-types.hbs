@@ -220,7 +220,7 @@
           <ul>
           {{#each numbers as |number|}}
             <li>
-              <button {{on "click" number.decrement}}><FaIcon @icon="caret-down"/></button>
+              <button {{on "click" (noargs number.decrement)}}><FaIcon @icon="caret-down"/></button>
               <input 
                 type="number" 
                 value={{number.state}} 
