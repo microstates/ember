@@ -1,17 +1,17 @@
-{{#burger-menu animation="squeeze" width=200 as |burger|}}
-  {{#burger.menu itemTagName="li" as |menu|}}
+<BurgerMenu @animation="squeeze" @width={{200}} as |burger|>
+  <burger.menu @itemTagName="li" as |menu|>
     <Menu @item={{menu.item}} />
-  {{/burger.menu}}
+  </burger.menu>
 
-  {{#burger.outlet}}
+  <burger.outlet>
     <div class="container mx-auto px-4 flex flex-wrap">
       <nav>
         <h1 id="title">
-          {{#unless (eq currentPath 'index')}}
-            <button type="button" class="burger" {{action burger.state.actions.toggle}}>
-              {{fa-icon "bars"}}
+          {{#if (not (eq this.currentPath 'index'))}}
+            <button type="button" class="burger" {{on "click" burger.state.actions.toggle}}>
+              <FaIcon @icon="bars"/>
             </button>
-          {{/unless}}
+          {{/if}}
           {{link-to '@microstates/ember' 'index'}}
         </h1>
       </nav>
@@ -19,5 +19,5 @@
         {{outlet}}
       </main>
     </div>
-  {{/burger.outlet}}
-{{/burger-menu}}
+  </burger.outlet>
+</BurgerMenu>

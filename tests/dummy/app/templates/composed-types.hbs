@@ -42,7 +42,7 @@
           value={{person.lastName.state}}
           oninput={{action person.lastName.set value="target.value"}}
         />
-        <button {{action person.changeIdentity "Bart" "Simpson"}}>Change to Bart</button>
+        <button {{on "click" person.changeIdentity "Bart" "Simpson"}}>Change to Bart</button>
         <p>Full Name: {{person.fullName}}</p>
         <ValueBadge @value={{value-of person}} />
       {{/let}}
@@ -50,9 +50,9 @@
     </s.live>
     <s.code>
       <h3 class="mb-2">Person Type</h3>
-      {{code-snippet name="simple-person-type.js"}}      
+      <CodeSnippet @name="simple-person-type.js"/>     
       <h3 class="my-2">Template</h3>
-      {{code-snippet name="simple-person-demo.hbs"}}
+      <CodeSnippet @name="simple-person-demo.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -70,17 +70,17 @@
     </p>
     <h4 class="my-2">In this demo</h4>
     <ul>
-      <li>You can add child items to each node with {{fa-icon "plus"}}.</li>
-      <li>You can collapse and open each node with {{fa-icon 'plus-square'}} and {{fa-icon 'minus-square'}}</li>
-      <li>You can increment and decrement values with {{fa-icon "caret-up"}} and {{fa-icon "caret-down"}}.</li>
-      <li>You can delete a node with {{fa-icon "trash"}}.</li>
+      <li>You can add child items to each node with <FaIcon @icon="plus"/>.</li>
+      <li>You can collapse and open each node with <FaIcon @icon="plus-square"/> and <FaIcon @icon='minus-square'/></li>
+      <li>You can increment and decrement values with <FaIcon @icon="caret-up"/> and <FaIcon @icon="caret-down"/>.</li>
+      <li>You can delete a node with <FaIcon @icon="trash"/>.</li>
       <li>Adding a child to a node, automatically opens it.</li>
     </ul>
   </s.notes>
   <s.demo>
     <s.live>
       {{!BEGIN-SNIPPET tree-demo}}
-      {{#let (state (type "node") treeInitial) as |node|}}
+      {{#let (state (type "node") this.treeInitial) as |node|}}
         <Tree @node={{node}} />
         <ValueBadge @value={{value-of node}} />
       {{/let}}
@@ -89,12 +89,12 @@
     <s.code>
       <h3>Template</h3>
       <p>Let's start the tree by rendering the root node.</p>
-      {{code-snippet name="tree-demo.hbs"}}
+      <CodeSnippet @name="tree-demo.hbs"/>
       <h3>Type</h3>
       <p>The type references itself and uses parameterized array of type <i>Node.</i></p>
-      {{code-snippet name="node.js"}}
+      <CodeSnippet @name="node.js"/>
       <h3>Component</h3>
-      {{code-snippet name="tree.hbs"}}
+      <CodeSnippet @name="tree.hbs"/>
     </s.code>    
   </s.demo>
 </Section>
@@ -134,18 +134,18 @@
   <s.demo>
     <s.live @class="mb-4">
       {{!BEGIN-SNIPPET many-todomvc-template}}
-      {{#let (state (type "todomvc-manager") todomvcManagerInitial) as |manager|}}
-        <form class="manager-form" {{action manager.addList on="submit"}}>
+      {{#let (state (type "todomvc-manager") this.todomvcManagerInitial) as |manager|}}
+        <form class="manager-form" {{on "submit" manager.addList}}>
           <input
             value={{manager.newListTitle.state}} 
             oninput={{action manager.newListTitle.set value="target.value"}}
           >
           <button disabled={{not manager.isValid}}>Create</button>
-          <button {{action manager.show ""}}>All</button>
-          <button {{action manager.show "active"}}>Active</button>
-          <button {{action manager.show "completed"}}>Completed</button>
+          <button {{on "click" (fn manager.show "")}}>All</button>
+          <button {{on "click" (fn manager.show "active")}}>Active</button>
+          <button {{on "click" (fn manager.show "completed")}}>Completed</button>
           {{#if manager.remaining}}
-            <button {{action manager.completeRemaining}}>
+            <button {{on "click" manager.completeRemaining}}>
               <i class="badge">{{manager.remaining}}</i>Complete All
             </button>
           {{/if}}
@@ -164,7 +164,7 @@
         <i>state</i> computed property macro allows you to create state that is consumed when the component owns its state.
         When the component's state is owned by the context, this props is overwritten by state passed to the component.
       </p>
-      {{code-snippet name="todomvc-component-javascript.js"}}
+      <CodeSnippet @name="todomvc-component-javascript.js"/>
       <h3>Type</h3>
       <p>
         The parent type has access to each child state. It can derive state using getters. In the case of <i>remaining</i>,
@@ -172,13 +172,13 @@
         child microstates. <i>completeRemaining</i> transition maps over the todo lists and invokes <i>toggleAll</i> on each 
         list.
       </p>
-      {{code-snippet name="many-todomvc-type.js"}}
+      <CodeSnippet @name="many-todomvc-type.js"/>
       <h3>Template</h3>
       <p>
         In the template, we iterate over the list of TodoMVC microstates and pass each microstate to the TodoMVC component.
         The component consumes this state as it's own, without requiring modification of the component. 
       </p>
-      {{code-snippet name="many-todomvc-template.hbs"}}
+      <CodeSnippet @name="many-todomvc-template.hbs"/>
     </s.code>
   </s.demo>
 </Section>

@@ -17,7 +17,7 @@
   <s.notes>
     <p>Not passing a value or passing <pre class="inline">undefined</pre> to the state helper will create a microstate of type <i>Any</i>.</p>
     <p><strong>Transitions</strong>: Created microstate will only have a <i>set</i> transition. It will accept any value.</p>
-    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/any.js" target="_blank">Any</a></p>
+    <p><strong>Definition</strong>: <a href="https://github.com/microstates/microstates.js/blob/master/src/types/any.js" target="_blank" rel="noopener noreferrer">Any</a></p>
     <p><strong>Using type helper</strong>: <pre class="my-2">(state (type "any") value)</pre></p>
   </s.notes>
   <s.demo>
@@ -33,7 +33,7 @@
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="any.hbs"}}
+      <CodeSnippet @name="any.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -59,12 +59,12 @@
         <input
           type="checkbox"
           checked={{switch.state}}
-          onclick={{action switch.toggle}}
+          onclick={{switch.toggle}}
         >
-        <button {{action switch.set false}}>
+        <button {{on "click" (fn switch.set false)}}>
           set to false
         </button>
-        <button {{action switch.set true}}>
+        <button {{on "click" (fn switch.set true)}}>
           set to true
         </button>
         <ValueBadge @value={{value-of switch}} />
@@ -72,7 +72,7 @@
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="boolean.hbs"}}
+      <CodeSnippet @name="boolean.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -100,14 +100,14 @@
         value={{number.state}}
         oninput={{action number.set value="target.value"}}
       >
-      <button {{action number.decrement}}>{{fa-icon "caret-down"}}</button>
-      <button {{action number.increment}}>{{fa-icon "caret-up"}}</button>
+      <button {{on "click" number.decrement}}>{{fa-icon "caret-down"}}</button>
+      <button {{on "click" number.increment}}>{{fa-icon "caret-up"}}</button>
       <ValueBadge @value={{value-of number}} />
     {{/let}}
     {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="number.hbs"}}
+      <CodeSnippet @name="number.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -141,7 +141,7 @@
     {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="string.hbs"}}
+      <CodeSnippet @name="string.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -187,7 +187,7 @@
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="object.hbs"}}
+      <CodeSnippet @name="object.hbs"/>
     </s.code>
   </s.demo>
 </Section>
@@ -235,7 +235,7 @@
       {{!END-SNIPPET}}
     </s.live>
     <s.code>
-      {{code-snippet name="array-demo.hbs"}}
+      <CodeSnippet @name="array-demo.hbs"/>
     </s.code>
   </s.demo>
 </Section>
