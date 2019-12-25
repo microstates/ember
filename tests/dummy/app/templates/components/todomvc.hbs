@@ -1,7 +1,6 @@
 {{!BEGIN-SNIPPET todomvc-component-template}}
 <div class="todoapp-container">
   <div class="todoapp">
-    {{debugger}}
     <form class="header" {{on "submit" this.todomvc.insertNewTodo}} autocomplete="off">
       <h1>{{this.todomvc.title.state}}</h1>
       <input
