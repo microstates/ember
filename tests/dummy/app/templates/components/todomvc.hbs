@@ -21,7 +21,6 @@
         {{#each this.todomvc.filtered key="id.state" as |todo|}}
           <li class={{if todo.completed.state "completed"}}>
             {{#if todo.editing.state}}
-              {{log "2" todo.save}}
               <form {{on "submit" todo.save}}>
                 <input
                   class="edit" 
