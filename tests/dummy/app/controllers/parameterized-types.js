@@ -1,7 +1,7 @@
 import Controller from "@ember/controller";
 
-export default Controller.extend({
-  todomvcInitial: [
+export default class PArameterizedTypes extends Controller {
+  todomvcInitial = [
     {
       todos: [
         { id: 0, text: "Go to India", completed: true },
@@ -15,8 +15,9 @@ export default Controller.extend({
         { id: 4, text: "Bagels", completed: false }
       ]
     }
-  ],
-  simpsons: {
+  ];
+
+  simpsons = {
     father: {
       name: 'Homer Simpson',
       age: 36
@@ -33,5 +34,5 @@ export default Controller.extend({
       name: 'Lisa Simpson',
       age: 7
     }
-  }
-}); 
+  };
+}

@@ -7,7 +7,7 @@
     <div class="container mx-auto px-4 flex flex-wrap">
       <nav>
         <h1 id="title">
-          {{#if (not (eq this.currentPath 'index'))}}
+          {{#if (not (eq this.router.currentPath 'index'))}}
             <button type="button" class="burger" {{on "click" burger.state.actions.toggle}}>
               <FaIcon @icon="bars"/>
             </button>

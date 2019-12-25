@@ -1,7 +1,7 @@
 // BEGIN-SNIPPET todomvc-component-javascript
 import Component from "@glimmer/component";
-import { state } from "@microstates/ember";
-import TodoMVC from "../types/todomvc";
+import { state } from '@microstates/ember';
+import TodoMVCType from "../types/todomvc";
 
 const initial = {
   title: "todos",
@@ -12,9 +12,9 @@ const initial = {
   ]
 };
 
-export default class TodoMvc extends Component {
+export default class Todo extends Component {
   // this property is overwritten when context controls the state
-  @state(TodoMVC, initial)
+  @state(TodoMVCType, initial)
   todomvc;
 }
 // END-SNIPPET

@@ -11,7 +11,7 @@ module('Integration | Helper | value-of', function(hooks) {
     await render(hbs`
       {{#let (state 42) as |$|}}
         {{on-render (action (mut value)) (value-of $)}}
-        <button {{action $.increment}} />
+        <button {{on "click" (fn $.increment 1)}} />
       {{/let}}
     `);
 

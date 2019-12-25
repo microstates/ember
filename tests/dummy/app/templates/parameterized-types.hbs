@@ -36,7 +36,7 @@
                 value={{number.state}} 
                 onchange={{tval number.set}} 
               />
-              <button {{on "click" number.increment}} type="button"><FaIcon @icon="caret-up"/></button>
+              <button {{on "click" (fn number.increment 1)}} type="button"><FaIcon @icon="caret-up"/></button>
             </li>
           {{/each}}
         </ul>

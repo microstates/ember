@@ -1,6 +1,7 @@
 {{!BEGIN-SNIPPET todomvc-component-template}}
 <div class="todoapp-container">
   <div class="todoapp">
+    {{log "1" this.todomvc}}
     <form class="header" {{on "submit" this.todomvc.insertNewTodo}} autocomplete="off">
       <h1>{{this.todomvc.title.state}}</h1>
       <input
@@ -21,6 +22,7 @@
         {{#each this.todomvc.filtered key="id.state" as |todo|}}
           <li class={{if todo.completed.state "completed"}}>
             {{#if todo.editing.state}}
+              {{log "2" todo.save}}
               <form {{on "submit" todo.save}}>
                 <input
                   class="edit" 

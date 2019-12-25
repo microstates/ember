@@ -124,7 +124,7 @@ mechanism that accepts a callback. We use this callback to invoke `this.set` to 
 Here is what that would look like if we didn't use the macro that `@microstates/ember` provides.
 
 ```js
-import Component from '@ember/component';
+import Component from '@glimmer/component';
 import { computed } from '@ember/object';
 import { create, Store } from '@microstates/ember';
 
@@ -135,16 +135,9 @@ class Person {
 
 let microstate = create(Person, { name: 'Taras' });
 
-export default Component.extend({
-  state: computed({
-    get() {
-      return Store(microstate, next => this.set('state', next))
-    },
-    set(key, state) {
-      return state;
-    }
-  })
-});
+export default class PersonManager extends Component {
+  @tracked state = Store(microstate, next => this.state = next);
+}
 ```
 
 Now any transition that you invoke on the state, will automatically create the next state and trigger a re-render. Here is the same
