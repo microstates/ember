@@ -6,9 +6,9 @@ module.exports = function(defaults) {
   let app = new EmberAddon(defaults, {
     // Add options here
     snippetSearchPaths: ["tests/dummy"],
-    babel: {
-      plugins: ["transform-class-properties"]
-    }
+    // babel: {
+    //   plugins: ["transform-class-properties"]
+    // }
   });
 
   /*
