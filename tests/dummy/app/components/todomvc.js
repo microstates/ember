@@ -16,5 +16,12 @@ export default class Todo extends Component {
   // this property is overwritten when context controls the state
   @state(TodoMVCType, initial)
   todomvc;
+
+  constructor() {
+    super(...arguments);
+    if (this.args.todomvc) {
+      this.todomvc = this.args.todomvc;
+    }
+  }
 }
 // END-SNIPPET

@@ -9690,6 +9690,11 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+macro-decorators@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/macro-decorators/-/macro-decorators-0.1.0.tgz#293d34c78f187dab504120601b4e100984fba1be"
+  integrity sha512-WrFbrQPbvkfmE+nsx3h8H1KbvVHWUSc2oIy55wZXeI8g/+FbSu4l/2w697r7YezuI7Rw/1t69wM/DflJ8RJ5uA==
+
 magic-string@^0.22.4:
   version "0.22.5"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.22.5.tgz#8e9cf5afddf44385c1da5bc2a6a0dbd10b03657e"
