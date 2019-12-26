@@ -144,20 +144,18 @@ Now any transition that you invoke on the state, will automatically create the n
 component with the macro.
 
 ```js
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { create, state } from '@microstates/ember';
+import Component from '@glimmer/component';
+import { state } from '@microstates/ember';
 
 class Person {
   name = String;
   age = Number;
 }
 
-let microstate = create(Person, { name: 'Taras' });
-
-export default Component.extend({
-  state: state(microstate)
-});
+export default class PersonManager extends Component {
+  @state(Person, { name: 'Taras' })
+  state;
+}
 ```
 
 **[Checkout the demos for examples of how Microstates can be used.](https://ember-microstates.netlify.com)**
