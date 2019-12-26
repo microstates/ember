@@ -1,7 +1,7 @@
 import Controller from "@ember/controller";
 
-export default Controller.extend({
-  todomvcManagerInitial: {
+export default class ComposedTypes extends Controller {
+  todomvcManagerInitial = {
     lists: [
       {
         title: "bucket",
@@ -19,8 +19,9 @@ export default Controller.extend({
         ]
       }
     ]
-  },
-  treeInitial: {
+  };
+
+  treeInitial = {
     children: [
       {
         children: [
@@ -54,5 +55,5 @@ export default Controller.extend({
       }
     ],
     isOpen: true
-  }
-}); 
+  };
+}

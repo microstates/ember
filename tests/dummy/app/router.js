@@ -12,4 +12,5 @@ Router.map(function() {
   this.route('composed-types');
   this.route('parameterized-types');
   this.route('higher-order-types');
+  this.route('todo');
 });
