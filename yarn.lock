@@ -5757,10 +5757,10 @@ ember-auto-import@^1.5.3:
     walk-sync "^0.3.3"
     webpack "~4.28"
 
-ember-burger-menu@3.3.3:
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/ember-burger-menu/-/ember-burger-menu-3.3.3.tgz#e0bfc4c7b0d58a74f242c8e3b5f8cd7e578e1730"
-  integrity sha512-mbrb2nFLjXbf2M1719HYHRMTTgaqZQEHoN30cvqKf74LSwhnb6nFt3YLFZ9Un3T/5CbVsqk4vdZ4VUpRwKWECg==
+ember-burger-menu@3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/ember-burger-menu/-/ember-burger-menu-3.3.4.tgz#8f92e183cd13d3b3c1bdd361a764f872cc3b4a59"
+  integrity sha512-TiAPay7iy7fJk2VW3X89x3GpAk/4GBb5Txf/UDfY25zqQA8djxRwYTcrdmABMLlfGJA4xbRWsWIpYOTAjPAgfw==
   dependencies:
     ember-auto-import "^1.2.13"
     ember-cli-babel "^6.16.0"
